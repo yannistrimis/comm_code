@@ -1,0 +1,10 @@
+#!/bin/bash --login
+
+#SBATCH --time=00:30:00
+#SBATCH --ntasks=4
+
+#SBATCH --job-name yannis_lat_gen
+
+module load intel/2020b
+
+bash control_script.sh $1
