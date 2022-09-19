@@ -27,7 +27,7 @@ EOF
 for i in {1..10..1}
 do
 
-i_lat=$(awk "BEGIN {printf \"%i\",${i_start}+${i}}")
+i_lat=$(awk "BEGIN {printf \"%i\" , ${i_start}+${i}}")
 echo "${i_lat}"
 
 done
