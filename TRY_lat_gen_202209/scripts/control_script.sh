@@ -2,7 +2,7 @@
 
 source params.sh
 
-if [! -d "${directory}" ]
+if [ ! -d "${directory}" ]
 then
 mkdir "${directory}"
 mkdir "${directory}/outs"
