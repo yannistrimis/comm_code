@@ -3,7 +3,7 @@
 source params.sh
 
 i_curr=$1
-
+seed=$2
 if [ $i_curr -gt 101 ]
 then
 i_prev=$((${i_curr}-1))
@@ -14,7 +14,7 @@ nx 4
 ny 4
 nz 4
 nt 4
-iseed 9435
+iseed ${seed}
 
 warms 0
 trajecs 3
@@ -28,6 +28,7 @@ save_serial ${directory}/try.lat.${i_curr}
 EOF
 
 elif [ $i_curr -eq 101 ]
+then
 
 cat << EOF > input
 prompt 0
@@ -35,7 +36,7 @@ nx 4
 ny 4
 nz 4
 nt 4
-iseed 9435
+iseed ${seed}
 
 warms 0
 trajecs 3

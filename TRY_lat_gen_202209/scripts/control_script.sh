@@ -11,6 +11,7 @@ seed=$(head -n 2 "${directory}/guard" | tail -n 1)
 else
 
 i_lat=101
+seed=${init_seed}
 
 cat << EOF > "${directory}/guard"
 ${i_lat}
@@ -23,8 +24,9 @@ i=1
 while [ $i -le $n_of_lat ]
 do
 
-bash make_input.sh $i_lat
-srun -n 4 ../su3_ora_symzk0_a_par_intel input
+bash make_input.sh $i_lat $seed
+#srun -n 4 ../su3_ora_symzk0_a_par_intel input
+mpirun -n 4 ../su3_ora_symzk0_a_sca_gnu input
 i_lat=$(($i_lat+1))
 seed=$((${seed}+1))
 
