@@ -8,6 +8,4 @@
 
 module load intel/2020b
 
-
-
-bash control_script.sh $1
+bash control_script.sh

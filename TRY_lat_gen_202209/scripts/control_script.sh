@@ -1,54 +1,37 @@
 #!/bin/bash
 
-echo 'entered control_script'
+source params.sh
 
-i_start=$1
+if [ -d "${directory}/guard" ]
+then
 
-cat << EOF > input
-prompt 0
-nx 4
-ny 4
-nz 4
-nt 4
-iseed 9435
+i_lat=$(head -n 1 "${directory}/guard" | tail -n 1)
+seed=$(head -n 2 "${directory}/guard" | tail -n 1)
 
-warms 0
-trajecs 3
-traj_between_meas 1
-beta 5.0 7.0
-u0 0.870
-steps_per_trajectory 2
-qhb_steps 1
-fresh
-save_serial TRY_1.lat.${i_start}
+else
+
+i_lat=101
+
+cat << EOF > "${directory}/guard"
+${i_lat}
+${init_seed}
 EOF
 
-srun -n 4 ./su3_ora_symzk0_a_intel input output.${i_start}
+fi
 
-for i in {1..4..1}
+i=1
+while [ $i -le $n_of_lat ]
 do
 
-i_lat=$(awk "BEGIN {printf \"%i\" , ${i_start}+${i}}")
-i_prev=$(awk "BEGIN {printf \"%i\" , ${i_start}+${i}-1}")
-cat << EOF > input
-prompt 0
-nx 4
-ny 4
-nz 4
-nt 4
-iseed 9435
+bash make_input $i_lat
+srun -n 4 ./su3_ora_symzk0_a_intel input
+i_lat=$(($i_lat+1))
+seed=$((${seed}+1))
 
-warms 0
-trajecs 3
-traj_between_meas 1
-beta 5.0 7.0
-u0 0.870
-steps_per_trajectory 2
-qhb_steps 1
-reload_serial TRY_1.lat.${i_prev}
-save_serial TRY_1.lat.${i_lat}
+cat << EOF > "${directory}/guard"
+${i_lat}
+${seed}
 EOF
 
-srun -n 4 ./su3_ora_symzk0_a_intel input output.${i_lat}
-
+i=$(($i+1))
 done
