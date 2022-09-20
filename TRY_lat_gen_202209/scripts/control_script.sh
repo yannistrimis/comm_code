@@ -35,6 +35,9 @@ echo $seed
 bash make_input.sh $i_lat $seed
 #srun -n 4 ../su3_ora_symzk0_a_par_intel input
 mpirun -n 4 ../su3_ora_symzk0_a_sca_gnu input "${directory}/outs/out.${i_lat}"
+
+if [ -f "${directory}/outs/out.${i_lat}" ]
+then
 i_lat=$(($i_lat+1))
 seed=$((${seed}+1))
 
@@ -43,5 +46,13 @@ ${i_lat}
 ${seed}
 EOF
 
+fi
+
+
+
 i=$(($i+1))
 done
+
+n_produced=$((${i_lat}-1))
+
+echo "produced $"
