@@ -2,15 +2,15 @@
 
 source params.sh
 
-if [ -d "${directory}" ]
+if [! -d "${directory}" ]
 then
-rm -r "${directory}"
-fi
-
 mkdir "${directory}"
 mkdir "${directory}/outs"
+fi
 
-if [ -d "${directory}/guard" ]
+
+
+if [ -f "${directory}/guard" ]
 then
 
 i_lat=$(head -n 1 "${directory}/guard" | tail -n 1)
