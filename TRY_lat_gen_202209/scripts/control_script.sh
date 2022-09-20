@@ -1,9 +1,14 @@
 #!/bin/bash
 
-rm -r "${directory}"
-mkdir "${directory}"
-
 source params.sh
+
+if [ -d "${directory}" ]
+then
+rm -r "${directory}"
+fi
+
+mkdir "${directory}"
+mkdir "${directory}/outs"
 
 if [ -d "${directory}/guard" ]
 then
@@ -29,7 +34,7 @@ do
 echo $seed
 bash make_input.sh $i_lat $seed
 #srun -n 4 ../su3_ora_symzk0_a_par_intel input
-mpirun -n 4 ../su3_ora_symzk0_a_sca_gnu input "${directory}/out.${i_lat}"
+mpirun -n 4 ../su3_ora_symzk0_a_sca_gnu input "${directory}/outs/out.${i_lat}"
 i_lat=$(($i_lat+1))
 seed=$((${seed}+1))
 
