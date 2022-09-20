@@ -24,7 +24,7 @@ while [ $i -le $n_of_lat ]
 do
 
 bash make_input $i_lat
-srun -n 4 ./su3_ora_symzk0_a_intel input
+srun -n 4 ../su3_ora_symzk0_a_par_intel input
 i_lat=$(($i_lat+1))
 seed=$((${seed}+1))
 
