@@ -20,7 +20,7 @@ then
 i_lat=$(head -n 1 "${directory}/guard" | tail -n 1)
 seed=$(head -n 2 "${directory}/guard" | tail -n 1)
 else
-i_lat=101
+i_lat=1
 seed=${init_seed}
 cat << EOF > "${directory}/guard"
 ${i_lat}
@@ -36,14 +36,13 @@ do
 echo $seed
 bash make_input.sh $i_lat $seed
 #srun -n 4 ../su3_ora_symzk0_a_par_intel input "${directory}/outs/out.${i_lat}" #this is for iCER
-mpirun -n 4 ../su3_ora_symzk0_a_sca_gnu input "${directory}/outs/out.${i_lat}" #this is for workstation
+mpirun -n 1 ../su3_ora_symzk0_a_sca_gnu input "${directory}/outs/out.${i_lat}" #this is for workstation
 
 file_name="${directory}/outs/out.${i_lat}"
-line=45
 text="Saved gauge configuration serially to binary file ${directory}/try.lat.${i_lat}"
-complete_flag=$(bash is_complete.sh ${file_name} ${line} ${text})
-
-if [ ${complete_flag} = "1" ]
+complete_flag=$(bash is_complete.sh ${file_name} ${text})
+echo "${complete_flag}"
+if [ "${complete_flag}" = "1" ]
 then
 n_produced=$((${n_produced}+1))
 i_lat=$(($i_lat+1))

@@ -1,8 +1,8 @@
 #!/bin/bash
 
-read_text=$(head -n $2 $1 | tail -n 1)
+isInFile=$(cat $1 | grep -c "$2")
 
-if [ "${read_text}" = "$3" ]
+if [ ! ${isInFile} -eq 0 ]
 then
 echo "1"
 else
