@@ -2,7 +2,7 @@
 
 source params.sh
 
-if [ "${erase}" = "yes" ]
+if [ "${erase}" = "yes" ] && [ -d "${directory}" ]
 then
 rm -r "${directory}"
 fi
@@ -35,8 +35,8 @@ while [ $i -le $n_of_lat ]
 do
 echo $seed
 bash make_input.sh $i_lat $seed
-#srun -n 4 ../su3_ora_symzk0_a_par_intel input
-mpirun -n 4 ../su3_ora_symzk0_a_sca_gnu input "${directory}/outs/out.${i_lat}"
+#srun -n 4 ../su3_ora_symzk0_a_par_intel input #this is for iCER
+mpirun -n 4 ../su3_ora_symzk0_a_sca_gnu input "${directory}/outs/out.${i_lat}" #this is for workstation
 
 if [ -f "${directory}/outs/out.${i_lat}" ]
 then
