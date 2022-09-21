@@ -2,7 +2,7 @@
 
 source params.sh
 
-if [ erase = "yes" ]
+if [ "${erase}" = "yes" ]
 then
 rm -r "${directory}"
 fi
@@ -28,6 +28,8 @@ ${seed}
 EOF
 fi
 
+n_produced=0
+
 i=1
 while [ $i -le $n_of_lat ]
 do
@@ -38,6 +40,7 @@ mpirun -n 4 ../su3_ora_symzk0_a_sca_gnu input "${directory}/outs/out.${i_lat}"
 
 if [ -f "${directory}/outs/out.${i_lat}" ]
 then
+n_produced=$((${n_produced}+1))
 i_lat=$(($i_lat+1))
 seed=$((${seed}+1))
 cat << EOF > "${directory}/guard"
@@ -50,6 +53,5 @@ i=$(($i+1))
 
 done
 
-n_produced=$((${i_lat}-1))
 
 echo "produced ${n_produced} out of ${n_of_lat} requested"
