@@ -38,7 +38,11 @@ bash make_input.sh $i_lat $seed
 #srun -n 4 ../su3_ora_symzk0_a_par_intel input "${directory}/outs/out.${i_lat}" #this is for iCER
 mpirun -n 4 ../su3_ora_symzk0_a_sca_gnu input "${directory}/outs/out.${i_lat}" #this is for workstation
 
-if [ -f "${directory}/outs/out.${i_lat}" ]
+text="${text_base}/try.lat.${i_lat}"
+
+complete_flag=$(bash is_complete.sh ${line} ${text})
+
+if [ ${complete_flag} = "1" ]
 then
 n_produced=$((${n_produced}+1))
 i_lat=$(($i_lat+1))
