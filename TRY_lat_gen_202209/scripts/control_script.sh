@@ -2,6 +2,11 @@
 
 source params.sh
 
+if [ erase = "yes" ]
+then
+rm -r "${directory}"
+fi
+
 if [ ! -d "${directory}" ]
 then
 mkdir "${directory}"
@@ -9,23 +14,18 @@ mkdir "${directory}/outs"
 fi
 
 
-
+#guard file contains number and seed of THE NEXT lattice to be produced
 if [ -f "${directory}/guard" ]
 then
-
 i_lat=$(head -n 1 "${directory}/guard" | tail -n 1)
 seed=$(head -n 2 "${directory}/guard" | tail -n 1)
-
 else
-
 i_lat=101
 seed=${init_seed}
-
 cat << EOF > "${directory}/guard"
 ${i_lat}
-${init_seed}
+${seed}
 EOF
-
 fi
 
 i=1
@@ -40,19 +40,16 @@ if [ -f "${directory}/outs/out.${i_lat}" ]
 then
 i_lat=$(($i_lat+1))
 seed=$((${seed}+1))
-
 cat << EOF > "${directory}/guard"
 ${i_lat}
 ${seed}
 EOF
-
 fi
 
-
-
 i=$(($i+1))
+
 done
 
 n_produced=$((${i_lat}-1))
 
-echo "produced $"
+echo "produced ${n_produced} out of ${n_of_lat} requested"

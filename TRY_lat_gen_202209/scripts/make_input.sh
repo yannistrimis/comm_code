@@ -4,6 +4,7 @@ source params.sh
 
 i_curr=$1
 seed=$2
+
 if [ $i_curr -gt 101 ]
 then
 i_prev=$((${i_curr}-1))
