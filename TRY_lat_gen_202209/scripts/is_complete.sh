@@ -1,8 +1,8 @@
 #!/bin/bash
 
-read_text=$(head -n $1 "${directory}/guard" | tail -n 1)
+read_text=$(head -n $2 $1 | tail -n 1)
 
-if [ ${read_text} = $2 ]
+if [ "${read_text}" = "$3" ]
 then
 echo "1"
 else

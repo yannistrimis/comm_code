@@ -38,9 +38,10 @@ bash make_input.sh $i_lat $seed
 #srun -n 4 ../su3_ora_symzk0_a_par_intel input "${directory}/outs/out.${i_lat}" #this is for iCER
 mpirun -n 4 ../su3_ora_symzk0_a_sca_gnu input "${directory}/outs/out.${i_lat}" #this is for workstation
 
-text="${text_base}/try.lat.${i_lat}"
-
-complete_flag=$(bash is_complete.sh ${line} ${text})
+file_name="${directory}/outs/out.${i_lat}"
+line=45
+text="Saved gauge configuration serially to binary file ${directory}/try.lat.${i_lat}"
+complete_flag=$(bash is_complete.sh ${file_name} ${line} ${text})
 
 if [ ${complete_flag} = "1" ]
 then

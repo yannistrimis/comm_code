@@ -9,3 +9,4 @@ erase="yes"
 #the following feed the is_complete.sh script
 line=45
 text_base="Saved gauge configuration serially to binary file ${directory}"
+file_base="${directory}"
