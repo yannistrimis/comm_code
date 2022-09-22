@@ -41,7 +41,7 @@ mpirun -n 1 ../su3_ora_symzk0_a_sca_gnu input "${directory}/outs/out.${i_lat}" #
 file_name="${directory}/outs/out.${i_lat}"
 text="Saved gauge configuration serially to binary file ${directory}/try.lat.${i_lat}"
 complete_flag=$(bash is_complete.sh ${file_name} ${text})
-echo "${complete_flag}"
+
 if [ "${complete_flag}" = "1" ]
 then
 n_produced=$((${n_produced}+1))
