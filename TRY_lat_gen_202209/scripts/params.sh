@@ -1,20 +1,16 @@
 #!/bin/bash
 
-#directory="/mnt/scratch/trimisio/lattices/try_lattices20220920" #this is for iCER
-directory="/home/trimis/Code/costas" #this is for workstation
-erase="yes"
-
 init_seed=7692
 n_of_lat=2
 
-nx=8
-ny=8
-nz=8
-nt=16
+nx=4
+ny=4
+nz=4
+nt=8
 
-# We want to reproduce 1205.0781, for: beta=6.1, xi_0=2.46, 24^3x48
+# We want to reproduce arxiv 1205.0781 for: beta=6.1, xi_0=2.46, 24^3x48
 # MILC convention (in the improved action) is: beta=10/g^2
-# 1205.0781 convention is beta=6/g^2
+# arxiv 1205.0781 convention is beta=6/g^2
 
 # beta=6.1*5/3=10.167
 
@@ -44,3 +40,8 @@ ensemble="${nx}${nt}b${beta_name}x${xi_0_name}${stream}"
 
 out_name="out${ensemble}"
 lat_name="l${ensemble}"
+
+#directory="/mnt/scratch/trimisio/lattices/try_lattices20220920" #this is for iCER
+#directory="/home/trimis/Code/lat${ensemble}" #this is for workstation
+directory="/home/yannis/Physics/LQCD/code_local/lat${ensemble}" #this is for laptop
+erase="yes"

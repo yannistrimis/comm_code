@@ -1,4 +1,5 @@
 #!/bin/bash
+start_time=$(date +%s.%N)
 
 source params.sh
 
@@ -36,7 +37,7 @@ do
 echo $seed
 bash make_input.sh $i_lat $seed
 #srun -n 4 ../su3_ora_symzk0_a_par_intel input "${directory}/outs/out.${i_lat}" #this is for iCER
-mpirun -n 4 ../su3_ora_symzk0_a_par_gnu input "${directory}/outs/${out_name}.${i_lat}" #this is for workstation
+mpirun -n 4 ../su3_ora_symzk0_a_par_gnu input "${directory}/outs/${out_name}.${i_lat}" #this is for workstation/laptop
 
 file_name="${directory}/outs/${out_name}.${i_lat}"
 text="Saved gauge configuration serially to binary file ${directory}/${lat_name}.${i_lat}"
@@ -57,5 +58,9 @@ i=$(($i+1))
 
 done
 
-
 echo "produced ${n_produced} out of ${n_of_lat} requested"
+
+end_time=$(date +%s.%N)
+
+elapsed_time=$(python3 -c "res=${end_time}-${start_time};print(res)")
+echo "elapsed time = ${elapsed_time} sec"
