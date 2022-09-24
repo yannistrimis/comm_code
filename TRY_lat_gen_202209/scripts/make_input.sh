@@ -24,8 +24,8 @@ beta $beta_s $beta_t
 u0 $u0
 steps_per_trajectory $steps_per_trajectory
 qhb_steps $qhb_steps
-reload_serial ${directory}/try.lat.${i_prev}
-save_serial ${directory}/try.lat.${i_curr}
+reload_serial ${directory}/${lat_name}.${i_prev}
+save_serial ${directory}/${lat_name}.${i_curr}
 EOF
 
 elif [ $i_curr -eq 1 ]
@@ -47,7 +47,7 @@ u0 $u0
 steps_per_trajectory $steps_per_trajectory
 qhb_steps $qhb_steps
 fresh
-save_serial ${directory}/try.lat.${i_curr}
+save_serial ${directory}/${lat_name}.${i_curr}
 EOF
 
 fi

@@ -36,10 +36,10 @@ do
 echo $seed
 bash make_input.sh $i_lat $seed
 #srun -n 4 ../su3_ora_symzk0_a_par_intel input "${directory}/outs/out.${i_lat}" #this is for iCER
-mpirun -n 1 ../su3_ora_symzk0_a_sca_gnu input "${directory}/outs/out.${i_lat}" #this is for workstation
+mpirun -n 4 ../su3_ora_symzk0_a_par_gnu input "${directory}/outs/${out_name}.${i_lat}" #this is for workstation
 
-file_name="${directory}/outs/out.${i_lat}"
-text="Saved gauge configuration serially to binary file ${directory}/try.lat.${i_lat}"
+file_name="${directory}/outs/${out_name}.${i_lat}"
+text="Saved gauge configuration serially to binary file ${directory}/${lat_name}.${i_lat}"
 complete_flag=$(bash is_complete.sh ${file_name} ${text})
 
 if [ "${complete_flag}" = "1" ]

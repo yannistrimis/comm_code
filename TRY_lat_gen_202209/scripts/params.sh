@@ -5,18 +5,42 @@ directory="/home/trimis/Code/costas" #this is for workstation
 erase="yes"
 
 init_seed=7692
-n_of_lat=10
+n_of_lat=2
 
-nx=4
-ny=4
-nz=4
-nt=4
+nx=8
+ny=8
+nz=8
+nt=16
+
+# We want to reproduce 1205.0781, for: beta=6.1, xi_0=2.46, 24^3x48
+# MILC convention (in the improved action) is: beta=10/g^2
+# 1205.0781 convention is beta=6/g^2
+
+# beta=6.1*5/3=10.167
+
+# Now one has to calculate spatial and temporal beta. 
+# beta_s=beta/xi_0=4.133
+# beta_t=beta*xi_0=25.010
+
+beta=10.167
+xi_0=2.46
+
+beta_s=4.133 #in the MILC colde this appears first
+beta_t=25.010 #and this appears second
+
+beta_name="10167"
+xi_0_name="246"
 
 warms=0
-trajecs=3
+trajecs=1
 traj_between_meas=1
-beta_s=5.0 #in the MILC colde this appears first
-beta_t=7.0 #and this appears second
-u0=0.870
-steps_per_trajectory=2
+u0=1.0
+steps_per_trajectory=1
 qhb_steps=1
+
+stream="a"
+
+ensemble="${nx}${nt}b${beta_name}x${xi_0_name}${stream}"
+
+out_name="out${ensemble}"
+lat_name="l${ensemble}"
