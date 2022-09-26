@@ -1,0 +1,38 @@
+NOTES FROM HPCC FIRST ATTEMPT
+
+sep 25 2022
+
+4^3*8       4 lattices  1-1-1 (traj etc)
+    -n 4				15 sec
+    -n 8				12 sec
+
+8^3*16      4 lattices  1-1-1 (traj etc)    
+    -n 4	            11 sec
+    -n 4	            11 sec
+
+16^3*16     4 lattices  1-1-1 (traj etc)
+    -n 8             	118 sec
+    -n 8             	125 sec
+
+    -n 16            	36 sec
+    -n 16            	36 sec
+
+16^3*32     4 lattices  1-1-1 (traj etc)
+    -n 8             	301 sec
+    -n 16            	175 sec
+    -n 32            	46 sec
+
+24^3*24     4 lattices  1-1-1 (traj etc)
+    -n 16            	487 sec
+    -n 32            	265 sec
+    -n 64            	76 sec
+    -n 128           	44 sec
+    -n 256           	never...
+
+24^3*48     4 lattices  1-1-1 (traj etc)
+    -n 32            	492 sec
+    -n 64            	267 sec
+    -n 128           	130 sec
+
+24^3*48     1 lattice  10-10-10 (traj etc)
+    -n 128           	1400 sec (~23 min)
