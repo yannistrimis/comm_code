@@ -1,0 +1,30 @@
+NOTES FROM HPCC FIRST ATTEMPT
+
+sep 25 2022
+
+4^3*8       4 lattices  1-1-1 (traj etc)
+    4 nodes             15 sec
+    4 nodes exclusive   7 sec
+    
+    8 nodes             12 sec
+
+8^3*16      4 lattices  1-1-1 (traj etc)
+    4 nodes exclusive   16 sec
+    4 nodes exclusive   13 sec
+    
+    4 nodes             11 sec
+    4 nodes             11 sec
+
+16^3*16     4 lattices  1-1-1 (traj etc)
+    8 nodes             118 sec
+    8 nodes             125 sec
+
+    16 nodes            36 sec
+    16 nodes            36 sec
+
+16^3*32     4 lattices  1-1-1 (traj etc)
+    8 nodes             301 sec
+
+    16 nodes            175 sec
+
+    32 nodes            46 sec
