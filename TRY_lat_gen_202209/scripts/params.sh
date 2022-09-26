@@ -41,7 +41,7 @@ ensemble="${nx}${nt}b${beta_name}x${xi_0_name}${stream}"
 out_name="out${ensemble}"
 lat_name="l${ensemble}"
 
-#directory="/mnt/scratch/trimisio/lattices/try_lattices20220920" #this is for iCER
+#directory="/mnt/scratch/trimisio/lattices/lat${ensemble}" #this is for iCER
 #directory="/home/trimis/Code/lat${ensemble}" #this is for workstation
 directory="/home/yannis/Physics/LQCD/code_local/lat${ensemble}" #this is for laptop
 erase="yes"
