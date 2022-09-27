@@ -36,3 +36,6 @@ sep 25 2022
 
 24^3*48     1 lattice  10-10-1 (traj ora hb)
     -n 128           	1400 sec (~23 min)
+
+24^3*48     5 lattices  4-3-2 (traj ora hb)
+    -n 128              1287 sec (~22 min)

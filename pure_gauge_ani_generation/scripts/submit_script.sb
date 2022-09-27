@@ -2,7 +2,7 @@
 
 
 #SBATCH --time=00:30:00
-#SBATCH --ntasks=4
+#SBATCH --ntasks=128
 
 #SBATCH --job-name yannis_lat_gen
 

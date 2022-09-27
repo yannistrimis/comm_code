@@ -1,7 +1,7 @@
 #!/bin/bash
 
 init_seed=7562
-n_of_lat=4
+n_of_lat=1
 
 nx=24
 ny=24
@@ -41,7 +41,7 @@ ensemble="${nx}${nt}b${beta_name}x${xi_0_name}${stream}"
 out_name="out${ensemble}"
 lat_name="l${ensemble}"
 
-#directory="/mnt/scratch/trimisio/lattices/lat${ensemble}" #this is for iCER
+directory="/mnt/scratch/trimisio/lattices/lat${ensemble}" #this is for hpcc
 #directory="/home/trimis/local_code/lat${ensemble}" #this is for workstation
-directory="/home/yannis/Physics/LQCD/code_local/lat${ensemble}" #this is for laptop
+#directory="/home/yannis/Physics/LQCD/code_local/lat${ensemble}" #this is for laptop
 erase="yes"
