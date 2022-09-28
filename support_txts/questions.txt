@@ -1,0 +1,27 @@
+1.	Why do we bin the data instead of jackkniving right away?
+
+2.	Do we use the reduced-bias jackknife in our analysis?
+
+3.	How and when do we choose beta in QCD simulations? After or before scale setting?
+	And, based on what?
+
+4.	Assignment 3 from Berg 2.7. Second part. Is this done to demonstrate that for such a
+	small N the bias is visible? 
+4A.	Yes. Contrary ( perhaps ) to one's intuition, be averaging over 2000 experiments
+	we just make sure that the bias is what it's supposed to be!
+
+5.	Assignment 3 from Berg 2.7. This function is in fact a function of two sets of data.
+	It is not f(<x>), but f(<x>,<x^4>). I don't want to ask something on that, only to
+	mention that this is kind of implicit...
+
+6.	I have replicated Berg's code in python, and with the same data it yiedls the same
+	results for the simple jackknife. I don't understand (and the results don't agree)
+	what he does in the double jackknife. He populates correctly only the lower triangle
+	of the matrix... but what does he do then?
+	
+	Actually, my questions are the following. 
+	a. I want to prove that b_i^J of page 106 indeed average to O(1/N^2).
+	b. Why does he include FJJ(1,I) in stebjj1.f? This is just a number. But later
+	in the bias.f he declares it as vector of length N-1.
+	c. Why all the fuss about populating the lower triangle etc. Why doesn't he just
+	implement 2.169,2.170 ?

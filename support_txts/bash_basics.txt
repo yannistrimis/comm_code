@@ -1,0 +1,78 @@
+# # # # B A S H   S C R I P T I N G   B A S I C S # # # #
+
+SEE shell_example.sh FOR MORE
+
+0. To compile and run a bash script:
+	chmod +x <name>.sh
+	./<name>.sh
+
+1. You save the file as <name>.sh
+   First line of the file: #!/bin/bash
+	
+2. IF STATEMENTS:
+	if [ $var_1 -eq $var_2 ]
+	then
+		var_3= "mitsos"
+		echo "var_3 created and is equal to $var_3"
+	else
+		echo "var3 not created"
+	fi
+	
+   BEAR IN MIND that = is both comparison and assignment.
+   ALSO BEAR IN MIND when you assign values to variables DO NOT LEAVE SPACE BETWEEN VARIABLE AND =
+   
+	
+3. SOME BASIC OPERATORS: -eq , -ne , -gt , -lt
+
+4. COMPILE AND RUN PROGRAM: just type the usual compilation/execution commands into the bash script.
+
+5. TO SAVE THE OUTPUT (example):
+	./programm > output.dat
+	
+	OR
+	
+	./program >> output.dat
+	
+	(the latter can also append an already created file!!!) 
+	
+	LOOK AT try2.sh under "Code/stupids/"
+	
+6 TO PROVIDE INPUT TO A PROGRAM:
+	./program << 'EOF'
+	input1
+	input2
+	input3
+	etc
+	EOF
+	
+7. TO LOOP THROUGH FILES IN A DIRECTORY:
+	for file in /full/path/to/the/desired/directory/*
+	do
+		chmod -v 444 $file	(THIS IS AN EXAMPLE!!!!)
+	done
+	
+8. TO LOOP AN INDEX:
+	for i in {0..10..1}
+	do
+		echo $i
+	done
+	
+	THIS WILL GIVE:
+	0
+	1
+	2
+	3
+	4
+	5
+	6
+	7
+	8
+	9
+	10	
+
+9. TO GIVE INPUT TO A SHELLSCRIPT:
+    bash <shellscript_name>.sh 35
+AND THEN INSIDE THE SHELLSCRIPT use $1 to get the value 35
+
+
+

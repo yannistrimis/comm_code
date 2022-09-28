@@ -1,0 +1,70 @@
+
+	a. From a terminal: ssh -X trimisio@hpcc.msu.edu
+    PASSWORD IS MSU PASSWORD
+	You are now in a gateway node. Don't stay here because you slow the system down.
+
+	b. To go to a development node:
+			ssh -X <NAME OF NODE> (e.g. ssh -X dev-intel18)
+	You can navigate with the usual commands.
+
+    b1. You can pick a module (i.e. a compiler) once you are in the development node.
+
+	c. Go to your computer. If you want to transport a directory named <NAME>
+	to the cluster you have to tar it first: tar -cvf <NAME>.tar <NAME>
+
+	d. You transport things to the cluster via scp:
+
+			scp <NAME>.tar trimisio@hpcc.msu.edu:~/Documents/. 
+
+	The dot at the end ensures that the directory or file will keep the same name <NAME>.tar
+	on the cluster.
+
+	e. You untar by doing: tar -xvf <NAME>.tar
+
+	f. You can run small things on the development node using regular commands.
+	You can use the command "time" before the run command to check the CPU running time.
+	Consider the top row ("real").
+
+	g. In order to submit a job to the queue, you have to use a script <SCRIPT_NAME>.sb with a 
+    specific format:
+
+		#!/bin/bash --login
+
+		#SBATCH --time=hh:mm:ss (input maximum run time)
+
+		<COMPILE & RUN COMMANDS>
+
+	That is the most minimal version. Then, to run the script use: sbatch <SCRIPT_NAME>.sb
+
+	h. In order to check the queue run: sq
+
+	i. In order to check CPU time and memory left, run: quota
+
+    j. GENERAL TEMPLATE FOR SUBMISSION SCRIPT:
+
+
+#!/bin/bash --login
+########## SBATCH Lines for Resource Request ##########
+
+#SBATCH --time=00:10:00             # limit of wall clock time - how long the job will run (same as -t)
+#SBATCH --nodes=1-5                 # number of different nodes - could be an exact number or a range of nodes (same as -N)
+#SBATCH --ntasks=5                  # number of tasks - how many tasks (nodes) that you require (same as -n)
+#SBATCH --cpus-per-task=2           # number of CPUs (or cores) per task (same as -c)
+#SBATCH --mem-per-cpu=2G            # memory required per allocated CPU (or core)
+#SBATCH --job-name Name_of_Job      # you can give your job a name for easier identification (same as -J)
+
+########## Command Lines for Job Running ##########
+
+module load GCC/6.4.0-2.28 OpenMPI  ### load necessary modules.
+
+cd <path_to_code>                   ### change to the directory where your code is located.
+
+srun -n 5 <executable>              ### call your executable. (use srun instead of mpirun.)
+
+scontrol show job $SLURM_JOB_ID     ### write job information to SLURM output file.
+js -j $SLURM_JOB_ID                 ### write resource usage to SLURM output file (powertools command).
+
+
+
+    k. From the SLURM website: if --nodes (-N) is not specified the it is allocated so that requested 
+    --ntasks (-n) can be made possible 

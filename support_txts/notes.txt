@@ -1,0 +1,79 @@
+1. To start anaconda environment:
+
+	source ~/anaconda3/bin/activate
+
+	(after this conda or anaconda-navigator, etc. commands are available).
+	
+	### OR JUST ###
+	
+	anaconda-navigator
+	
+
+
+
+2. To ssh to the workstation:
+
+	first terminal: ssh -N -L 2222:ytdevice.dhcp.egr.msu.edu:22 trimisio@mulder.egr.msu.edu
+
+			Then it asks for password: 161960729@
+
+	second terminal: ssh trimis@localhost -p 2222
+
+			Then it asks for password: Ka1imera!
+
+
+
+3. To install an application:
+
+	sudo apt install 
+
+
+
+4. To compile with gcc:
+
+	gcc -c -o NAME.o NAME.c
+	gcc -o NAME NAME.o
+	./NAME
+	
+	
+5. git basics
+
+	my username: yannistrimis 
+
+	my password: Ka1imera!
+
+    ssh password: gitssh
+
+	token: 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
+	
+	a. Add things to the local repository:	git add .
+	
+		or if you want to add a single file/folder: git add <name of file/folder>
+		
+	(bear in mind that those files/folders should ALREADY be inside the local
+    repository directory.
+	
+	and then:	git commit -m "some message"
+
+        This commits the changes to the local repository, in the sense that if you want to go
+        back to this stage you always can; each "commit" is a snapshot.
+
+	and finally to push to the cloud:	git push origin master
+	
+	then, to pull from the cloud:	git pull
+	
+	all the previous commands should be executed inside the local repository directory!!!
+
+	b. To clone a repository:
+	
+	git clone <web address of the repository>
+
+    c. To check branch: git status
+    c1. To change branch: git checkout <name of target branch>
+
+
+
+
+
+
+
