@@ -36,7 +36,7 @@ while [ $i -le $n_of_lat ]
 do
 echo $seed
 bash make_input.sh $i_lat $seed
-srun -n 128 ../build/su3_ora_symzk0_a_par_intel input "${directory}/outs/${out_name}.${i_lat}" #this is for hpcc
+srun -n 4 ../build/su3_ora_symzk0_a_par_intel input "${directory}/outs/${out_name}.${i_lat}" #this is for hpcc
 #mpirun -n 4 ../build/su3_ora_symzk0_a_par_gnu input "${directory}/outs/${out_name}.${i_lat}" #this is for workstation/laptop
 
 file_name="${directory}/outs/${out_name}.${i_lat}"

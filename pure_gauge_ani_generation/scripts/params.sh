@@ -1,12 +1,12 @@
 #!/bin/bash
 
 init_seed=7562
-n_of_lat=1
+n_of_lat=10
 
-nx=24
-ny=24
-nz=24
-nt=48
+nx=8
+ny=8
+nz=8
+nt=16
 
 # We want to reproduce arxiv 1205.0781 for: beta=6.1, xi_0=2.46, 24^3x48
 # MILC convention (in the improved action) is: beta=10/g^2
@@ -44,4 +44,4 @@ lat_name="l${ensemble}"
 directory="/mnt/scratch/trimisio/lattices/lat${ensemble}" #this is for hpcc
 #directory="/home/trimis/local_code/lat${ensemble}" #this is for workstation
 #directory="/home/yannis/Physics/LQCD/code_local/lat${ensemble}" #this is for laptop
-erase="yes"
+erase="no"

@@ -1,2 +1,3 @@
 __pycache__/
 /pure_gauge_ani_generation/build
+slurm-*.out
