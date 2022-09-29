@@ -1,0 +1,10 @@
+1] Our branch is feature/anisotropic_pure_gauge
+
+2] .1. in test files means single-precision
+   .2. means double
+
+3] Makefile:
+    a. COMPILER = (choose compiler)
+    b. MPP = true (parallel job)
+    c. PRECISION = 1 (single precision)
+    d. WANTQIO = (SHOULD BE BLANK!!!)
