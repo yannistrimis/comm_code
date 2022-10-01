@@ -28,7 +28,7 @@ for xf in xf_vec:
 	for i_file in range(101,n_files+101):
 		
 		i = i_file - 101
-		f_read = open( '../runflowl1632b7300x183a/sflow1632b7300x183xf%sa_dt0.025.lat.%d'%( xf , i_file ) , 'r' )
+		f_read = open( '/home/data/runflowl1632b7300x183a/sflow1632b7300x183xf%sa_dt0.025.lat.%d'%( xf , i_file ) , 'r' )
     
 		content = f_read.readlines()
     
@@ -191,9 +191,9 @@ for i_bins in range(n_bins):
 	
 	### AT THIS STAGE we have the gauge anisotropy.
 	
-	coeffs2 = np.polyfit( xf_float_vec , ratio_val_arr[i_bins,:] , 4 )
+	coeffs2 = np.polyfit( xf_float_vec , w0_arr[i_bins,:] , 4 )
 	w0[ i_bins ] = np.real( np.polyval( coeffs2 , xi_g[i_bins] ) )
-	
+	w0[ i_bins ] = np.sqrt( w0[ i_bins ]  )	
 	
 ### AT THIS STAGE we have gauge anisotropy and scale for all bins. Now we need to find average and error:
 
