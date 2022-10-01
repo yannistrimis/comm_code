@@ -1,12 +1,12 @@
 #!/bin/bash
 
-init_seed=7562
-n_of_lat=10
+init_seed=1855
+n_of_lat=20
 
-nx=8
-ny=8
-nz=8
-nt=16
+nx=24
+ny=24
+nz=24
+nt=48
 
 # We want to reproduce arxiv 1205.0781 for: beta=6.1, xi_0=2.46, 24^3x48
 # MILC convention (in the improved action) is: beta=10/g^2
@@ -31,10 +31,10 @@ warms=0
 trajecs=4
 traj_between_meas=1
 u0=1.0
-steps_per_trajectory=3
-qhb_steps=2
+steps_per_trajectory=4
+qhb_steps=1
 
-stream="a"
+stream="b"
 
 ensemble="${nx}${nt}b${beta_name}x${xi_0_name}${stream}"
 
