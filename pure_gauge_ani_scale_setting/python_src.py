@@ -191,7 +191,7 @@ for i_bins in range(n_bins):
 	
 	### AT THIS STAGE we have the gauge anisotropy.
 	
-	coeffs2 = np.polyfit( xf_float_vec , ratio_val_arr[i_bins,:] , 4 )
+	coeffs2 = np.polyfit( xf_float_vec , w0_arr[i_bins,:] , 4 )
 	w0[ i_bins ] = np.real( np.polyval( coeffs2 , xi_g[i_bins] ) )
 	
 	
