@@ -1,7 +1,7 @@
 #!/bin/bash
 
 init_seed=1555
-n_of_lat=25
+n_of_lat=20
 
 nx=24
 ny=24
