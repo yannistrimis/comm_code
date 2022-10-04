@@ -1,6 +1,8 @@
 import numpy as np
 from matplotlib import pyplot as plt
 
+# THIS IS FOR HPCC
+
 N_lat = 20
 i_col = 1 # 1 for re[polyakov], 2 for im[polyakov], 4 for ss plaq, 5 for st plaq
 obs = 're_polyakov'
