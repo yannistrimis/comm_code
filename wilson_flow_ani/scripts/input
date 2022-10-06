@@ -1,0 +1,13 @@
+prompt 0
+nx 4
+ny 4
+nz 4
+nt 8
+anisotropy 2.85
+
+reload_serial /home/trimis/local_code/lat48b10167x246a/l48b10167x246a.4
+wilson
+exp_order 12
+stepsize 0.025
+stoptime 4.0
+forget
