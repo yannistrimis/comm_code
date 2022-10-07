@@ -4,7 +4,7 @@
 #SBATCH --time=00:30:00
 #SBATCH --ntasks=128
 
-#SBATCH --job-name flow_c
+#SBATCH --job-name flow_285
 
 module load intel/2020b
 

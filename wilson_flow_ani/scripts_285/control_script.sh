@@ -18,7 +18,7 @@ if [ -f "${directory}/guard" ]
 then
 i_lat=$(head -n 1 "${directory}/guard" | tail -n 1)
 else
-i_lat=1
+i_lat=101
 cat << EOF > "${directory}/guard"
 ${i_lat}
 EOF
@@ -32,8 +32,8 @@ do
 
 bash make_input.sh $i_lat
 
-#srun -n 128 ../build/wilson_flow_a_par_2_intel input "${directory}/${f_ensemble}.${i_lat}" #this is for hpcc
-mpirun -n 4 ../build/wilson_flow_a_par_1_gnu input "${directory}/${f_ensemble}.${i_lat}" #this is for workstation/laptop
+srun -n 128 ../build/wilson_flow_a_par_1_intel input "${directory}/${f_ensemble}.${i_lat}" #this is for hpcc
+#mpirun -n 4 ../build/wilson_flow_a_par_1_gnu input "${directory}/${f_ensemble}.${i_lat}" #this is for workstation/laptop
 
 file_name="${directory}/${f_ensemble}.${i_lat}"
 text="RUNNING COMPLETED"

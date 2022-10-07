@@ -5,15 +5,15 @@ from python_funcs import *
 from matplotlib import pyplot as plt
 
 # let us define xf_vec
-xf_vec = [ '196','198','200','202','204' ]
-xf_float_vec = [ 1.96 , 1.98 , 2.00 , 2.02 , 2.04 ]
+xf_vec = [ '285', '295', '305' ]
+xf_float_vec = [ 2.85, 2.95, 3.05 ]
 # how many files?
-n_files = 400
+n_files = 30
 # how many flow steps?
-n_steps = 97
+n_steps = 160 # should be one more than flow output says. That is, for us initial point counts as a step!!!
 tau_arr = np.zeros( n_steps )
 # how many jackknife bins?
-n_bins = 40
+n_bins = 10
 
 dEs_arr = np.zeros(( n_steps , n_files , len(xf_vec) ))
 ratio_arr = np.zeros(( n_steps , n_files , len(xf_vec) ))
@@ -28,7 +28,7 @@ for xf in xf_vec:
 	for i_file in range(101,n_files+101):
 		
 		i = i_file - 101
-		f_read = open( '/home/data/runflowl1632b7300x183a/sflow1632b7300x183xf%sa_dt0.025.lat.%d'%( xf , i_file ) , 'r' )
+		f_read = open( '/mnt/scratch/trimisio/flows/wflow2448b10167x246xf%sc_dt0.025/wflow2448b10167x246xf%sc_dt0.025.%d'%( xf, xf, i_file ) , 'r' )
     
 		content = f_read.readlines()
     
@@ -39,7 +39,7 @@ for xf in xf_vec:
 
 		dEt_arr = np.zeros( n_steps )
     
-		for i_line in range(39,136): #this is so only for 97 steps output!!! 
+		for i_line in range(34,194): #ADJUST ACCORDING TO STEPS!!!!
         
 			my_line = content[ i_line ].split(' ')
 			if i_file == 101 and i_xf == 0 : #the tau_array will be the same for all, so we form it once
