@@ -66,7 +66,7 @@ for xf in xf_vec:
 			dEs_arr[i_time,i,i_xf] = dEs_arr[i_time,i,i_xf] * tau_arr[i_time] #that one is important
 			ratio_arr[i_time,i,i_xf] = (dEs_arr[i_time,i,i_xf])/(dEt_arr[i_time]) #and that one is important
 			
-	print( '\n	%d out of %d'%(i_xf+1,len(xf_vec)) )
+	print( '\n%d out of %d'%(i_xf+1,len(xf_vec)) )
 
 del dEt_arr
 			
@@ -98,7 +98,7 @@ del dEs_arr
 del ratio_arr
 		
 ### AT THIS STAGE we have the binned data and the weights for the fits.
-	
+
 w0_arr = np.zeros( ( n_bins , len(xf_vec) ) )
 
 print('\n Calculating w0 points...')
@@ -119,22 +119,23 @@ for i_xf in range(len(xf_vec)):
 			y_points[j] = dEs_binned[clos_i+k,i_bins,i_xf]
 			x_points[j] = tau_arr[clos_i+k]
 			w_points[j] = dEs_weight[clos_i+k,i_xf]
-		
+			
+
 		coeffs = np.polyfit(x_points,y_points,4,w=w_points) #the coeffs of the fitted polynomial. 
 		#It lists the polynomial coeffs from largest power to smallest.
 		
 		coeffs[4] = coeffs[4] - 0.15
-		
+				
 		solutions = np.roots(coeffs)
-		
+
 		for ii in range( len(solutions) ): #that polynomial might cross y=0.15 in several locations!!!
 			
 			if solutions[ii] < tau_arr[clos_i+1] and solutions[ii] > tau_arr[clos_i-1] :
-				
+					
 				w0_arr[i_bins,i_xf] = np.real(solutions[ii])
 				break
 		
-	print( '\n	%d out of %d'%(i_xf+1,len(xf_vec)) )
+	print( '\n%d out of %d'%(i_xf+1,len(xf_vec)) )
 	
 ### AT THIS STAGE we have the w0 points.
 
@@ -142,7 +143,9 @@ for i_xf in range(len(xf_vec)):
 ratio_val_arr = np.zeros( ( n_bins , len(xf_vec) ) )#the array that has the ratio values specifically at w0.
 
 i_xf = -1
+
 print('\n Calculating ratio points at corresponding w0 points...')
+
 for xf_float in xf_float_vec:
 	
 	i_xf = i_xf + 1
