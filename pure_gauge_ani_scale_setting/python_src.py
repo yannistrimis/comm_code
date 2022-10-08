@@ -66,8 +66,8 @@ for xf in xf_vec:
 			dEs_arr[i_time,i,i_xf] = dEs_arr[i_time,i,i_xf] * tau_arr[i_time] #that one is important
 			ratio_arr[i_time,i,i_xf] = (dEs_arr[i_time,i,i_xf])/(dEt_arr[i_time]) #and that one is important
 			
-	print( '\n%d out of %d'%(i_xf+1,len(xf_vec)) )
-print(dEs_arr[:,0,0])
+	print( '\n	%d out of %d'%(i_xf+1,len(xf_vec)) )
+
 del dEt_arr
 
 ### AT THIS STAGE we have the 3-dimensional dEs_arr. ratio_arr that contain our data. The tau_arr
@@ -135,7 +135,7 @@ for i_xf in range(len(xf_vec)):
 				w0_arr[i_bins,i_xf] = np.real(solutions[ii])
 				break
 		
-	print( '\n%d out of %d'%(i_xf+1,len(xf_vec)) )
+	print( '\n	%d out of %d'%(i_xf+1,len(xf_vec)) )
 	
 ### AT THIS STAGE we have the w0 points.
 

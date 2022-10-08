@@ -1,6 +1,6 @@
 #!/bin/bash
 
-n_of_lat=30
+n_of_lat=1
 
 nx=24
 ny=24
@@ -17,13 +17,13 @@ xf=2.85
 xf_name="285"
 dt=0.025
 
-stoptime=4.0
+stoptime=25.0
 exp_order=12
 flow_action="wilson"
 
 f_ensemble="wflow${nx}${nt}b${beta_name}x${xi_0_name}xf${xf_name}${stream}_dt${dt}"
 
-directory="/mnt/scratch/trimisio/flows/${f_ensemble}" #this is for hpcc
+directory="/mnt/scratch/trimisio/flows/${f_ensemble}mitsos" #this is for hpcc
 #directory="/home/trimis/local_code/${f_ensemble}" #this is for workstation
 #directory="/home/yannis/Physics/LQCD/local_code/${f_ensemble}" #this is for laptop
 
