@@ -43,5 +43,5 @@ lat_name="l${ensemble}"
 
 directory="/mnt/scratch/trimisio/lattices/lat${ensemble}" #this is for hpcc
 #directory="/home/trimis/local_code/lat${ensemble}" #this is for workstation
-#directory="/home/yannis/Physics/LQCD/code_local/lat${ensemble}" #this is for laptop
+#directory="/home/yannis/Physics/LQCD/local_code/lat${ensemble}" #this is for laptop
 erase="no"

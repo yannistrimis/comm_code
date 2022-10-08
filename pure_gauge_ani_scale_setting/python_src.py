@@ -5,15 +5,15 @@ from python_funcs import *
 from matplotlib import pyplot as plt
 
 # let us define xf_vec
-xf_vec = [ '196','198','200','202','204' ]
-xf_float_vec = [ 1.96 , 1.98 , 2.00 , 2.02 , 2.04 ]
+xf_vec = [ '285', '295', '305' ]
+xf_float_vec = [ 2.85, 2.95, 3.05 ]
 # how many files?
-n_files = 400
+n_files = 30
 # how many flow steps?
-n_steps = 97
+n_steps = 160 # should be one more than flow output says. That is, for us initial point counts as a step!!!
 tau_arr = np.zeros( n_steps )
 # how many jackknife bins?
-n_bins = 40
+n_bins = 10
 
 dEs_arr = np.zeros(( n_steps , n_files , len(xf_vec) ))
 ratio_arr = np.zeros(( n_steps , n_files , len(xf_vec) ))
@@ -28,7 +28,7 @@ for xf in xf_vec:
 	for i_file in range(101,n_files+101):
 		
 		i = i_file - 101
-		f_read = open( '/home/data/runflowl1632b7300x183a/sflow1632b7300x183xf%sa_dt0.025.lat.%d'%( xf , i_file ) , 'r' )
+		f_read = open( '/mnt/scratch/trimisio/flows/wflow2448b10167x246xf%sc_dt0.025/wflow2448b10167x246xf%sc_dt0.025.%d'%( xf, xf, i_file ) , 'r' )
     
 		content = f_read.readlines()
     
@@ -39,7 +39,7 @@ for xf in xf_vec:
 
 		dEt_arr = np.zeros( n_steps )
     
-		for i_line in range(39,136): #this is so only for 97 steps output!!! 
+		for i_line in range(34,194): #ADJUST ACCORDING TO STEPS!!!!
         
 			my_line = content[ i_line ].split(' ')
 			if i_file == 101 and i_xf == 0 : #the tau_array will be the same for all, so we form it once
@@ -66,10 +66,10 @@ for xf in xf_vec:
 			dEs_arr[i_time,i,i_xf] = dEs_arr[i_time,i,i_xf] * tau_arr[i_time] #that one is important
 			ratio_arr[i_time,i,i_xf] = (dEs_arr[i_time,i,i_xf])/(dEt_arr[i_time]) #and that one is important
 			
-	print( '\n	%d out of %d'%(i_xf+1,len(xf_vec)) )
-
+	print( '\n%d out of %d'%(i_xf+1,len(xf_vec)) )
+print(dEs_arr[:,0,0])
 del dEt_arr
-			
+
 ### AT THIS STAGE we have the 3-dimensional dEs_arr. ratio_arr that contain our data. The tau_arr
 #contains the flow time points.
 
@@ -98,7 +98,7 @@ del dEs_arr
 del ratio_arr
 		
 ### AT THIS STAGE we have the binned data and the weights for the fits.
-	
+
 w0_arr = np.zeros( ( n_bins , len(xf_vec) ) )
 
 print('\n Calculating w0 points...')
@@ -119,22 +119,23 @@ for i_xf in range(len(xf_vec)):
 			y_points[j] = dEs_binned[clos_i+k,i_bins,i_xf]
 			x_points[j] = tau_arr[clos_i+k]
 			w_points[j] = dEs_weight[clos_i+k,i_xf]
-		
+			
+
 		coeffs = np.polyfit(x_points,y_points,4,w=w_points) #the coeffs of the fitted polynomial. 
 		#It lists the polynomial coeffs from largest power to smallest.
 		
 		coeffs[4] = coeffs[4] - 0.15
-		
+				
 		solutions = np.roots(coeffs)
-		
+
 		for ii in range( len(solutions) ): #that polynomial might cross y=0.15 in several locations!!!
 			
 			if solutions[ii] < tau_arr[clos_i+1] and solutions[ii] > tau_arr[clos_i-1] :
-				
+					
 				w0_arr[i_bins,i_xf] = np.real(solutions[ii])
 				break
 		
-	print( '\n	%d out of %d'%(i_xf+1,len(xf_vec)) )
+	print( '\n%d out of %d'%(i_xf+1,len(xf_vec)) )
 	
 ### AT THIS STAGE we have the w0 points.
 
@@ -142,7 +143,9 @@ for i_xf in range(len(xf_vec)):
 ratio_val_arr = np.zeros( ( n_bins , len(xf_vec) ) )#the array that has the ratio values specifically at w0.
 
 i_xf = -1
+
 print('\n Calculating ratio points at corresponding w0 points...')
+
 for xf_float in xf_float_vec:
 	
 	i_xf = i_xf + 1
