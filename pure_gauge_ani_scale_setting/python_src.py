@@ -67,9 +67,9 @@ for xf in xf_vec:
 			ratio_arr[i_time,i,i_xf] = (dEs_arr[i_time,i,i_xf])/(dEt_arr[i_time]) #and that one is important
 			
 	print( '\n%d out of %d'%(i_xf+1,len(xf_vec)) )
-
+print(dEs_arr[:,0,0])
 del dEt_arr
-			
+
 ### AT THIS STAGE we have the 3-dimensional dEs_arr. ratio_arr that contain our data. The tau_arr
 #contains the flow time points.
 
