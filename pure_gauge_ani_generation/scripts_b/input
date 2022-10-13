@@ -3,14 +3,14 @@ nx 24
 ny 24
 nz 24
 nt 48
-iseed 2454
+iseed 8266
 
 warms 0
 trajecs 4
 traj_between_meas 1
-beta 4.133 25.010
-u0 1.0
+beta 2.480 15.006
 steps_per_trajectory 4
 qhb_steps 1
-reload_serial /mnt/scratch/trimisio/lattices/lat2448b10167x246b/l2448b10167x246b.599
-save_serial /mnt/scratch/trimisio/lattices/lat2448b10167x246b/l2448b10167x246b.600
+reload_serial /mnt/scratch/trimisio/lattices/wlat2448b61x246b/l2448b61x246b.6791
+no_gauge_fix
+save_serial /mnt/scratch/trimisio/lattices/wlat2448b61x246b/l2448b61x246b.6792

@@ -7,7 +7,7 @@ ny=24
 nz=24
 nt=48
 
-beta_name="10167"
+beta_name="61"
 xi_0_name="246"
 stream="c"
 ensemble="${nx}${nt}b${beta_name}x${xi_0_name}${stream}"
@@ -27,8 +27,8 @@ directory="/mnt/scratch/trimisio/flows/${f_ensemble}" #this is for hpcc
 #directory="/home/trimis/local_code/${f_ensemble}" #this is for workstation
 #directory="/home/yannis/Physics/LQCD/local_code/${f_ensemble}" #this is for laptop
 
-lat_directory="/mnt/scratch/trimisio/lattices/lat${ensemble}" #this is for hpcc
+lat_directory="/mnt/scratch/trimisio/lattices/wlat${ensemble}" #this is for hpcc
 #lat_directory="/home/trimis/local_code/lat${ensemble}" #this is for workstation
 #lat_directory="/home/yannis/Physics/LQCD/local_code/lat${ensemble}" #this is for laptop
 
-erase="yes"
+erase="no"

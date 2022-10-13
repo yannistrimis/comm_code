@@ -18,7 +18,7 @@ if [ -f "${directory}/guard" ]
 then
 i_lat=$(head -n 1 "${directory}/guard" | tail -n 1)
 else
-i_lat=101
+i_lat=1001
 cat << EOF > "${directory}/guard"
 ${i_lat}
 EOF

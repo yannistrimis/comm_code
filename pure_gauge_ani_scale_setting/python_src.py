@@ -25,10 +25,10 @@ for xf in xf_vec:
 	
 	i_xf = i_xf + 1
 	
-	for i_file in range(101,n_files+101):
+	for i_file in range(1001,n_files+1001):
 		
-		i = i_file - 101
-		f_read = open( '/mnt/scratch/trimisio/flows/wflow2448b10167x246xf%sc_dt0.025/wflow2448b10167x246xf%sc_dt0.025.%d'%( xf, xf, i_file ) , 'r' )
+		i = i_file - 1001
+		f_read = open( '/mnt/scratch/trimisio/flows/wflow2448b61x246xf%sc_dt0.025/wflow2448b61x246xf%sc_dt0.025.%d'%( xf, xf, i_file ) , 'r' )
     
 		content = f_read.readlines()
     
@@ -42,7 +42,7 @@ for xf in xf_vec:
 		for i_line in range(34,194): #ADJUST ACCORDING TO STEPS!!!!
         
 			my_line = content[ i_line ].split(' ')
-			if i_file == 101 and i_xf == 0 : #the tau_array will be the same for all, so we form it once
+			if i_file == 1001 and i_xf == 0 : #the tau_array will be the same for all, so we form it once
 				tau_arr[i_time] = float( my_line[1] )
 		
 
@@ -188,7 +188,7 @@ print('\n Implementing Wuppertal fig. 2 ...')
 for i_bins in range(n_bins):
 	
 	coeffs = np.polyfit( xf_float_vec , ratio_val_arr[i_bins,:] , 1 )# linear fit, because if curved, then
-	#for some configurations more than one intersections with 1.0 in reasonable range are obtained!
+	#for some bins more than one intersections with 1.0 in reasonable range are obtained!
 	coeffs[1] = coeffs[1] - 1.0
 	xi_g[ i_bins ] = np.real( np.roots(coeffs) )
 	
@@ -225,7 +225,3 @@ xi_g_err = np.sqrt(xi_g_err)
 
 print('\nw0 = %f +/- %f '%(w0_av,w0_err)) 
 print('xi_g = %f +/- %f '%(xi_g_av,xi_g_err))
-
-
-
-
