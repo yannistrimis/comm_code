@@ -1,34 +1,53 @@
-### THIS PROGRAM NEEDS the flow files in a directory named and positioned as shown below. 
-
 import numpy as np
 from python_funcs import *
 from matplotlib import pyplot as plt
 
-# let us define xf_vec
-xf_vec = [ '285', '295', '305' ]
-xf_float_vec = [ 2.85, 2.95, 3.05 ]
-# how many files?
-n_files = 30
-# how many flow steps?
-n_steps = 160 # should be one more than flow output says. That is, for us initial point counts as a step!!!
+beta_x0_length = open('beta_x0_length','r')
+xf_file = open('xi_f_arr','r')
+xf_float_file = open('xi_f_flo','r')
+
+content_1 = beta_x0_length.readlines()
+content_2 = xf_file.readlines()
+content_3 = xf_float_file.readlines()
+
+lines_1 = content_1[0].split(' ')
+beta = lines_1[0]
+x0 = lines_1[1]
+length = int( lines_1[2] )
+
+xf_vec = [None]*length
+xf_float_vec = [None]*length
+
+for i in range(length):
+	xf_vec[i] = content_2[i].strip()
+	xf_float_vec[i] = float(content_3[i].strip())
+
+beta_x0_length.close()
+xf_file.close()
+xf_float_file.close()
+
+n_files = 400
+first_file = 101
+first_line = 39 # to be fed to range()
+last_line = 136 # to be fed to range()
+n_steps = 97 # should be one more than flow output says. That is, for us initial point counts as a step!!!
 tau_arr = np.zeros( n_steps )
-# how many jackknife bins?
 n_bins = 10
 
 dEs_arr = np.zeros(( n_steps , n_files , len(xf_vec) ))
 ratio_arr = np.zeros(( n_steps , n_files , len(xf_vec) ))
 
+
 i_xf = -1
 
-print('\n Exracting energy derivative and ratio from flow files...')
 for xf in xf_vec:
 	
 	i_xf = i_xf + 1
 	
-	for i_file in range(101,n_files+101):
+	for i_file in range(first_file,n_files+first_file):
 		
-		i = i_file - 101
-		f_read = open( '/mnt/scratch/trimisio/flows/wflow2448b10167x246xf%sc_dt0.025/wflow2448b10167x246xf%sc_dt0.025.%d'%( xf, xf, i_file ) , 'r' )
+		i = i_file - first_file
+		f_read = open( '/home/data/fnal_unzipped/runflowl1632b%sx%sa/sflow1632b%sx%sxf%sa_dt0.025.lat.%d'%(beta,x0,beta,x0,xf,i_file) , 'r' )
     
 		content = f_read.readlines()
     
@@ -39,10 +58,10 @@ for xf in xf_vec:
 
 		dEt_arr = np.zeros( n_steps )
     
-		for i_line in range(34,194): #ADJUST ACCORDING TO STEPS!!!!
+		for i_line in range(first_line,last_line): #ADJUST ACCORDING TO STEPS!!!!
         
 			my_line = content[ i_line ].split(' ')
-			if i_file == 101 and i_xf == 0 : #the tau_array will be the same for all, so we form it once
+			if i_file == first_file and i_xf == 0 : #the tau_array will be the same for all, so we form it once
 				tau_arr[i_time] = float( my_line[1] )
 		
 
@@ -65,8 +84,6 @@ for xf in xf_vec:
 	
 			dEs_arr[i_time,i,i_xf] = dEs_arr[i_time,i,i_xf] * tau_arr[i_time] #that one is important
 			ratio_arr[i_time,i,i_xf] = (dEs_arr[i_time,i,i_xf])/(dEt_arr[i_time]) #and that one is important
-			
-	print( '\n	%d out of %d'%(i_xf+1,len(xf_vec)) )
 
 del dEt_arr
 
@@ -79,8 +96,6 @@ ratio_binned = np.zeros( ( n_steps , n_bins , len(xf_vec) ) )
 dEs_weight = np.zeros( ( n_steps , len(xf_vec) ) )
 ratio_weight = np.zeros( ( n_steps , len(xf_vec) ) )
 
-print('\n Jackkniving...')
-
 for i_xf in range(len(xf_vec)):
 	for i_time in range(n_steps):	
 		dEs_binned[i_time,:,i_xf] = jackknife(dEs_arr[i_time,:,i_xf],n_bins,'bins')
@@ -91,8 +106,6 @@ for i_xf in range(len(xf_vec)):
 		if i_time > 0:# the first elements are not going to be needed anyways
 			dEs_weight[i_time,i_xf] = 1/(dEs_error)
 			ratio_weight[i_time,i_xf] = 1/(ratio_error)
-		
-	print( '\n	%d out of %d'%(i_xf+1,len(xf_vec)) )
 	
 del dEs_arr
 del ratio_arr
@@ -101,7 +114,6 @@ del ratio_arr
 
 w0_arr = np.zeros( ( n_bins , len(xf_vec) ) )
 
-print('\n Calculating w0 points...')
 for i_xf in range(len(xf_vec)):
 	
 	for i_bins in range(n_bins):
@@ -134,8 +146,6 @@ for i_xf in range(len(xf_vec)):
 					
 				w0_arr[i_bins,i_xf] = np.real(solutions[ii])
 				break
-		
-	print( '\n	%d out of %d'%(i_xf+1,len(xf_vec)) )
 	
 ### AT THIS STAGE we have the w0 points.
 
@@ -143,8 +153,6 @@ for i_xf in range(len(xf_vec)):
 ratio_val_arr = np.zeros( ( n_bins , len(xf_vec) ) )#the array that has the ratio values specifically at w0.
 
 i_xf = -1
-
-print('\n Calculating ratio points at corresponding w0 points...')
 
 for xf_float in xf_float_vec:
 	
@@ -173,7 +181,6 @@ for xf_float in xf_float_vec:
 		#It lists the polynomial coeffs from largest power to smallest.
 		ratio_val_arr[i_bins,i_xf] = np.real( np.polyval( coeffs , w0_arr[i_bins,i_xf] ) )
 
-	print( '\n	%d out of %d'%(i_xf+1,len(xf_vec)) )
 
 del coeffs
 del solutions
@@ -184,11 +191,10 @@ del solutions
 xi_g = np.zeros( n_bins )
 w0  = np.zeros( n_bins )
 
-print('\n Implementing Wuppertal fig. 2 ...')
 for i_bins in range(n_bins):
 	
 	coeffs = np.polyfit( xf_float_vec , ratio_val_arr[i_bins,:] , 1 )# linear fit, because if curved, then
-	#for some configurations more than one intersections with 1.0 in reasonable range are obtained!
+	#for some bins more than one intersections with 1.0 in reasonable range are obtained!
 	coeffs[1] = coeffs[1] - 1.0
 	xi_g[ i_bins ] = np.real( np.roots(coeffs) )
 	
@@ -223,9 +229,6 @@ w0_err = np.sqrt(w0_err)
 xi_g_err = xi_g_err*(n_bins-1)/n_bins
 xi_g_err = np.sqrt(xi_g_err)
 
+print('\nfor beta = %s and x0 = %s we have:'%(beta,x0))
 print('\nw0 = %f +/- %f '%(w0_av,w0_err)) 
-print('xi_g = %f +/- %f '%(xi_g_av,xi_g_err))
-
-
-
-
+print('\nxi_g = %f +/- %f '%(xi_g_av,xi_g_err))

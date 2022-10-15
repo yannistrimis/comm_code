@@ -21,10 +21,10 @@ warms $warms
 trajecs $trajecs
 traj_between_meas $traj_between_meas
 beta $beta_s $beta_t
-u0 $u0
 steps_per_trajectory $steps_per_trajectory
 qhb_steps $qhb_steps
 reload_serial ${directory}/${lat_name}.${i_prev}
+no_gauge_fix
 save_serial ${directory}/${lat_name}.${i_curr}
 EOF
 
@@ -43,10 +43,10 @@ warms $warms
 trajecs $trajecs
 traj_between_meas $traj_between_meas
 beta $beta_s $beta_t
-u0 $u0
 steps_per_trajectory $steps_per_trajectory
 qhb_steps $qhb_steps
 fresh
+no_gauge_fix
 save_serial ${directory}/${lat_name}.${i_curr}
 EOF
 

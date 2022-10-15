@@ -5,7 +5,7 @@ nz 24
 nt 48
 anisotropy 2.95
 
-reload_serial /mnt/scratch/trimisio/lattices/lat2448b10167x246c/l2448b10167x246c.130
+reload_serial /mnt/scratch/trimisio/lattices/wlat2448b61x246c/l2448b61x246c.1030
 wilson
 exp_order 12
 stepsize 0.025
