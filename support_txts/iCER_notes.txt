@@ -67,4 +67,7 @@ js -j $SLURM_JOB_ID                 ### write resource usage to SLURM output fil
 
 
     k. From the SLURM website: if --nodes (-N) is not specified the it is allocated so that requested 
-    --ntasks (-n) can be made possible 
+    --ntasks (-n) can be made possible
+
+	l. To touch all files in scratch: Go to /mnt/scratch/trimisio and run: 
+		find . -exec touch {} \;

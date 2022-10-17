@@ -2,6 +2,8 @@
 
 mother_dir="/home/data/fnal_unzipped"
 
+printf "beta x0 w0 w0_err xi_g xi_g_err\n" >> surface_file
+
 for dir in "${mother_dir}"/*/
 do
 
@@ -65,7 +67,7 @@ printf "%s\n" "${xi_f_arr[@]}" > xi_f_arr
 printf "%s\n" "${xi_f_flo[@]}" > xi_f_flo
 printf "%s %s %s" "${beta}" "${x0}" "${j_prev}" > beta_x0_length
 
-python python_src.py
+python python_src.py >> surface_file
 
 rm xi_f_arr
 rm xi_f_flo
