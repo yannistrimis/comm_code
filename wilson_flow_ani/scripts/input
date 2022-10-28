@@ -1,0 +1,13 @@
+prompt 0
+nx 16
+ny 16
+nz 16
+nt 16
+anisotropy 1.00
+
+reload_serial /mnt/home/bazavov/scratch/puregauge/lattices/l1616b7000x100a/l1616b7000x100a.300
+symanzik
+exp_order 12
+stepsize 0.0078125
+stoptime 2.4
+forget

@@ -1,0 +1,11 @@
+#!/bin/bash --login
+
+
+#SBATCH --time=02:00:00
+#SBATCH --ntasks=128
+
+#SBATCH --job-name 128rk8
+
+module load intel/2020b
+
+bash control_script.sh
