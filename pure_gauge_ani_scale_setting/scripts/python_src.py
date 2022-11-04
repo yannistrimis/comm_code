@@ -229,6 +229,4 @@ w0_err = np.sqrt(w0_err)
 xi_g_err = xi_g_err*(n_bins-1)/n_bins
 xi_g_err = np.sqrt(xi_g_err)
 
-print('\nfor beta = %s and x0 = %s we have:'%(beta,x0))
-print('\nw0 = %f +/- %f '%(w0_av,w0_err)) 
-print('\nxi_g = %f +/- %f '%(xi_g_av,xi_g_err))
+print('%s %s %f %f %f %f'%(beta,x0,w0_av,w0_err,xi_g_av,xi_g_err))
