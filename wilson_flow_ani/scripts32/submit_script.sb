@@ -4,7 +4,7 @@
 #SBATCH --time=12:00:00
 #SBATCH --ntasks=128
 
-#SBATCH --job-name dt128
+#SBATCH --job-name dt32
 
 module load intel/2020b
 

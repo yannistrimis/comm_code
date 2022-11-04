@@ -3,18 +3,18 @@ from python_funcs import *
 from matplotlib import pyplot as plt
 
 cur_dir = '/mnt/home/bazavov/puregauge/outputs'
-vol = '1664'
+vol = '1680'
 beta = '7000'
-x0 = '34380'
+x0 = '42700'
 stream = 'a'
-flow_type = 's'
-xf_vec = ['360','370','380','390']
-xf_float_vec = [3.60,3.70,3.80,3.90] 
-dt = 0.015625
-n_files = 20
+flow_type = 'w'
+xf_vec = ['490','500','510']
+xf_float_vec = [4.90,5.00,5.10]
+dt = 0.005
+n_files = 200
 first_file = 101
-n_bins = 5
-n_steps = 97
+n_bins = 20
+n_steps = 481 # one more than the number appearing at the flow file
 
 tau_arr = np.zeros( n_steps )
 
@@ -25,7 +25,7 @@ dEt_arr = np.zeros(( n_steps , n_files , len(xf_vec) ))
 ratio_arr = np.zeros(( n_steps , n_files , len(xf_vec) ))
 
 f_write = open( 'tau_Et_Es_dEt_dEs_ratio_sflow%sb%sx%sdt%s'%(vol,beta,x0,dt) , 'w' )
-i_xf_rec = 3
+i_xf_rec = 0
 i_xf = -1
 
 for xf in xf_vec:
