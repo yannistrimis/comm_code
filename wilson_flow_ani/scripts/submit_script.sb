@@ -1,13 +1,14 @@
 #!/bin/bash --login
 
 
-#SBATCH --time=12:00:00
+#SBATCH --time=10:00:00
 #SBATCH --ntasks=128
 
 #SBATCH --job-name dt128
 
 module load intel/2020b
 
+bash control_script.sh rkmk8
 bash control_script.sh rkmk4
 bash control_script.sh rkmk3
 bash control_script.sh bbb

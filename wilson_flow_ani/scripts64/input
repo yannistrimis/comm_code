@@ -2,10 +2,10 @@ prompt 0
 nx 16
 ny 16
 nz 16
-nt 16
-anisotropy 1.00
+nt 80
+anisotropy 4.50
 
-reload_serial /mnt/home/bazavov/scratch/puregauge/lattices/l1616b7000x100a/l1616b7000x100a.300
+reload_serial /mnt/home/bazavov/scratch/puregauge/lattices/l1680b7000x42000a/l1680b7000x42000a.300
 symanzik
 exp_order 12
 stepsize 0.015625

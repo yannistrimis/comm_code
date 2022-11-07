@@ -1,19 +1,19 @@
 #!/bin/bash
 
-n_of_lat=15
+n_of_lat=1
 
 nx=16
 ny=16
 nz=16
-nt=16
+nt=80
 
 beta_name="7000"
-xi_0_name="100"
+xi_0_name="42000"
 stream="a"
 lat_name="l${nx}${nt}b${beta_name}x${xi_0_name}${stream}"
 
-xf=1.00
-xf_name="100"
+xf=4.50
+xf_name="450"
 dt=0.03125 # aka 1/32
 
 stoptime=2.4

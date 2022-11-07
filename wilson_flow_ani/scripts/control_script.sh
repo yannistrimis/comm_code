@@ -18,7 +18,7 @@ if [ -f "${directory}/guard_$1_dt${dt}" ]
 then
 i_lat=$(head -n 1 "${directory}/guard_$1_dt${dt}" | tail -n 1)
 else
-i_lat=1000
+i_lat=300 ###############INITIAL FILE
 cat << EOF > "${directory}/guard_$1_dt${dt}"
 ${i_lat}
 EOF
@@ -41,7 +41,7 @@ complete_flag=$(bash is_complete.sh ${file_name} ${text})
 if [ "${complete_flag}" = "1" ]
 then
 n_produced=$((${n_produced}+1))
-i_lat=$(($i_lat-50))
+i_lat=$(($i_lat-50)) #####################FILE STEP
 cat << EOF > "${directory}/guard_$1_dt${dt}"
 ${i_lat}
 EOF
