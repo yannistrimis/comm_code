@@ -1,10 +1,10 @@
 #!/bin/bash --login
 
 
-#SBATCH --time=10:00:00
+#SBATCH --time=12:00:00
 #SBATCH --ntasks=128
 
-#SBATCH --job-name dt64
+#SBATCH --job-name dtpop1
 
 module load intel/2020b
 

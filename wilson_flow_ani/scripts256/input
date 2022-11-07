@@ -8,6 +8,6 @@ anisotropy 4.50
 reload_serial /mnt/home/bazavov/scratch/puregauge/lattices/l1680b7000x42000a/l1680b7000x42000a.300
 symanzik
 exp_order 12
-stepsize 0.03125
+stepsize 0.00390625
 stoptime 2.4
 forget

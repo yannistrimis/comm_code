@@ -14,7 +14,7 @@ lat_name="l${nx}${nt}b${beta_name}x${xi_0_name}${stream}"
 
 xf=4.50
 xf_name="450"
-dt=0.015625 # aka 1/64
+dt=0.01104854 # aka 1/2^(13/2)
 
 stoptime=2.4
 exp_order=12
