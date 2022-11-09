@@ -34,7 +34,7 @@ else
     init=0
 
 for i in range(init,n_of_lat) :
-    lattice = update(lattice,D)
+    
     with open("l%d%db%s%s.%d.npy"%(nx,nt,beta_str,stream,i), "wb") as f:
         np.save( f, K )
     f.close()

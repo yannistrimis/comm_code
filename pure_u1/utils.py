@@ -19,5 +19,10 @@ def cold(vol,D_cold) :
                 lattice[j1,j2] = D_cold
     return lattice
 
+def ind_to_vec(i,nx,nt) :
+    return vec
+def vec_to_ind(vec,nx,nt) :
+    return ind
+
 def aver_plaq(lattice) :
 
