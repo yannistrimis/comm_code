@@ -1,43 +1,41 @@
 #!/bin/bash
 
-init_seed=1655
-n_of_lat=720
+init_seed=1255
+n_of_lat=2
 
-nx=24
-ny=24
-nz=24
-nt=48
+nx=20
+ny=20
+nz=20
+nt=20
 
-# We want to reproduce arxiv 1205.0781 for: beta=6.1, xi_0=2.46, 24^3x48
 # MILC convention in the improved action is: beta=10/g^2
 # Here we use plaquette action and so that is not relevant.
 # arxiv 1205.0781 convention is beta=6/g^2
 
 # Now one has to calculate spatial and temporal beta. 
 
-# beta_s=beta/xi_0=2.480
-# beta_t=beta*xi_0=15.006
+# beta_s=beta/xi_0
+# beta_t=beta*xi_0
 
-beta_s=2.480 #in the MILC colde this appears first
-beta_t=15.006 #and this appears second
+beta_s=7.167 #in the MILC colde this appears first
+beta_t=7.167 #and this appears second
 
-beta_name="61"
-xi_0_name="246"
+beta_name="7167"
+xi_0_name="100"
 
 warms=0
-trajecs=4
+trajecs=20
 traj_between_meas=1
-steps_per_trajectory=3
-# u0=1.0 THIS IS FOR SYMANZIK
-qhb_steps=2
+steps_per_trajectory=4
+u0=1.0 # THIS IS FOR SYMANZIK
+qhb_steps=1
 
 stream="a"
 
 ensemble="${nx}${nt}b${beta_name}x${xi_0_name}${stream}"
 
-out_name="out${ensemble}"
 lat_name="l${ensemble}"
-
-directory="/mnt/scratch/trimisio/lattices/wlat${ensemble}" #this is for hpcc
-
-erase="no"
+out_name="out${ensemble}"
+directory="/mnt/scratch/trimisio/lattices/${lat_name}" #this is for hpcc
+out_dir="/mnt/home/trimisio/outputs/${lat_name}"
+erase="yes"

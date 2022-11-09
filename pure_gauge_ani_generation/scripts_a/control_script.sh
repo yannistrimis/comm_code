@@ -6,12 +6,13 @@ source params.sh
 if [ "${erase}" = "yes" ] && [ -d "${directory}" ]
 then
 rm -r "${directory}"
+rm -r "${out_dir}"
 fi
 
 if [ ! -d "${directory}" ]
 then
 mkdir "${directory}"
-mkdir "${directory}/outs"
+mkdir "${out_dir}"
 fi
 
 
@@ -36,11 +37,10 @@ while [ $i -le $n_of_lat ]
 do
 echo $seed
 bash make_input.sh $i_lat $seed
-srun -n 128 ../build/su3_plaq_ora_a_par_1_intel input "${directory}/outs/${out_name}.${i_lat}" #this is for hpcc
-# mpirun -n 4 SOMETHING input "${directory}/outs/${out_name}.${i_lat}" #this is for workstation/laptop
+srun -n 125 ../build/su3_ora_symzk1_a input "${out_dir}/${out_name}.lat.${i_lat}"
 
-file_name="${directory}/outs/${out_name}.${i_lat}"
-text="Saved gauge configuration serially to binary file ${directory}/${lat_name}.${i_lat}"
+file_name="${out_dir}/${out_name}.lat.${i_lat}"
+text="Saved gauge configuration serially to binary file ${directory}/${lat_name}.lat.${i_lat}"
 complete_flag=$(bash is_complete.sh ${file_name} ${text})
 
 if [ "${complete_flag}" = "1" ]
