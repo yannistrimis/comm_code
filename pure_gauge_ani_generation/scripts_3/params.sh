@@ -1,12 +1,12 @@
 #!/bin/bash
 
-init_seed=1255
+init_seed=1355
 n_of_lat=50
 
 nx=20
 ny=20
 nz=20
-nt=20
+nt=40
 
 # MILC convention in the improved action is: beta=10/g^2
 # Here we use plaquette action and so that is not relevant.
@@ -17,11 +17,11 @@ nt=20
 # beta_s=beta/xi_0
 # beta_t=beta*xi_0
 
-beta_s=7.167 #in the MILC colde this appears first
-beta_t=7.167 #and this appears second
+beta_s=3.9368 #in the MILC colde this appears first
+beta_t=13.0475 #and this appears second
 
 beta_name="7167"
-xi_0_name="100"
+xi_0_name="18205"
 
 warms=0
 trajecs=20

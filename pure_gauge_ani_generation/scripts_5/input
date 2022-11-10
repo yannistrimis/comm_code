@@ -1,0 +1,16 @@
+prompt 0
+nx 20
+ny 20
+nz 20
+nt 80
+iseed 1377
+
+warms 0
+trajecs 20
+traj_between_meas 1
+beta 2.1104 26.1798
+u0 1.0
+steps_per_trajectory 4
+qhb_steps 1
+reload_serial /mnt/scratch/trimisio/lattices/l2080b7433x35221a/l2080b7433x35221a.lat.32
+save_serial /mnt/scratch/trimisio/lattices/l2080b7433x35221a/l2080b7433x35221a.lat.33

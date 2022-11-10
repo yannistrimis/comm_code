@@ -1,12 +1,12 @@
 #!/bin/bash
 
-init_seed=1255
-n_of_lat=50
+init_seed=1258
+n_of_lat=2
 
-nx=20
-ny=20
-nz=20
-nt=20
+nx=24
+ny=24
+nz=24
+nt=24
 
 # MILC convention in the improved action is: beta=10/g^2
 # Here we use plaquette action and so that is not relevant.
@@ -17,10 +17,10 @@ nt=20
 # beta_s=beta/xi_0
 # beta_t=beta*xi_0
 
-beta_s=7.167 #in the MILC colde this appears first
-beta_t=7.167 #and this appears second
+beta_s=7.433 #in the MILC colde this appears first
+beta_t=7.433 #and this appears second
 
-beta_name="7167"
+beta_name="7433"
 xi_0_name="100"
 
 warms=0
@@ -38,4 +38,4 @@ lat_name="l${ensemble}"
 out_name="out${ensemble}"
 directory="/mnt/scratch/trimisio/lattices/${lat_name}" #this is for hpcc
 out_dir="/mnt/home/trimisio/outputs/${lat_name}"
-erase="no"
+erase="yes"

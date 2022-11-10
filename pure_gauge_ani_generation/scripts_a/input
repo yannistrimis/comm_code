@@ -3,7 +3,7 @@ nx 20
 ny 20
 nz 20
 nt 20
-iseed 1256
+iseed 1392
 
 warms 0
 trajecs 20
@@ -12,5 +12,5 @@ beta 7.167 7.167
 u0 1.0
 steps_per_trajectory 4
 qhb_steps 1
-reload_serial /mnt/scratch/trimisio/lattices/l2020b7167x100a/l2020b7167x100a.lat.1
-save_serial /mnt/scratch/trimisio/lattices/l2020b7167x100a/l2020b7167x100a.lat.2
+reload_serial /mnt/scratch/trimisio/lattices/l2020b7167x100a/l2020b7167x100a.lat.137
+save_serial /mnt/scratch/trimisio/lattices/l2020b7167x100a/l2020b7167x100a.lat.138
