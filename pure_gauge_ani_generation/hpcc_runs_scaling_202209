@@ -23,7 +23,10 @@ SYMANZIK IMPROVED ACTION
     -n 128              1287 sec (~22 min)
 
 20^3*20     2 lattices  20-4-1 (traj ora hb)
-    -n 128              200 sec (~3.5 min)
+    -n 125              200 sec (~3.5 min)
+
+24^3*24     2 lattices  20-4-1 (traj ora hb)
+    -n 144              3800 sec (~1 h)
 
 PLAQUETTE ACTION
 
