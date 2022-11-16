@@ -1,4 +1,5 @@
 import numpy as np
+from utils import *
 
 a=16**4
 with open("test4.npy", "rb") as f:

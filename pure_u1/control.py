@@ -14,6 +14,7 @@ beta_str = "0500"
 D = 10
 stream = "a"
 lat_dir = "l" + str(nx) + str(nt) + "b" + beta_str + stream
+out_dir = lat_dir + "_out"
 
 start_type = "fresh" # "reload"
 fresh_type = "hot" # "cold"
@@ -30,7 +31,7 @@ if (start_type == "fresh") :
     init=1
     
 else
-    lattice = read_lat(lat_dir)
+    
     init=0
 
 for i in range(init,n_of_lat) :
