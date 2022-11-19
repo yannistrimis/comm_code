@@ -35,5 +35,20 @@ def vec_to_ind(vec,nx,nt) :
     ind = it*nx**3+iz*nx**2+iy*nx+ix
     return ind
 
-def aver_plaq(lattice) :
+def nn(ind,mu,nx,nt):
+    vec = ind_to_vec(ind,nx,nt)
+    if mu == 3 :
+        if ( vec[mu] % nt ) == 0 :
+            vec_mu_nn = 0
+        else :
+             vec_mu_nn = vec[mu] + 1
+    else :
+        if ( vec[mu] % nx ) == 0 :
+            vec_mu_nn = 0
+        else :
+            vec_mu_nn = vec[mu] + 1
 
+    vec_nn = vec
+    vec_nn[mu] = vec_mu_nn
+    ind_nn = vec_to_ind(vec_nn,nx,nt)
+    return ind_nn
