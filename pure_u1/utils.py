@@ -1,22 +1,23 @@
 import numpy as np
 import random as rd
+import globals
 
 def hot(vol,D_hot) :
     lattice = np.zeros((4,vol))
-    for j2 in range(vol):
-            for j1 in range(4):
+    for ind in range(vol):
+            for a in range(4):
                 r = rd.random()
                 r = 2*r-1.0
                 r = r*D_hot
-                lattice[j1,j2] = r
+                lattice[a,ind] = r
     
     return lattice
                 
 def cold(vol,D_cold) :
     lattice = np.zeros((4,vol))
-    for j2 in range(vol):
-            for j1 in range(4):
-                lattice[j1,j2] = D_cold
+    for ind in range(vol):
+            for a in range(4):
+                lattice[a,ind] = D_cold
     return lattice
 
 def ind_to_vec(i,nx,nt) :
@@ -36,14 +37,15 @@ def vec_to_ind(vec,nx,nt) :
     return ind
 
 def nn(ind,mu,nx,nt):
+# finds the forward neighbour in the mu direction
     vec = ind_to_vec(ind,nx,nt)
     if mu == 3 :
-        if ( vec[mu] % nt ) == 0 :
+        if vec[mu] == nt-1 :
             vec_mu_nn = 0
         else :
              vec_mu_nn = vec[mu] + 1
     else :
-        if ( vec[mu] % nx ) == 0 :
+        if vec[mu] == nx-1 :
             vec_mu_nn = 0
         else :
             vec_mu_nn = vec[mu] + 1
@@ -52,3 +54,22 @@ def nn(ind,mu,nx,nt):
     vec_nn[mu] = vec_mu_nn
     ind_nn = vec_to_ind(vec_nn,nx,nt)
     return ind_nn
+
+def pnn(ind,mu,nx,nt):
+# finds the backward neighbor in the mu direction
+    vec = ind_to_vec(ind,nx,nt)
+    if mu == 3 :
+        if vec[mu] == 0 :
+            vec_mu_pnn = nt-1
+        else :
+            vec_mu_pnn = vec[mu] - 1
+    else :
+        if vec[mu] == 0 :
+            vec_mu_pnn = nx-1
+        else :
+            vec_mu_pnn = vec[mu] - 1
+
+    vec_pnn = vec
+    vec_pnn[mu] = vec_mu_pnn
+    ind_pnn = vec_to_ind(vec_pnn,nx,nt)
+    return ind_pnn
