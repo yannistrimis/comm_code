@@ -7,7 +7,7 @@ vol = '2040'
 beta = '7167'
 x0 = '18205'
 stream = 'a'
-flow_type = 'w'
+flow_type = 's'
 xf_vec = ['180','186','190','194','200']
 xf_float_vec = [1.80,1.86,1.90,1.94,2.00]
 dt = 0.015625
@@ -45,8 +45,8 @@ for xf in xf_vec:
         
 			my_line = content[ i_line ].split(' ')
             
-            if my_line[1] == 'COMPLETED'
-                break
+			if my_line[0] == 'RUNNING':
+                		break
 
 			if my_line[0] == 'GFLOW:' :
 				if i_file == first_file and i_xf == 0 : #the tau_array will be the same for all, so we form it once
