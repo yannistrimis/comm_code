@@ -1,54 +1,65 @@
 import numpy as np
+from matplotlib import pyplot as plt
 from utils import *
 from action import *
-import globals
-"generation of pure gauge non-compact U(1) ensembles"
 
-n_of_lat = 10
-trajectories = 1
+n_of_lat = 30
+traj = 1
 
 nx = 4
 nt = 4
 
-for beta in [0.01, 0.02, 0.03, 0.04, 0.05, 0.06, 0.07, 0.08, 0.09, 0.1, 0.11, 0.12, 0.13, 0.14, 0.15, 0.16, 0.17, 0.18, 0.19, 0.2] :
-    #beta = 0.1 # beta=1/g0^2
-    beta_str = "0500"
-    D_update = 10
-    stream = "a"
-    ens_name = "l"+str(nx)+str(nt)+"b"+beta_str+stream
-    lat_dir = "/home/yannis/Physics/LQCD/pure_u1_lattices/"+ens_name
+#beta = 1.0 # beta=1/g0^2
+beta_arr = [1.0, 2.0, 4.0, 6.0, 8.0]
+D_update = 0.1
 
-    start_type = "fresh" # "reload"
-    fresh_type = "hot" # "cold"
+plaq_arr = np.zeros((len(beta_arr),n_of_lat))
+q_array = np.zeros((len(beta_arr),n_of_lat))
 
-    lattice = np.zeros((4,nx**3*nt))
+# beta_str = ""
+# stream = "a"
+# ens_name = "l"+str(nx)+str(nt)+"b"+beta_str+stream
+# lat_dir = "/home/yannis/Physics/LQCD/pure_u1_lattices/"+ens_name
+for i_beta in range(len(beta_arr)) :
+    beta = beta_arr[i_beta]
+    lattice = np.zeros((4, nx**3*nt))
+    D_hot = 1.0
+    lattice = hot(nx**3*nt, D_hot)
 
-    if (start_type == "fresh") :
-        if (fresh_type == "hot") :
-            D_hot = 10
-            lattice = hot(nx**3*nt,D_hot)
-        else :
-            D_cold = 10
-            lattice = cold(nx**3*nt,D_cold)
-    else :
-        prev_lat = "NO_PREV_LAT"
-        with open("%s/%s"%(lat_dir,prev_lat), "rb") as f:
-            lattice = np.load(f)
-            f.close()
+    action = action_func(lattice, nx, nt)
+    plaq_arr[i_beta,0] = action/(nx**3*nt*6)
+    q_help = 0.0
+
+    for i in range(1,n_of_lat) :
+
+        lattice, action, q_help = update(action, lattice, beta, nx, nt, D_update, q_help, traj)
         
-    init = 1
-    action = action_func(lattice,beta,nx,nt)
+        plaq_arr[i_beta,i] = action/(nx**3*nt*6)
+        q_help = q_help/(nx**3*nt*4)
+        q_array[i_beta,i] = q_help
+        if q_help > 0.7 :
+            D_update = D_update + 0.1
+        elif q_help < 0.5 :
+            D_update = D_update - 0.1
+        q_help = 0.0
+        
+        print("%d out of %d\n############"%(i+1,n_of_lat))
 
-    with open("%s/%s.lat.%d"%(lat_dir,ens_name,init), "wb") as f:
-        np.save(f,lattice)
-    f.close()
+fig1 = plt.figure()
+plt.plot( plaq_arr[0,:], label=r"$\beta=1.0$")
+plt.plot( plaq_arr[1,:], label=r"$\beta=2.0$")
+plt.plot( plaq_arr[2,:], label=r"$\beta=4.0$")
+plt.plot( plaq_arr[3,:], label=r"$\beta=6.0$")
+plt.plot( plaq_arr[4,:], label=r"$\beta=8.0$")
+plt.legend()
+plt.title(r"Plaquette vs sweeps, $4^4$")
 
-    for i in range(init+1,n_of_lat+1) :    
-        lattice = update(action,lattice,beta,nx,nt,D_update,trajectories)
-        with open("%s/%s.lat.%d"%(lat_dir,ens_name,i), "wb") as f:
-            np.save(f,lattice)
-        f.close()
-
-    globals.q_help = globals.q_help/(nx**3*nt*4*trajectories*(n_of_lat-1))
-    
-    print("%f %f"%(globals.q_help,beta))
+fig2 = plt.figure()
+plt.plot( q_array[0,:], label=r"$\beta=1.0$")
+plt.plot( q_array[1,:], label=r"$\beta=2.0$")
+plt.plot( q_array[2,:], label=r"$\beta=4.0$")
+plt.plot( q_array[3,:], label=r"$\beta=6.0$")
+plt.plot( q_array[4,:], label=r"$\beta=8.0$")
+plt.legend()
+plt.title(r"acceptance vs sweeps, $4^4$")
+plt.show()
