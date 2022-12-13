@@ -12,12 +12,12 @@ xi_0_name="42000"
 stream="a"
 lat_name="l${nx}${nt}b${beta_name}x${xi_0_name}${stream}"
 
-xf=4.50
-xf_name="450"
-dt=0.0078125 # aka 1/128
+xf_array=[4.50]
+xf_name_array=["450"]
+dt_array=(0.015625 0.03125)
 
 stoptime=2.4
-exp_order=12
+exp_order=16
 flow_action="symanzik"
 
 f_ensemble="sflow${nx}${nt}b${beta_name}x${xi_0_name}xf${xf_name}${stream}_dt${dt}"

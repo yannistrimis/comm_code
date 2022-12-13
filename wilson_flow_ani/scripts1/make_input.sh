@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source params.sh
+source /mnt/home/trimisio/comm_code/wilson_flow_ani/scripts1/params.sh
 
 i_curr=$1
 
