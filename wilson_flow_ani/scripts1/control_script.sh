@@ -48,10 +48,10 @@ then
 rm "${file_name}"
 fi
 
-bash make_input.sh ${i_lat} ${dt} ${xf}
+bash /mnt/home/trimisio/comm_code/wilson_flow_ani/scripts1/make_input.sh ${i_lat} ${dt} ${xf}
 srun -n 128 /mnt/home/trimisio/comm_code/wilson_flow_ani/build/wilson_flow_bbb_a input "${file_name}"
 text="RUNNING COMPLETED"
-complete_flag=$(bash is_complete.sh ${file_name} ${text})
+complete_flag=$(bash /mnt/home/trimisio/comm_code/wilson_flow_ani/scripts1/is_complete.sh ${file_name} ${text})
 
 if [ "${complete_flag}" = "1" ]
 then

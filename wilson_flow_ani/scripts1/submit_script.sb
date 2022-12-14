@@ -8,4 +8,4 @@
 
 module load intel/2020b
 
-bash control_script.sh
+bash /mnt/home/trimisio/comm_code/wilson_flow_ani/scripts1/control_script.sh

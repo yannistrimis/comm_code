@@ -1,5 +1,6 @@
 #!/bin/bash
 
+cd /mnt/home/trimisio/runs/runs1
 for i in {1..1..1}
 do
 
