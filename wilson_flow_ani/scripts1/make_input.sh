@@ -10,12 +10,12 @@ nx $nx
 ny $ny
 nz $nz
 nt $nt
-anisotropy ${xf}
+anisotropy $3
 
-reload_serial ${lat_directory}/${lat_name}.${i_curr}
+reload_serial ${lat_directory}/${lat_name}.lat.${i_curr}
 ${flow_action}
 exp_order ${exp_order}
-stepsize ${dt}
+stepsize $2
 stoptime ${stoptime}
 forget
 EOF
