@@ -3,18 +3,18 @@ from python_funcs import *
 from matplotlib import pyplot as plt
 
 cur_dir = '/mnt/home/trimisio/outputs'
-vol = '2040'
-beta = '7167'
-x0 = '18205'
+vol = '2080'
+beta = '7667'
+x0 = '35480'
 stream = 'a'
-flow_type = 's'
-xf_vec = ['180','186','190','194','200']
-xf_float_vec = [1.80,1.86,1.90,1.94,2.00]
+flow_type = 'w'
+xf_vec = ['390','396','400','404','410']
+xf_float_vec = [3.90, 3.96, 4.00, 4.04, 4.10]
 dt = 0.015625
 n_files = 50
-first_file = 101
+first_file = 281
 n_bins = 10
-n_steps = 193 # one more than the number appearing at the flow file
+n_steps = 257 # one more than the number appearing at the flow file
 
 tau_arr = np.zeros( n_steps )
 
