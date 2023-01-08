@@ -131,10 +131,11 @@ def add(a,b):
 
 
 
-# Let us define multiplication for general expressions. 
+# Let us define multiplication for general expressions. Here num_in_front
+# has not yet been applied
 
 
-def mul(a,b):
+def primitive_mul(a,b):
 
     if isnumber(a) and isnumber(b):
         
@@ -163,46 +164,13 @@ def mul(a,b):
     else:
         return a+'*'+b
     
-
     
     
-    
-
-# Let us define derivative of f with respect to Y. f0 is f, f1 is f' etc.
-
-def dY(a):
-    
-    if a=='':
-        return '0'
-    
-    b=list(a)
-    c=int(b[1])
-    c=c+1
-    d=str(c)
-    return b[0]+d
 
 
 
 
-# Let us define derivative of an object with respect to time.
 
-def dt(a):
-    
-    if a=='' or isnumber(a):
-        return '0'
-    
-    if a[0]=='f':
-        
-        return dY(a)+'*f0*Y'
-    
-    elif a=='Y':
-        
-        return 'f0*Y'
-    
-    
-    
-    
-    
     
     
 # Let us define a function that breaks a product into its components.
@@ -237,6 +205,80 @@ def break_prod(a):
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+# Let us define a function that takes a product and places 
+# all numbers in front.
+    
+def num_in_front(a):
+    
+    a_list=break_prod(a)
+    
+    nums=['']*len(a_list)
+    
+    i_nums=-1
+    
+    for i in range(len(a_list)):
+        
+        if isnumber(a_list[i]):
+            
+            i_nums=i_nums+1
+            
+            nums[i_nums]=a_list[i]
+            
+            
+    new_a='1'
+    
+    for i in range(i_nums+1):
+
+        new_a=primitive_mul(new_a,nums[i])
+            
+    for i in range(len(a_list)):
+            
+            if isnumber(a_list[i]):
+                continue
+            else:
+                new_a=primitive_mul(new_a,a_list[i])
+                
+    return new_a
+
+
+
+
+
+
+
+
+# The most general multiplication function.
+
+def mul(a,b):
+    res = primitive_mul(a,b)
+    res = num_in_front(res)
+    return res
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Let us define a function that breaks a sum into its components.
 
 def break_sum(a): 
@@ -265,54 +307,86 @@ def break_sum(a):
         
     return el_a_2
   
-    
-    
-  
-    
-    
-    
-# Let us define a function that takes a product and places 
-# all numbers in front.
-    
-def num_in_front(a):
-    
-    a_list=break_prod(a)
-    
-    nums=['']*len(a_list)
-    
-    i_nums=-1
-    
-    for i in range(len(a_list)):
-        
-        if isnumber(a_list[i]):
-            
-            i_nums=i_nums+1
-            
-            nums[i_nums]=a_list[i]
-            
-            
-    new_a='1'
-    
-    for i in range(i_nums+1):
 
-        new_a=mul(new_a,nums[i])
-            
-    for i in range(len(a_list)):
-            
-            if isnumber(a_list[i]):
-                continue
-            else:
-                new_a=mul(new_a,a_list[i])
-                
-    return new_a
+
+
+
+
+# The following is essentially the most general version
+# of multiplication. It can do (a+b)*(a+b)=a*a+a*b+b*a+b*b
+
+def epimeristiki(a,b):
+    list_a = break_sum(a)
+    list_b = break_sum(b)
+
+    res = '0'
+
+    for ia in range(len(list_a)):
+        for ib in range(len(list_b)):
+            product = mul(list_a[ia],list_b[ib])
+            res = add( res, product )
+    return res
+
+
+
+
+
+
+
+
+# Let us define derivative of f with respect to Y. f0 is f, f1 is f' etc.
+
+def dY(a):
     
+#    if a=='':
+#        return '0'
     
+    b=list(a)
+    c=int(b[1])
+    c=c+1
+    d=str(c)
+    return b[0]+d
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Let us define derivative of an object with respect to time.
+
+def dt(a):
     
+    if a[0]=='f':
+        
+        return dY(a)+'*f0*Y'
     
+    elif a=='Y':
+        
+        return 'f0*Y'
     
+    else:
+        return '0'
     
+
     
-    
+
+
+
+
+
+
+
+
+
  
     
 # Let us define derivative of a product with respect to time. "a" is 
@@ -365,6 +439,12 @@ def d_prod(a):
 
 
 
+
+
+
+
+
+
 # Now our most general derivative of a quantity.
 
 def der(a):
@@ -380,6 +460,14 @@ def der(a):
         
     return result
    
+
+
+
+
+
+
+
+
 
 
 
@@ -416,6 +504,12 @@ def remove_Y(a):
 
 
 
+
+
+
+
+
+
 # The following function accepts a product and separates the
 # f-terms from everything else
 
@@ -442,6 +536,10 @@ def f_structure(a):
 
 
     return a_f, a_rest 
+
+
+
+
 
 
 
@@ -477,19 +575,16 @@ def f_factorize(a):
             structures[i_struct] = a_f
             coeffs[i_struct]     = a_rest
             
-            if i<len(a_list):
+            if i<(len(a_list)-1):
             
                 for j in range( i+1,len(a_list) ):
-                    
-                    if check[j]==0:
                             
+                    if f_structure(a_list[j])[0]==a_f:
+                                
+                        check[j]=1
                             
-                        if f_structure(a_list[j])[0]==a_f:
-                                
-                            check[j]=1
-                                
-                            coeffs[i_struct] = add( coeffs[i_struct], \
-                            f_structure(a_list[j])[1] )
+                        coeffs[i_struct] = add( coeffs[i_struct], \
+                        f_structure(a_list[j])[1] )
 
         
     structures=delete_blanks(structures)
@@ -500,6 +595,12 @@ def f_factorize(a):
     
     return structures, coeffs
      
+
+
+
+
+
+
 
 
 
