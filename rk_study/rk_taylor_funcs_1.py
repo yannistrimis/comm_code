@@ -145,13 +145,15 @@ def primitive_mul(a,b):
         
         if num_a=='0' or num_b=='0':
             return '0'
+
+        numer = str(int( int(num_a)*int(num_b) ))
+        denom = str(int( int(den_a)*int(den_b) ))
             
-        if int(den_a)*int(den_b)==1:
-            res = str( int(num_a)*int(num_b) )
+        if int( np.gcd( int(numer), int(denom) ) )==int(denom):
+            return str( int( int(numer)/int(denom) ) )
             
-        else:
-            res = str( int(num_a)*int(num_b) ) \
-            +'/'+ str( int(den_a)*int(den_b) )
+        else :
+            res = numer+"/"+denom
             
         return res
     
@@ -398,7 +400,7 @@ def d_prod(a):
         return '0'
     
 
-# The following bit will calculate the derivative and put terms in list.
+    # The following bit will calculate the derivative and put terms in list.
 
     prod_list=break_prod(a)
     
@@ -412,8 +414,8 @@ def d_prod(a):
         
         temp_list[i] = dt(prod_list[i])
         
-# The following 4 lines are just for checking. Instead of calculating the 
-# actual derivative, a 'd' is added in front of every object.
+    # The following 4 lines are just for checking. Instead of calculating the 
+    # actual derivative, a 'd' is added in front of every object.
         
         # if isnumber(temp_list[i]):
         #     temp_list[i]='0'
@@ -424,8 +426,8 @@ def d_prod(a):
             
             res_list[i]=mul(res_list[i],temp_list[j])
             
-# The following bit will add the terms and create the actual derivative
-# the product.
+    # The following bit will add the terms and create the actual derivative
+    # the product.
 
     result=''
     
@@ -501,6 +503,39 @@ def remove_Y(a):
     return a_new
             
             
+
+
+
+
+
+
+
+# The following functions accepts a sum and removes all h's
+
+def remove_h(a):
+    
+    a_list = break_sum(a)
+    
+    a_new=''
+    
+    for i in range(len(a_list)):
+        
+        a_list_list=break_prod(a_list[i])
+        
+        for j in range(len(a_list_list)):
+            
+            if a_list_list[j]=='h':
+                a_list_list[j]='1'
+                
+        a_list_list_new='1'
+        
+        for j in range(len(a_list_list)):
+            
+            a_list_list_new=mul(a_list_list_new , a_list_list[j])
+    
+        a_new=add(a_new,a_list_list_new)
+        
+    return a_new
 
 
 
@@ -610,7 +645,6 @@ def f_factorize(a):
 
 def count_h(a):
     
-    
     a_list=break_prod(a)
     
     h_count=0
@@ -625,5 +659,111 @@ def count_h(a):
 
 
 
-       
-            
+
+
+
+
+
+def epimeristiki_h(a,b):
+    h_ord = 3
+    list_a = break_sum(a)
+    list_b = break_sum(b)
+
+    res = '0'
+
+    for ia in range(len(list_a)):
+        for ib in range(len(list_b)):
+            product = mul(list_a[ia],list_b[ib])
+            h_count = count_h(product)
+            if h_count <= h_ord :
+                res = add( res, product )
+    return res
+
+
+
+
+
+
+
+
+
+
+def param_char(a):
+    my_char = [0]*6
+    list_a = break_prod(a)
+    for el in list_a:
+        if el == 'a121' :
+            my_char[0]=my_char[0]+1
+        elif el == 'a232' :
+            my_char[1]=my_char[1]+1
+        elif el == 'a231' :
+            my_char[2]=my_char[2]+1
+        elif el == 'b33' :
+            my_char[3]=my_char[3]+1
+        elif el == 'b32' :
+            my_char[4]=my_char[4]+1
+        elif el == 'b31' :
+            my_char[5]=my_char[5]+1
+
+    return my_char
+
+
+
+
+
+
+
+
+
+def pref(a):
+    list_a = break_prod(a)
+
+    if isnumber(list_a[0]) == False :
+        pref_a  = '1'
+        rest = a
+    else :
+        pref_a = list_a[0]
+        rest = '1'
+        for i in range(1,len(list_a)):
+            rest = mul(rest,list_a[i])
+
+    return pref_a, rest
+
+
+
+
+
+
+def gather(a):
+    res = '0'
+    list_a = break_sum(a)
+    check_list = [0]*len(list_a)
+
+    for i_a in range(len(list_a)):
+        if check_list[i_a] == 1:
+            continue
+        check_list[i_a] = 1
+        partial_res = pref(list_a[i_a])[0]
+        rest_i = pref(list_a[i_a])[1]
+        struc_i = f_structure(list_a[i_a])[0]
+        par_i = param_char(list_a[i_a])
+        h_i = count_h(list_a[i_a])
+
+        for j_a in range(i_a+1,len(list_a)): #if i_a is the last one then it does not enter.
+            if check_list[j_a] == 1 :
+                continue
+            struc_j = f_structure(list_a[j_a])[0]
+            par_j = param_char(list_a[j_a])
+            h_j = count_h(list_a[j_a])
+            if struc_i == struc_j and par_i == par_j and h_i == h_j :
+                check_list[j_a] = 1
+                pref_j = pref(list_a[j_a])[0]
+                partial_res = add(partial_res,pref_j)
+
+
+        partial_res = mul(partial_res,rest_i)
+        res = add(res,partial_res)
+
+    return res
+
+                    
