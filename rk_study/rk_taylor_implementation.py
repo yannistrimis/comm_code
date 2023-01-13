@@ -63,22 +63,51 @@ rhs = gather(rhs) # This is the final form of the RHS.
 # print(rhs)
 
 rhs = epimeristiki('-1',rhs)
+all_lhs = add(y4,rhs) # all is brought to the LHS
 
-y4_list = break_sum(y4)
 
-for el in y4_list :
+# LHS is broken in powers of h:
+all_0 = '0'
+all_1 = '0'
+all_2 = '0'
+all_3 = '0'
+
+list_all_lhs = break_sum(all_lhs)
+
+for el in list_all_lhs :
     if count_h(el) == 0 :
+        all_0 = add(all_0,el)
+    elif count_h(el) == 1 :
+        all_1 = add(all_1,el)
+    elif count_h(el) == 2 :
+        all_2 = add(all_2,el)
+    elif count_h(el) == 3 :
+        all_3 = add(all_3,el)
 
-        print(remove_h(el))
-print('------------------------------------------------')
-for el in y4_list :
-    if count_h(el) == 1 :
-        print(remove_h(el))
-print('------------------------------------------------')
-for el in y4_list :
-    if count_h(el) == 2 :
-        print(remove_h(el))
-print('------------------------------------------------')
-for el in y4_list :
-    if count_h(el) == 3 :
-        print(remove_h(el))
+all_0 = remove_h(all_0)
+all_1 = remove_h(all_1)
+all_2 = remove_h(all_2)
+all_3 = remove_h(all_3)
+
+# print("%s = 0"%all_0)
+# print('-----------------------------------')
+# print("%s = 0"%all_1)
+# print('-----------------------------------')
+# print("%s = 0"%all_2)
+# print('-----------------------------------')
+# print("%s = 0"%all_3)
+# print('-----------------------------------')
+
+coef_0 = f_factorize(all_0)
+coef_1 = f_factorize(all_1)
+coef_2 = f_factorize(all_2)
+coef_3 = f_factorize(all_3)
+
+for i in range(len((coef_0)[0])) :
+    print("%s = 0 , %s\n"%(coef_0[1][i],coef_0[0][i]))
+for i in range(len((coef_1)[0])) :
+    print("%s = 0 , %s\n"%(coef_1[1][i],coef_1[0][i]))
+for i in range(len((coef_2)[0])) :
+    print("%s = 0 , %s\n"%(coef_2[1][i],coef_2[0][i]))
+for i in range(len((coef_3)[0])) :
+    print("%s = 0 , %s\n"%(coef_3[1][i],coef_3[0][i]))

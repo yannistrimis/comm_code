@@ -686,7 +686,8 @@ def epimeristiki_h(a,b):
 
 
 
-
+# the following returns a list with the times that each parameter
+# appears in a product.
 
 def param_char(a):
     my_char = [0]*6
@@ -713,7 +714,7 @@ def param_char(a):
 
 
 
-
+# The following returns the numeric prefactor of a product.
 
 def pref(a):
     list_a = break_prod(a)
@@ -732,7 +733,11 @@ def pref(a):
 
 
 
-
+# The following accepts a sum and looks for terms that are equivalent
+# up to numeric prefactor (that is, same parameters, same h-order and 
+#same f-structure) and adds them, to make the sum more compact. 
+# IT DOES NOT gather terms with same f-structure but different h-order
+# or parameter content.
 
 def gather(a):
     res = '0'
