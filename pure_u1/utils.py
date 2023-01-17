@@ -64,5 +64,4 @@ def pnn(ind,mu,nx,nt):
     vec_pnn[mu] = vec_mu_pnn
     ind_pnn = vec_to_ind(vec_pnn,nx,nt)
     return ind_pnn
-
-    def jackknife()
+    
