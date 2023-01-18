@@ -8,12 +8,12 @@ beta = '7667'
 x0 = '35480'
 stream = 'a'
 flow_type = 's'
-obs_type = 'wilson'
+obs_type = 'symanzik'
 xf_vec = ['380','390']
 xf_float_vec = [3.80,3.90]
 dt = 0.015625
 n_files = 50
-first_file =101
+first_file =201
 n_bins = 10
 n_steps = 257 # one more than the number appearing at the flow file
 
@@ -25,8 +25,8 @@ dEs_arr = np.zeros(( n_steps , n_files , len(xf_vec) ))
 dEt_arr = np.zeros(( n_steps , n_files , len(xf_vec) ))
 ratio_arr = np.zeros(( n_steps , n_files , len(xf_vec) ))
 
-i_xf_rec = 0
-f_write = open( '../tau_dEt_dEs_ratio_sflow%sb%sx%sxf%sdt%sobs_%s'%(vol,beta,x0,xf_vec[i_xf_rec],dt,obs_type) , 'w' )
+i_xf_rec = 0 # which one of the flow anisotropies to pick for recording
+f_write = open( '/mnt/home/trimisio/plot_data/tau_dEt_dEs_ratio_sflow%sb%sx%sxf%sdt%sobs_%s'%(vol,beta,x0,xf_vec[i_xf_rec],dt,obs_type) , 'w' )
 
 i_xf = -1
 
@@ -43,11 +43,11 @@ for xf in xf_vec:
     
 		i_time = 0
 
-		for i_line in range(len(content)): #ADJUST ACCORDING TO STEPS!!!!
+		for i_line in range(len(content)):
         
 			my_line = content[ i_line ].split(' ')
             
-			if my_line[0] == 'RUNNING':
+			if my_line[0] == 'RUNNING': # this is added for security
                 		break
 
 			if my_line[0] == 'GFLOW:' :
@@ -58,11 +58,11 @@ for xf in xf_vec:
 					Et_arr[i_time,i,i_xf] = float( my_line[2] )
 					Es_arr[i_time,i,i_xf] = float( my_line[3] )
 				elif obs_type == 'wilson' :
-					Et_arr[i_time,i,i_xf] = 2*( 18-3*float(my_line[4]) )
-					Es_arr[i_time,i,i_xf] = 2*( 18-3*float(my_line[5]) )
+					Et_arr[i_time,i,i_xf] = 6*( 3-float(my_line[4]) )
+					Es_arr[i_time,i,i_xf] = 6*( 3-float(my_line[5]) )
 				elif obs_type == 'symanzik' :
-					Et_arr[i_time,i,i_xf] = 3*19-10*float(my_line[4])+float(my_line[6])
-					Es_arr[i_time,i,i_xf] = 3*19-10*float(my_line[5])+float(my_line[7])
+					Et_arr[i_time,i,i_xf] = 10*( 3-float(my_line[4]) )-( 3-float(my_line[6]) )
+					Es_arr[i_time,i,i_xf] = 10*( 3-float(my_line[5]) )-( 3-float(my_line[7]) )
 				
 				Et_arr[i_time,i,i_xf] = tau_arr[i_time]*tau_arr[i_time]*Et_arr[i_time,i,i_xf]
 				Es_arr[i_time,i,i_xf] = tau_arr[i_time]*tau_arr[i_time]*Es_arr[i_time,i,i_xf]
@@ -74,7 +74,7 @@ for xf in xf_vec:
 		dEt_arr[:,i,i_xf] = deriv( Et_arr[:,i,i_xf] , dt )
 		dEs_arr[:,i,i_xf] = deriv( Es_arr[:,i,i_xf] , dt )
 
-#WE WILL OMIT the first element because in the ratio there would be division by zero
+		#WE WILL OMIT the first element because in the ratio there would be division by zero
 		for i_time in range(1,n_steps) :
 			dEt_arr[i_time,i,i_xf] = dEt_arr[i_time,i,i_xf] * tau_arr[i_time]
 	

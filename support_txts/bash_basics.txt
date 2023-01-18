@@ -74,5 +74,10 @@ SEE shell_example.sh FOR MORE
     bash <shellscript_name>.sh 35
 AND THEN INSIDE THE SHELLSCRIPT use $1 to get the value 35
 
+10. AWK MANIPULATIONS EXAMPLE:
+	In the following the manipulation should happen ONLY IF "GFLOW:" is the first colume:
+	 
+	cat sflow2020b7167x100xf096a_dt0.015625.lat.200 | awk '/GFLOW:/{print (3-$5)*10-(3-$7)}' > s_ts.dat
 
+	
 
