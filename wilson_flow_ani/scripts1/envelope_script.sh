@@ -3,7 +3,7 @@
 cd /mnt/home/trimisio/runs/runs1
 path="/mnt/home/trimisio/comm_code/wilson_flow_ani/scripts1"
 
-for i in {1..10..1}
+for i in {1..5..1}
 do
 
 if [ $i -eq 1 ]

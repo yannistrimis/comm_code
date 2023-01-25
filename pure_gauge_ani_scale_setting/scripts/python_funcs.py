@@ -1,16 +1,16 @@
 import numpy as np
 
-def deriv( arr, dt ) : #O(dt^2) error for first, second, last but one and last elements, O(dt^4) error for the rest 
+def deriv( arr, dt ) : #O(dt^4) 
 	n = len( arr )
 	der = np.zeros( n )
 
-	der[0] = (-3*arr[0] + 4*arr[1] - arr[2] ) / ( 2*dt ) #first
-	der[n-1] = ( 3*arr[n-1] - 4*arr[n-2] + arr[n-3] ) / ( 2*dt ) #last
+	der[0] =  ( -25*arr[0]+48*arr[1]-36*arr[2]+16*arr[3]-3*arr[4] ) / ( 12*dt ) # FIRST
+	der[n-1] = ( 3*arr[n-5]-16*arr[n-4]+36*arr[n-3]-48*arr[n-2]+25*arr[n-1] ) / ( 12*dt ) # LAST
 
-	der[1] = ( arr[2] - arr[0] ) / ( 2*dt )#second
-	der[n-2] = ( arr[n-1] - arr[n-3] ) / ( 2*dt )#last but one
+	der[1] =  ( -3*arr[0]-10*arr[1]+18*arr[2]-6*arr[3]+1*arr[4] )/( 12*dt ) # SECOND
+	der[n-2] = ( -1*arr[n-5]+6*arr[n-4]-18*arr[n-3]+10*arr[n-2]+3*arr[n-1] )/( 12*dt ) # LAST BUT ONE
 
-	for i in range(2,n-2): #the rest
+	for i in range(2,n-2):
 		der[i] = ( -arr[i+2] + 8*arr[i+1] - 8*arr[i-1] + arr[i-2] ) / ( 12*dt )
 
 	return der
