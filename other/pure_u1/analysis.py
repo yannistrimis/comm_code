@@ -38,14 +38,14 @@ def jackknife(arr,nbins,fl):
 	elif fl=='error':
 		return er
 
-my_dir = "/home/yannis/Physics/LQCD/pure_u1/data/"
+my_dir = "/home/yannis/Physics/LQCD/pure_u1/data/" # LAPTOP
 n_of_lat = 20
-beta_arr = [1.0, 2.0, 4.0, 6.0, 8.0, 10, 12]
-beta_str_arr = ["1","2","4","6","8", "10", "12"]
+beta_arr = [1.0, 2.0, 4.0, 6.0, 8.0]
+beta_str_arr = ["1","2","4","6","8"]
 
 # Array that contains averages and errors for the two volumes:
 plaq = np.zeros((2,len(beta_arr),2))
-vol_arr = [4]
+vol_arr = [4,8]
 
 for i_vol in range(len(vol_arr)) :
     nx = vol_arr[i_vol]
@@ -72,7 +72,7 @@ for i_vol in range(len(vol_arr)) :
 
 fig1 = plt.figure()
 plt.errorbar(beta_arr,plaq[0,:,0],yerr=plaq[0,:,1],linestyle='None',marker='o',capsize=3,label=r"$4^4$")
-# plt.errorbar(beta_arr,plaq[1,:,0],yerr=plaq[1,:,1],linestyle='None',marker='o',capsize=3,label=r"$8^4$")
+plt.errorbar(beta_arr,plaq[1,:,0],yerr=plaq[1,:,1],linestyle='None',marker='o',capsize=3,label=r"$8^4$")
 plt.legend(loc="upper right")
 plt.title(r"plaquette vs $\beta$")
 plt.show()
