@@ -37,7 +37,8 @@ if how_input=="0" :
 	first_file = int(input())
 	n_bins = int(input()) 
 	i_xf_rec = int(input()) # WHICH ONE OF THE FLOW ANISOTROPIES TO PICK FOR RECORDING
-f_write = open( '/mnt/home/trimisio/plot_data/tau_Et_dEt_dEs_ratio_sflow%sb%sx%sxf%sdt%sobs_%s'%(vol,beta,x0,xf_vec[i_xf_rec],dt,obs_type) , 'w' )
+f_write = open( '/mnt/home/trimisio/plot_data/data_sflow%sb%sx%sxf%sdt%sobs_%s'%(vol,beta,x0,xf_vec[i_xf_rec],dt,obs_type) , 'w' )
+f_write.write( '#tau #Et #Et_err #Es #Es_err #dEt #dEt_err #dEs #dEs_err #ratio #ratio_err\n' )
 i_xf = -1
 for xf in xf_vec:	
 	i_xf = i_xf + 1
@@ -80,10 +81,11 @@ for xf in xf_vec:
 		dEt_arr[:,i,i_xf] = deriv( Et_arr[:,i,i_xf] , float(dt) )
 		dEs_arr[:,i,i_xf] = deriv( Es_arr[:,i,i_xf] , float(dt) )
 ### WE WILL OMIT THE FIRST ELEMENT FOR IT WOULD LEAD TO DIVISION BY ZERO
-		for i_time in range(1,n_steps) :
+		for i_time in range(0,n_steps) :
 			dEt_arr[i_time,i,i_xf] = dEt_arr[i_time,i,i_xf] * tau_arr[i_time]	
 			dEs_arr[i_time,i,i_xf] = dEs_arr[i_time,i,i_xf] * tau_arr[i_time]
-			ratio_arr[i_time,i,i_xf] = (dEs_arr[i_time,i,i_xf])/(dEt_arr[i_time,i,i_xf])
+			if i_time>0 :
+				ratio_arr[i_time,i,i_xf] = (dEs_arr[i_time,i,i_xf])/(dEt_arr[i_time,i,i_xf])
 dEs_binned = np.zeros( ( n_steps , n_bins , len(xf_vec) ) )
 ratio_binned = np.zeros( ( n_steps , n_bins , len(xf_vec) ) )
 dEs_weight = np.zeros( ( n_steps , len(xf_vec) ) )
@@ -99,16 +101,16 @@ for i_xf in range(len(xf_vec)):
 			ratio_weight[i_time,i_xf] = 1/(ratio_error)
 for i_time in range(n_steps):
 	Et_rec = jackknife(Et_arr[i_time,:,i_xf_rec],n_bins,'average')
-#	Et_err_rec = jackknife(Et_arr[i_time,:,i_xf_rec],n_bins,'error')
+	Et_err_rec = jackknife(Et_arr[i_time,:,i_xf_rec],n_bins,'error')
 	Es_rec = jackknife(Es_arr[i_time,:,i_xf_rec],n_bins,'average')
-#	Es_err_rec = jackknife(Es_arr[i_time,:,i_xf_rec],n_bins,'error')
+	Es_err_rec = jackknife(Es_arr[i_time,:,i_xf_rec],n_bins,'error')
 	dEt_rec = jackknife(dEt_arr[i_time,:,i_xf_rec],n_bins,'average')
-#	dEt_err_rec = jackknife(dEt_arr[i_time,:,i_xf_rec],n_bins,'error')
+	dEt_err_rec = jackknife(dEt_arr[i_time,:,i_xf_rec],n_bins,'error')
 	dEs_rec = jackknife(dEs_arr[i_time,:,i_xf_rec],n_bins,'average')
-#	dEs_err_rec = jackknife(dEs_arr[i_time,:,i_xf_rec],n_bins,'error')
+	dEs_err_rec = jackknife(dEs_arr[i_time,:,i_xf_rec],n_bins,'error')
 	ratio_rec = jackknife(ratio_arr[i_time,:,i_xf_rec],n_bins,'average')
-#	ratio_err_rec = jackknife(ratio_arr[i_time,:,i_xf_rec],n_bins,'error')
-	f_write.write('%f %f %f %f %f\n'%(tau_arr[i_time],Et_rec,dEt_rec,dEs_rec,ratio_rec))
+	ratio_err_rec = jackknife(ratio_arr[i_time,:,i_xf_rec],n_bins,'error')
+	f_write.write('%f %f %f %f %f %f %f %f %f %f %f\n'%(tau_arr[i_time],Et_rec,Et_err_rec,Es_rec,Es_err_rec,dEt_rec,dEt_err_rec,dEs_rec,dEs_err_rec,ratio_rec,ratio_err_rec))
 f_write.close()
 del Et_arr
 del Es_arr
