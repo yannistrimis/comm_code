@@ -16,10 +16,10 @@ then
 else 
 	i_lat=${set_i_lat}
 	seed=${set_seed}
-	cat << EOF > "${directory}/guard"
-	${i_lat}
-	${seed}
-	EOF
+cat << EOF > "${directory}/guard"
+${i_lat}
+${seed}
+EOF
 fi
 
 n_produced=0
@@ -28,16 +28,16 @@ counter=0
 i=1
 while [ $i -le $n_of_lat ]
 do
-	for i in[1..2..1]
+	for j in {1..2..1}
 	do	
-		file_name="${directory}/spec${nx}${nt}b${beta_name}x${xi_0_name}${stream}_dt${dt}.lat.${i_lat}.${i}"
+		file_name="${directory}/TESTspec${nx}${nt}b${beta_name}x${xi_0_name}${stream}_dt${dt}.lat.${i_lat}.${j}"
 		if [ -f "${file_name}" ]
 		then
 			rm "${file_name}"
 		fi
-		bash ${path}/make_input.sh ${i_lat} ${seed} ${i}
-		bash ${path}/build_input.ks_spectrum_hisq.spectrum2.2.sh ???
-		srun ??? ${path_build} ???
+		bash ${path}/make_input.sh ${i_lat} ${seed} ${j}
+		bash ${path_build}/build_input.ks_spectrum_hisq.spectrum2v3.2.sh ${path}/param_input > spec_input
+		${path_build}/ks_spectrum_hisq_dbl_scalar_icc_20230120 ${path}/spec_input > ${file_name}
 		text="RUNNING COMPLETED"
 		complete_flag=$(bash ${path}/is_complete.sh ${file_name} ${text})
 		if [ "${complete_flag}" = "1" ]
@@ -58,10 +58,10 @@ do
 		n_produced=$((${n_produced}+1))
 		i_lat=$((${i_lat}+1)) 
 		seed=$((${seed}+1))
-		cat << EOF > "${directory}/guard"
-		${i_lat}
-		${seed}
-		EOF
+cat << EOF > "${directory}/guard"
+${i_lat}
+${seed}
+EOF
 		echo "${n_produced} completed"
 	fi
 	i=$(($i+1))
@@ -71,4 +71,3 @@ echo "measured ${n_produced} out of ${n_of_lat} requested. Next is ${i_lat}"
 end_time=$(date +%s.%N)
 elapsed_time=$(python3 -c "res=${end_time}-${start_time};print(res)")
 echo "elapsed time = ${elapsed_time} sec"
-
