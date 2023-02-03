@@ -1,9 +1,15 @@
 #!/bin/bash
-source params.sh
+path=$(pwd)
+source ${path}/params.sh
+
+if [ ! -d "${run_dir}" ]
+then
+        mkdir "${run_dir}"
+fi
 
 cd ${run_dir}
 
-for i in {1..1..1}
+for i in {1..6..1}
 do
 	if [ $i -eq 1 ]
 	then

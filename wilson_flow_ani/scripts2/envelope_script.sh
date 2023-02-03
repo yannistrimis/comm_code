@@ -1,9 +1,9 @@
 #!/bin/bash
 
-cd /mnt/home/trimisio/runs/runs2
+cd /mnt/home/trimisio/runs/runflowl2424b7433x100a
 path="/mnt/home/trimisio/comm_code/wilson_flow_ani/scripts2"
 
-for i in {1..25..1}
+for i in {1..22..1}
 do
 
 if [ $i -eq 1 ]

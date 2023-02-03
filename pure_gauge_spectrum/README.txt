@@ -1,0 +1,26 @@
+1. CHANGE PARAMETERS IN params.sh
+2. CHANGE JOB ID IN submit_script.sb
+3. TAKE CARE OF LATTICE NAMING CONVENTION IN make_input.sh
+4. TAKE CARE OF NUMBER OF TASKS IN control_script.sh AND submit_script.sh
+5. TAKE CARE OF NUMBER OF JOBS IN envelope_script.sh
+
+6. BUILD SCRIPT spectrum2v3 MEASURES DIAGONAL HADRONS. v4 MEASURES ALL MESONS, BUT
+   DIAGONAL BARYONS ONLY. nd SCRIPT MEASURES ALL.
+
+SCALING---DIAGONAL HADRONS ONLY:
+16^4, masses=(0.02 0.04 0.06 0.08 1.00), -n 256, ~300 sec for 10 MEASUREMENTS
+16^4, masses=(0.02 0.04 0.06 0.08 1.00), -n 128, ~200 sec for 10 MEASUREMENTS
+16^4, masses=(0.02 0.04 0.06 0.08 1.00), -n 64, ~200 sec for 10 MEASUREMENTS
+16^4, masses=(0.02 0.04 0.06 0.08 1.00), -n 32, ~230 sec for 10 MEASUREMENTS
+16^4, masses=(0.02 0.04 0.06 0.08 1.00), -n 16, ~430 sec for 10 MEASUREMENTS
+16^4, masses=(0.02 0.04 0.06 0.08 1.00), -n 8, ~600 sec for 10 MEASUREMENTS
+16^4, masses=(0.02 0.04 0.06 0.08 1.00), -n 4, ~1000 sec for 10 MEASUREMENTS
+
+20^4, masses=(0.02 0.04 0.06 0.08 1.00), -n 256, ~200 sec for 10 MEASUREMENTS
+20^4, masses=(0.02 0.04 0.06 0.08 1.00), -n 128, ~300 sec for 10 MEASUREMENTS
+20^4, masses=(0.02 0.04 0.06 0.08 1.00), -n 64, CRASHES
+20^4, masses=(0.02 0.04 0.06 0.08 1.00), -n 32, ~430 sec for 10 MEASUREMENTS
+20^4, masses=(0.02 0.04 0.06 0.08 1.00), -n 16, CRASHES
+
+24^4, masses=(0.02 0.04 0.06 0.08 1.00), -n 256, ~400 sec for 10 MEASUREMENTS
+24^4, masses=(0.02 0.04 0.06 0.08 1.00), -n 128, ~400 sec for 10 MEASUREMENTS
