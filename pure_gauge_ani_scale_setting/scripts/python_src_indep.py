@@ -37,7 +37,7 @@ if how_input=="0" :
 	first_file = int(input())
 	n_bins = int(input()) 
 	i_xf_rec = int(input()) # WHICH ONE OF THE FLOW ANISOTROPIES TO PICK FOR RECORDING
-f_write = open( '/mnt/home/trimisio/plot_data/data_sflow%sb%sx%sxf%sdt%sobs_%s'%(vol,beta,x0,xf_vec[i_xf_rec],dt,obs_type) , 'w' )
+f_write = open( '/mnt/home/trimisio/plot_data/flow_data/data_sflow%sb%sx%sxf%sdt%sobs_%s'%(vol,beta,x0,xf_vec[i_xf_rec],dt,obs_type) , 'w' )
 f_write.write( '#tau #Et #Et_err #Es #Es_err #dEt #dEt_err #dEs #dEs_err #ratio #ratio_err\n' )
 i_xf = -1
 for xf in xf_vec:	
@@ -186,4 +186,5 @@ w0_err = w0_err*(n_bins-1)/n_bins
 w0_err = np.sqrt(w0_err)
 xi_g_err = xi_g_err*(n_bins-1)/n_bins
 xi_g_err = np.sqrt(xi_g_err)
+
 print('%s %s %f %f %f %f'%(beta,x0,w0_av,w0_err,xi_g_av,xi_g_err))
