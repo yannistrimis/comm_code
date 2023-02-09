@@ -5,24 +5,23 @@
 
 double* lattice;
 int nx;
-
 int main(void){
-    nx = 4; 
+    nx = 4;
     int my_seed = 8213;
 
-    hot(nx,my_seed);
+    hot(my_seed);
     for(int i=0;i<nx;i++){
         printf("%lf ",lattice[i]);
     }
     printf("\n");
     
-    ran_test(nx);
+    ran_test();
     for(int i=0;i<nx;i++){
         printf("%lf ",lattice[i]);
     }
     printf("\n");
 
-    ran_test(nx);
+    ran_test();
     for(int i=0;i<nx;i++){
         printf("%lf ",lattice[i]);
     }

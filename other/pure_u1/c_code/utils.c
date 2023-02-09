@@ -3,15 +3,15 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-void hot(int nx,int my_seed){
-    lattice = malloc( sizeof( double ) * 4 );
+void hot(int my_seed){
+    lattice = malloc( sizeof( double ) * nx );
     srand(my_seed);
     for(int i=0;i<nx;i++){
         double r = (double)rand()/(double)RAND_MAX;
         lattice[i] = r;
     }
 }
-void ran_test(int nx){
+void ran_test(){
     for(int i=0;i<nx;i++){
         double r = (double)rand()/(double)RAND_MAX;
         lattice[i] = r;

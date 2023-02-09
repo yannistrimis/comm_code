@@ -1,3 +1,3 @@
-void hot(int,int);
-void ran_test(int);
+void hot(int);
+void ran_test(void);
 void print_lat(void);
