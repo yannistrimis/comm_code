@@ -6,19 +6,19 @@ from matplotlib import pyplot as plt
 ### FOR PURE GAUGES ENSEMBLES. IT ALSO PRODUCES JACKKNIFE-BINNED DATA
 ### WHICH ARE STORED IN FILE FOR PLOTTING.
 
-cur_dir = '/mnt/home/trimisio/outputs'
-vol = '2080'
-beta = '7433'
-x0 = '35221'
+cur_dir = '/mnt/home/bazavov/puregauge/outputs'
+vol = '1616'
+beta = '7000'
+x0 = '100'
 stream = 'a'
 flow_type = 's'
-obs_type = 'symanzik'
-xf_vec = ['360','370','380','390']
-xf_float_vec = [3.60,3.70,3.80,3.90]
+obs_type = 'clover'
+xf_vec = ['096', '098', '100', '102', '104']
+xf_float_vec = [0.96, 0.98, 1.00, 1.02, 1.04]
 dt = '0.015625'
-n_files = 50
+n_files = 600
 first_file =201
-n_bins = 10
+n_bins = 60
 i_xf_rec = 2 # WHICH ONE OF THE FLOW ANISOTROPIES TO PICK FOR RECORDING
 
 how_input = input("type 0 for by-hand input or 1 for in-script values: ") 

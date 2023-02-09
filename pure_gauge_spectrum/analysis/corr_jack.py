@@ -12,7 +12,7 @@ ens_name = vol+'b'+beta+'x'+x0+stream
 first_file = 101
 last_file = 300 # DON'T FORGET, THERE ARE 2 FILES PER NUMBER
 
-n_bins = 5
+n_bins = 30
 
 cur_dir = '/mnt/home/trimisio/plot_data/spec_data/'+'l'+ens_name
 
@@ -73,16 +73,16 @@ for i in range(length) :
     write_1_im.write( '%f '%(tau_arr[i]) )
     write_2_im.write( '%f '%(tau_arr[i]) )
 
-    write_2_re.write( '%f %f\n'%(my_av_re[i],my_err_re[i]) )
-    write_2_im.write( '%f %f\n'%(my_av_im[i],my_err_im[i]) )
+    write_2_re.write( '%.16f %.16f\n'%(my_av_re[i],my_err_re[i]) )
+    write_2_im.write( '%.16f %.16f\n'%(my_av_im[i],my_err_im[i]) )
 
 
-    for j in range(n_bins) :
-        write_1_re.write('%f '%(my_bin_array_re[i,j]))
-        write_1_im.write('%f '%(my_bin_array_im[i,j]))
+    for j in range(n_bins-1) :
+        write_1_re.write('%.16f '%(my_bin_array_re[i,j]))
+        write_1_im.write('%.16f '%(my_bin_array_im[i,j]))
 
-    write_1_re.write('\n')
-    write_1_im.write('\n')
+    write_1_re.write('%.16f\n'%(my_bin_array_re[i,n_bins-1]))
+    write_1_im.write('%.16f\n'%(my_bin_array_im[i,n_bins-1]))
    
 
 write_1_re.close()

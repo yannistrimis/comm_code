@@ -27,17 +27,17 @@ for i_line in range(len(content)) :
         re = float(split[1])
         im = float(split[2])
         flag = 1
-        f_write.write('%s %f %f\n'%(split[0],re,im))
+        f_write.write('%s %.16f %.16f\n'%(split[0],re,im))
     elif split[0] == str(int(nt/2)) :
         re = float(split[1])
         im = float(split[2])
         flag = 0
-        f_write.write('%s %f %f\n'%(split[0],re,im))
+        f_write.write('%s %.16f %.16f\n'%(split[0],re,im))
     elif flag == 1 :
         split2 = content[ i_line+nt-2*int(split[0]) ].split(' ')
         re = ( float(split[1]) + float(split2[1]) ) / 2   
         im = ( float(split[2]) + float(split2[2]) ) / 2
-        f_write.write('%s %f %f\n'%(split[0],re,im))
+        f_write.write('%s %.16f %.16f\n'%(split[0],re,im))
 
 f_write.close()
 f_read.close()
