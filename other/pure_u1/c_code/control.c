@@ -1,35 +1,33 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <math.h>
 #include "lattice.h"
 #include "utils.h"
 
-double* lattice;
+double* lattice[4];
 int nx;
+int nt;
+int vol;
+double beta;
+
 int main(void){
     nx = 4;
+    nt = 4;
+    vol = (int)pow(nx,3)*nt;
     int my_seed = 8213;
+    beta = 1.0;
 
-    hot(my_seed);
-    for(int i=0;i<nx;i++){
-        printf("%lf ",lattice[i]);
-    }
-    printf("\n");
-    
-    ran_test();
-    for(int i=0;i<nx;i++){
-        printf("%lf ",lattice[i]);
-    }
-    printf("\n");
+    double d_hot = 1.0;
+    initialize(my_seed, d_hot);
 
-    ran_test();
-    for(int i=0;i<nx;i++){
-        printf("%lf ",lattice[i]);
+    for(int ind=0;ind<vol;ind++){
+        for(int i=0;i<4;i++){
+                printf("%lf\n",lattice[i][ind]);
+        }
     }
-    printf("\n");
-    
-    lattice[0]=lattice[0]+1;
-    print_lat();
 
-    free(lattice);
+    for(int i=0;i<4;i++){
+        free(lattice[i]);
+    }
     return 0;
 }

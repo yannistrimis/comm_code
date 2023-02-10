@@ -3,7 +3,7 @@ FILES.h = lattice.h utils.h
 FILES.o = ${FILES.c:.c=.o}
 
 pure_u1 : $(FILES.o)
-	gcc -o pure_u1 $(FILES.o)
+	gcc -o pure_u1 $(FILES.o) -lm
 
 $(FILES.o) : $(FILES.h)
  
