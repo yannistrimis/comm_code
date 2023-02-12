@@ -45,3 +45,39 @@ int vec_to_ind(int vec[4]){
     ind = it*nx*nx*nx + iz*nx*nx + iy*nx + ix;
     return ind;
 }
+
+int nn(int ind, int mu){
+    int* vec;
+    int vec_mu_nn;
+    int ind_nn;
+    int vec_nn[4];
+
+    vec = ind_to_vec(ind);
+    if( mu==3 ){
+        if( *(vec+mu)==(nt-1) ){
+            vec_mu_nn = 0;
+        }
+        else{
+            vec_mu_nn = *(vec+mu) + 1;
+        }
+    }
+    else{
+        if( *(vec+mu)==(nx-1) ){
+            vec_mu_nn = 0;
+        }
+        else{
+            vec_mu_nn = *(vec+mu) + 1;
+        }
+    }
+    for(int i=0;i<4;i++){ 
+        vec_nn[i] = *(vec+i);
+    }
+    vec_nn[mu] = vec_mu_nn;
+    ind_nn = vec_to_ind(vec_nn);
+    return ind_nn;
+}
+
+
+// int pnn(){
+
+// }
