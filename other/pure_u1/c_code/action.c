@@ -64,16 +64,30 @@ double single_update(int ind, int mu, double d_update, double q_help){
             }
         }
     }
+
     if(act_prop<action){
         q_help = q_help + 1;
     }else{
         double r = (double)rand()/(double)RAND_MAX;
-        double exp_action = exp(-0.5*beta*act_prop+0.5*beta*action);
+        double exp_action = exp(-beta*act_prop+beta*action);
         if(r<=exp_action){
             q_help = q_help + 1;
         }else{
             lattice[mu][ind] = cur;
         }
     }
+    
+    return q_help;
+}
+
+double update(double d_update, double q_help, int traj){
+    for(int i_traj=0;i_traj<traj;i_traj++){
+        for(int ind=0;ind<vol;ind++){
+            for(int mu=0;mu<4;mu++){
+                q_help = single_update(ind,mu,d_update,q_help);
+            }
+        }
+    }
+
     return q_help;
 }
