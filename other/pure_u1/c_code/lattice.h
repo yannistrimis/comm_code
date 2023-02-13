@@ -3,3 +3,4 @@ extern int nx;
 extern int nt;
 extern int vol;
 extern double beta;
+extern double action;

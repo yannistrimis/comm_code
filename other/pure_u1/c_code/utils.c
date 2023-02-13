@@ -78,6 +78,33 @@ int nn(int ind, int mu){
 }
 
 
-// int pnn(){
+int pnn(int ind, int mu){
+    int* vec;
+    int vec_mu_pnn;
+    int ind_pnn;
+    int vec_pnn[4];
 
-// }
+    vec = ind_to_vec(ind);
+    if( mu==3 ){
+        if( *(vec+mu)==0 ){
+            vec_mu_pnn = nt - 1;
+        }
+        else{
+            vec_mu_pnn = *(vec+mu) - 1;
+        }
+    }
+    else{
+        if( *(vec+mu)==0 ){
+            vec_mu_pnn = nx - 1;
+        }
+        else{
+            vec_mu_pnn = *(vec+mu) - 1;
+        }
+    }
+    for(int i=0;i<4;i++){ 
+        vec_pnn[i] = *(vec+i);
+    }
+    vec_pnn[mu] = vec_mu_pnn;
+    ind_pnn = vec_to_ind(vec_pnn);
+    return ind_pnn;
+}
