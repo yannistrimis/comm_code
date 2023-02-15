@@ -14,34 +14,46 @@ double beta;
 double action;
 
 int main(void){
-    nx = 4;
-    nt = 4;
+    
+    int n_of_lat;
+    int traj;
+    int my_seed;
+    double d_hot;
+    double d_update;
+
+    scanf("seed = %d\n",&my_seed);
+    scanf("nx = %d\n",&nx);
+    scanf("nt = %d\n",&nt);
+    scanf("beta = %lf\n",&beta);
+    scanf("n_of_lat = %d\n",&n_of_lat);
+    scanf("trejectories = %d\n",&traj);
+    scanf("d_hot = %lf\n",&d_hot);
+    scanf("d_update = %lf\n",&d_update);
+
+
+    // printf("seed = %d\n",my_seed);
+    // printf("nx = %d\n",nx);
+    // printf("nt = %d\n",nt);
+    // printf("beta = %lf\n",beta);
+    // printf("n_of_lat = %d\n",n_of_lat);
+    // printf("trejectories = %d\n",traj);
+    // printf("d_hot = %lf\n",d_hot);
+    // printf("d_update = %lf\n",d_update);
 
     vol = nx*nx*nx*nt;
-    int my_seed = 8213;
 
-    double beta_arr[4] = {0.25,0.5,1.0,2.0};
-
-    double d_hot = 1.0;
     initialize(my_seed, d_hot);
+    action_func();
+    double plaq;
+    plaq = (double)action/(6*vol);
+    printf("0 %lf 0.0\n",plaq);
 
-    double q_help = 0.0;
-    double d_update = 1.0;
-    
-    for(int i_beta=0;i_beta<4;i_beta++){
-        beta = beta_arr[i_beta];
-
-
-    }
+    for(int i_lat=1;i_lat<n_of_lat;i_lat++){
+        d_update = update(d_update,traj);
+    }   
     
     
-    
-    
-    
-    
-    
-    
-    
+    // printf("%d %d %lf\n",nx,nt,beta);
     
     // for(int ind=0;ind<vol;ind++){
     //     for(int i=0;i<4;i++){

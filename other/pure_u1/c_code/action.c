@@ -51,7 +51,7 @@ double single_update(int ind, int mu, double d_update, double q_help){
     }
     double aa = (double)rand()/(double)RAND_MAX;
     aa = (2*aa-1)*d_update;
-    lattice[mu][ind] = aa;
+    lattice[mu][ind] = cur + aa;
 
     for(int counter=0;counter<5;counter++){
         i = my_array[counter];
@@ -66,12 +66,14 @@ double single_update(int ind, int mu, double d_update, double q_help){
     }
 
     if(act_prop<action){
-        q_help = q_help + 1;
+        action = act_prop;
+        q_help = q_help + 1.0;
     }else{
         double r = (double)rand()/(double)RAND_MAX;
         double exp_action = exp(-beta*act_prop+beta*action);
         if(r<=exp_action){
-            q_help = q_help + 1;
+            action = act_prop;
+            q_help = q_help + 1.0;
         }else{
             lattice[mu][ind] = cur;
         }
@@ -80,14 +82,27 @@ double single_update(int ind, int mu, double d_update, double q_help){
     return q_help;
 }
 
-double update(double d_update, double q_help, int traj){
+double update(double d_update, int traj){
+    static int counter = 1;
+    double plaq;
+    double q_help;
     for(int i_traj=0;i_traj<traj;i_traj++){
+
+        q_help = 0.0;
         for(int ind=0;ind<vol;ind++){
             for(int mu=0;mu<4;mu++){
                 q_help = single_update(ind,mu,d_update,q_help);
             }
         }
+        q_help = (double)q_help/(vol*4.0);
+        if(q_help>0.7){
+            d_update = d_update + 0.1;
+        }else if(q_help<0.5){
+            d_update = d_update - 0.1;
+        }
     }
-
-    return q_help;
+    plaq = (double)action/(6*vol);
+    printf("%d %lf %lf\n",counter,plaq,q_help);
+    counter = counter + 1;
+    return d_update;
 }
