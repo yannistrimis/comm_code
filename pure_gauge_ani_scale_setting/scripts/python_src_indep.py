@@ -16,9 +16,9 @@ obs_type = 'clover'
 xf_vec = ['096', '098', '100', '102', '104']
 xf_float_vec = [0.96, 0.98, 1.00, 1.02, 1.04]
 dt = '0.015625'
-n_files = 600
-first_file =201
-n_bins = 60
+n_files = 800
+first_file =101
+n_bins = 80
 i_xf_rec = 2 # WHICH ONE OF THE FLOW ANISOTROPIES TO PICK FOR RECORDING
 
 how_input = input("type 0 for by-hand input or 1 for in-script values: ") 

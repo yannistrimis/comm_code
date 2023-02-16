@@ -6,6 +6,9 @@ beta = '7000'
 x0 = '100'
 stream = 'a'
 i_file = input()
+mass_line = input()
+source_line = input()
+sink_line = input()
 ens_name = vol+'b'+beta+'x'+x0+stream
 f_read = open('%s/l%s/spec%s.lat.%s'%(cur_dir,ens_name,ens_name,i_file),'r')
 f_write_a = open('%s/l%s/clean_spec%s.lat.%sa'%(cur_dir,ens_name,ens_name,i_file),'w')
@@ -24,20 +27,25 @@ for line in content:
 
 	if line == 'STARTPROP\n' :
 		flag = 1
-	elif flag == 1 and split_line[0] == '0' :
+	elif flag == 1 and line == mass_line :
 		flag = 2
+	elif flag == 2 and line == source_line :
+		flag = 3
+	elif flag ==3 and line == sink_line :
+	elif flag == 3 and split_line[0] == '0' :
+		flag = 4
 		counter = 1
 		if source_flag == 1 :
 			f_write_a.write('%s'%(line))
 		elif source_flag == 2 :
 			f_write_b.write('%s'%(line))
-	elif flag == 2 and split_line[0] == str(counter) :
+	elif flag == 4 and split_line[0] == str(counter) :
 		counter = counter + 1
 		if source_flag == 1 :
 			f_write_a.write('%s'%(line))
 		elif source_flag == 2 :
 			f_write_b.write('%s'%(line))
-	elif flag == 2 and line == 'ENDPROP\n' :
+	elif flag == 4 and line == 'ENDPROP\n' :
 		flag = 0
 		counter = 0
 
