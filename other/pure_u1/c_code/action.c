@@ -70,7 +70,7 @@ double single_update(int ind, int mu, double d_update, double q_help){
         q_help = q_help + 1.0;
     }else{
         double r = (double)rand()/(double)RAND_MAX;
-        double exp_action = exp(-beta*act_prop+beta*action);
+        double exp_action = exp(-0.5*beta*act_prop+0.5*beta*action);
         if(r<=exp_action){
             action = act_prop;
             q_help = q_help + 1.0;
