@@ -1,21 +1,27 @@
 # 4 SPACES INSTEAD OF TAB
 import numpy as np
 
-cur_dir = '/mnt/home/trimisio/outputs/pure_gauge_spec'
+out_dir = '/mnt/home/trimisio/plot_data/spec_data'
 nx=16
 nt=16
 vol = str(nx)+str(nt)
 beta = '7000'
 x0 = '100'
 stream = 'a'
+
 i_file = input() # FILE NUMBER
 i_source = input() # a OR b
+mass1 = input()
+mass2 = input()
+source1 = input()
+source2 = input()
+sinks = input()
+
 ens_name = vol+'b'+beta+'x'+x0+stream
 
-out_dir = '/mnt/home/trimisio/plot_data/spec_data'
 
-f_write = open('%s/l%s/folded_spec%s.lat.%s%s'%(out_dir,ens_name,ens_name,i_file,i_source),'w')
-f_read = open('%s/l%s/clean_spec%s.lat.%s%s'%(cur_dir,ens_name,ens_name,i_file,i_source),'r')
+f_write = open('%s/l%s/fold_m1_%s_m2_%s_%s_%s_%s.%s%s'%(out_dir,ens_name,mass1,mass2,sinks,source1,source2,i_file,i_source),'w')
+f_read = open('%s/l%s/spec_m1_%s_m2_%s_%s_%s_%s.%s%s'%(out_dir,ens_name,mass1,mass2,sinks,source1,source2,i_file,i_source),'r')
 
 content = f_read.readlines()
 re = 0.0

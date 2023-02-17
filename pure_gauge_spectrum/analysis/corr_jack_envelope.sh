@@ -6,13 +6,9 @@ source1="CORNER"
 source2="CORNER"
 
 
-for i_file in {201..300..1}
-do
-
-echo ${i_file}
-
 for (( m1=0 ; m1<5 ; m1++ ));
 do
+
 
 # for (( m2=$m1 ; m2<5 ; m2++ ));
 # do
@@ -22,8 +18,9 @@ m2=$m1
 mass1=${masses[$m1]}
 mass2=${masses[$m2]}
 
-python clean_one.py <<EOF
-${i_file}
+echo $mass1 $mass2
+
+python corr_jack.py <<EOF
 ${mass1}
 ${mass2}
 ${source1}
@@ -33,7 +30,4 @@ EOF
 
 
 # done
-
-done
-
 done
