@@ -10,7 +10,6 @@ x0 = '100'
 stream = 'a'
 
 i_file = input() # FILE NUMBER
-i_source = input() # a OR b
 mass1 = input()
 mass2 = input()
 source1 = input()
@@ -20,8 +19,8 @@ sinks = input()
 ens_name = vol+'b'+beta+'x'+x0+stream
 
 
-f_write = open('%s/l%s/fold_m1_%s_m2_%s_%s_%s_%s.%s%s'%(out_dir,ens_name,mass1,mass2,sinks,source1,source2,i_file,i_source),'w')
-f_read = open('%s/l%s/spec_m1_%s_m2_%s_%s_%s_%s.%s%s'%(out_dir,ens_name,mass1,mass2,sinks,source1,source2,i_file,i_source),'r')
+f_write = open('%s/l%s/fold_m1_%s_m2_%s_%s_%s_%s.%s'%(out_dir,ens_name,mass1,mass2,sinks,source1,source2,i_file),'w')
+f_read = open('%s/l%s/spec_m1_%s_m2_%s_%s_%s_%s.%s'%(out_dir,ens_name,mass1,mass2,sinks,source1,source2,i_file),'r')
 
 content = f_read.readlines()
 re = 0.0
