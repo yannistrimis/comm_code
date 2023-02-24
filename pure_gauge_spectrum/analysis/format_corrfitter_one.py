@@ -19,11 +19,11 @@ ens_name = vol+'b'+beta+'x'+x0+stream
 
 f_write = open('%s/l%s/m1_%s_m2_%s_%s_%s_%s.data'%(out_dir,ens_name,mass1,mass2,sinks,source1,source2),'w')
 
-for i_file in range(101,301):
+for i_file in range(101,201):
     f_read = open('%s/l%s/spec_m1_%s_m2_%s_%s_%s_%s.%d'%(out_dir,ens_name,mass1,mass2,sinks,source1,source2,i_file),'r')
     content = f_read.readlines()
 
-    f_write.write( '%s'%(sinks) )
+    f_write.write( 'PROP' )
     for i_line in range(len(content)) :
         split = content[i_line].split(' ')
         f_write.write( ' %s'%(split[1]) )

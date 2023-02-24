@@ -15,53 +15,39 @@ source1 = input()
 source2 = input()
 sinks = input()
 
-first_file = 101
-last_file = 300 # DON'T FORGET, THERE ARE 2 FILES PER NUMBER
-
-n_bins = 30
+n_bins = 20
 
 cur_dir = '/mnt/home/trimisio/plot_data/spec_data'
 
-try_file = open('%s/l%s/fold_m1_%s_m2_%s_%s_%s_%s.%sa'%(cur_dir,ens_name,mass1,mass2,sinks,source1,source2,first_file),'r')
-try_content = try_file.readlines()
-length = len(try_content)
+f_read = open('%s/l%s/m1_%s_m2_%s_%s_%s_%s.data'%(cur_dir,ens_name,mass1,mass2,sinks,source1,source2),'r')
+content = f_read.readlines()
+n_of_files = len(content)
 
-tau_arr = np.zeros(length)
-for i in range(length) :
-    line = try_content[i].split(' ')
-    tau_arr[i] = int(line[0])
+tau_arr = np.zeros(nt)
+for i in range(nt) :
+    tau_arr[i] = i
 
-try_file.close()
+f_read.close()
 
-write_1_re = open('%s/l%s/bins_re_m1_%s_m2_%s_%s_%s_%s.dat'%(cur_dir,ens_name,mass1,mass2,sinks,source1,source2),'w')
-write_2_re = open('%s/l%s/av_err_re_m1_%s_m2_%s_%s_%s_%s.dat'%(cur_dir,ens_name,mass1,mass2,sinks,source1,source2),'w')
+write_1_re = open('%s/l%s/m1_%s_m2_%s_%s_%s_%s.bins'%(cur_dir,ens_name,mass1,mass2,sinks,source1,source2),'w')
+write_2_re = open('%s/l%s/m1_%s_m2_%s_%s_%s_%s.averr'%(cur_dir,ens_name,mass1,mass2,sinks,source1,source2),'w')
 
-my_bin_array_re = np.zeros(( length , n_bins ))
+my_bin_array_re = np.zeros(( nt , n_bins ))
+my_array_re = np.zeros(( nt , n_of_files ))
+my_av_re = np.zeros(nt)
+my_err_re = np.zeros(nt) 
 
-my_array_re = np.zeros(( length , 2*(last_file-first_file+1) ))
+for j in range(n_of_files) :
+    line = content[j].split(' ')
+    for i in range(nt) :
+        my_array_re[i,j] =  float(line[i+1])
 
-my_av_re = np.zeros(length)
-
-my_err_re = np.zeros(length) 
-
-j = -1
-for jj in range(first_file,last_file+1) :
-    for i_source in ['a','b'] :
-        j = j + 1
-        f_read = open('%s/l%s/fold_m1_%s_m2_%s_%s_%s_%s.%s%s'%(cur_dir,ens_name,mass1,mass2,sinks,source1,source2,jj,i_source),'r')
-        content = f_read.readlines()
-        for i in range(length) :
-            line = content[i].split(' ')
-            my_array_re[i,j] =  float(line[1])
-        
-        f_read.close()
-
-for i in range(length) :
+for i in range(nt) :
     my_bin_array_re[i,:] = jackknife(my_array_re[i,:],n_bins,'bins')
     my_av_re[i] = jackknife(my_array_re[i,:],n_bins,'average')    
     my_err_re[i] = jackknife(my_array_re[i,:],n_bins,'error')
  
-for i in range(length) :
+for i in range(nt) :
     write_1_re.write( '%f '%(tau_arr[i]) )
     write_2_re.write( '%f '%(tau_arr[i]) )
 
