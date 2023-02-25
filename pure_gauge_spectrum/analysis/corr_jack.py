@@ -48,8 +48,8 @@ for i in range(nt) :
     my_err_re[i] = jackknife(my_array_re[i,:],n_bins,'error')
  
 for i in range(nt) :
-    write_1_re.write( '%f '%(tau_arr[i]) )
-    write_2_re.write( '%f '%(tau_arr[i]) )
+    write_1_re.write( '%d '%(tau_arr[i]) )
+    write_2_re.write( '%d '%(tau_arr[i]) )
 
     write_2_re.write( '%.16f %.16f\n'%(my_av_re[i],my_err_re[i]) )
 

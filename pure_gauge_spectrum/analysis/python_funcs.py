@@ -37,3 +37,4 @@ def jackknife(arr,nbins,fl):
                 return av
         elif fl=='error':
                 return er
+
