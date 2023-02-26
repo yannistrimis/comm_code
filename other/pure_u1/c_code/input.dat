@@ -1,0 +1,8 @@
+seed = 7838
+nx = 8
+nt = 8
+beta = 4.0
+n_of_lat = 50
+trajectories = 4
+d_hot = 1.0
+d_update = 0.1
