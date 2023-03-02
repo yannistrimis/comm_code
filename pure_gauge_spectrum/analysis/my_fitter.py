@@ -23,8 +23,8 @@ cur_dir = '/mnt/home/trimisio/plot_data/spec_data'
 f_read = open('%s/l%s/m1_%s_m2_%s_%s_%s_%s.data'%(cur_dir,ens_name,mass1,mass2,sinks,source1,source2),'r')
 content = f_read.readlines()
 f_read.close()
-tmin = 3
-tmax = 13
+tmin = 1
+tmax = 15
 n_of_meas = len(content)
 x = np.zeros(tmax-tmin+1)
 for i in range(tmax-tmin+1) :
@@ -40,11 +40,26 @@ def main() :
  
     y_cov = np.cov(y_arr)
     y_av = np.average(y_arr,axis=1)   
-    p0 = dict(an=-50,En=0.5,ao=50,Eo=0.5)
+    p0 = dict(an=-200,En=0.5,ao=150,Eo=0.5)
 #    p0 = dict(an=594,En=0.42)
 
     fit = lsqfit.nonlinear_fit(data=(x,y_av,y_cov), prior=None, p0=p0, fcn=fitfcn)
+    print('\ntmin = %d   tmax = %d\n'%(tmin,tmax))
     print(fit)
+    print('========FIT POINTS AND ERRORS=========')
+    for i in range(tmax-tmin+1) :
+        print( x[i],fitfcn(x[i],fit.p).mean,fitfcn(x[i],fit.p).sdev )
+    print('========MEASUREMENT AVERAGES AND ERRORS=========')
+    for i in range(tmax-tmin+1) :
+        av = y_av[i]
+        err = np.sqrt(y_cov[i,i])
+        print(x[i],av,err)
+    print("===========DISTANCES============")
+    for i in range(tmax-tmin+1) :
+        av = y_av[i]
+        err = np.sqrt(y_cov[i,i])
+        quantity = ( av-fitfcn(x[i],fit.p).mean )**2 / err**2
+        print(x[i],quantity)
 
 def fitfcn(x,p) :
     return p['an']*( np.exp(-p['En']*x)+np.exp(-p['En']*(nt-x)) ) + (-1)**x*p['ao']*( np.exp(-p['Eo']*x)+np.exp(-p['Eo']*(nt-x)) )
