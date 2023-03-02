@@ -102,7 +102,21 @@ double update(double d_update, int traj){
         }
     }
     plaq = (double)action/(6*vol);
-    printf("%d %lf %lf\n",counter,plaq,q_help);
+    // printf("%d %lf %lf\n",counter,plaq,q_help);
     counter = counter + 1;
     return d_update;
+}
+
+double wilson_loop(int r, int t){
+    double wl;
+    wl = 0.0;
+
+    for(int ind=0;ind<vol;ind++){
+        for(int a=0;a<3;a++){
+// CONSTRUCT LOOP !!!
+        }
+    }
+
+
+    return wl;
 }
