@@ -4,7 +4,7 @@ from python_funcs import *
 
 my_dir = "/home/yannis/Physics/LQCD/pure_u1/data" # LAPTOP
 
-n_of_lat = 20
+n_of_lat = 60
 beta_arr = [0.125, 0.25, 0.5, 1.0, 2.0, 4.0]
 beta_str_arr = ["125", "250", "500", "1000","2000","4000"]
 
@@ -31,8 +31,8 @@ for i_vol in range(len(vol_arr)) :
             line = content[j].split(' ')
             temp[k] = float(line[1])
 
-        average = jackknife(temp,5,"average")
-        error = jackknife(temp,5,"error")
+        average = jackknife(temp,12,"average")
+        error = jackknife(temp,12,"error")
         f_write.write('%lf %lf %lf\n'%(beta,average,error))
 
     f_write.close()
