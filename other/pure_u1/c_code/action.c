@@ -27,7 +27,6 @@ void action_func(void){
 double single_update(int ind, int mu, double d_update, double q_help){
     double cur = lattice[mu][ind]; 
     double act_prop = action;
-
     int pnn0 = pnn(ind,0);
     int pnn1 = pnn(ind,1);
     int pnn2 = pnn(ind,2);
@@ -85,6 +84,7 @@ double single_update(int ind, int mu, double d_update, double q_help){
 double update(double d_update, int traj){
     static int counter = 1;
     double plaq;
+    wl_struct wl;
     double q_help;
     for(int i_traj=0;i_traj<traj;i_traj++){
 
@@ -101,22 +101,56 @@ double update(double d_update, int traj){
             d_update = d_update - 0.1;
         }
     }
-    plaq = (double)action/(6*vol);
-    // printf("%d %lf %lf\n",counter,plaq,q_help);
+    plaq = plaquette();
+    wl = wilson_loop(5,25);
+    printf("%d %lf %lf %lf <> %lf\n",counter,plaq,wl.re,wl.im,q_help);
     counter = counter + 1;
     return d_update;
 }
 
-double wilson_loop(int r, int t){
-    double wl;
-    wl = 0.0;
+double plaquette(){
+    double plaq;
+    plaq = (double)action/(6*vol);
+    return plaq;
+}
+
+wl_struct wilson_loop(int r, int t){
+    wl_struct wl;
+
+    double tf;
+    double tb;
+    double sf;
+    double sb;
+    double loop;
 
     for(int ind=0;ind<vol;ind++){
+        tf = 0.0;
+        for(int it=0;it<t;it++){
+            tf = tf + lattice[3][???];
+        }
         for(int a=0;a<3;a++){
-// CONSTRUCT LOOP !!!
+            wl.re = 0.0;
+            wl.im = 0.0;
+            tb = 0.0;
+            sf = 0.0;
+            sb = 0.0;
+            for(int ix=0;ix<r;ix++){
+                sf = sf + lattice[a][???];
+            }
+            for(int it=0;it<t;it++){
+                tb = tb + lattice[3][???];
+            }
+            for(int ix=0;ix<r;ix++){
+                sb = sb + lattice[a][???];
+            }
+            loop = tf + sf + tb + sb;
+            wl.re = cos(???*loop);
+            wl.im = sin(???*loop);
         }
     }
 
+    wl.re = (double)wl.re/(3.0*vol);
+    wl.im = (double)wl.im/(3.0*vol);
 
     return wl;
 }
