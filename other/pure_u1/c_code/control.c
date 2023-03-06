@@ -14,7 +14,7 @@ double beta;
 double action;
 
 int main(void){
-    
+
     int n_of_lat;
     int traj;
     int my_seed;
@@ -28,7 +28,7 @@ int main(void){
     scanf("n_of_lat = %d\n",&n_of_lat);
     scanf("trejectories = %d\n",&traj);
     scanf("d_hot = %lf\n",&d_hot);
-    scanf("d_update = %lf\n",&d_update);
+    scanf("d_update = %lf",&d_update);
 
 
     // printf("seed = %d\n",my_seed);
@@ -44,11 +44,11 @@ int main(void){
 
     initialize(my_seed, d_hot);
     action_func();
-    double plaq;
-    plaq = (double)action/(6*vol);
-    printf("0 %lf 0.0\n",plaq);
+    // double plaq;
+    // plaq = (double)action/(6*vol);
+    // printf("0 %lf 0.0\n",plaq);
 
-    for(int i_lat=1;i_lat<n_of_lat;i_lat++){
+    for(int i_lat=1;i_lat<=n_of_lat;i_lat++){
         d_update = update(d_update,traj);
     }   
     
