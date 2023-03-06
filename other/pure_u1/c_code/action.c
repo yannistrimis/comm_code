@@ -103,7 +103,7 @@ double update(double d_update, int traj){
     }
     plaq = plaquette();
     wl = wilson_loop(4,4);
-    printf("%d %lf %lf %lf %lf\n",counter,plaq,wl.re,wl.im,q_help);
+//    printf("%d %lf %lf %lf %lf\n",counter,plaq,wl.re,wl.im,q_help);
     counter = counter + 1;
     return d_update;
 }
@@ -125,13 +125,20 @@ wl_struct wilson_loop(int r, int t){
 
     int cursor;
     int milestone;
-
+    int* helper; 
     wl.re = 0.0;
     wl.im = 0.0;
 
     for(int ind=0;ind<vol;ind++){
         tf = 0.0;
+        printf("=======NEW POINT========\n");
         cursor = ind;
+        helper = ind_to_vec(cursor);
+        printf("START AT ( ");
+        for(int gg=0;gg<4;gg++){
+            printf("%d ",*(helper+gg));
+        }
+        printf(")\n");
         for(int it=0;it<t;it++){
             tf = tf + lattice[3][cursor];
             cursor = nn(cursor,3);
@@ -158,6 +165,11 @@ wl_struct wilson_loop(int r, int t){
             wl.re = wl.re + cos(sqrt( (double)1.0/beta )*loop);
             wl.im = wl.im + sin(sqrt( (double)1.0/beta )*loop);
         }
+        printf("END AT ( ");
+        for(int gg=0;gg<4;gg++){
+            printf("%d ",*(helper+gg));
+        }
+        printf(")\n");
     }
 
     wl.re = (double)wl.re/(3.0*vol);
