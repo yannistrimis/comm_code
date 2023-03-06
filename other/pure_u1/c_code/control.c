@@ -28,7 +28,7 @@ int main(void){
     scanf("n_of_lat = %d\n",&n_of_lat);
     scanf("trejectories = %d\n",&traj);
     scanf("d_hot = %lf\n",&d_hot);
-    scanf("d_update = %lf",&d_update);
+    scanf("d_update = %lf\n",&d_update);
 
 
     // printf("seed = %d\n",my_seed);

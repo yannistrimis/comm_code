@@ -102,8 +102,8 @@ double update(double d_update, int traj){
         }
     }
     plaq = plaquette();
-    wl = wilson_loop(5,25);
-    printf("%d %lf %lf %lf <> %lf\n",counter,plaq,wl.re,wl.im,q_help);
+    wl = wilson_loop(4,4);
+    printf("%d %lf %lf %lf %lf\n",counter,plaq,wl.re,wl.im,q_help);
     counter = counter + 1;
     return d_update;
 }
@@ -123,29 +123,40 @@ wl_struct wilson_loop(int r, int t){
     double sb;
     double loop;
 
+    int cursor;
+    int milestone;
+
+    wl.re = 0.0;
+    wl.im = 0.0;
+
     for(int ind=0;ind<vol;ind++){
         tf = 0.0;
+        cursor = ind;
         for(int it=0;it<t;it++){
-            tf = tf + lattice[3][???];
+            tf = tf + lattice[3][cursor];
+            cursor = nn(cursor,3);
         }
+        milestone = cursor;
         for(int a=0;a<3;a++){
-            wl.re = 0.0;
-            wl.im = 0.0;
             tb = 0.0;
             sf = 0.0;
             sb = 0.0;
+            cursor = milestone;
             for(int ix=0;ix<r;ix++){
-                sf = sf + lattice[a][???];
+                sf = sf + lattice[a][cursor];
+                cursor = nn(cursor,a);
             }
             for(int it=0;it<t;it++){
-                tb = tb + lattice[3][???];
+                cursor = pnn(cursor,3);
+                tb = tb - lattice[3][cursor];
             }
             for(int ix=0;ix<r;ix++){
-                sb = sb + lattice[a][???];
+                cursor = pnn(cursor,a);
+                sb = sb - lattice[a][cursor];
             }
             loop = tf + sf + tb + sb;
-            wl.re = cos(???*loop);
-            wl.im = sin(???*loop);
+            wl.re = wl.re + cos(sqrt( (double)1.0/beta )*loop);
+            wl.im = wl.im + sin(sqrt( (double)1.0/beta )*loop);
         }
     }
 
