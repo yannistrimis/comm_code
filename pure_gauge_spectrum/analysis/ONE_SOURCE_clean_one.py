@@ -37,7 +37,9 @@ source_line = 'SOURCE:' + ' ' + source1 + ' ' +  source2
 sink_line = 'SINKS:' + ' ' + sinks
 
 content = f_read.readlines()
+i_line = -1
 for line in content:
+        i_line = i_line + 1
         split_line = line.split(' ')
 
         if split_line[0]=='#' and split_line[1]=='source' and split_line[2]=='time':
@@ -54,6 +56,12 @@ for line in content:
         elif flag==3 and line.rstrip('\n')==sink_line :
                 flag = 4
         elif flag==4 and split_line[0]=='0' :
+                print(content[i_line-6])
+                print(content[i_line-5])
+                print(content[i_line-4])
+                print(content[i_line-3])
+       	       	print(content[i_line-2])
+       	       	print(content[i_line-1])
                 flag = 5
                 counter = 1
                 if source_flag == 1 :

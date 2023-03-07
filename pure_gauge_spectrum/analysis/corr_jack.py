@@ -23,6 +23,9 @@ f_read = open('%s/l%s/m1_%s_m2_%s_%s_%s_%s.data'%(cur_dir,ens_name,mass1,mass2,s
 content = f_read.readlines()
 n_of_files = len(content)
 
+if (n_of_files%n_bins) != 0 :
+    print('WARNING: number of bins does not divide number of files')
+
 tau_arr = np.zeros(nt)
 for i in range(nt) :
     tau_arr[i] = i

@@ -37,13 +37,16 @@ def main() :
         for i in range(int(nt/2)-tmin+1) :
             y_arr[i,kk] = float(line[i+1+tmin])
  
-    y_cov = np.cov(y_arr)
-    y_cov = y_cov / n_of_meas # TEMPORARY FIX
-    print(y_cov[0,0])
+    y_std = np.std(y_arr,axis=1)
+    y_stda = y_std/200
+    y_stdb = y_std/199
+    print(y_stda)
+    print(y_stdb)
     y_av = np.average(y_arr,axis=1)   
+    print(y_av)
 #    p0 = dict(an=-200,En=0.5,ao=150,Eo=0.5)
     p0 = dict(an=500,En=0.5)
-    fit0 = lsqfit.nonlinear_fit( data=(x,y_av,y_cov), prior=None, p0=p0, fcn=fitfcn0 )
+    fit0 = lsqfit.nonlinear_fit( data=(x,y_av,y_std), prior=None, p0=p0, fcn=fitfcn0 )
     print('\n')
     print('====== GROUND STATE ONLY =======')
     print('\ntmin = %d\n'%tmin)
@@ -54,12 +57,12 @@ def main() :
     print('== MEASUREMENT AVERAGES AND ERRORS ==')
     for i in range(int(nt/2)-tmin+1) :
         av = y_av[i]
-        err = np.sqrt(y_cov[i,i])
+        err = y_std[i]
         print(x[i],av,err)
     print("== DISTANCES ==")
     for i in range(int(nt/2)-tmin+1) :
         av = y_av[i]
-        err = np.sqrt(y_cov[i,i])
+        err = y_std[i]
         quantity = ( av-fitfcn0(x[i],fit0.p).mean ) / err
         print(x[i],quantity)
 
@@ -67,7 +70,7 @@ def main() :
 
 #   q0 = ??? FOR OSCILLATING
     q0 = dict(an=fit0.pmean['an'], En=fit0.pmean['En'], an1=-300, En1=1.0 )
-    fit1 = lsqfit.nonlinear_fit( data=(x,y_av,y_cov), prior=None, p0=q0, fcn=fitfcn1 )
+    fit1 = lsqfit.nonlinear_fit( data=(x,y_av,y_std), prior=None, p0=q0, fcn=fitfcn1 )
     print('\n')
     print('====== GROUND STATE + 1ST EXITED =======')
     print('\ntmin = %d\n'%tmin)
@@ -78,12 +81,12 @@ def main() :
     print('== MEASUREMENT AVERAGES AND ERRORS ==')
     for i in range(int(nt/2)-tmin+1) :
         av = y_av[i]
-        err = np.sqrt(y_cov[i,i])
+        err = y_std[i]
         print(x[i],av,err)
     print("== DISTANCES ==")
     for i in range(int(nt/2)-tmin+1) :
         av = y_av[i]
-        err = np.sqrt(y_cov[i,i])
+        err = y_std[i]
         quantity = ( av-fitfcn1(x[i],fit1.p).mean ) / err
         print(x[i],quantity)
 

@@ -15,16 +15,18 @@ source1 = input()
 source2 = input()
 sinks = input()
 
+first_file = 101
+last_file = 300
+
 ens_name = vol+'b'+beta+'x'+x0+stream
 
-# f_write = open('%s/l%s/m1_%s_m2_%s_%s_%s_%s.fold.data'%(out_dir,ens_name,mass1,mass2,sinks,source1,source2),'w')
-f_write = open('%s/l%s/m1_%s_m2_%s_%s_%s_%s.data'%(out_dir,ens_name,mass1,mass2,sinks,source1,source2),'w')
+f_write = open('%s/l%s/m1_%s_m2_%s_%s_%s_%s.fold.data'%(out_dir,ens_name,mass1,mass2,sinks,source1,source2),'w')
+# f_write = open('%s/l%s/m1_%s_m2_%s_%s_%s_%s.data'%(out_dir,ens_name,mass1,mass2,sinks,source1,source2),'w')
 
-for i_file in range(101,300):
-#    f_read = open('%s/l%s/foldspec_m1_%s_m2_%s_%s_%s_%s.%d'%(out_dir,ens_name,mass1,mass2,sinks,source1,source2,i_file),'r')
-    f_read = open('%s/l%s/spec_m1_%s_m2_%s_%s_%s_%s.%d'%(out_dir,ens_name,mass1,mass2,sinks,source1,source2,i_file),'r')
+for i_file in range(first_file,last_file+1):
+    f_read = open('%s/l%s/foldspec_m1_%s_m2_%s_%s_%s_%s.%d'%(out_dir,ens_name,mass1,mass2,sinks,source1,source2,i_file),'r')
+#    f_read = open('%s/l%s/spec_m1_%s_m2_%s_%s_%s_%s.%d'%(out_dir,ens_name,mass1,mass2,sinks,source1,source2,i_file),'r')
     content = f_read.readlines()
-
     f_write.write( 'PROP' )
     for i_line in range(len(content)) :
         split = content[i_line].split(' ')
@@ -34,3 +36,4 @@ for i_file in range(101,300):
 
 f_write.close()
 
+print("first file: %d\nlast file: %d"%(first_file,last_file) )
