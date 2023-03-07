@@ -21,6 +21,7 @@ int main(void){
     double d_hot;
     double d_update;
 
+
     scanf("seed = %d\n",&my_seed);
     scanf("nx = %d\n",&nx);
     scanf("nt = %d\n",&nt);
@@ -44,12 +45,12 @@ int main(void){
 
     initialize(my_seed, d_hot);
     action_func();
-    // double plaq;
-    // plaq = (double)action/(6*vol);
-    // printf("0 %lf 0.0\n",plaq);
+
+
 
     for(int i_lat=1;i_lat<=n_of_lat;i_lat++){
         d_update = update(d_update,traj);
+        measurements();
     }   
     
     

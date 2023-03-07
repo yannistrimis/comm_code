@@ -1,5 +1,4 @@
 import numpy as np
-from matplotlib import pyplot as plt
 from python_funcs import *
 
 my_dir = "/home/yannis/Physics/LQCD/pure_u1/data" # LAPTOP

@@ -5,6 +5,7 @@
 #include <stdlib.h>
 #include <math.h>
 
+
 void action_func(void){
     double temp;
     int nna;
@@ -23,6 +24,7 @@ void action_func(void){
         }
     }
 }
+
 
 double single_update(int ind, int mu, double d_update, double q_help){
     double cur = lattice[mu][ind]; 
@@ -77,14 +79,12 @@ double single_update(int ind, int mu, double d_update, double q_help){
             lattice[mu][ind] = cur;
         }
     }
-    
     return q_help;
 }
 
+
 double update(double d_update, int traj){
     static int counter = 1;
-    double plaq;
-    wl_struct wl;
     double q_help;
     for(int i_traj=0;i_traj<traj;i_traj++){
 
@@ -101,18 +101,41 @@ double update(double d_update, int traj){
             d_update = d_update - 0.1;
         }
     }
-    plaq = plaquette();
-    wl = wilson_loop(4,4);
-//    printf("%d %lf %lf %lf %lf\n",counter,plaq,wl.re,wl.im,q_help);
+    printf("%d",counter);
     counter = counter + 1;
     return d_update;
 }
+
+
+void measurements(){
+    double plaq;
+    wl_struct wl;
+
+    int r_wl[3] = {2,4,6};    
+    int t_wl[5] = {2,3,4,5,6};
+
+    int r_size = sizeof(r_wl)/sizeof(int);
+    int t_size = sizeof(t_wl)/sizeof(int);   
+
+    plaq = plaquette();
+    printf(" %lf",plaq); /*I LEAVE GAP FIRST BECAUSE COUNTER IS PRINTED BY update() FUNCTION*/
+
+    for(int ir=0;ir<r_size;ir++){
+        for(int it=0;it<t_size;it++){
+            wl = wilson_loop(r_wl[ir],t_wl[it]);
+            printf(" %lf %lf",wl.re,wl.im);
+        }
+    }
+    printf("\n");
+}
+
 
 double plaquette(){
     double plaq;
     plaq = (double)action/(6*vol);
     return plaq;
 }
+
 
 wl_struct wilson_loop(int r, int t){
     wl_struct wl;
@@ -154,6 +177,7 @@ wl_struct wilson_loop(int r, int t){
             tb = 0.0;
             sf = 0.0;
             sb = 0.0;
+            loop = 0.0;
             cursor = milestone;
             for(int ix=0;ix<r;ix++){
                 sf = sf + lattice[a][cursor];
