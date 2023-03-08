@@ -8,4 +8,4 @@
 
 module load intel/2020b
 path=$1
-bash ${path}/control_script.sh ${path}
+bash ${path}/wilson_control_script.sh ${path}

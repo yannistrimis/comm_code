@@ -18,6 +18,8 @@ def deriv( arr, dt ) : #O(dt^4)
 	
 def jackknife(arr,nbins,fl):
 	n = len(arr)
+	if (n%nbins) != 0 :
+		print('WARNING: NUMBER OF BINS DOES NOT DIVIDE NUMBER OF DATA POINTS')
 	ninbin = int(n/nbins)
 	jack_bins = np.zeros(nbins)
 	normal_bins = np.zeros(nbins)

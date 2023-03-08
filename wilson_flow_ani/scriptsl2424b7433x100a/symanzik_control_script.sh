@@ -13,13 +13,13 @@ then
 mkdir "${directory}"
 fi
 
-#guard file contains number of THE NEXT lattice to be flowed
-if [ -f "${directory}/wguard" ]
+#sguard file contains number of THE NEXT lattice to be flowed
+if [ -f "${directory}/sguard" ]
 then
-i_lat=$(head -n 1 "${directory}/wguard" | tail -n 1)
+i_lat=$(head -n 1 "${directory}/sguard" | tail -n 1)
 else
 i_lat=101 ###############INITIAL FILE
-cat << EOF > "${directory}/wguard"
+cat << EOF > "${directory}/sguard"
 ${i_lat}
 EOF
 fi
@@ -75,7 +75,7 @@ then
 counter=0
 n_produced=$((${n_produced}+1))
 i_lat=$((${i_lat}+1)) #####################FILE STEP
-cat << EOF > "${directory}/wguard"
+cat << EOF > "${directory}/sguard"
 ${i_lat}
 EOF
 echo "${n_produced} completed"
