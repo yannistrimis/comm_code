@@ -1,12 +1,12 @@
 #!/bin/bash
 
-init_seed=1258
-n_of_lat=50
+init_seed=1189
+n_of_lat=40
 
-nx=24
-ny=24
-nz=24
-nt=24
+nx=16
+ny=16
+nz=16
+nt=32
 
 # MILC convention in the improved action is: beta=10/g^2
 # Here we use plaquette action and so that is not relevant.
@@ -17,10 +17,10 @@ nt=24
 # beta_s=beta/xi_0
 # beta_t=beta*xi_0
 
-beta_s=7.433 #in the MILC colde this appears first
-beta_t=7.433 #and this appears second
+beta_s=6.875 #in the MILC colde this appears first
+beta_t=6.875 #and this appears second
 
-beta_name="7433"
+beta_name="6875"
 xi_0_name="100"
 
 warms=0
@@ -35,7 +35,12 @@ stream="a"
 ensemble="${nx}${nt}b${beta_name}x${xi_0_name}${stream}"
 
 lat_name="l${ensemble}"
-out_name="out${ensemble}"
 directory="/mnt/scratch/trimisio/lattices/${lat_name}" #this is for hpcc
+
+out_name="out${ensemble}"
 out_dir="/mnt/home/trimisio/outputs/${lat_name}"
+
+path_build="/mnt/home/trimisio/comm_code/pure_gauge_ani_generation/build"
+run_dir="/mnt/home/trimisio/runs/rungen${lat_name}"
+
 erase="no"

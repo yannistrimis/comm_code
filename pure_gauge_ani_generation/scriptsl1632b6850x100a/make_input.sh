@@ -1,6 +1,6 @@
 #!/bin/bash
 
-source params.sh
+source ${3}/params.sh
 
 i_curr=$1
 seed=$2
@@ -9,7 +9,7 @@ if [ $i_curr -gt 1 ]
 then
 i_prev=$((${i_curr}-1))
 
-cat << EOF > input
+cat << EOF > ${run_dir}/input
 prompt 0
 nx $nx
 ny $ny
@@ -31,7 +31,7 @@ EOF
 elif [ $i_curr -eq 1 ]
 then
 
-cat << EOF > input
+cat << EOF > ${run_dir}/input
 prompt 0
 nx $nx
 ny $ny
