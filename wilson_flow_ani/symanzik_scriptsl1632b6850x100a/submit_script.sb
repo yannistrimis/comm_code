@@ -1,0 +1,12 @@
+#!/bin/bash --login
+
+
+#SBATCH --time=05:00:00
+#SBATCH --ntasks=128
+#SBATCH --constraint=intel16
+#SBATCH --job-name sf0
+
+module load intel/2020b
+path=$1
+bash ${path}/symanzik_control_script.sh ${path}
+

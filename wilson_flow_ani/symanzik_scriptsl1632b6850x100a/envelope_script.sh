@@ -2,7 +2,6 @@
 path=$(pwd)
 source ${path}/params.sh
 
-
 if [ ! -d "${run_dir}" ]
 then
         mkdir "${run_dir}"
@@ -10,7 +9,7 @@ fi
 
 cd ${run_dir}
 
-for i in {1..5..1}
+for i in {1..2..1}
 do
 
 if [ $i -eq 1 ]

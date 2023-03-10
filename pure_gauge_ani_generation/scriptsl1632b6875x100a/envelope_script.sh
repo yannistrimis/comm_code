@@ -10,16 +10,16 @@ fi
 
 cd ${run_dir}
 
-for i in {1..8..1}
+for i in {1..5..1}
 do
 
 if [ $i -eq 1 ]
 then
 sbatch ${path}/submit_script.sb ${path} > ${run_dir}/id_file
-prev_id=$( awk '{print $4}' id_file )
+prev_id=$( awk '{print $4}' ${run_dir}/id_file )
 else
 sbatch --dependency=afterany:${prev_id} ${path}/submit_script.sb ${path} > ${run_dir}/id_file
-prev_id=$( awk '{print $4}' id_file )
+prev_id=$( awk '{print $4}' ${run_dir}/id_file )
 fi
 
 done

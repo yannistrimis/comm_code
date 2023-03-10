@@ -38,6 +38,12 @@ do
 echo $seed $i_lat
 file_name="${out_dir}/${out_name}.lat.${i_lat}"
 
+if [ -f "${directory}/${lat_name}.lat.${i_lat}" ] # THIS PRECAUTION IS ONLY ABOUT THE BINARY
+then
+rm "${directory}/${lat_name}.lat.${i_lat}"
+fi
+
+
 bash ${path}/make_input.sh $i_lat $seed $path
 srun -n 128 ${path_build}/su3_ora_symzk1_a_dbl_icc_20230309 ${run_dir}/input ${file_name}
 
