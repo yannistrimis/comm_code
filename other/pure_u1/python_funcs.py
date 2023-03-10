@@ -2,6 +2,10 @@ import numpy as np
 
 def jackknife(arr,nbins,fl):
     n = len(arr)
+
+    if (n%nbins) != 0 :
+        print('WARNING: NUMBER OF BINS DOES NOT DIVIDE NUMBER OF POINTS')
+
     ninbin = int(n/nbins)
     jack_bins = np.zeros(nbins)
     normal_bins = np.zeros(nbins)
