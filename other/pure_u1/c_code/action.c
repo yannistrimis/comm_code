@@ -210,8 +210,8 @@ wl_struct wilson_loop(int r, int t){
             // }
             // printf(")\n=NEW DIRECTION=\n");            
             loop = tf + sf + tb + sb;
-            wl.re = wl.re + cos(sqrt( (double)1.0/beta )*loop);
-            wl.im = wl.im + sin(sqrt( (double)1.0/beta )*loop);
+            wl.re = wl.re + cos(loop);
+            wl.im = wl.im + sin(loop);
         }
     }
 

@@ -10,7 +10,7 @@ stream = 'a'
 f_read = open('%s/l%d%db%d%s/wl_r_2_4_6_t_2_3_4_5_6.data'%(my_dir,nx,nt,beta,stream),'r')
 content = f_read.readlines()
 
-n_of_lat = 60
+n_of_lat = 100
 
 
 
