@@ -7,7 +7,7 @@ ny=16
 nz=16
 nt=32
 
-beta_name="6850"
+beta_name="6875"
 xi_0_name="100"
 stream="a"
 lat_name="l${nx}${nt}b${beta_name}x${xi_0_name}${stream}"

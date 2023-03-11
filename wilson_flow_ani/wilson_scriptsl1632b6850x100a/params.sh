@@ -19,12 +19,12 @@ dt_array=(0.015625)
 
 stoptime=4.0
 exp_order=16
-flow_action="symanzik"
+flow_action="wilson"
 
 directory="/mnt/home/trimisio/outputs/${lat_name}"
 lat_directory="/mnt/scratch/trimisio/lattices/${lat_name}"
 
 path_build="/mnt/home/trimisio/comm_code/wilson_flow_ani/build"
-run_dir="/mnt/home/trimisio/runs/runflow${lat_name}"
+run_dir="/mnt/home/trimisio/runs/runwflow${lat_name}"
 
 erase="no"
