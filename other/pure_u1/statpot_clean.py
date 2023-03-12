@@ -13,9 +13,6 @@ f_read.close()
 rr_arr = ['2','4','6']
 tt_arr = ['2','3','4','5','6']
 
-n_of_lat = 60
-nbins = 10
-
 
 i_col = 0
 for rr in rr_arr : 
@@ -35,10 +32,3 @@ for rr in rr_arr :
         f_write_log.close()
         f_write.close()
 
-### THE SECOND PART CREATES ONE FILE PER SPATIAL LENGTH WITH <W(T+1)>/<W(T)>
-### TO ASSESS CONVERGENCE
-
-
-
-
-### THE THIRD PART FITS -ln<Re[W(R,T)]> = - V(R)T + C TO EXTRACT POTENTIAL V(R)
