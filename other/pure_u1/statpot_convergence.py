@@ -8,20 +8,20 @@ nt = 16
 beta = 200
 stream = 'a'
 
-rr_arr = ['2','4','6']
-tt_arr = ['2','3','4','5','6']
+rr_arr = ['2','4','6','8']
+tt_arr = ['1','2','3','4','5','6','7','8']
 
 n_of_lat = 60 # HOW MANY WE WANT TO KEEP
 nbins = 10
 
 for rr in rr_arr :
-    f_write = open('%s/l%d%db%d%s/wl_r_%s.ratios'%(my_dir,nx,nt,beta,stream,rr),'w')
+    f_write = open('%s/l%d%db%d%s/wl_r%s.ratios'%(my_dir,nx,nt,beta,stream,rr),'w')
     aver_arr = np.zeros(len(tt_arr))
     i_av = -1
     for tt in tt_arr :
         i_av = i_av + 1
         data_arr = np.zeros(n_of_lat)
-        data_arr_all = np.loadtxt('%s/l%d%db%d%s/wl_r_%s_t_%s.re.data'%(my_dir,nx,nt,beta,stream,rr,tt), dtype=float)
+        data_arr_all = np.loadtxt('%s/l%d%db%d%s/wl_r%s_t%s.re.data'%(my_dir,nx,nt,beta,stream,rr,tt), dtype=float)
         n_total = len(data_arr_all)
         if n_of_lat > n_total :
             print('WARNING: NUMBER OF KEPT MEASUREMENTS LARGER THAN NUMBER OF TOTAL MEASUREMENTS')

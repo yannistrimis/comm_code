@@ -7,19 +7,19 @@ nx = 16
 nt = 16
 beta = 200
 stream = 'a'
-f_read = open('%s/l%d%db%d%s/wl_r_2_4_6_t_2_3_4_5_6.data'%(my_dir,nx,nt,beta,stream),'r')
+f_read = open('%s/l%d%db%d%s/wl_r2468_t12345678.data'%(my_dir,nx,nt,beta,stream),'r')
 content = f_read.readlines()
 f_read.close()
-rr_arr = ['2','4','6']
-tt_arr = ['2','3','4','5','6']
+rr_arr = ['2','4','6','8']
+tt_arr = ['1','2','3','4','5','6','7','8']
 
 
 i_col = 0
 for rr in rr_arr : 
     for tt in tt_arr :        
 
-        f_write_log = open('%s/l%d%db%d%s/wl_r_%s_t_%s.log.re.data'%(my_dir,nx,nt,beta,stream,rr,tt),'w')
-        f_write = open('%s/l%d%db%d%s/wl_r_%s_t_%s.re.data'%(my_dir,nx,nt,beta,stream,rr,tt),'w')
+        f_write_log = open('%s/l%d%db%d%s/wl_r%s_t%s.log.re.data'%(my_dir,nx,nt,beta,stream,rr,tt),'w')
+        f_write = open('%s/l%d%db%d%s/wl_r%s_t%s.re.data'%(my_dir,nx,nt,beta,stream,rr,tt),'w')
         
         i_col = i_col + 2
         for i_line in range(len(content)) :
