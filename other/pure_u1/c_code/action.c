@@ -111,8 +111,8 @@ void measurements(){
     double plaq;
     wl_struct wl;
 
-    int r_wl[3] = {2,4,6};    
-    int t_wl[5] = {2,3,4,5,6};
+    int r_wl[6] = {1,2,3,4,5,6};
+    int t_wl[8] = {1,2,3,4,5,6,7,8};
 
     int r_size = sizeof(r_wl)/sizeof(int);
     int t_size = sizeof(t_wl)/sizeof(int);   
