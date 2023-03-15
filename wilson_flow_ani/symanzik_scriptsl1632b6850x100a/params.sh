@@ -25,6 +25,7 @@ directory="/mnt/home/trimisio/outputs/${lat_name}"
 lat_directory="/mnt/scratch/trimisio/lattices/${lat_name}"
 
 path_build="/mnt/home/trimisio/comm_code/wilson_flow_ani/build"
-run_dir="/mnt/home/trimisio/runs/runflow${lat_name}"
+submit_dir="/mnt/home/trimisio/submits/subsflow${lat_name}"
+run_dir="/mnt/scratch/trimisio/runs/runsflow${lat_name}"
 
 erase="no"

@@ -4,7 +4,7 @@ source ${path}/params.sh
 
 i_curr=$1
 
-cat << EOF > ${run_dir}/input
+cat << EOF > ${submit_dir}/input
 prompt 0
 nx $nx
 ny $ny

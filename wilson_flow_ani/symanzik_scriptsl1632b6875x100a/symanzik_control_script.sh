@@ -31,9 +31,8 @@ max_counter=$((${#dt_array[@]}*${#xf_name_array[@]}))
 i=1
 while [ $i -le $n_of_lat ]
 do
-#############################################################################
-#############################################################################
-#############################################################################
+
+
 for dt in ${dt_array[@]}
 do
 for i_xf in ${!xf_name_array[@]}
@@ -49,7 +48,11 @@ rm "${file_name}"
 fi
 
 bash ${path}/make_input.sh ${i_lat} ${dt} ${xf} ${path}
-srun -n 128 ${path_build}/wilson_flow_bbb_a ${run_dir}/input ${file_name}
+
+cd ${run_dir}
+srun -n 128 ${path_build}/wilson_flow_bbb_a ${submit_dir}/input ${file_name}
+cd ${submit_dir}
+
 text="RUNNING COMPLETED"
 complete_flag=$(bash ${path}/is_complete.sh ${file_name} ${text})
 
@@ -67,19 +70,19 @@ fi
 
 done
 done
-#############################################################################
-#############################################################################
-#############################################################################
+
+
 if [ ${counter} -eq ${max_counter} ]
 then
 counter=0
 n_produced=$((${n_produced}+1))
-i_lat=$((${i_lat}+1)) #####################FILE STEP
+i_lat=$((${i_lat}+1)) ### FILE STEP
 cat << EOF > "${directory}/sguard"
 ${i_lat}
 EOF
 echo "${n_produced} completed"
 fi
+
 
 i=$(($i+1))
 done
