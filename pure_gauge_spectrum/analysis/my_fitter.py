@@ -5,9 +5,9 @@ import lsqfit
 from python_funcs import *
 
 nx = 16
-nt = 16
+nt = 32
 vol = str(nx) + str(nt)
-beta = '7000'
+beta = '6850'
 x0 = '100'
 stream = 'a'
 ens_name = vol+'b'+beta+'x'+x0+stream
@@ -23,7 +23,7 @@ cur_dir = '/mnt/home/trimisio/plot_data/spec_data'
 f_read = open('%s/l%s/m1_%s_m2_%s_%s_%s_%s.fold.data'%(cur_dir,ens_name,mass1,mass2,sinks,source1,source2),'r')
 content = f_read.readlines()
 f_read.close()
-tmin = 2
+tmin = 6
 n_of_meas = len(content)
 x = np.zeros(int(nt/2)-tmin+1)
 for i in range(int(nt/2)-tmin+1) :

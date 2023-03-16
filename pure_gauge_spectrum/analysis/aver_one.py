@@ -3,9 +3,9 @@ import numpy as np
 
 out_dir = '/mnt/home/trimisio/plot_data/spec_data'
 nx=16
-nt=16
+nt=32
 vol = str(nx)+str(nt)
-beta = '7000'
+beta = '6850'
 x0 = '100'
 stream = 'a'
 

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-masses=("0.02")
+masses=("0.02" "0.04" "0.06" "0.08" "0.1")
 mas_len=${#masses[@]}
 sinks="PION_5"
 source1="CORNER"
@@ -23,7 +23,7 @@ m2=$m1
 mass1=${masses[$m1]}
 mass2=${masses[$m2]}
 
-python ONE_SOURCE_clean_one.py <<EOF
+python clean_one.py <<EOF
 ${i_file}
 ${mass1}
 ${mass2}

@@ -1,9 +1,11 @@
 import numpy as np
 
+# THIS HAS TO BE PIPED INTO A FILE CALLED <something>.meff.data
+
 nx = 16
-nt = 16
+nt = 32
 vol = str(nx) + str(nt)
-beta = '7000'
+beta = '6850'
 x0 = '100'
 stream = 'a'
 ens_name = vol+'b'+beta+'x'+x0+stream

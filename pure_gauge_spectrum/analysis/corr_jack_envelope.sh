@@ -1,6 +1,6 @@
 #!/bin/bash
 
-masses=("0.02" "0.04" "0.06" "0.08")
+masses=("0.02" "0.04" "0.06" "0.08" "0.1")
 mas_len=${#masses[@]}
 sinks="PION_5"
 source1="CORNER"

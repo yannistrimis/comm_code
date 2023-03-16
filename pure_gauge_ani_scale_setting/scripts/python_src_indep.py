@@ -7,8 +7,8 @@ from matplotlib import pyplot as plt
 ### WHICH ARE STORED IN FILE FOR PLOTTING.
 
 cur_dir = '/mnt/home/trimisio/outputs'
-vol = '3232'
-beta = '7833'
+vol = '1632'
+beta = '6850'
 x0 = '100'
 stream = 'a'
 flow_type = 's'
@@ -16,9 +16,9 @@ obs_type = 'clover'
 xf_vec = ['096', '098', '100', '102', '104']
 xf_float_vec = [0.96, 0.98, 1.00, 1.02, 1.04]
 dt = '0.015625'
-n_files = 400
+n_files = 200
 first_file =101
-n_bins = 40
+n_bins = 20
 i_xf_rec = 2 # WHICH ONE OF THE FLOW ANISOTROPIES TO PICK FOR RECORDING
 
 how_input = input("type 0 for by-hand input or 1 for in-script values: ") 

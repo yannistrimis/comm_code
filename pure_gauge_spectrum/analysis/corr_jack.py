@@ -2,9 +2,9 @@ import numpy as np
 from python_funcs import *
 
 nx = 16
-nt = 16
+nt = 32
 vol = str(nx) + str(nt)
-beta = '7000'
+beta = '6850'
 x0 = '100'
 stream = 'a'
 ens_name = vol+'b'+beta+'x'+x0+stream
@@ -17,9 +17,11 @@ sinks = input()
 
 n_bins = 20
 
+nt = int(nt/2) # QUICK SOLUTION FOR FOLDED DATA
+
 cur_dir = '/mnt/home/trimisio/plot_data/spec_data'
 
-f_read = open('%s/l%s/m1_%s_m2_%s_%s_%s_%s.data'%(cur_dir,ens_name,mass1,mass2,sinks,source1,source2),'r')
+f_read = open('%s/l%s/m1_%s_m2_%s_%s_%s_%s.fold.data'%(cur_dir,ens_name,mass1,mass2,sinks,source1,source2),'r')
 content = f_read.readlines()
 n_of_files = len(content)
 
