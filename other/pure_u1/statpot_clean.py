@@ -1,16 +1,17 @@
 import numpy as np
 from python_funcs import *
 
-my_dir = '/home/yannis/Physics/LQCD/projects/dark_coupling/data' # LAPTOP
+# my_dir = '/home/yannis/Physics/LQCD/projects/dark_coupling/data' # LAPTOP
+my_dir = '/home/trimis/data/pure_u1/wilson_loop' # CMSE DESKTOP
 
 nx = 16
 nt = 16
 beta = 200
 stream = 'a'
-f_read = open('%s/l%d%db%d%s/wl_r2468_t12345678.data'%(my_dir,nx,nt,beta,stream),'r')
+f_read = open('%s/l%d%db%d%s/wl_r123456_t12345678.data'%(my_dir,nx,nt,beta,stream),'r')
 content = f_read.readlines()
 f_read.close()
-rr_arr = ['2','4','6','8']
+rr_arr = ['1','2','3','4','5','6']
 tt_arr = ['1','2','3','4','5','6','7','8']
 
 

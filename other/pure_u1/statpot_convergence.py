@@ -1,14 +1,15 @@
 import numpy as np
 from python_funcs import *
 
-my_dir = '/home/yannis/Physics/LQCD/projects/dark_coupling/data' # LAPTOP
+# my_dir = '/home/yannis/Physics/LQCD/projects/dark_coupling/data' # LAPTOP
+my_dir = '/home/trimis/data/pure_u1/wilson_loop' # CMSE DESKTOP
 
 nx = 16
 nt = 16
 beta = 200
 stream = 'a'
 
-rr_arr = ['2','4','6','8']
+rr_arr = ['1','2','3','4','5','6']
 tt_arr = ['1','2','3','4','5','6','7','8']
 
 n_of_lat = 60 # HOW MANY WE WANT TO KEEP
