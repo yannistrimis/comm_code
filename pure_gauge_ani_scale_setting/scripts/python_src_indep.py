@@ -6,9 +6,9 @@ from matplotlib import pyplot as plt
 ### FOR PURE GAUGES ENSEMBLES. IT ALSO PRODUCES JACKKNIFE-BINNED DATA
 ### WHICH ARE STORED IN FILE FOR PLOTTING.
 
-cur_dir = '/mnt/home/trimisio/outputs'
-vol = '1632'
-beta = '6850'
+cur_dir = '/mnt/home/bazavov/puregauge/outputs'
+vol = '2020'
+beta = '7000'
 x0 = '100'
 stream = 'a'
 flow_type = 's'
@@ -16,9 +16,9 @@ obs_type = 'clover'
 xf_vec = ['096', '098', '100', '102', '104']
 xf_float_vec = [0.96, 0.98, 1.00, 1.02, 1.04]
 dt = '0.015625'
-n_files = 200
+n_files = 600
 first_file =101
-n_bins = 20
+n_bins = 30
 i_xf_rec = 2 # WHICH ONE OF THE FLOW ANISOTROPIES TO PICK FOR RECORDING
 
 how_input = input("type 0 for by-hand input or 1 for in-script values: ") 
@@ -37,15 +37,18 @@ if how_input=="0" :
 	first_file = int(input())
 	n_bins = int(input()) 
 	i_xf_rec = int(input()) # WHICH ONE OF THE FLOW ANISOTROPIES TO PICK FOR RECORDING
+
 f_write = open( '/mnt/home/trimisio/plot_data/flow_data/data_sflow%sb%sx%sxf%sdt%sobs_%s'%(vol,beta,x0,xf_vec[i_xf_rec],dt,obs_type) , 'w' )
 f_write.write( '#tau #Et #Et_err #Es #Es_err #dEt #dEt_err #dEs #dEs_err #ratio #ratio_err\n' )
 i_xf = -1
 for xf in xf_vec:	
 	i_xf = i_xf + 1
 	for i_file in range(first_file,n_files+first_file):
+		print(i_file)
 		i = i_file - first_file
 		f_read = open( '%s/l%sb%sx%s%s/%sflow%sb%sx%sxf%s%s_dt%s.lat.%d'%(cur_dir,vol,beta,x0,stream,flow_type,vol,beta,x0,xf,stream,dt,i_file) , 'r' )
 		content = f_read.readlines()
+		f_read.close()
 		if i_file == first_file and i_xf == 0 :
 			for i_line in range(len(content)):
 				my_line = content[ i_line ].split(' ')
@@ -77,7 +80,7 @@ for xf in xf_vec:
 				Et_arr[i_time,i,i_xf] = tau_arr[i_time]*tau_arr[i_time]*Et_arr[i_time,i,i_xf]
 				Es_arr[i_time,i,i_xf] = tau_arr[i_time]*tau_arr[i_time]*Es_arr[i_time,i,i_xf]
 				i_time = i_time + 1
-		f_read.close()
+
 		dEt_arr[:,i,i_xf] = deriv( Et_arr[:,i,i_xf] , float(dt) )
 		dEs_arr[:,i,i_xf] = deriv( Es_arr[:,i,i_xf] , float(dt) )
 ### WE WILL OMIT THE FIRST ELEMENT FOR IT WOULD LEAD TO DIVISION BY ZERO
