@@ -2,7 +2,7 @@
 
 masses=("0.02" "0.04" "0.06" "0.08" "0.1")
 mas_len=${#masses[@]}
-sinks="PION_5"
+sinks="PION_05"
 source1="CORNER"
 source2="CORNER"
 
