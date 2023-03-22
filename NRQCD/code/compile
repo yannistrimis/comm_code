@@ -1,0 +1,2 @@
+gfortran -o mainprogram ./userparameters.f90 ./lattice.f90 ./gaugefields.f90 \
+            ./heavyoperators.f90 ./heavypropagators.f90 mainprogram.f90
