@@ -59,7 +59,7 @@
 
 ! Open the extracted configuration file for reading.
     open(unit=10,file=trim(userfilename),status="old",form="unformatted", &
-         access="stream",convert="big_endian")
+         access="stream")
 
 ! Read some of the requested time steps.
      iread = 0

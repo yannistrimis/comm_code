@@ -12,10 +12,10 @@
     integer, public, parameter :: KI=4
 
 ! Define the real precision, KR=4 for single and KR=8 for double.
-    integer, public, parameter :: KR=8
+    integer, public, parameter :: KR=4
 
 ! Define the complex precision, KC=4 for single and KC=8 for double.
-    integer, public, parameter :: KC=8
+    integer, public, parameter :: KC=4
 
 ! Define the number of space-time dimensions.
 ! NOTE: At present the code will only work with ndir=4.
@@ -30,17 +30,17 @@
     integer, public, parameter :: np=2
 
 ! Define the number of lattice sites in each spatial direction.
-    integer, public, parameter :: nx=16, ny=16, nz=16
+    integer, public, parameter :: nx=24, ny=24, nz=24
 
 ! Define the total number of lattice sites in the time direction.
-    integer, public, parameter :: largeNt=32
+    integer, public, parameter :: largeNt=48
 
 ! Define the number of consecutive lattice sites in the time direction that
 ! will be used for any correlation function.
 ! NOTE: If nt<largeNt then correlation functions will only have nt-4 time steps
 !       because two initial time steps and two final time steps are needed
 !       for neighbours during the calculation of color-electric fields.
-    integer, public, parameter :: nt=8
+    integer, public, parameter :: nt=30
 
 ! ===============================================
 ! Abandon all hope, ye who tamper below this line.
