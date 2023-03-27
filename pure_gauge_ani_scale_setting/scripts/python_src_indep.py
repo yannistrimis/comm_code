@@ -6,9 +6,9 @@ from matplotlib import pyplot as plt
 ### FOR PURE GAUGES ENSEMBLES. IT ALSO PRODUCES JACKKNIFE-BINNED DATA
 ### WHICH ARE STORED IN FILE FOR PLOTTING.
 
-cur_dir = '/mnt/home/bazavov/puregauge/outputs'
-vol = '2020'
-beta = '7000'
+cur_dir = '/mnt/home/trimisio/outputs'
+vol = '1632'
+beta = '6850'
 x0 = '100'
 stream = 'a'
 flow_type = 's'
@@ -16,9 +16,9 @@ obs_type = 'clover'
 xf_vec = ['096', '098', '100', '102', '104']
 xf_float_vec = [0.96, 0.98, 1.00, 1.02, 1.04]
 dt = '0.015625'
-n_files = 600
+n_files = 400
 first_file =101
-n_bins = 30
+n_bins = 40
 i_xf_rec = 2 # WHICH ONE OF THE FLOW ANISOTROPIES TO PICK FOR RECORDING
 
 how_input = input("type 0 for by-hand input or 1 for in-script values: ") 
@@ -44,7 +44,7 @@ i_xf = -1
 for xf in xf_vec:	
 	i_xf = i_xf + 1
 	for i_file in range(first_file,n_files+first_file):
-		print(i_file)
+#		print(i_file)
 		i = i_file - first_file
 		f_read = open( '%s/l%sb%sx%s%s/%sflow%sb%sx%sxf%s%s_dt%s.lat.%d'%(cur_dir,vol,beta,x0,stream,flow_type,vol,beta,x0,xf,stream,dt,i_file) , 'r' )
 		content = f_read.readlines()

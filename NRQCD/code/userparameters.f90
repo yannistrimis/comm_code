@@ -30,10 +30,10 @@
     integer, public, parameter :: np=2
 
 ! Define the number of lattice sites in each spatial direction.
-    integer, public, parameter :: nx=24, ny=24, nz=24
+    integer, public, parameter :: nx=16, ny=16, nz=16
 
 ! Define the total number of lattice sites in the time direction.
-    integer, public, parameter :: largeNt=48
+    integer, public, parameter :: largeNt=32
 
 ! Define the number of consecutive lattice sites in the time direction that
 ! will be used for any correlation function.
