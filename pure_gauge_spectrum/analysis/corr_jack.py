@@ -17,7 +17,7 @@ sinks = input()
 
 n_bins = 20
 
-nt = int(nt/2) # QUICK SOLUTION FOR FOLDED DATA
+nt = int(nt/2)+1 # QUICK SOLUTION FOR FOLDED DATA
 
 cur_dir = '/mnt/home/trimisio/plot_data/spec_data'
 
