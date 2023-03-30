@@ -46,7 +46,17 @@ int main(void){
     initialize(my_seed, d_hot);
     action_func();
 
+    printf("#plaq");
 
+    #ifdef show_acceptance
+    printf(" #accept");
+    #endif
+
+    #ifdef show_wilson_loop
+    printf(" #wl_re #wl_im");
+    #endif
+
+    printf("\n");
 
     for(int i_lat=1;i_lat<=n_of_lat;i_lat++){
         d_update = update(d_update,traj);

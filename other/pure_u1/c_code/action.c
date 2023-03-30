@@ -103,6 +103,11 @@ double update(double d_update, int traj){
     }
     printf("%d",counter);
     counter = counter + 1;
+    
+    #ifdef show_acceptance
+    printf(" %lf",q_help);
+    #endif
+
     return d_update;
 }
 
@@ -120,12 +125,15 @@ void measurements(){
     plaq = plaquette();
     printf(" %lf",plaq); /*I LEAVE GAP FIRST BECAUSE COUNTER IS PRINTED BY update() FUNCTION*/
 
+    #ifdef show_wilson_loop
     for(int ir=0;ir<r_size;ir++){
         for(int it=0;it<t_size;it++){
             wl = wilson_loop(r_wl[ir],t_wl[it]);
             printf(" %lf %lf",wl.re,wl.im);
         }
     }
+    #endif
+
     printf("\n");
 }
 
