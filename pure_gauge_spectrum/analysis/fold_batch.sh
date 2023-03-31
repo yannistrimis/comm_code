@@ -1,13 +1,14 @@
 #!/bin/bash
 
-masses=("0.02" "0.04" "0.06" "0.08" "0.1")
+#masses=("0.02" "0.04" "0.06" "0.08" "0.1")
+masses=("0.08128")
 mas_len=${#masses[@]}
-sinks="PION_05"
+sinks="PION_5"
 source1="CORNER"
 source2="CORNER"
 
 
-for i_file in {101..300..1}
+for i_file in {301..400..1}
 do
 
 echo ${i_file}

@@ -28,13 +28,9 @@ n_sources=2
 source_inc=16
 source_prec=7 # CHANGE ACCORDING TO nt
 
-nmasses=5
-mass1=0.02
-mass2=0.04
-mass3=0.06
-mass4=0.08
-mass5=0.10
 
+nmasses=1
+mass1=0.08128
 
 err=1e-6
 max_cg_iterations=300

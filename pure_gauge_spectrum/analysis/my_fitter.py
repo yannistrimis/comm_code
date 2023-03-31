@@ -23,7 +23,7 @@ cur_dir = '/mnt/home/trimisio/plot_data/spec_data'
 f_read = open('%s/l%s/m1_%s_m2_%s_%s_%s_%s.fold.data'%(cur_dir,ens_name,mass1,mass2,sinks,source1,source2),'r')
 content = f_read.readlines()
 f_read.close()
-tmin = 7
+tmin = 6
 n_of_meas = len(content)
 x = np.zeros(int(nt/2)-tmin+1)
 for i in range(int(nt/2)-tmin+1) :
@@ -41,8 +41,8 @@ def main() :
     y_cov = y_cov / n_of_meas # NUMPY COV RETURNS COVARIANCE OF SAMPLE, 
     # WHEREAS WE NEED COVARIANCE OF THE MEAN
     y_av = np.average(y_arr,axis=1)   
-    p0 = dict(an=-800,En=1.2,ao=500,Eo=2.0) # OSCILLATING
-#    p0 = dict(an=500,En=0.5)
+#    p0 = dict(an=-800,En=1.2,ao=500,Eo=2.0) # OSCILLATING
+    p0 = dict(an=500,En=0.5)
     fit0 = lsqfit.nonlinear_fit( data=(x,y_av,y_cov), prior=None, p0=p0, fcn=fitfcn0 )
     print('\n')
     print('====== GROUND STATE ONLY =======')
@@ -115,8 +115,8 @@ def main() :
 
 
 def fitfcn0(x,p) :
-    return p['an']*( np.exp(-p['En']*x)+np.exp(-p['En']*(nt-x)) ) + (-1)**x*p['ao']*( np.exp(-p['Eo']*x)+np.exp(-p['Eo']*(nt-x)) )
-#    return p['an']*( np.exp(-p['En']*x)+np.exp(-p['En']*(nt-x)) )
+#    return p['an']*( np.exp(-p['En']*x)+np.exp(-p['En']*(nt-x)) ) + (-1)**x*p['ao']*( np.exp(-p['Eo']*x)+np.exp(-p['Eo']*(nt-x)) )
+    return p['an']*( np.exp(-p['En']*x)+np.exp(-p['En']*(nt-x)) )
 
 # def fitfcn1(x,q) :
 #    return q['an']*( np.exp(-q['En']*x)+np.exp(-q['En']*(nt-x)) ) + (-1)**x*q['ao']*( np.exp(-q['Eo']*x)+np.exp(-q['Eo']*(nt-x)) ) + q['an1']*( np.exp(-q['En1']*x)+np.exp(-q['En1']*(nt-x)) ) + (-1)**x*q['ao1']*( np.exp(-q['Eo1']*x)+np.exp(-q['Eo1']*(nt-x)) ) 

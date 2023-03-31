@@ -15,7 +15,7 @@ source1 = input()
 source2 = input()
 sinks = input()
 
-n_bins = 20
+n_bins = 30
 
 nt = int(nt/2)+1 # QUICK SOLUTION FOR FOLDED DATA
 
