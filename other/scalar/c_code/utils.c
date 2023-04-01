@@ -6,12 +6,12 @@
 
 void initialize (int my_seed){
     for(int i=0;i<2;i++){    
-        lattice[i] = malloc( sizeof( double ) * vol );
+        phi[i] = malloc( sizeof( double ) * vol );
     }
     srand(my_seed);
     for(int ind=0;ind<vol;ind++){\
-        lattice[0][ind] = 1.0;
-        lattice[1][ind] = 0.0;
+        phi[0][ind] = 1.0;
+        phi[1][ind] = 0.0;
     }
     
 }

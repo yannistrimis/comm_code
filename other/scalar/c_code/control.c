@@ -6,7 +6,7 @@
 #include "utils.h"
 #include "action.h"
 
-double* lattice[2];
+double* phi[2];
 int nx;
 int nt;
 int vol;
@@ -36,7 +36,7 @@ int main(void){
     initialize(my_seed);
     action_func();
     // for(int ind=0;ind<vol;ind++){
-    //     printf("%lf %lf %d\n",lattice[0][ind],lattice[1][ind],ind);
+    //     printf("%lf %lf %d\n",phi[0][ind],phi[1][ind],ind);
     // }
     return 0;
 }

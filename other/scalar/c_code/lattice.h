@@ -1,4 +1,4 @@
-extern double* lattice[2];
+extern double* phi[2];
 extern int nx;
 extern int nt;
 extern int vol;
