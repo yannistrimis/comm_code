@@ -26,7 +26,7 @@ void action_func(void){
 }
 
 
-double single_update(int ind, int mu, double d_update, double q_help){
+double single_update(int ind, int mu, double q_help){
     double cur = lattice[mu][ind]; 
     double act_prop = action;
     int pnn0 = pnn(ind,0);
@@ -83,7 +83,7 @@ double single_update(int ind, int mu, double d_update, double q_help){
 }
 
 
-double update(double d_update, int traj){
+void update(int traj){
     static int counter = 1;
     double q_help;
     for(int i_traj=0;i_traj<traj;i_traj++){
@@ -91,7 +91,7 @@ double update(double d_update, int traj){
         q_help = 0.0;
         for(int ind=0;ind<vol;ind++){
             for(int mu=0;mu<4;mu++){
-                q_help = single_update(ind,mu,d_update,q_help);
+                q_help = single_update(ind,mu,q_help);
             }
         }
         q_help = (double)q_help/(vol*4.0);
@@ -108,7 +108,6 @@ double update(double d_update, int traj){
     printf(" %lf",q_help);
     #endif
 
-    return d_update;
 }
 
 

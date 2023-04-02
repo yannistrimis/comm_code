@@ -24,7 +24,7 @@ void action_func(void){
 }
 
 
-double single_update_rho(int ind, double d_rho, double q_rho){
+double single_update_rho(int ind, double q_rho){
 
     double cur = phi[0][ind];
     double act_prop = action;
@@ -75,7 +75,7 @@ double single_update_rho(int ind, double d_rho, double q_rho){
         q_rho = q_rho + 1.0;
     }else{
         double r = (double)rand()/(double)RAND_MAX;
-        double exp_action = (phi[0][ind])*exp(action-act_prop);
+        double exp_action = (phi[0][ind]/cur)*exp(action-act_prop);
         if(r<=exp_action){
             action = act_prop;
             q_rho = q_rho + 1.0;
@@ -88,7 +88,7 @@ double single_update_rho(int ind, double d_rho, double q_rho){
 }
 
 
-double single_update_theta(int ind, double d_theta, double q_theta){
+double single_update_theta(int ind, double q_theta){
 
     double cur = phi[1][ind];
     double act_prop = action;
@@ -139,7 +139,7 @@ double single_update_theta(int ind, double d_theta, double q_theta){
         q_theta = q_theta + 1.0;
     }else{
         double r = (double)rand()/(double)RAND_MAX;
-        double exp_action = (phi[0][ind])*exp(action-act_prop);
+        double exp_action = exp(action-act_prop);
         if(r<=exp_action){
             action = act_prop;
             q_theta = q_theta + 1.0;
@@ -149,4 +149,9 @@ double single_update_theta(int ind, double d_theta, double q_theta){
     }
 
     return q_theta;
+}
+
+
+void update(int traj){
+    
 }

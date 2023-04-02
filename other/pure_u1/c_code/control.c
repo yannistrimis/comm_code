@@ -13,14 +13,14 @@ int vol;
 double beta;
 double action;
 
+double d_update;
+
 int main(void){
 
     int n_of_lat;
     int traj;
     int my_seed;
     double d_hot;
-    double d_update;
-
 
     scanf("seed = %d\n",&my_seed);
     scanf("nx = %d\n",&nx);
@@ -59,7 +59,7 @@ int main(void){
     printf("\n");
 
     for(int i_lat=1;i_lat<=n_of_lat;i_lat++){
-        d_update = update(d_update,traj);
+        update(traj);
         measurements();
     }   
     

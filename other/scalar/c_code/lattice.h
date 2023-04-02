@@ -5,3 +5,6 @@ extern int vol;
 extern double lamda;
 extern double kappa;
 extern double action;
+
+extern double d_rho;
+extern double d_theta;

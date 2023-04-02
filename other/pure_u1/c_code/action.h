@@ -1,6 +1,6 @@
 void action_func(void);
-double single_update(int,int,double,double);
-double update(double,int);
+double single_update(int,int,double);
+void update(int);
 double plaquette(void);
 void measurements(void);
 

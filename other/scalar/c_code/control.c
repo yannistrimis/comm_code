@@ -14,12 +14,14 @@ double lamda;
 double kappa;
 double action;
 
+double d_rho;
+double d_theta;
+
 int main(void){
 
     int n_of_lat;
     int traj;
     int my_seed;
-    double d_update;
 
 
     scanf("seed = %d\n",&my_seed);
@@ -29,7 +31,8 @@ int main(void){
     scanf("kappa = %lf\n",&kappa);
     scanf("n_of_lat = %d\n",&n_of_lat);
     scanf("trejectories = %d\n",&traj);
-    scanf("d_update = %lf\n",&d_update);
+    scanf("d_rho = %lf\n",&d_rho);
+    scanf("d_theta = %lf\n",&d_theta);
 
     vol = nx*nx*nx*nt;
 

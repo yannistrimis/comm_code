@@ -4,3 +4,5 @@ extern int nt;
 extern int vol;
 extern double beta;
 extern double action;
+
+extern double d_update;
