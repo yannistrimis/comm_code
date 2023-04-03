@@ -30,7 +30,7 @@ int main(void){
     scanf("lamda = %lf\n",&lamda);
     scanf("kappa = %lf\n",&kappa);
     scanf("n_of_lat = %d\n",&n_of_lat);
-    scanf("trejectories = %d\n",&traj);
+    scanf("trajectories = %d\n",&traj);
     scanf("d_rho = %lf\n",&d_rho);
     scanf("d_theta = %lf\n",&d_theta);
 
@@ -41,5 +41,28 @@ int main(void){
     // for(int ind=0;ind<vol;ind++){
     //     printf("%lf %lf %d\n",phi[0][ind],phi[1][ind],ind);
     // }
+
+    printf("#no");
+    
+    #ifdef show_accept_rho
+    printf(" accept_rho");
+    #endif
+
+    #ifdef show_accept_theta
+    printf(" accept_theta");
+    #endif
+
+    printf("\n");
+
+    for(int i_lat=1;i_lat<=n_of_lat;i_lat++){
+        update(traj);
+        measurements();
+    }    
+
+
+
+    for(int i=0;i<2;i++){
+        free(phi[i]);
+    }
     return 0;
 }

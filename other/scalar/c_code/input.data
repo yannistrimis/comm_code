@@ -1,0 +1,9 @@
+seed = 3623
+nx = 8
+nt = 8
+lamda = 1.0
+kappa = 1.0
+n_of_lat = 40
+trajectories = 4
+d_rho = 0.1
+d_theta = 0.1
