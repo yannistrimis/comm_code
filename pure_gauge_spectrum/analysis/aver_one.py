@@ -15,12 +15,13 @@ mass2 = input()
 source1 = input()
 source2 = input()
 sinks = input()
+pre_name = input()
 
 ens_name = vol+'b'+beta+'x'+x0+stream
 
-f_write = open('%s/l%s/spec_m1_%s_m2_%s_%s_%s_%s.%s'%(out_dir,ens_name,mass1,mass2,sinks,source1,source2,i_file),'w')
-f_read_a = open('%s/l%s/spec_m1_%s_m2_%s_%s_%s_%s.%sa'%(out_dir,ens_name,mass1,mass2,sinks,source1,source2,i_file),'r')
-f_read_b = open('%s/l%s/spec_m1_%s_m2_%s_%s_%s_%s.%sb'%(out_dir,ens_name,mass1,mass2,sinks,source1,source2,i_file),'r')
+f_write = open('%s/l%s/%s_spec_m1_%s_m2_%s_%s.%s'%(out_dir,ens_name,pre_name,mass1,mass2,sinks,i_file),'w')
+f_read_a = open('%s/l%s/%s_spec_m1_%s_m2_%s_%s.%sa'%(out_dir,ens_name,pre_name,mass1,mass2,sinks,i_file),'r')
+f_read_b = open('%s/l%s/%s_spec_m1_%s_m2_%s_%s.%sb'%(out_dir,ens_name,pre_name,mass1,mass2,sinks,i_file),'r')
 
 content_a = f_read_a.readlines()
 content_b = f_read_b.readlines()

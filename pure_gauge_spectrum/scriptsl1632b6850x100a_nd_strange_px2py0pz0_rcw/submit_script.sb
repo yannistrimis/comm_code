@@ -3,7 +3,7 @@
 #SBATCH --time=02:00:00
 #SBATCH --ntasks=128
 #SBATCH --constraint=intel16
-#SBATCH --job-name sp1632nd
+#SBATCH --job-name p2_0_0rw
 
 module load intel/2020b
 path=$1

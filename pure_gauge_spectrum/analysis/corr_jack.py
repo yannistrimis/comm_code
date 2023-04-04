@@ -14,14 +14,15 @@ mass2 = input()
 source1 = input()
 source2 = input()
 sinks = input()
+pre_name = input()
 
-n_bins = 30
+n_bins = 10
 
 nt = int(nt/2)+1 # QUICK SOLUTION FOR FOLDED DATA
 
 cur_dir = '/mnt/home/trimisio/plot_data/spec_data'
 
-f_read = open('%s/l%s/m1_%s_m2_%s_%s_%s_%s.fold.data'%(cur_dir,ens_name,mass1,mass2,sinks,source1,source2),'r')
+f_read = open('%s/l%s/%s_m1_%s_m2_%s_%s.fold.data'%(cur_dir,ens_name,pre_name,mass1,mass2,sinks),'r')
 content = f_read.readlines()
 n_of_files = len(content)
 
@@ -34,8 +35,8 @@ for i in range(nt) :
 
 f_read.close()
 
-write_1_re = open('%s/l%s/m1_%s_m2_%s_%s_%s_%s.bins'%(cur_dir,ens_name,mass1,mass2,sinks,source1,source2),'w')
-write_2_re = open('%s/l%s/m1_%s_m2_%s_%s_%s_%s.averr'%(cur_dir,ens_name,mass1,mass2,sinks,source1,source2),'w')
+write_1_re = open('%s/l%s/%s_m1_%s_m2_%s_%s.bins'%(cur_dir,ens_name,pre_name,mass1,mass2,sinks),'w')
+write_2_re = open('%s/l%s/%s_m1_%s_m2_%s_%s.averr'%(cur_dir,ens_name,pre_name,mass1,mass2,sinks),'w')
 
 my_bin_array_re = np.zeros(( nt , n_bins ))
 my_array_re = np.zeros(( nt , n_of_files ))

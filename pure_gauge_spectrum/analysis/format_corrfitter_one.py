@@ -14,18 +14,17 @@ mass2 = input()
 source1 = input()
 source2 = input()
 sinks = input()
+pre_name = input()
 
 first_file = 101
-last_file = 400
+last_file = 200
 
 ens_name = vol+'b'+beta+'x'+x0+stream
 
-f_write = open('%s/l%s/m1_%s_m2_%s_%s_%s_%s.fold.data'%(out_dir,ens_name,mass1,mass2,sinks,source1,source2),'w')
-# f_write = open('%s/l%s/m1_%s_m2_%s_%s_%s_%s.data'%(out_dir,ens_name,mass1,mass2,sinks,source1,source2),'w')
+f_write = open('%s/l%s/%s_m1_%s_m2_%s_%s.fold.data'%(out_dir,ens_name,pre_name,mass1,mass2,sinks),'w')
 
 for i_file in range(first_file,last_file+1):
-    f_read = open('%s/l%s/foldspec_m1_%s_m2_%s_%s_%s_%s.%d'%(out_dir,ens_name,mass1,mass2,sinks,source1,source2,i_file),'r')
-#    f_read = open('%s/l%s/spec_m1_%s_m2_%s_%s_%s_%s.%d'%(out_dir,ens_name,mass1,mass2,sinks,source1,source2,i_file),'r')
+    f_read = open('%s/l%s/%s_foldspec_m1_%s_m2_%s_%s.%d'%(out_dir,ens_name,pre_name,mass1,mass2,sinks,i_file),'r')
     content = f_read.readlines()
     f_write.write( 'PROP' )
     for i_line in range(len(content)) :

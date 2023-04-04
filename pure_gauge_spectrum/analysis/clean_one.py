@@ -14,19 +14,13 @@ mass2 = input()
 source1 = input()
 source2 = input()
 sinks = input()
-
-#i_file = '101'
-#mass1 = '0.04'
-#mass2 = '0.04'
-#source1 = 'CORNER'
-#source2 = 'CORNER'
-#sinks = 'PION_05'
-
+pre_name = input()
 ens_name = vol+'b'+beta+'x'+x0+stream
 
-f_read = open('%s/l%s/spec%s.lat.%s'%(cur_dir,ens_name,ens_name,i_file),'r')
-f_write_a = open('%s/l%s/spec_m1_%s_m2_%s_%s_%s_%s.%sa'%(out_dir,ens_name,mass1,mass2,sinks,source1,source2,i_file),'w')
-f_write_b = open('%s/l%s/spec_m1_%s_m2_%s_%s_%s_%s.%sb'%(out_dir,ens_name,mass1,mass2,sinks,source1,source2,i_file),'w')
+
+f_read = open('%s/l%s/%s_spec%s.lat.%s'%(cur_dir,ens_name,pre_name,ens_name,i_file),'r')
+f_write_a = open('%s/l%s/%s_spec_m1_%s_m2_%s_%s.%sa'%(out_dir,ens_name,pre_name,mass1,mass2,sinks,i_file),'w')
+f_write_b = open('%s/l%s/%s_spec_m1_%s_m2_%s_%s.%sb'%(out_dir,ens_name,pre_name,mass1,mass2,sinks,i_file),'w')
 
 source_flag = 0
 flag = 0

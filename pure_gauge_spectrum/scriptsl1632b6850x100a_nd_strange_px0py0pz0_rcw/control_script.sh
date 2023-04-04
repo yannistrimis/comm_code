@@ -9,14 +9,14 @@ then
 fi
 
 ### guard_strange FILE CONTAINS NUMBER OF THE NEXT LATTICE TO BE MEASURED
-if [ -f "${directory}/guard_strange_p${px}${py}${pz}" ]
+if [ -f "${directory}/guard_nd_strange_px${px}py${py}pz${pz}_${source}" ]
 then
-	i_lat=$(head -1 "${directory}/guard_strange_p${px}${py}${pz}")
-	seed=$(tail -1 "${directory}/guard_strange_p${px}${py}${pz}")
+	i_lat=$(head -1 "${directory}/guard_nd_strange_px${px}py${py}pz${pz}_${source}")
+	seed=$(tail -1 "${directory}/guard_nd_strange_px${px}py${py}pz${pz}_${source}")
 else 
 	i_lat=${set_i_lat}
 	seed=${set_seed}
-cat << EOF > "${directory}/guard_strange_p${px}${py}${pz}"
+cat << EOF > "${directory}/guard_nd_strange_px${px}py${py}pz${pz}_${source}"
 ${i_lat}
 ${seed}
 EOF
@@ -28,13 +28,13 @@ i=1
 while [ $i -le $n_of_lat ]
 do
 
-	file_name="${directory}/strange_p${px}${py}${pz}_testspec${nx}${nt}b${beta_name}x${xi_0_name}${stream}.lat.${i_lat}"
+	file_name="${directory}/nd_strange_px${px}py${py}pz${pz}_${source}_spec${nx}${nt}b${beta_name}x${xi_0_name}${stream}.lat.${i_lat}"
 	if [ -f "${file_name}" ]
 	then
 		rm "${file_name}"
 	fi
 	bash ${path}/make_input_nd.sh ${i_lat} ${seed} ${path}
-	bash ${path}/build_input.ks_spectrum_hisq.ndv3.2.sh ${submit_dir}/param_input > ${submit_dir}/spec_input
+	bash ${path}/build_input.ks_spectrum_hisq.ndv3.2.sh_MOM ${submit_dir}/param_input > ${submit_dir}/spec_input
 cd ${run_dir}
 	srun -n 128 ${path_build}/ks_spectrum_hisq_dbl_icc_20230125 ${submit_dir}/spec_input > ${file_name}
 cd ${submit_dir}
@@ -45,7 +45,7 @@ cd ${submit_dir}
 		n_produced=$((${n_produced}+1))
 		i_lat=$((${i_lat}+1)) 
 		seed=$((${seed}+1))
-cat << EOF > "${directory}/guard_strange_p${px}${py}${pz}"
+cat << EOF > "${directory}/guard_nd_strange_px${px}py${py}pz${pz}_${source}"
 ${i_lat}
 ${seed}
 EOF

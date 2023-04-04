@@ -71,7 +71,7 @@ number_of_base_sources 1
 
 # base source 0
 
-random_color_wall
+${source_legal_name}
 field_type KS
 subset full
 t0 ${t0}
