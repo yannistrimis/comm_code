@@ -17,13 +17,14 @@ mass2 = input()
 source1 = input()
 source2 = input()
 sinks = input()
+pre_name = input()
 
 cur_dir = '/mnt/home/trimisio/plot_data/spec_data'
 
-f_read = open('%s/l%s/m1_%s_m2_%s_%s_%s_%s.fold.data'%(cur_dir,ens_name,mass1,mass2,sinks,source1,source2),'r')
+f_read = open('%s/l%s/%s_m1_%s_m2_%s_%s.fold.data'%(cur_dir,ens_name,pre_name,mass1,mass2,sinks),'r')
 content = f_read.readlines()
 f_read.close()
-tmin = 5
+tmin = 3
 n_of_meas = len(content)
 x = np.zeros(int(nt/2)-tmin+1)
 for i in range(int(nt/2)-tmin+1) :
