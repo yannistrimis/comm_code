@@ -3,9 +3,6 @@ source ${3}/params.sh
 
 inlat="${lat_directory}/${lat_name}.lat.${1}"
 
-# THIS IS FOR TESTING
-# inlat="/mnt/home/trimisio/local_code/milc/git20230120_develop/milc_qcd/binary_samples/lat.sample.l8888"
-
 source_start=$(python3 -c "a=int(   ${set_source_start} + (  (${1}-${set_i_lat})*${source_prec}  ) % int(${nt}/2)   );print(a)")
 echo "source start = ${source_start}"
 cat << EOF > ${submit_dir}/param_input

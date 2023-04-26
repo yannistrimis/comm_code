@@ -8,7 +8,7 @@ nz=16
 nt=32
 
 set_i_lat=101
-set_seed=5204
+set_seed=5294
 
 beta_name="6850"
 xi_0_name="100"
@@ -18,8 +18,8 @@ lat_name="l${nx}${nt}b${beta_name}x${xi_0_name}${stream}"
 path_build="/mnt/home/trimisio/comm_code/pure_gauge_spectrum/build"
 directory="/mnt/home/trimisio/outputs/pure_gauge_spec/${lat_name}"
 lat_directory="/mnt/home/trimisio/scratch/lattices/${lat_name}"
-run_dir="/mnt/home/trimisio/scratch/runs/runspec${lat_name}"
-submit_dir="/mnt/home/trimisio/submits/subspec${lat_name}"
+run_dir="/mnt/home/trimisio/scratch/runs/runspec${lat_name}_strange"
+submit_dir="/mnt/home/trimisio/submits/subspec${lat_name}_strange"
 
 u0=1
 
@@ -30,7 +30,7 @@ source_prec=7 # CHANGE ACCORDING TO nt
 
 
 nmasses=1
-mass1=0.08128
+mass1=0.0788
 
 err=1e-6
 max_cg_iterations=300

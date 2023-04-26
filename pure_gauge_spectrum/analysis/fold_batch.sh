@@ -1,20 +1,13 @@
 #!/bin/bash
 
-#masses=("0.02" "0.04" "0.06" "0.08" "0.1")
-masses=("0.08128")
+masses=("0.0788")
 mas_len=${#masses[@]}
 sinks="PION_5"
-source1="random_color_wall"
-source2="random_color_wall"
-
-momenta=("px0py0pz0" "px1py0pz0" "px1py1pz1" "px2py0pz0" "px2py1pz0")
-momenta_len=${#momenta[@]}
-
-for (( i_mom=0 ; i_mom<${momenta_len} ; i_mom++ ));
-do
+source1="CORNER"
+source2="CORNER"
 
 
-for i_file in {101..200..1}
+for i_file in {101..400..1}
 do
 
 
@@ -40,14 +33,14 @@ ${mass2}
 ${source1}
 ${source2}
 ${sinks}
-nd_strange_${momenta[$i_mom]}_rcw
+strange
 EOF
 
 
 # done
 
-done
 
 done
+  
 
 done
