@@ -1,9 +1,9 @@
 #!/bin/bash --login
 
-#SBATCH --time=02:00:00
+#SBATCH --time=00:40:00
 #SBATCH --ntasks=128
 #SBATCH --constraint=intel16
-#SBATCH --job-name 1632strange
+#SBATCH --job-name 0120mom
 
 module load intel/2020b
 path=$1

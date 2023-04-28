@@ -159,14 +159,16 @@ done
 cat  <<EOF
 # Description of mesons
 
-number_of_mesons $[$[${nmasses}+1]*${nmasses}/2]
+number_of_mesons ${nmasses}
 
 EOF
 
 k=0
 
 for ((m=0; m<${nmasses}; m++)); do
-for ((n=${m}; n<${nmasses}; n++)); do
+# for ((n=${m}; n<${nmasses}; n++)); do
+
+n=${m}
 
 cat  <<EOF
 
@@ -178,22 +180,15 @@ spectrum_request meson
 forget_corr
 r_offset 0 0 0 ${t0}
 
-number_of_correlators 8
+number_of_correlators 1
 
 correlator PION_5  p000  1 * 1 pion5  0 0 0 E E E
-correlator PION_05 p000  1 * 1 pion05 0 0 0 E E E           
-correlator RHO_i   p000  1 * 3 rhox   0 0 0 E E E           
-correlator RHO_i   p000  1 * 3 rhoy   0 0 0 E E E           
-correlator RHO_i   p000  1 * 3 rhoz   0 0 0 E E E           
-correlator RHO_i0  p000  1 * 3 rhox0  0 0 0 E E E           
-correlator RHO_i0  p000  1 * 3 rhoy0  0 0 0 E E E           
-correlator RHO_i0  p000  1 * 3 rhoz0  0 0 0 E E E           
 
 EOF
 
 k=$[${k}+1]
 
-done
+# done
 done
 
 ######################################################################
@@ -202,15 +197,18 @@ done
 cat  <<EOF
 # Description of baryons
 
-number_of_baryons $[$[${nmasses}+2]*$[${nmasses}+1]*${nmasses}/6]
+number_of_baryons ${nmasses}
 
 EOF
 
 k=0
 
 for ((m0=0; m0<${nmasses}; m0++)); do
-for ((m1=${m0}; m1<${nmasses}; m1++)); do
-for ((m2=${m1}; m2<${nmasses}; m2++)); do
+# for ((m1=${m0}; m1<${nmasses}; m1++)); do
+# for ((m2=${m1}; m2<${nmasses}; m2++)); do
+
+m1=${m0}
+m2=${m0}
 
 cat  <<EOF
 
@@ -222,16 +220,14 @@ spectrum_request baryon
 forget_corr
 r_offset 0 0 0 ${t0}
 
-number_of_correlators 1
-
-correlator NUCLEON  1 * 1 nucleon
+number_of_correlators 0
 
 EOF
 
 k=$[${k}+1]
 
-done
-done
+# done
+# done
 done
 
 reload_gauge_cmd="continue"

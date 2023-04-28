@@ -8,15 +8,15 @@ then
 	mkdir "${directory}"
 fi
 
-### guard FILE CONTAINS NUMBER OF THE NEXT LATTICE TO BE MEASURED
-if [ -f "${directory}/guard" ]
+### guard_nd FILE CONTAINS NUMBER OF THE NEXT LATTICE TO BE MEASURED
+if [ -f "${directory}/guard_nd" ]
 then
-	i_lat=$(head -1 "${directory}/guard")
-	seed=$(tail -1 "${directory}/guard")
+	i_lat=$(head -1 "${directory}/guard_nd")
+	seed=$(tail -1 "${directory}/guard_nd")
 else 
 	i_lat=${set_i_lat}
 	seed=${set_seed}
-cat << EOF > "${directory}/guard"
+cat << EOF > "${directory}/guard_nd"
 ${i_lat}
 ${seed}
 EOF
@@ -28,7 +28,7 @@ i=1
 while [ $i -le $n_of_lat ]
 do
 
-	file_name="${directory}/spec${nx}${nt}b${beta_name}x${xi_0_name}${stream}.lat.${i_lat}"
+	file_name="${directory}/specnd${nx}${nt}b${beta_name}x${xi_0_name}ml${mass1}ms${mass2}xq${xq_0_name}${stream}.${i_lat}"
 	if [ -f "${file_name}" ]
 	then
 		rm "${file_name}"
@@ -46,7 +46,7 @@ cd ${submit_dir}
 		n_produced=$((${n_produced}+1))
 		i_lat=$((${i_lat}+1)) 
 		seed=$((${seed}+1))
-cat << EOF > "${directory}/guard"
+cat << EOF > "${directory}/guard_nd"
 ${i_lat}
 ${seed}
 EOF

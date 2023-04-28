@@ -1,7 +1,7 @@
 #!/bin/bash
 source ${3}/params.sh
 
-inlat="${lat_directory}/${lat_name}.lat.${1}"
+inlat="${lat_directory}/${lat_name}.${1}"
 
 source_start=$(python3 -c "a=int(   ${set_source_start} + (  (${1}-${set_i_lat})*${source_prec}  ) % int(${nt}/2)   );print(a)")
 echo "source start = ${source_start}"
