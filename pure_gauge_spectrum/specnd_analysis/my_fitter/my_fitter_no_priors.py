@@ -1,5 +1,6 @@
 ### FOUR SPACES INSTEAD OF TAB ###
 from __future__ import print_function
+import gvar as gv
 import numpy as np
 import lsqfit
 from python_funcs import *
@@ -21,8 +22,19 @@ pre_name = input()
 str_tmin = input()
 str_tmax = input()
 str_an = input()
+str_san = input()
 str_En = input()
+str_sEn = input()
+str_ao = input()
+str_sao = input()
+str_Eo = input()
+str_sEo = input()
 to_print = input()
+
+gvan = str_an+'('+str_san+')'
+gvEn = str_En+'('+str_sEn+')'
+gvao = str_ao+'('+str_sao+')'
+gvEo = str_Eo+'('+str_sEo+')'
 
 tmin = int(str_tmin)
 tmax = int(str_tmax)
@@ -35,6 +47,7 @@ n_of_meas = len(content)
 x = np.zeros(tmax+1-tmin)
 for i in range(tmax+1-tmin) :
     x[i] = float(i) + tmin
+
 
 def main() :
 
@@ -49,11 +62,12 @@ def main() :
     y_cov = y_cov / n_of_meas # NUMPY COV RETURNS COVARIANCE OF SAMPLE, 
     # WHEREAS WE NEED COVARIANCE OF THE MEAN
     y_av = np.average(y_arr,axis=1)   
-    p0 = dict(an=float(str_an),En=float(str_En))
-    fit0 = lsqfit.nonlinear_fit( data=(x,y_av,y_cov), prior=None, p0=p0, fcn=fitfcn0 )
+    print('HERE',gvan)
+    prior = gv.gvar(dict(an=gvan,En=gvEn,ao=gvao,Eo=gvEo))
+    fit0 = lsqfit.nonlinear_fit( data=(x,y_av,y_cov), prior=prior, p0=None, fcn=fitfcn0 )
     if to_print == 'yes' :
         print('\n')
-        print('====== n =======')
+        print('====== n+o =======')
         print('\ntmin = %d, tmax = %d\n'%(tmin,tmax))
         print(fit0)
         print('== FIT POINTS AND ERRORS ==')
@@ -76,11 +90,11 @@ def main() :
             print(x[i],quantity)
 
     if to_print == 'no' :
-        print(tmin,tmax,fit0.chi2/fit0.dof,fit0.Q,fit0.p['En'].mean,fit0.p['En'].sdev)
+        print(tmin,tmax,fit0.chi2/fit0.dof,fit0.Q,fit0.p['En'].mean,fit0.p['En'].sdev,fit0.p['Eo'].mean,fit0.p['Eo'].sdev)
 
 
 def fitfcn0(x,p) :
-    return p['an']*( np.exp(-p['En']*x)+np.exp(-p['En']*(nt-x)) )
+    return p['an']*( np.exp(-p['En']*x)+np.exp(-p['En']*(nt-x)) ) + (-1)**x*p['ao']*( np.exp(-p['Eo']*x)+np.exp(-p['Eo']*(nt-x)) )
 
 
 if __name__ == '__main__' :

@@ -13,8 +13,8 @@ ${sinks}
 specnd
 ${one_tmin}
 ${one_tmax}
-${En}
 ${an}
+${En}
 yes
 EOF
 
@@ -30,10 +30,60 @@ ${sinks}
 specnd
 ${one_tmin}
 ${one_tmax}
-${En}
 ${an}
-${Eo}
+${En}
 ${ao}
+${Eo}
+yes
+EOF
+
+elif [ ${my_fitter} = "my_fitter_no_priors.py"  ]
+then
+
+cat <<EOF > fitter_input.dat
+${one_mass1}
+${one_mass2}
+${source1}
+${source2}
+${sinks}
+specnd
+${one_tmin}
+${one_tmax}
+${an}
+${san}
+${En}
+${sEn}
+${ao}
+${sao}
+${Eo}
+${sEo}
+yes
+EOF
+
+elif [ ${my_fitter} = "my_fitter_non_priors.py"  ]
+then
+
+cat <<EOF > fitter_input.dat
+${one_mass1}
+${one_mass2}
+${source1}
+${source2}
+${sinks}
+specnd
+${one_tmin}
+${one_tmax}
+${an}
+${san}
+${En}
+${sEn}
+${ao}
+${sao}
+${Eo}
+${sEo}
+${a1n}
+${sa1n}
+${E1n}
+${sE1n}
 yes
 EOF
 

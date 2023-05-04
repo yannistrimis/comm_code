@@ -10,6 +10,7 @@ echo "#tmin tmax chi2/dof Q Emean Esdev EOmean EOsdev"
 elif [ ${my_fitter} = "my_fitter_non.py"  ]
 then
 echo "#tmin tmax chi2/dof Q Emean Esdev EOmean EOsdev E1mean E1sdev"
+
 fi
 
 for (( tmin=0 ; tmin<=${tmin_max} ; tmin++ ))
@@ -27,8 +28,8 @@ ${sinks}
 specnd
 ${tmin}
 ${tmax}
-${En}
 ${an}
+${En}
 no
 EOF
 
@@ -44,18 +45,39 @@ ${sinks}
 specnd
 ${tmin}
 ${tmax}
-${En}
 ${an}
-${Eo}
+${En}
 ${ao}
+${Eo}
 no
 EOF
 
-# elif [ ${my_fitter} = "my_fitter_non.py"  ]
-# then
+elif [ ${my_fitter} = "my_fitter_non_priors.py"  ]
+then
 
-# cat <<EOF > fitter_input.dat 
-# EOF
+cat <<EOF > fitter_input.dat
+${one_mass1}
+${one_mass2}
+${source1}
+${source2}
+${sinks}
+specnd
+${one_tmin}
+${one_tmax}
+${an}
+${san}
+${En}
+${sEn}
+${ao}
+${sao}
+${Eo}
+${sEo}
+${a1n}
+${sa1n}
+${E1n}
+${sE1n}
+yes
+EOF
 
 fi
 

@@ -20,6 +20,10 @@ sinks = input()
 pre_name = input()
 str_tmin = input()
 str_tmax = input()
+str_an = input()
+str_En = input()
+str_ao = input()
+str_Eo = input()
 to_print = input()
 
 
@@ -52,7 +56,7 @@ def main() :
     fit0 = lsqfit.nonlinear_fit( data=(x,y_av,y_cov), prior=None, p0=p0, fcn=fitfcn0 )
     if to_print == 'yes' :
         print('\n')
-        print('====== GROUND STATE ONLY =======')
+        print('====== n+o =======')
         print('\ntmin = %d, tmax = %d\n'%(tmin,tmax))
         print(fit0)
         print('== FIT POINTS AND ERRORS ==')
