@@ -1,7 +1,7 @@
 #!/bin/bash
 source fitter_params.sh
 
-if [ ${my_fitter} = "my_fitter_n.py"  ]
+if [ ${my_fitter} = "scipy_fitter_n.py"  ]
 then
 
 cat <<EOF > fitter_input.dat 
@@ -18,7 +18,7 @@ ${En}
 yes
 EOF
 
-elif [ ${my_fitter} = "my_fitter_no.py"  ]
+elif [ ${my_fitter} = "scipy_fitter_no.py"  ]
 then
 
 cat <<EOF > fitter_input.dat
@@ -60,7 +60,7 @@ ${sEo}
 yes
 EOF
 
-elif [ ${my_fitter} = "my_fitter_non_priors.py"  ]
+elif [ ${my_fitter} = "scipy_fitter_non.py"  ]
 then
 
 cat <<EOF > fitter_input.dat
@@ -73,17 +73,11 @@ specnd
 ${one_tmin}
 ${one_tmax}
 ${an}
-${san}
 ${En}
-${sEn}
 ${ao}
-${sao}
 ${Eo}
-${sEo}
 ${a1n}
-${sa1n}
 ${E1n}
-${sE1n}
 yes
 EOF
 

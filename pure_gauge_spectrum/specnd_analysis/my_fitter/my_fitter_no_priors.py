@@ -35,7 +35,7 @@ gvan = str_an+'('+str_san+')'
 gvEn = str_En+'('+str_sEn+')'
 gvao = str_ao+'('+str_sao+')'
 gvEo = str_Eo+'('+str_sEo+')'
-
+print(gvan,gvEn,gvao,gvEo)
 tmin = int(str_tmin)
 tmax = int(str_tmax)
 cur_dir = '/mnt/home/trimisio/plot_data/spec_data'
@@ -60,11 +60,11 @@ def main() :
  
     y_cov = np.cov(y_arr)
     y_cov = y_cov / n_of_meas # NUMPY COV RETURNS COVARIANCE OF SAMPLE, 
+    y_cov_diag = np.diag(y_cov)
     # WHEREAS WE NEED COVARIANCE OF THE MEAN
     y_av = np.average(y_arr,axis=1)   
-    print('HERE',gvan)
     prior = gv.gvar(dict(an=gvan,En=gvEn,ao=gvao,Eo=gvEo))
-    fit0 = lsqfit.nonlinear_fit( data=(x,y_av,y_cov), prior=prior, p0=None, fcn=fitfcn0 )
+    fit0 = lsqfit.nonlinear_fit( data=(x,y_av,y_cov_diag), prior=prior, p0=None, fcn=fitfcn0 )
     if to_print == 'yes' :
         print('\n')
         print('====== n+o =======')

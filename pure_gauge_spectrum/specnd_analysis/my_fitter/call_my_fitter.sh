@@ -3,20 +3,22 @@ source fitter_params.sh
 
 if [ ${my_fitter} = "my_fitter_n.py"  ]
 then
-echo "#tmin tmax chi2/dof Q Emean Esdev"
+echo "#tmin tmax chi2/dof Emean Esdev"
 elif [ ${my_fitter} = "my_fitter_no.py"  ]
 then
-echo "#tmin tmax chi2/dof Q Emean Esdev EOmean EOsdev"
+echo "#tmin tmax chi2/dof Emean Esdev EOmean EOsdev"
 elif [ ${my_fitter} = "my_fitter_non.py"  ]
 then
-echo "#tmin tmax chi2/dof Q Emean Esdev EOmean EOsdev E1mean E1sdev"
+echo "#tmin tmax chi2/dof Emean Esdev EOmean EOsdev E1mean E1sdev"
 
 fi
 
 for (( tmin=0 ; tmin<=${tmin_max} ; tmin++ ))
 do
+for tmax in ${tmax_arr[@]}
+do
 
-if [ ${my_fitter} = "my_fitter_n.py"  ]
+if [ ${my_fitter} = "scipy_fitter_n.py"  ]
 then
 
 cat <<EOF > fitter_input.dat 
@@ -33,7 +35,7 @@ ${En}
 no
 EOF
 
-elif [ ${my_fitter} = "my_fitter_no.py"  ]
+elif [ ${my_fitter} = "scipy_fitter_no.py"  ]
 then
 
 cat <<EOF > fitter_input.dat
@@ -52,7 +54,7 @@ ${Eo}
 no
 EOF
 
-elif [ ${my_fitter} = "my_fitter_non_priors.py"  ]
+elif [ ${my_fitter} = "scipy_fitter_non.py"  ]
 then
 
 cat <<EOF > fitter_input.dat
@@ -65,22 +67,17 @@ specnd
 ${one_tmin}
 ${one_tmax}
 ${an}
-${san}
 ${En}
-${sEn}
 ${ao}
-${sao}
 ${Eo}
-${sEo}
 ${a1n}
-${sa1n}
 ${E1n}
-${sE1n}
-yes
+no
 EOF
 
 fi
 
 cat fitter_input.dat | python3 ${my_fitter}
 
-done
+done # tmin
+done # tmax

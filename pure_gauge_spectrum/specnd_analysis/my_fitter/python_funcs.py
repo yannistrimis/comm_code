@@ -38,3 +38,22 @@ def jackknife(arr,nbins,fl):
         elif fl=='error':
                 return er
 
+
+def chisq_by_dof(meas_array,fit_array,y_cov,dof):
+    n = len(meas_array)
+    
+    if len(meas_array) != len(fit_array) :
+        print('UNMATCHING DIMENSIONS')
+        return 0
+
+    y_cov_inv = np.linalg.inv(y_cov)
+    
+    res = 0.0
+
+    for i in range(n):
+        for j in range(n):
+            res = res + (meas_array[i]-fit_array[i])*y_cov_inv[i,j]*(meas_array[j]-fit_array[j])
+
+    res = res/dof
+
+    return res
