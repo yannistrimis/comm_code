@@ -1,6 +1,8 @@
 ### FOUR SPACES INSTEAD OF TAB ###
+from __future__ import print_function
 import numpy as np
-from scipy.optimize import curve_fit
+import lsqfit
+from python_funcs import *
 
 nx = 16
 nt = 32
@@ -24,10 +26,6 @@ to_print = input()
 
 tmin = int(str_tmin)
 tmax = int(str_tmax)
-
-an_start = float(str_an)
-En_start = float(str_En)
-
 cur_dir = '/mnt/home/trimisio/plot_data/spec_data'
 
 f_read = open('%s/l%s/%s_m1_%s_m2_%s_%s.fold.data'%(cur_dir,ens_name,pre_name,mass1,mass2,sinks),'r')
@@ -37,7 +35,6 @@ n_of_meas = len(content)
 x = np.zeros(tmax+1-tmin)
 for i in range(tmax+1-tmin) :
     x[i] = float(i) + tmin
-
 
 def main() :
 
@@ -50,49 +47,41 @@ def main() :
  
     y_cov = np.cov(y_arr)
     y_cov = y_cov / n_of_meas # NUMPY COV RETURNS COVARIANCE OF SAMPLE, 
-    y_sdev = np.diag(y_cov)
     # WHEREAS WE NEED COVARIANCE OF THE MEAN
     y_av = np.average(y_arr,axis=1)   
-
-    p0 = np.array([an_start,En_start])
-    popt, pcov = curve_fit(f10, x, y_av, p0=p0, sigma=y_cov, full_output=False)
-
-    an_sdev = np.sqrt(pcov[0,0])
-    En_sdev = np.sqrt(pcov[1,1])
-
-    an = popt[0]
-    En = popt[1]
-
-    fit_points = np.zeros(tmax+1-tmin)
-    for i in range(tmax+1-tmin):
-        fit_points[i] = f10(x[i],an,En)
-
-    dof = tmax + 1 - tmin - 2
-
-    chi2dof = chisq_by_dof(y_av,fit_points,y_cov,dof)
-
+    p0 = dict(an=float(str_an),En=float(str_En))
+    fit0 = lsqfit.nonlinear_fit( data=(x,y_av,y_cov), prior=None, p0=p0, fcn=fitfcn0 )
     if to_print == 'yes' :
-        print('STARTING VALUES:\n')
-        print(p0,'\n')
-
-        print('an = ', an,' +- ',an_sdev)
-        print('En = ', En,' +- ',En_sdev)
- 
         print('\n')
-
-        print('chisquare/dof = ',chi2dof,'\n')
-        print('# t, meas_points, err_meas_points, fit_points, distances')
-        for i in range(tmax+1-tmin):
-            print(x[i], y_av[i], y_sdev[i], fit_points[i], (y_av[i]-fit_points[i])/y_sdev[i]) 
+        print('====== n =======')
+        print('\ntmin = %d, tmax = %d\n'%(tmin,tmax))
+        print(fit0)
+        print('== FIT POINTS AND ERRORS ==')
+        for i in range(tmax+1-tmin) :
+            print( x[i],fitfcn0(x[i],fit0.p).mean,fitfcn0(x[i],fit0.p).sdev )
+        print('== MEASUREMENT AVERAGES AND ERRORS ==')
     
-    elif to_print == 'no' :
-        print(tmin,tmax,chi2dof,En,En_sdev)
+    for i in range(tmax+1-tmin) :
+        av = y_av[i]
+        err = np.sqrt(y_cov[i,i])
+        if to_print == 'yes' :
+            print(x[i],av,err)
+    if to_print == 'yes' :
+        print("== DISTANCES ==")
+    for i in range(tmax+1-tmin) :
+        av = y_av[i]
+        err = np.sqrt(y_cov[i,i])
+        quantity = ( av-fitfcn0(x[i],fit0.p).mean ) / err
+        if to_print == 'yes' :
+            print(x[i],quantity)
+
+    if to_print == 'no' :
+        print(tmin,tmax,fit0.chi2/fit0.dof,fit0.Q,fit0.p['En'].mean,fit0.p['En'].sdev)
 
 
-def f10(x,an,En) :
-    return an*( np.exp(-En*x)+np.exp(-En*nt+En*x) )
+def fitfcn0(x,p) :
+    return p['an']*( np.exp(-p['En']*x)+np.exp(-p['En']*(nt-x)) )
 
 
 if __name__ == '__main__' :
     main()
-
