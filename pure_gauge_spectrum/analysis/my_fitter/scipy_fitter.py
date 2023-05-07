@@ -4,11 +4,7 @@ from scipy.optimize import curve_fit
 from python_funcs import *
 
 fit_type = input()
-nx = input()
-nt = input()
-beta = input()
-x0 = input()
-stream = input()
+ens_name = input()
 mass1 = input()
 mass2 = input()
 source1 = input()
@@ -25,19 +21,15 @@ str_a1n = input()
 str_E1n = input()
 to_print = input()
 
-vol = nx + nt
-ens_name = vol+'b'+beta+'x'+x0+stream
-
-
 tmin = int(str_tmin)
 tmax = int(str_tmax)
 
-an_start = float(str_an)
-En_start = float(str_En)
-ao_start = float(str_ao)
-Eo_start = float(str_Eo)
-a1n_start = float(str_a1n)
-E1n_start = float(str_E1n)
+an = float(str_an)
+En = float(str_En)
+ao = float(str_ao)
+Eo = float(str_Eo)
+a1n = float(str_a1n)
+E1n = float(str_E1n)
 
 
 cur_dir = '/mnt/home/trimisio/plot_data/spec_data'
@@ -66,9 +58,9 @@ def main() :
     y_av = np.average(y_arr,axis=1)   
 
 
-    if fit_type == "non" :
+    if fit_type == 'non' :
 
-        p0 = np.array([an_start,En_start,ao_start,Eo_start])
+        p0 = np.array([an,En,ao,Eo])
         popt, pcov = curve_fit(f11, x, y_av, p0=p0, sigma=y_cov, full_output=False, method='trf')
 
         an_sdev = np.sqrt(pcov[0,0])
@@ -81,7 +73,7 @@ def main() :
         ao = popt[2]
         Eo = popt[3]
 
-        p1 = np.array([an,En,ao,Eo,a1n_start,E1n_start])
+        p1 = np.array([an,En,ao,Eo,a1n,E1n])
         popt1, pcov1 = curve_fit(f21, x, y_av, p0=p1, sigma=y_cov, full_output=False, method='trf')
 
         an_sdev = np.sqrt(pcov1[0,0])
@@ -106,13 +98,36 @@ def main() :
 
     elif fit_type == 'non_fix' :
 
-        p0 = np.array([an_start,E1n_start])
+        p0 = np.array([a1n,E1n])
+        popt, pcov = curve_fit(f21_fix, x, y_av, p0=p0, sigma=y_cov, full_output=False, method='trf')
+
+        an_sdev = 'N/A'
+        En_sdev = 'N/A'
+        ao_sdev = 'N/A'
+        Eo_sdev = 'N/A'
+        a1n_sdev = np.sqrt(pcov[0,0])
+        E1n_sdev = np.sqrt(pcov[1,1])
+
+        a1n = popt[0]
+        E1n = popt[1]
+
+        fit_points = np.zeros(tmax+1-tmin)
+        for i in range(tmax+1-tmin):
+            fit_points[i] = f21_fix(x[i],a1n,E1n)
+
+        dof = tmax + 1 - tmin - 2
+
+    elif fit_type == 'no' :
+
+        p0 = np.array([an,En,ao,Eo])
         popt, pcov = curve_fit(f11, x, y_av, p0=p0, sigma=y_cov, full_output=False, method='trf')
 
         an_sdev = np.sqrt(pcov[0,0])
         En_sdev = np.sqrt(pcov[1,1])
         ao_sdev = np.sqrt(pcov[2,2])
         Eo_sdev = np.sqrt(pcov[3,3])
+        a1n_sdev = 'N/A'
+        E1n_sdev = 'N/A'
 
         an = popt[0]
         En = popt[1]
@@ -121,22 +136,62 @@ def main() :
 
         fit_points = np.zeros(tmax+1-tmin)
         for i in range(tmax+1-tmin):
-            fit_points[i] = f21(x[i],an,En,ao,Eo,a1n,E1n)
+            fit_points[i] = f11(x[i],an,En,ao,Eo)
 
-        dof = tmax + 1 - tmin - 6
+        dof = tmax + 1 - tmin - 4
 
-    elif fit_type == 'no' :
     elif fit_type == 'no_fix' :
+
+        p0 = np.array([ao,Eo])
+        popt, pcov = curve_fit(f11_fix, x, y_av, p0=p0, sigma=y_cov, full_output=False, method='trf')
+
+        an_sdev = 'N/A'
+        En_sdev = 'N/A'
+        ao_sdev = np.sqrt(pcov[0,0])
+        Eo_sdev = np.sqrt(pcov[1,1])
+        a1n_sdev = 'N/A'
+        E1n_sdev = 'N/A'
+
+        ao = popt[0]
+        Eo = popt[1]
+
+
+        fit_points = np.zeros(tmax+1-tmin)
+        for i in range(tmax+1-tmin):
+            fit_points[i] = f11_fix(x[i],ao,Eo)
+
+        dof = tmax + 1 - tmin - 2
+
     elif fit_type == 'n' :
+
+        p0 = np.array([an,En])
+        popt, pcov = curve_fit(f10, x, y_av, p0=p0, sigma=y_cov, full_output=False, method='trf')
+
+        an_sdev = np.sqrt(pcov[0,0])
+        En_sdev = np.sqrt(pcov[1,1])
+        ao_sdev = 'N/A'
+        Eo_sdev = 'N/A'
+        a1n_sdev = 'N/A'
+        E1n_sdev = 'N/A'
+
+        an = popt[0]
+        En = popt[1]
+
+        fit_points = np.zeros(tmax+1-tmin)
+        for i in range(tmax+1-tmin):
+            fit_points[i] = f10(x[i],an,En)
+
+        dof = tmax + 1 - tmin - 2
 
     chi2dof = chisq_by_dof(y_av,fit_points,y_cov,dof)
 
     if to_print == 'yes' :
+        print('FIT TYPE: ',fit_type,'\n')
         print('STARTING VALUES:\n')
         print(p1,'\n')
 
         print('an = ', an,' +- ',an_sdev)
-        print('En = ', En,' +- ',En_sdev)
+        print('En = ', En,' +- ',En_sdev)        
         print('ao = ', ao,' +- ',ao_sdev)
         print('Eo = ', Eo,' +- ',Eo_sdev)
         print('a1n = ', a1n,' +- ',a1n_sdev)
