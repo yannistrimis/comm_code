@@ -2,10 +2,10 @@
 import numpy as np
 
 out_dir = '/mnt/home/trimisio/plot_data/spec_data'
-nx=16
-nt=32
+nx=24
+nt=48
 vol = str(nx)+str(nt)
-beta = '6850'
+beta = '7140'
 x0 = '100'
 stream = 'a'
 

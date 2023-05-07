@@ -3,13 +3,15 @@ import numpy as np
 cur_dir = '/mnt/home/trimisio/outputs/pure_gauge_spec'
 out_dir = '/mnt/home/trimisio/plot_data/spec_data'
 
-vol = '2448'
-beta = '7140'
+vol = '1632'
+beta = '6850'
 x0 = '100'
 xq = '100'
 stream = 'a'
 
 i_file = input()
+ml = input()
+ms = input()
 mass1 = input()
 mass2 = input()
 source1 = input()
@@ -19,9 +21,9 @@ pre_name = input()
 ens_name_nostream = vol+'b'+beta+'x'+x0
 ens_name = ens_name_nostream+stream
 
-f_read = open('%s/l%s/%s%sxq%s%s.%s'%(cur_dir,ens_name,pre_name,ens_name_nostream,xq,stream,i_file),'r')
-f_write_a = open('%s/l%s/%s_m1_%s_m2_%s_%s.%sa'%(out_dir,ens_name,pre_name,mass1,mass2,sinks,i_file),'w')
-f_write_b = open('%s/l%s/%s_m1_%s_m2_%s_%s.%sb'%(out_dir,ens_name,pre_name,mass1,mass2,sinks,i_file),'w')
+f_read = open('%s/l%s/%s%sml%sms%sxq%s%s.%s'%(cur_dir,ens_name,pre_name,ens_name_nostream,ml,ms,xq,stream,i_file),'r')
+f_write_a = open('%s/l%s/%s_spec_m1_%s_m2_%s_%s.%sa'%(out_dir,ens_name,pre_name,mass1,mass2,sinks,i_file),'w')
+f_write_b = open('%s/l%s/%s_spec_m1_%s_m2_%s_%s.%sb'%(out_dir,ens_name,pre_name,mass1,mass2,sinks,i_file),'w')
 
 source_flag = 0
 flag = 0

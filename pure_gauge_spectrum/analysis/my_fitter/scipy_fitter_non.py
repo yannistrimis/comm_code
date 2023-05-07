@@ -3,14 +3,12 @@ import numpy as np
 from scipy.optimize import curve_fit
 from python_funcs import *
 
-nx = 16
-nt = 32
-vol = str(nx) + str(nt)
-beta = '6850'
-x0 = '100'
-stream = 'a'
-ens_name = vol+'b'+beta+'x'+x0+stream
-
+fit_type = input()
+nx = input()
+nt = input()
+beta = input()
+x0 = input()
+stream = input()
 mass1 = input()
 mass2 = input()
 source1 = input()
@@ -26,6 +24,10 @@ str_Eo = input()
 str_a1n = input()
 str_E1n = input()
 to_print = input()
+
+vol = nx + nt
+ens_name = vol+'b'+beta+'x'+x0+stream
+
 
 tmin = int(str_tmin)
 tmax = int(str_tmax)
@@ -63,41 +65,69 @@ def main() :
     # WHEREAS WE NEED COVARIANCE OF THE MEAN
     y_av = np.average(y_arr,axis=1)   
 
-    p0 = np.array([an_start,En_start,ao_start,Eo_start])
-    popt, pcov = curve_fit(f11, x, y_av, p0=p0, sigma=y_cov, full_output=False, method='trf')
 
-    an_sdev = np.sqrt(pcov[0,0])
-    En_sdev = np.sqrt(pcov[1,1])
-    ao_sdev = np.sqrt(pcov[2,2])
-    Eo_sdev = np.sqrt(pcov[3,3])
+    if fit_type == "non" :
 
-    an = popt[0]
-    En = popt[1]
-    ao = popt[2]
-    Eo = popt[3]
+        p0 = np.array([an_start,En_start,ao_start,Eo_start])
+        popt, pcov = curve_fit(f11, x, y_av, p0=p0, sigma=y_cov, full_output=False, method='trf')
 
-    p1 = np.array([an,En,ao,Eo,a1n_start,E1n_start])
-    popt1, pcov1 = curve_fit(f21, x, y_av, p0=p1, sigma=y_cov, full_output=False, method='trf')
+        an_sdev = np.sqrt(pcov[0,0])
+        En_sdev = np.sqrt(pcov[1,1])
+        ao_sdev = np.sqrt(pcov[2,2])
+        Eo_sdev = np.sqrt(pcov[3,3])
 
-    an_sdev = np.sqrt(pcov1[0,0])
-    En_sdev = np.sqrt(pcov1[1,1])
-    ao_sdev = np.sqrt(pcov1[2,2])
-    Eo_sdev = np.sqrt(pcov1[3,3])
-    a1n_sdev = np.sqrt(pcov1[4,4])
-    E1n_sdev = np.sqrt(pcov1[5,5])
+        an = popt[0]
+        En = popt[1]
+        ao = popt[2]
+        Eo = popt[3]
 
-    an = popt1[0]
-    En = popt1[1]
-    ao = popt1[2]
-    Eo = popt1[3]
-    a1n = popt1[4]
-    E1n = popt1[5]
+        p1 = np.array([an,En,ao,Eo,a1n_start,E1n_start])
+        popt1, pcov1 = curve_fit(f21, x, y_av, p0=p1, sigma=y_cov, full_output=False, method='trf')
 
-    fit_points = np.zeros(tmax+1-tmin)
-    for i in range(tmax+1-tmin):
-        fit_points[i] = f21(x[i],an,En,ao,Eo,a1n,E1n)
+        an_sdev = np.sqrt(pcov1[0,0])
+        En_sdev = np.sqrt(pcov1[1,1])
+        ao_sdev = np.sqrt(pcov1[2,2])
+        Eo_sdev = np.sqrt(pcov1[3,3])
+        a1n_sdev = np.sqrt(pcov1[4,4])
+        E1n_sdev = np.sqrt(pcov1[5,5])
 
-    dof = tmax + 1 - tmin - 6
+        an = popt1[0]
+        En = popt1[1]
+        ao = popt1[2]
+        Eo = popt1[3]
+        a1n = popt1[4]
+        E1n = popt1[5]
+
+        fit_points = np.zeros(tmax+1-tmin)
+        for i in range(tmax+1-tmin):
+            fit_points[i] = f21(x[i],an,En,ao,Eo,a1n,E1n)
+
+        dof = tmax + 1 - tmin - 6
+
+    elif fit_type == 'non_fix' :
+
+        p0 = np.array([an_start,E1n_start])
+        popt, pcov = curve_fit(f11, x, y_av, p0=p0, sigma=y_cov, full_output=False, method='trf')
+
+        an_sdev = np.sqrt(pcov[0,0])
+        En_sdev = np.sqrt(pcov[1,1])
+        ao_sdev = np.sqrt(pcov[2,2])
+        Eo_sdev = np.sqrt(pcov[3,3])
+
+        an = popt[0]
+        En = popt[1]
+        ao = popt[2]
+        Eo = popt[3]
+
+        fit_points = np.zeros(tmax+1-tmin)
+        for i in range(tmax+1-tmin):
+            fit_points[i] = f21(x[i],an,En,ao,Eo,a1n,E1n)
+
+        dof = tmax + 1 - tmin - 6
+
+    elif fit_type == 'no' :
+    elif fit_type == 'no_fix' :
+    elif fit_type == 'n' :
 
     chi2dof = chisq_by_dof(y_av,fit_points,y_cov,dof)
 
@@ -123,8 +153,26 @@ def main() :
         print(tmin,tmax,chi2dof,En,En_sdev,Eo,Eo_sdev,E1n,E1n_sdev)
 
 
+# FUNCTION DEFINITIONS
+
+
+def f10(x,an,En) :
+    return an*( np.exp(-En*x)+np.exp(-En*nt+En*x) )
+
+
+def f11_fix(x,ao,Eo) :
+    return an*( np.exp(-En*x)+np.exp(-En*nt+En*x) ) + np.cos(np.pi*x)*ao*( np.exp(-Eo*x)+np.exp(-Eo*nt+Eo*x) )
+
+
 def f11(x,an,En,ao,Eo) :
     return an*( np.exp(-En*x)+np.exp(-En*nt+En*x) ) + np.cos(np.pi*x)*ao*( np.exp(-Eo*x)+np.exp(-Eo*nt+Eo*x) )
+
+
+def f21_fix(x,a1n,E1n) :
+    res = an*( np.exp(-En*x)+np.exp(-En*nt+En*x) )
+    res = res + np.cos(np.pi*x)*ao*( np.exp(-Eo*x)+np.exp(-Eo*nt+Eo*x) )
+    res = res + a1n*( np.exp(-E1n*x)+np.exp(-E1n*nt+E1n*x) )
+    return res
 
 
 def f21(x,an,En,ao,Eo,a1n,E1n) :
@@ -132,6 +180,7 @@ def f21(x,an,En,ao,Eo,a1n,E1n) :
     res = res + np.cos(np.pi*x)*ao*( np.exp(-Eo*x)+np.exp(-Eo*nt+Eo*x) )
     res = res + a1n*( np.exp(-E1n*x)+np.exp(-E1n*nt+E1n*x) ) 
     return res
+
 
 if __name__ == '__main__' :
     main()
