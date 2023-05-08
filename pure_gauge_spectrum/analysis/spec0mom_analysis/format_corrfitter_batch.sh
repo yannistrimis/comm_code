@@ -1,9 +1,9 @@
 #!/bin/bash
 
-masses=("0.01576" "0.0788")
+masses=("0.02" "0.04" "0.06" "0.08" "0.1")
 mas_len=${#masses[@]}
 
-sinks_arr=("PION_5" "PION_05" "RHO_i" "RHO_i0")
+sinks_arr=("PION_5")
 
 source1="CORNER"
 source2="CORNER"
@@ -16,12 +16,8 @@ echo "====${sinks}===="
 for (( m1=0 ; m1<${mas_len} ; m1++ ));
 do
 
-for (( m2=$m1 ; m2<${mas_len} ; m2++ ));
-do
-
-
 mass1=${masses[$m1]}
-mass2=${masses[$m2]}
+mass2=${mass1}
 
 python format_corrfitter_one.py <<EOF
 ${mass1}
@@ -29,11 +25,8 @@ ${mass2}
 ${source1}
 ${source2}
 ${sinks}
-specnd
+spec0mom
 EOF
-
-
-done # m2
 
 done # m1
 

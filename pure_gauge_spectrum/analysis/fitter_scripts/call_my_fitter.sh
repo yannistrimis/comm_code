@@ -3,13 +3,13 @@ source fitter_params.sh
 
 if [ ${my_fitter} = "scipy_fitter_n.py"  ]
 then
-echo "#tmin tmax chi2/dof Emean Esdev"
+echo "#tmin tmax chi2/dof Q Emean Esdev"
 elif [ ${my_fitter} = "scipy_fitter_no.py"  ]
 then
-echo "#tmin tmax chi2/dof Emean Esdev EOmean EOsdev"
+echo "#tmin tmax chi2/dof Q Emean Esdev EOmean EOsdev"
 elif [ ${my_fitter} = "scipy_fitter_non.py"  ]
 then
-echo "#tmin tmax chi2/dof Emean Esdev EOmean EOsdev E1mean E1sdev"
+echo "#tmin tmax chi2/dof Q Emean Esdev EOmean EOsdev E1mean E1sdev"
 
 fi
 

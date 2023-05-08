@@ -5,18 +5,19 @@ x0=100
 stream="a"
 ens_name="l${nx}${nt}b${beta}x${x0}${stream}"
 
-tmin_min=1 # tmin IS INCLUDED !!!
+tmin_min=0 # tmin IS INCLUDED !!!
 tmin_max=8 # tmin IS INCLUDED !!!
-tmax_arr=("13" "14" "15") # tmax IS ALSO INCLUDED !!!
+tmax_arr=("14" "15" "16") # tmax IS ALSO INCLUDED !!!
 
-masses=("0.01576")
-mas_len=${#masses[@]}
+mass1=0.01576
+mass2=0.01576
 
 source1="CORNER"
 source2="CORNER"
 
 sinks="RHO_i0"
 
+spec_type="specnd"
 my_fitter_suffix="no"
 my_fitter="scipy_fitter_${my_fitter_suffix}.py"
 
@@ -33,8 +34,5 @@ E1n=0.1
 
 # PARAMETERS FOR one_call_my_fitter.sh SCRIPT
 
-one_mass1=0.01576
-one_mass2=0.01576
-
 one_tmin=5
-one_tmax=14
+one_tmax=15

@@ -1,5 +1,5 @@
 import numpy as np
-
+from scipy.special import gammainc
 
 def jackknife(arr,nbins,fl):
         n = len(arr)
@@ -57,3 +57,9 @@ def chisq_by_dof(meas_array,fit_array,y_cov,dof):
     res = res/dof
 
     return res
+
+
+def q_value(chi2dof,dof) :
+    chisq = chi2dof*dof
+    p_value = gammainc(0.5*dof,0.5*chisq)
+    return 1 - p_value

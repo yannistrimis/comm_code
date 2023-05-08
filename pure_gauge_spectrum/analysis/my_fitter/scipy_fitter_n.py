@@ -1,6 +1,7 @@
 ### FOUR SPACES INSTEAD OF TAB ###
 import numpy as np
 from scipy.optimize import curve_fit
+from python_funcs import *
 
 str_nx = input()
 str_nt = input()
@@ -55,7 +56,7 @@ def main() :
     y_av = np.average(y_arr,axis=1)   
 
     p0 = np.array([an_start,En_start])
-    popt, pcov = curve_fit(f10, x, y_av, p0=p0, sigma=y_cov, full_output=False)
+    popt, pcov = curve_fit(f10, x, y_av, p0=p0, sigma=y_cov, full_output=False, method='trf')
 
     an_sdev = np.sqrt(pcov[0,0])
     En_sdev = np.sqrt(pcov[1,1])
@@ -70,9 +71,10 @@ def main() :
     dof = tmax + 1 - tmin - 2
 
     chi2dof = chisq_by_dof(y_av,fit_points,y_cov,dof)
+    q_val = q_value(chi2dof,dof)
 
     if to_print == 'yes' :
-        print('FIT TYPE: n\n')
+        print('FIT TYPE: n  tmin = %d  tmax = %d\n'%(tmin,tmax))
         print('STARTING VALUES:\n')
         print(p0,'\n')
 
@@ -81,13 +83,13 @@ def main() :
  
         print('\n')
 
-        print('chisquare/dof = ',chi2dof,'\n')
+        print('chisquare/dof = ',chi2dof,'  Q = ',q_val,'\n')
         print('# t, meas_points, err_meas_points, fit_points, distances')
         for i in range(tmax+1-tmin):
             print(x[i], y_av[i], y_sdev[i], fit_points[i], (y_av[i]-fit_points[i])/y_sdev[i]) 
     
     elif to_print == 'no' :
-        print(tmin,tmax,chi2dof,En,En_sdev)
+        print(tmin,tmax,chi2dof,q_val,En,En_sdev)
 
 
 def f10(x,an,En) :

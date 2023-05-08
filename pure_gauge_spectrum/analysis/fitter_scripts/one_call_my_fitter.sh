@@ -15,7 +15,7 @@ $2
 ${source1}
 ${source2}
 ${sinks}
-specnd
+${spec_type}
 $3
 $4
 ${an}
@@ -37,7 +37,7 @@ $2
 ${source1}
 ${source2}
 ${sinks}
-specnd
+${spec_type}
 $3
 $4
 ${an}
@@ -61,7 +61,7 @@ $2
 ${source1}
 ${source2}
 ${sinks}
-specnd
+${spec_type}
 $3
 $4
 ${an}
@@ -75,5 +75,5 @@ EOF
 
 fi
 
-cat fitter_input.dat | python3 ../../my_fitter/${my_fitter}
+cat fitter_input.dat | python3 ../my_fitter/${my_fitter}
 
