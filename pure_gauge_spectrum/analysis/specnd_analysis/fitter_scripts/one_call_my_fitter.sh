@@ -20,7 +20,7 @@ $3
 $4
 ${an}
 ${En}
-yes
+$5
 EOF
 
 elif [ ${my_fitter} = "scipy_fitter_no.py"  ]
@@ -44,7 +44,7 @@ ${an}
 ${En}
 ${ao}
 ${Eo}
-yes
+$5
 EOF
 
 elif [ ${my_fitter} = "scipy_fitter_non.py"  ]
@@ -70,7 +70,7 @@ ${ao}
 ${Eo}
 ${a1n}
 ${E1n}
-yes
+$5
 EOF
 
 fi

@@ -103,7 +103,9 @@ def main() :
 
     if to_print == 'yes' :
         print('FIT TYPE: non\n')
-        print('STARTING VALUES:\n')
+        print('STARTING VALUES FOR no:\n')
+        print(p0,'\n')
+        print('STARTING VALUES FOR non:\n')
         print(p1,'\n')
 
         print('an = ', an,' +- ',an_sdev)

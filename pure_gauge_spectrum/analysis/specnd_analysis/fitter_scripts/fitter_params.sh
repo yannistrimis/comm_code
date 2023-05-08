@@ -2,13 +2,14 @@ nx=16
 nt=32
 beta=6850
 x0=100
+stream="a"
 ens_name="l${nx}${nt}b${beta}x${x0}${stream}"
 
 tmin_min=1 # tmin IS INCLUDED !!!
 tmin_max=8 # tmin IS INCLUDED !!!
 tmax_arr=("13" "14" "15") # tmax IS ALSO INCLUDED !!!
 
-masses=("0.01576" "0.0788")
+masses=("0.01576")
 mas_len=${#masses[@]}
 
 source1="CORNER"
@@ -16,7 +17,7 @@ source2="CORNER"
 
 sinks="RHO_i0"
 
-my_fitter_suffix="non"
+my_fitter_suffix="no"
 my_fitter="scipy_fitter_${my_fitter_suffix}.py"
 
 # STARTING VALUES
@@ -35,5 +36,5 @@ E1n=0.1
 one_mass1=0.01576
 one_mass2=0.01576
 
-one_tmin=1
+one_tmin=5
 one_tmax=14

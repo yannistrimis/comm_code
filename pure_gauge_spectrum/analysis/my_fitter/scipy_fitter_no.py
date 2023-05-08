@@ -63,15 +63,15 @@ def main() :
     p0 = np.array([an_start,En_start,ao_start,Eo_start])
     popt, pcov = curve_fit(f11, x, y_av, p0=p0, sigma=y_cov, full_output=False, method='trf')
 
-    an_sdev = np.sqrt(pcov1[0,0])
-    En_sdev = np.sqrt(pcov1[1,1])
-    ao_sdev = np.sqrt(pcov1[2,2])
-    Eo_sdev = np.sqrt(pcov1[3,3])
+    an_sdev = np.sqrt(pcov[0,0])
+    En_sdev = np.sqrt(pcov[1,1])
+    ao_sdev = np.sqrt(pcov[2,2])
+    Eo_sdev = np.sqrt(pcov[3,3])
 
-    an = popt1[0]
-    En = popt1[1]
-    ao = popt1[2]
-    Eo = popt1[3]
+    an = popt[0]
+    En = popt[1]
+    ao = popt[2]
+    Eo = popt[3]
 
     fit_points = np.zeros(tmax+1-tmin)
     for i in range(tmax+1-tmin):

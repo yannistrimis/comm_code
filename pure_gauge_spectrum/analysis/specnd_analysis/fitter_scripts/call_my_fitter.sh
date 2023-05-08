@@ -18,7 +18,7 @@ do
 for tmax in ${tmax_arr[@]}
 do
 
-bash one_call_my_fitter.sh $1 $2 ${tmin} ${tmax}
+bash one_call_my_fitter.sh $1 $2 ${tmin} ${tmax} "no"
 
 done # tmin
 done # tmax
