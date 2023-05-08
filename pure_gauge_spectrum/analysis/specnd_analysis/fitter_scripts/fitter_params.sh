@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 nx=16
 nt=32
 beta=6850
@@ -7,11 +6,6 @@ ens_name="l${nx}${nt}b${beta}x${x0}${stream}"
 
 tmin_min=1 # tmin IS INCLUDED !!!
 tmin_max=8 # tmin IS INCLUDED !!!
-=======
-ens_name="1632b6850x100a"
-nt=32
-tmin_max=0 # tmin IS INCLUDED !!!
->>>>>>> a322b94853357662e48a0d647535d63fac6d2dfb
 tmax_arr=("13" "14" "15") # tmax IS ALSO INCLUDED !!!
 
 masses=("0.01576" "0.0788")
