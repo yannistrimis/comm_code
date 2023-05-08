@@ -4,6 +4,7 @@ from scipy.optimize import curve_fit
 from python_funcs import *
 
 fit_type = input()
+nt = input()
 ens_name = input()
 mass1 = input()
 mass2 = input()
@@ -24,13 +25,12 @@ to_print = input()
 tmin = int(str_tmin)
 tmax = int(str_tmax)
 
-an = float(str_an)
-En = float(str_En)
-ao = float(str_ao)
-Eo = float(str_Eo)
-a1n = float(str_a1n)
-E1n = float(str_E1n)
-
+an_start = float(str_an)
+En_start = float(str_En)
+ao_start = float(str_ao)
+Eo_start = float(str_Eo)
+a1n_start = float(str_a1n)
+E1n_start = float(str_E1n)
 
 cur_dir = '/mnt/home/trimisio/plot_data/spec_data'
 
@@ -60,7 +60,7 @@ def main() :
 
     if fit_type == 'non' :
 
-        p0 = np.array([an,En,ao,Eo])
+        p0 = np.array([an_start,En_start,ao_start,Eo_start])
         popt, pcov = curve_fit(f11, x, y_av, p0=p0, sigma=y_cov, full_output=False, method='trf')
 
         an_sdev = np.sqrt(pcov[0,0])

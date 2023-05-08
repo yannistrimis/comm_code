@@ -1,4 +1,5 @@
 ens_name="1632b6850x100a"
+nt=32
 tmin_max=0 # tmin IS INCLUDED !!!
 tmax_arr=("13" "14" "15") # tmax IS ALSO INCLUDED !!!
 
