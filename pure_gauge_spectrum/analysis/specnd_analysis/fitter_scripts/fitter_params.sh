@@ -1,5 +1,11 @@
-ens_name="1632b6850x100a"
-tmin_max=0 # tmin IS INCLUDED !!!
+nx=16
+nt=32
+beta=6850
+x0=100
+ens_name="l${nx}${nt}b${beta}x${x0}${stream}"
+
+tmin_min=1 # tmin IS INCLUDED !!!
+tmin_max=8 # tmin IS INCLUDED !!!
 tmax_arr=("13" "14" "15") # tmax IS ALSO INCLUDED !!!
 
 masses=("0.01576" "0.0788")
@@ -11,7 +17,7 @@ source2="CORNER"
 sinks="RHO_i0"
 
 my_fitter_suffix="non"
-my_fitter="scipy_fitter.py"
+my_fitter="scipy_fitter_${my_fitter_suffix}.py"
 
 # STARTING VALUES
 

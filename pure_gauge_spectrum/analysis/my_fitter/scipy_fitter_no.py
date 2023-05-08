@@ -3,14 +3,11 @@ import numpy as np
 from scipy.optimize import curve_fit
 from python_funcs import *
 
-nx = 16
-nt = 32
-vol = str(nx) + str(nt)
-beta = '6850'
-x0 = '100'
-stream = 'a'
-ens_name = vol+'b'+beta+'x'+x0+stream
-
+str_nx = input()
+str_nt = input()
+beta = input()
+x0 = input()
+stream = input()
 mass1 = input()
 mass2 = input()
 source1 = input()
@@ -25,6 +22,9 @@ str_ao = input()
 str_Eo = input()
 to_print = input()
 
+nt = int(str_nt)
+vol = str_nx + str_nt
+ens_name = vol+'b'+beta+'x'+x0+stream
 tmin = int(str_tmin)
 tmax = int(str_tmax)
 
@@ -82,6 +82,7 @@ def main() :
     chi2dof = chisq_by_dof(y_av,fit_points,y_cov,dof)
 
     if to_print == 'yes' :
+        print('FIT TYPE: no\n')
         print('STARTING VALUES:\n')
         print(p0,'\n')
 
