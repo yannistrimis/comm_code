@@ -20,7 +20,7 @@ fitter_tag = input()
 
 cur_dir = '/mnt/home/trimisio/plot_data/spec_data'
 
-f_read = open('%s/l%s/%s_m1_%s_m2_%s_%s.%s.measpoints'%(cur_dir,ens_name,pre_name,mass1,mass2,sinks,fitter_tag),'r')
+f_read = open('%s/l%s/%s_m1_%s_m2_%s_%s.%s.points'%(cur_dir,ens_name,pre_name,mass1,mass2,sinks,fitter_tag),'r')
 content = f_read.readlines()
 f_read.close()
 
