@@ -1,5 +1,31 @@
-import numpy as np
+0.01576
+0.01576
+x
+x
+PION_i
+specnlpi
+n0.01576
+0.01576
+x
+x
+PION_i
+specnlpi
+n0.01576
+0.01576
+x
+x
+PION_i
+specnlpi
+n
 
+
+
+
+
+xxximport numpy as np
+
+# TAKE THE DATA FROM <sth>.onefit FILE AND PASTE IT INTO A <sth>.points FILE
+# FIRST LINE OF <sth>.points SHOULD BE TAGS
 # THIS HAS TO BE PIPED INTO A FILE CALLED <something>.maezawa_meff.data
 
 nx = 16
@@ -24,16 +50,16 @@ f_read = open('%s/l%s/%s_m1_%s_m2_%s_%s.%s.points'%(cur_dir,ens_name,pre_name,ma
 content = f_read.readlines()
 f_read.close()
 
-y_av = np.zeros(int(nt/2))
+y_av = np.zeros(int(nt/2)+1)
 
 def main() :
-    meff_NO = np.zeros(int(nt/2)-3)
-    meff_O = np.zeros(int(nt/2)-3)
-    for i in range(int(nt/2)):    
-        line = content[i].split(' ')
+    meff_NO = np.zeros(int(nt/2)-2)
+    meff_O = np.zeros(int(nt/2)-2)
+    for i in range(int(nt/2)+1):    
+        line = content[i+1].split(' ')
         y_av[i] = float(line[1])
 
-    for i in range(int(nt/2)-3) :
+    for i in range(int(nt/2)-2) :
 
         g0 = y_av[i]
         g1 = y_av[i+1]
