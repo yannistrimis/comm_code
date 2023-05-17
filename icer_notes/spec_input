@@ -1,0 +1,116 @@
+prompt 0
+nx 16
+ny 16
+nz 16
+nt 32
+iseed 5508
+job_id none
+
+######################################################################
+# source time 0
+######################################################################
+
+# Gauge field description
+
+reload_serial /mnt/home/trimisio/scratch/lattices/l1632b6850x100a/l1632b6850x100a.lat.405
+u0 1
+coulomb_gauge_fix
+forget
+staple_weight 0
+ape_iter 0
+coordinate_origin 0 0 0 0
+time_bc antiperiodic
+
+# Eigenpairs
+
+max_number_of_eigenpairs 0
+
+# Chiral condensate and related measurements
+
+number_of_pbp_masses 0
+
+# Description of base sources
+
+number_of_base_sources 1
+
+# base source 0
+
+random_color_wall					# SOURCE TYPE ???
+field_type KS
+subset full
+t0 0
+ncolor 3
+momentum 1 0 0						# QUARK MOMENTUM ???
+
+
+source_label c
+forget_source
+
+# Description of modified sources
+
+number_of_modified_sources 0
+
+
+# Description of propagators
+
+number_of_sets 1
+
+# Parameters for set 0
+
+set_type multimass
+inv_type UML
+max_cg_iterations 300
+max_cg_restarts 5
+check yes
+momentum_twist 0 0 0
+precision 2
+
+source 0
+
+number_of_propagators 1
+
+# propagator 0
+
+mass 0.08128
+naik_term_epsilon 0
+error_for_propagator 1e-6
+rel_error_for_propagator 0
+
+fresh_ksprop
+forget_ksprop
+
+
+number_of_quarks 1
+
+
+# mass 0
+
+propagator 0
+
+identity						# SINK TYPE ???
+op_label d
+forget_ksprop
+
+# Description of mesons
+
+number_of_mesons 1
+
+
+# pair 0 (masses 0 0)
+
+pair 0 0
+spectrum_request meson
+
+forget_corr
+r_offset 0 0 0 0
+
+number_of_correlators 1
+
+correlator PION_5  p100  1 * 1 pion5  1 0 0  E E E	# WILL IT AVERAGE ???
+correlator PION_5  p100  1 * 1 pion5  0 1 0  E E E
+correlator PION_5  p100  1 * 1 pion5  0 0 1  E E E
+
+
+# Description of baryons
+
+number_of_baryons 0
