@@ -71,33 +71,37 @@ number_of_base_sources 1
 
 # base source 0
 
-${source_legal_name}
+evenandodd_wall
 field_type KS
 subset full
 t0 ${t0}
-ncolor 3
-momentum ${px} ${py} ${pz}
-
 source_label c
 forget_source
 
 # Description of modified sources
 
-number_of_modified_sources 0
+number_of_modified_sources 1
+
+# modified source 0
+
+source 0
+momentum
+momentum 1 0 0
+op_label m
+forget_source
 
 EOF
 
 ######################################################################
-# Definition of propagators for one set
+# Definition of propagators
 
 cat  <<EOF
 
 # Description of propagators
 
-number_of_sets 1
+number_of_sets 2
 
 # Parameters for set 0
-
 set_type multimass
 inv_type UML
 max_cg_iterations ${max_cg_iterations}
@@ -105,25 +109,20 @@ max_cg_restarts 5
 check yes
 momentum_twist 0 0 0
 precision ${precision}
-
 source 0
-
 number_of_propagators ${nmasses}
-EOF
 
-# Propagators for random wall source
+EOF
 
 for ((m=0; m<${nmasses}; m++)); do
 
 cat  <<EOF
 
 # propagator ${m}
-
 mass ${mass[$m]}
 ${naik_cmd[$m]}
 error_for_propagator ${error_for_propagator[$m]}
 rel_error_for_propagator 0
-
 fresh_ksprop
 forget_ksprop
 
@@ -131,12 +130,19 @@ EOF
 
 done
 
-######################################################################
-# Definition of quarks
 
 cat  <<EOF
 
-number_of_quarks ${nmasses}
+# Parameters for set 1
+set_type multimass
+inv_type UML
+max_cg_iterations ${max_cg_iterations}
+max_cg_restarts 5
+check yes
+momentum_twist 0 0 0
+precision ${precision}
+source 1
+number_of_propagators ${nmasses}
 
 EOF
 
@@ -144,17 +150,57 @@ for ((m=0; m<${nmasses}; m++)); do
 
 cat  <<EOF
 
-# mass ${m}
-
-propagator ${m}
-
-identity
-op_label d
+# propagator ${m}
+mass ${mass[$m]}
+${naik_cmd[$m]}
+error_for_propagator ${error_for_propagator[$m]}
+rel_error_for_propagator 0
+fresh_ksprop
 forget_ksprop
 
 EOF
 
 done
+
+
+######################################################################
+# Definition of quarks
+
+cat  <<EOF
+
+number_of_quarks $[2*${nmasses}]
+
+EOF
+
+# QUARKS WITHOUT FUNNYWALL2
+for ((m=0; m<${nmasses}; m++)); do
+
+cat  <<EOF
+# mass ${m}
+propagator ${m}
+momentum
+momentum 1 0 0
+op_label d
+forget_ksprop
+EOF
+
+done
+
+# QUARKS WITH FUNNYWALL2
+for ((m=0; m<${nmasses}; m++)); do
+
+cat  <<EOF
+# mass ${m}
+propagator $[${nmasses}+${m}]
+momentum
+momentum 1 0 0
+op_label d
+forget_ksprop
+EOF
+
+done
+
+
 
 ######################################################################
 # Specification of Mesons
@@ -170,11 +216,11 @@ k=0
 
 for ((m=0; m<${nmasses}; m++)); do
 
-n=${m}
+n=$[${nmasses}+${m}]
 
 cat  <<EOF
 
-# pair ${k} (masses ${m} ${n})
+# pair ${k}
 
 pair ${m} ${n}
 spectrum_request meson
@@ -184,7 +230,7 @@ r_offset 0 0 0 ${t0}
 
 number_of_correlators 1
 
-correlator PION_5  p${px}${py}${pz}  1 * 1 pion5  ${px} ${py} ${pz}  E E E
+correlator PION_5  p000  1 * 1 pion5  0 0 0 E E E
 
 EOF
 
@@ -197,38 +243,8 @@ done
 
 cat  <<EOF
 # Description of baryons
-
 number_of_baryons 0
-
 EOF
-
-# k=0
-
-# for ((m0=0; m0<${nmasses}; m0++)); do
-# for ((m1=${m0}; m1<${nmasses}; m1++)); do
-# for ((m2=${m1}; m2<${nmasses}; m2++)); do
-
-# cat  <<EOF
-
-# triplet ${k} (masses ${m0} ${m1} ${m2})
-
-# triplet ${m0} ${m1} ${m2}
-# spectrum_request baryon
-
-# forget_corr
-# r_offset 0 0 0 ${t0}
-
-# number_of_correlators 1
-
-# correlator NUCLEON  1 * 1 nucleon
-
-# EOF
-
-# k=$[${k}+1]
-
-# done
-# done
-# done
 
 reload_gauge_cmd="continue"
 
