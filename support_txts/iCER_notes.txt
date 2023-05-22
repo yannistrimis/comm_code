@@ -1,32 +1,32 @@
 
-	a. From a terminal: ssh -X trimisio@hpcc.msu.edu
-    PASSWORD IS MSU PASSWORD
+a.	From a terminal: ssh -X trimisio@hpcc.msu.edu
+    		PASSWORD IS MSU PASSWORD
 	You are now in a gateway node. Don't stay here because you slow the system down.
 
-	b. To go to a development node:
-			ssh -X <NAME OF NODE> (e.g. ssh -X dev-intel18)
+b.	To go to a development node:
+		ssh -X <NAME OF NODE> (e.g. ssh -X dev-intel18)
 	You can navigate with the usual commands.
 
-    b1. You can pick a module (i.e. a compiler) once you are in the development node.
+b1.	You can pick a module (i.e. a compiler) once you are in the development node.
 
-	c. Go to your computer. If you want to transport a directory named <NAME>
+c.	Go to your computer. If you want to transport a directory named <NAME>
 	to the cluster you have to tar it first: tar -cvf <NAME>.tar <NAME>
 
-	d. You transport things to the cluster via scp:
+d.	You transport things to the cluster via scp:
 
-			scp <NAME>.tar trimisio@hpcc.msu.edu:~/Documents/. 
+		scp <NAME>.tar trimisio@hpcc.msu.edu:~/Documents/. 
 
 	The dot at the end ensures that the directory or file will keep the same name <NAME>.tar
 	on the cluster.
 
-	e. You untar by doing: tar -xvf <NAME>.tar
+e.	You untar by doing: tar -xvf <NAME>.tar
 
-	f. You can run small things on the development node using regular commands.
+f.	You can run small things on the development node using regular commands.
 	You can use the command "time" before the run command to check the CPU running time.
 	Consider the top row ("real").
 
-	g. In order to submit a job to the queue, you have to use a script <SCRIPT_NAME>.sb with a 
-    specific format:
+g.	In order to submit a job to the queue, you have to use a script <SCRIPT_NAME>.sb with a 
+	specific format:
 
 		#!/bin/bash --login
 
@@ -36,11 +36,11 @@
 
 	That is the most minimal version. Then, to run the script use: sbatch <SCRIPT_NAME>.sb
 
-	h. In order to check the queue run: sq
+h.	In order to check the queue run: sq
 
-	i. In order to check CPU time and memory left, run: quota
+i.	In order to check CPU time and memory left, run: quota
 
-    j. GENERAL TEMPLATE FOR SUBMISSION SCRIPT:
+j.	GENERAL TEMPLATE FOR SUBMISSION SCRIPT:
 
 
 #!/bin/bash --login
@@ -66,8 +66,11 @@ js -j $SLURM_JOB_ID                 ### write resource usage to SLURM output fil
 
 
 
-    k. From the SLURM website: if --nodes (-N) is not specified the it is allocated so that requested 
-    --ntasks (-n) can be made possible
+k. 	From the SLURM website: if --nodes (-N) is not specified the it is allocated so that requested 
+	--ntasks (-n) can be made possible
 
-	l. To touch all files in scratch: Go to /mnt/scratch/trimisio and run: 
-		find . -exec touch {} \;
+l.	To touch all files in scratch: Go to /mnt/scratch/trimisio and run: 
+	find . -exec touch {} \;
+
+m.	ALWAYS INCLUDE #SBATCH --exclude=lac-[088-124]
+
