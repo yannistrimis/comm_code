@@ -35,10 +35,9 @@ iseed ${iseed}
 job_id ${jobid}
 EOF
 
-# Iterate over source time slices
+# ITERATE OVER SOURCE TIME SLICES
 for ((i=0; i<${n_sources}; i++)); do
 t0=$[${source_start}+${i}*${source_inc}]
-corrfilet=${corrfile}_t${t0}.test-out
 
 cat  <<EOF 
 
@@ -46,7 +45,7 @@ cat  <<EOF
 # source time ${t0}
 ######################################################################
 
-# Gauge field description
+# GAUGE FIELD DESCRIPTION
 
 ${reload_gauge_cmd}
 u0 ${u0}
@@ -57,19 +56,21 @@ ape_iter 0
 coordinate_origin 0 0 0 0
 time_bc antiperiodic
 
-# Eigenpairs
+# EIGENPAIRS
 
 max_number_of_eigenpairs 0
 
-# Chiral condensate and related measurements
+# CHIRAL CONDENSATE AND RELATED MEASUREMENTS
 
 number_of_pbp_masses 0
 
-# Description of base sources
+######################################################################
+
+# DESCRIPTION OF BASE SOURCES
 
 number_of_base_sources 1
 
-# base source 0
+# BASE SOURCE 0
 
 evenandodd_wall
 field_type KS
@@ -78,30 +79,36 @@ t0 ${t0}
 source_label c
 forget_source
 
-# Description of modified sources
+# DESCRIPTION OF MODIFIED SOURCES
 
-number_of_modified_sources 1
+number_of_modified_sources ${n_of_mom}
 
-# modified source 0
+EOF
 
+for (()); do # MOMENTUM LOOP
+mom=${}
+
+cat <<EOF
+# MODIFIED SOURCE ${i_mom}
 source 0
 momentum
-momentum 1 0 0
+momentum ${mom}
 op_label m
 forget_source
-
 EOF
 
+done # momenta
+
 ######################################################################
-# Definition of propagators
+# PROPAGATORS
 
 cat  <<EOF
 
-# Description of propagators
+# DESCRIPTION OF PROPAGATORS
 
-number_of_sets 2
+number_of_sets $[1+${n_of_mom}]
 
-# Parameters for set 0
+# PARAMETERS FOR SET 0
 set_type multimass
 inv_type UML
 max_cg_iterations ${max_cg_iterations}
@@ -118,7 +125,7 @@ for ((m=0; m<${nmasses}; m++)); do
 
 cat  <<EOF
 
-# propagator ${m}
+# PROPAGATOR ${m}
 mass ${mass[$m]}
 ${naik_cmd[$m]}
 error_for_propagator ${error_for_propagator[$m]}
@@ -128,12 +135,14 @@ forget_ksprop
 
 EOF
 
-done
+done # masses
 
+k=${nmasses}
+for (()); do # MOMENTUM LOOP
 
 cat  <<EOF
 
-# Parameters for set 1
+# PARAMETERS FOR SET $[1+${i_mom}]
 set_type multimass
 inv_type UML
 max_cg_iterations ${max_cg_iterations}
@@ -141,7 +150,7 @@ max_cg_restarts 5
 check yes
 momentum_twist 0 0 0
 precision ${precision}
-source 1
+source $[1+${i_mom}]
 number_of_propagators ${nmasses}
 
 EOF
@@ -150,7 +159,7 @@ for ((m=0; m<${nmasses}; m++)); do
 
 cat  <<EOF
 
-# propagator ${m}
+# PROPAGATOR ${k}
 mass ${mass[$m]}
 ${naik_cmd[$m]}
 error_for_propagator ${error_for_propagator[$m]}
@@ -160,69 +169,82 @@ forget_ksprop
 
 EOF
 
-done
+k=$[1+${k}]
 
+done # masses
+done # momenta
 
 ######################################################################
-# Definition of quarks
+# QUARKS
 
 cat  <<EOF
 
-number_of_quarks $[2*${nmasses}]
+# DESCRIPTION OF QUARKS
+
+number_of_quarks $[2*${nmasses}*${n_of_mom}]
 
 EOF
 
-# QUARKS WITHOUT FUNNYWALL2
+# QUARKS WITH MOMENTUM AT THE SINK. THEY ALL USE
+# THE SAME PROPAGATOR THAT WAS CALCULATED WITH A
+# ZERO MOMENTUM SOURCE
+
+for (()); do # MOMENTUM	LOOP
+mom=
 for ((m=0; m<${nmasses}; m++)); do
 
 cat  <<EOF
-# mass ${m}
+# MASS ${m}
 propagator ${m}
 momentum
-momentum 1 0 0
+momentum ${mom}
 op_label d
 forget_ksprop
 EOF
 
-done
+done # masses
+done # momenta
 
-# QUARKS WITH FUNNYWALL2
+# QUARKS WITH MOMENTUM AT THE SOURCE. THEY WILL RECEIVE
+# JUST THE IDENTITY AT THE SINK.
+
+k=${nmasses}
+for (()); do # MOMENTUM LOOP
 for ((m=0; m<${nmasses}; m++)); do
 
 cat  <<EOF
-# mass ${m}
-propagator $[${nmasses}+${m}]
-momentum
-momentum 1 0 0
+# MASS ${m}
+propagator ${k}
+identity
 op_label d
 forget_ksprop
 EOF
 
-done
-
-
+k=$[${k}+1]
+done # masses
+done # momenta
 
 ######################################################################
-# Specification of Mesons
+# MESONS
 
 cat  <<EOF
-# Description of mesons
+# DESCRIPTION OF MESONS
 
-number_of_mesons ${nmasses}
+number_of_mesons ???
 
 EOF
 
-k=0
 
-for ((m=0; m<${nmasses}; m++)); do
+for (()); do # MOMENTUM LOOP
+q1_min= ???
+q1_max= ???
+for ((q1=${q1_min}; q1<${q1_max}; q1++)); do
 
-n=$[${nmasses}+${m}]
+q2=$[${n_of_mom}*${nmasses}+${q1_min}+${q1}]
 
 cat  <<EOF
 
-# pair ${k}
-
-pair ${m} ${n}
+pair ${q1} ${q2}
 spectrum_request meson
 
 forget_corr
@@ -230,19 +252,19 @@ r_offset 0 0 0 ${t0}
 
 number_of_correlators 1
 
-correlator PION_5  p000  1 * 1 pion5  0 0 0 E E E
+correlator PION_5  p${mom_label}  1 * 1 pion5  0 0 0 E E E
 
 EOF
 
-k=$[${k}+1]
 
 done
+done # momenta
 
 ######################################################################
-# Specification of baryons
+# BARYONS
 
 cat  <<EOF
-# Description of baryons
+# DESCRIPTION OF BARYONS
 number_of_baryons 0
 EOF
 
