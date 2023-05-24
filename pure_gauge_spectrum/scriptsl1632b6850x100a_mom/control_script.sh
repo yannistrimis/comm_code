@@ -28,7 +28,7 @@ i=1
 while [ $i -le $n_of_lat ]
 do
 
-	file_name="${directory}/specmom${nx}${nt}b${beta_name}x${xi_0_name}xq${xq_0_name}${stream}.${i_lat}"
+	file_name="${directory}/specmom${nx}${nt}b${beta_name}x${xi_0_name}ml${mass1_name}xq${xq_0_name}${stream}.${i_lat}"
 	if [ -f "${file_name}" ]
 	then
 		rm "${file_name}"

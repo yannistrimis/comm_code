@@ -1,6 +1,6 @@
 #!/bin/bash
 
-n_of_lat=5
+n_of_lat=1
 
 nx=16
 ny=16
@@ -32,8 +32,12 @@ source_prec=8 # CHANGE ACCORDING TO nt
 
 nmasses=1
 mass1=0.01576
-
 mass1_name="01576"
+
+n_of_mom=3
+moml1="100"
+moml2="010"
+moml3="001"
 
 err=1e-6
 max_cg_iterations=300

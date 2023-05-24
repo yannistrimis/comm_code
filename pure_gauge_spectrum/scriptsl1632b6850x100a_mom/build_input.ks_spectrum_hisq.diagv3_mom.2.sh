@@ -85,8 +85,8 @@ number_of_modified_sources ${n_of_mom}
 
 EOF
 
-for (()); do # MOMENTUM LOOP
-mom=${}
+for (( i_mom=0; i_mom<${n_of_mom}; i_mom++ )); do # MOMENTUM LOOP
+mom="${mom_labels[${i_mom}]:0:1} ${mom_labels[${i_mom}]:1:1} ${mom_labels[${i_mom}]:2:1}"
 
 cat <<EOF
 # MODIFIED SOURCE ${i_mom}
@@ -138,7 +138,7 @@ EOF
 done # masses
 
 k=${nmasses}
-for (()); do # MOMENTUM LOOP
+for (( i_mom=0; i_mom<${n_of_mom}; i_mom++ )); do # MOMENTUM LOOP
 
 cat  <<EOF
 
@@ -189,8 +189,9 @@ EOF
 # THE SAME PROPAGATOR THAT WAS CALCULATED WITH A
 # ZERO MOMENTUM SOURCE
 
-for (()); do # MOMENTUM	LOOP
-mom=
+for (( i_mom=0; i_mom<${n_of_mom}; i_mom++ )); do # MOMENTUM LOOP
+mom="${mom_labels[${i_mom}]:0:1} ${mom_labels[${i_mom}]:1:1} ${mom_labels[${i_mom}]:2:1}"
+
 for ((m=0; m<${nmasses}; m++)); do
 
 cat  <<EOF
@@ -209,7 +210,9 @@ done # momenta
 # JUST THE IDENTITY AT THE SINK.
 
 k=${nmasses}
-for (()); do # MOMENTUM LOOP
+
+for (( i_mom=0; i_mom<${n_of_mom}; i_mom++ )); do # MOMENTUM LOOP
+
 for ((m=0; m<${nmasses}; m++)); do
 
 cat  <<EOF
@@ -230,17 +233,18 @@ done # momenta
 cat  <<EOF
 # DESCRIPTION OF MESONS
 
-number_of_mesons ???
+number_of_mesons $[${n_of_mom}*${nmasses}]
 
 EOF
 
+for (( i_mom=0; i_mom<${n_of_mom}; i_mom++ )); do # MOMENTUM LOOP
+mom_label=${mom_labels[${i_mom}]}
 
-for (()); do # MOMENTUM LOOP
-q1_min= ???
-q1_max= ???
-for ((q1=${q1_min}; q1<${q1_max}; q1++)); do
+q1_min=$[${i_mom}*${nmasses}]
+q1_max=$[${i_mom}*${nmasses}+${nmasses}]
+for (( q1=${q1_min}; q1<${q1_max}; q1++ )); do
 
-q2=$[${n_of_mom}*${nmasses}+${q1_min}+${q1}]
+q2=$[${n_of_mom}*${nmasses}+${q1}]
 
 cat  <<EOF
 
