@@ -13,7 +13,7 @@ do
 
 echo "====${sinks}===="
 
-for i_file in {101..500..1}
+for i_file in {101..101..1}
 do
 
 echo "    ${i_file}"
@@ -35,7 +35,11 @@ ${mass2}
 ${source1}
 ${source2}
 ${sinks}
-spec0mom
+3
+p100
+p010
+p001
+specmom
 EOF
 
 
