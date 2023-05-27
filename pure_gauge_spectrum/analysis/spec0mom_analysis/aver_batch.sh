@@ -1,6 +1,6 @@
 #!/bin/bash
 
-masses=("0.02" "0.04" "0.06" "0.08" "0.1")
+masses=("0.04" "0.06" "0.08" "0.1" "0.12")
 mas_len=${#masses[@]}
 
 sinks_arr=("PION_5")

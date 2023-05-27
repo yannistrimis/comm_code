@@ -26,8 +26,11 @@ n_sources=${n_sources}
 nmasses=${nmasses}
 mass=( ${mass1} ${mass2} ${mass3} ${mass4} ${mass5} )
 
+n_of_bs=${n_of_bs}
+bs_arr=( ${bs1} ${bs2} ${bs3} ${bs4} )
+
 n_of_mom=${n_of_mom}
-mom_labels=( ${moml1} ${moml2} ${moml3} )
+mom_labels=( ${moml1} ${moml2} ${moml3} ${moml4} ${moml5} ${moml6} ${moml7} ${moml8} ${moml9} )
 
 naik_term_epsilon=( 0 0 0 0 0 )
 error_for_propagator=( ${err} ${err} ${err} ${err} ${err} )

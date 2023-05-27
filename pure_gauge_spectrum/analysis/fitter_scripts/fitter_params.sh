@@ -1,29 +1,29 @@
 nx=16
 nt=32
-beta=6850
+beta=6647
 x0=100
 stream="a"
 ens_name="l${nx}${nt}b${beta}x${x0}${stream}"
 
 tmin_min=0 # tmin IS INCLUDED !!!
-tmin_max=2 # tmin IS INCLUDED !!!
-tmax_arr=("16") # tmax IS ALSO INCLUDED !!!
+tmin_max=8 # tmin IS INCLUDED !!!
+tmax_arr=("14" "15" "16") # tmax IS ALSO INCLUDED !!!
 
-mass1=0.01576
-mass2=0.01576
+mass1=0.12
+mass2=0.12
 
-source1="eow"
-source2="eow_fw"
+source1="cw"
+source2="cw"
 
-sinks="PION_i"
+sinks="PION_5"
 
-spec_type="specnlpi"
+spec_type="spec0mom"
 my_fitter_suffix="n"
 my_fitter="scipy_fitter_${my_fitter_suffix}.py"
 
 # STARTING VALUES
 
-an=-0.0025
+an=1000
 En=0.5
 
 ao=-0.001
@@ -34,5 +34,5 @@ E1n=0.1
 
 # PARAMETERS FOR one_call_my_fitter.sh SCRIPT
 
-one_tmin=0
-one_tmax=16
+one_tmin=6
+one_tmax=15

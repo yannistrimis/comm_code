@@ -3,8 +3,8 @@ import numpy as np
 cur_dir = '/mnt/home/trimisio/outputs/pure_gauge_spec'
 out_dir = '/mnt/home/trimisio/plot_data/spec_data'
 
-vol = '2448'
-beta = '7140'
+vol = '1632'
+beta = '6850'
 x0 = '100'
 xq = '100'
 stream = 'a'
@@ -12,6 +12,7 @@ stream = 'a'
 mom_list = []
 
 i_file = input()
+ml = input()
 mass1 = input()
 mass2 = input()
 source1 = input()
@@ -19,19 +20,19 @@ source2 = input()
 sinks = input()
 n_of_mom = int(input())
 for i in range(n_of_mom):
-    moml = input()
-    mom_list.append(moml)
+	moml = input()
+	mom_list.append(moml)
 pre_name = input()
 ens_name_nostream = vol+'b'+beta+'x'+x0
 ens_name = ens_name_nostream+stream
 
-f_read = open('%s/l%s/%s%sxq%s%s.%s'%(cur_dir,ens_name,pre_name,ens_name_nostream,xq,stream,i_file),'r')
+f_read = open('%s/l%s/%s%sml%sxq%s%s.%s'%(cur_dir,ens_name,pre_name,ens_name_nostream,ml,xq,stream,i_file),'r')
+content = f_read.readlines()
 
 for i_mom in range(n_of_mom):
 	mom = mom_list[i_mom]
-
-    f_write_a = open('%s/l%s/%s%s_spec_m1_%s_m2_%s_%s.%sa'%(out_dir,ens_name,pre_name,mom,mass1,mass2,sinks,i_file),'w')
-    f_write_b = open('%s/l%s/%s%s_spec_m1_%s_m2_%s_%s.%sb'%(out_dir,ens_name,pre_name,mom,mass1,mass2,sinks,i_file),'w')
+	f_write_a = open('%s/l%s/%s%s_spec_m1_%s_m2_%s_%s.%sa'%(out_dir,ens_name,pre_name,mom,mass1,mass2,sinks,i_file),'w')
+	f_write_b = open('%s/l%s/%s%s_spec_m1_%s_m2_%s_%s.%sb'%(out_dir,ens_name,pre_name,mom,mass1,mass2,sinks,i_file),'w')
 
 	source_flag = 0
 	flag = -1
@@ -42,10 +43,8 @@ for i_mom in range(n_of_mom):
 	source_line = 'SOURCE:' + ' ' + source1 + ' ' +  source2
 	sink_line = 'SINKS:' + ' ' + sinks
 
-	content = f_read.readlines()
 	for line in content:
 		split_line = line.split(' ')
-
 		if split_line[0]=='#' and split_line[1]=='source' and split_line[2]=='time':
 			source_flag = source_flag + 1
 
