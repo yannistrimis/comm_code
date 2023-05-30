@@ -1,6 +1,6 @@
 #!/bin/bash
 
-n_of_lat=2
+n_of_lat=1
 
 nx=16
 ny=16
@@ -27,21 +27,28 @@ u0=1
 set_source_start=0
 n_sources=2
 source_inc=16
-source_prec=7 # CHANGE ACCORDING TO nt
+source_prec=8 # CHANGE ACCORDING TO nt
 
 
-nmasses=5
-mass1=0.02
-mass2=0.04
-mass3=0.06
-mass4=0.08
-mass5=0.1
+nmasses=1
+mass1=0.01576
+mass1_name="01576"
 
-px=1
-py=0
-pz=0
+n_of_bs=3
+bs1="random_color_wall"
+bs2="evenandodd_wall"
+bs3="corner_wall"
 
-source_legal_name="random_color_wall"
+n_of_mom=9
+moml1="100"
+moml2="010"
+moml3="001"
+moml4="110"
+moml5="101"
+moml6="011"
+moml7="200"
+moml8="020"
+moml9="002"
 
 err=1e-6
 max_cg_iterations=300

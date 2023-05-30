@@ -46,7 +46,8 @@ int main(void){
     initialize(my_seed, d_hot);
     action_func();
 
-    printf("#plaq");
+    printf("#no");
+    printf(" #plaq");
 
     #ifdef show_acceptance
     printf(" #accept");

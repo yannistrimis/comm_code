@@ -1,12 +1,12 @@
 #!/bin/bash
 
-masses=("0.01576" "0.0788")
+masses=("0.01576")
 mas_len=${#masses[@]}
 
-sinks_arr=("PION_5" "PION_05" "RHO_i" "RHO_i0")
+sinks_arr=("PION_5" "PION_i5" "PION_i" "PION_s" "PION_05" "PION_ij" "PION_i0" "PION_0")
 
-source1="CORNER"
-source2="CORNER"
+source1="eow"
+source2="eow_fw"
 
 for sinks in "${sinks_arr[@]}"
 do
@@ -21,13 +21,8 @@ echo "    ${i_file}"
 for (( m1=0 ; m1<${mas_len} ; m1++ ));
 do
 
-
-for (( m2=$m1 ; m2<${mas_len} ; m2++ ));
-do
-
-
 mass1=${masses[$m1]}
-mass2=${masses[$m2]}
+mass2=${mass1}
 
 python aver_one.py <<EOF
 ${i_file}
@@ -36,11 +31,9 @@ ${mass2}
 ${source1}
 ${source2}
 ${sinks}
-specnd
+specnlpi
 EOF
 
-
-done # m2
 
 done # m1
 

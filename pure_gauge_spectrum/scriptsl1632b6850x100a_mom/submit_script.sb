@@ -3,8 +3,8 @@
 #SBATCH --time=00:40:00
 #SBATCH --ntasks=128
 #SBATCH --constraint=intel16
-#SBATCH --exclude=lac-[094-124]
-#SBATCH --job-name 0.16mom
+#SBATCH --exclude=lac-[084-124]
+#SBATCH --job-name mom
 
 module load intel/2020b
 path=$1

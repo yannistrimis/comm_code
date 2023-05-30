@@ -34,7 +34,7 @@ do
 		rm "${file_name}"
 	fi
 	bash ${path}/make_input.sh ${i_lat} ${seed} ${path}
-	bash ${path}/build_input.ks_spectrum_hisq.diagv3.2.sh ${submit_dir}/param_input > ${submit_dir}/spec_input
+	bash ${path}/build_input.ks_spectrum_hisq.diagv3_0mom.2.sh ${submit_dir}/param_input > ${submit_dir}/spec_input
 cd ${run_dir}
 	srun -n 128 ${path_build}/ks_spectrum_hisq_dbl_icc_20230125 ${submit_dir}/spec_input > ${file_name}
 #	${path_build}/ks_spectrum_hisq_dbl_scalar_icc_20230120 ${submit_dir}/spec_input > ${file_name}

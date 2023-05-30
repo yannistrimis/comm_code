@@ -3,8 +3,8 @@ import numpy as np
 cur_dir = '/mnt/home/trimisio/outputs/pure_gauge_spec'
 out_dir = '/mnt/home/trimisio/plot_data/spec_data'
 
-vol = '2448'
-beta = '7140'
+vol = '1632'
+beta = '6647'
 x0 = '100'
 xq = '100'
 stream = 'a'

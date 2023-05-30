@@ -1,6 +1,6 @@
 #!/bin/bash
 
-masses=("0.02" "0.04" "0.06" "0.08" "0.1")
+masses=("0.04" "0.06" "0.08" "0.1" "0.12")
 mas_len=${#masses[@]}
 
 sinks_arr=("PION_5")
@@ -13,7 +13,7 @@ do
 
 echo "====${sinks}===="
 
-for i_file in {101..400..1}
+for i_file in {101..500..1}
 do
 
 echo "    ${i_file}"
