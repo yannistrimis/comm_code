@@ -34,11 +34,6 @@ nmasses=1
 mass1=0.01576
 mass1_name="01576"
 
-n_of_bs=3
-bs1="random_color_wall"
-bs2="evenandodd_wall"
-bs3="corner_wall"
-
 n_of_mom=9
 moml1="100"
 moml2="010"

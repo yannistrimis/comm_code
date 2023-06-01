@@ -1,11 +1,10 @@
-
 #!/bin/bash --login
 
-#SBATCH --time=01:30:00
+#SBATCH --time=01:00:00
 #SBATCH --ntasks=128
 #SBATCH --constraint=intel16
 #SBATCH --exclude=lac-[084-124]
-#SBATCH --job-name sp2448nd
+#SBATCH --job-name momcw
 
 module load intel/2020b
 path=$1
