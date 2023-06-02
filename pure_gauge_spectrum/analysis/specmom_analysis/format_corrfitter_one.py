@@ -11,8 +11,6 @@ stream = 'a'
 
 mass1 = input()
 mass2 = input()
-source1 = input()
-source2 = input()
 sinks = input()
 pre_name = input()
 

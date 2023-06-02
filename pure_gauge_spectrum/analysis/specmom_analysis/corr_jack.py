@@ -11,12 +11,10 @@ ens_name = vol+'b'+beta+'x'+x0+stream
 
 mass1 = input()
 mass2 = input()
-source1 = input()
-source2 = input()
 sinks = input()
 pre_name = input()
 
-n_bins = 10
+n_bins = 20
 
 nt = int(nt/2)+1 # QUICK SOLUTION FOR FOLDED DATA
 

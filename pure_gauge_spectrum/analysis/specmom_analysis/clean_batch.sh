@@ -33,10 +33,10 @@ ${source1}
 ${source2}
 ${sinks}
 3
-p100
-p010
-p001
-specmom
+p200
+p020
+p002
+specmomeow
 EOF
 
 

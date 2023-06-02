@@ -7,9 +7,6 @@ sinks_arr=("PION_5")
 
 mom_arr=("p100" "p010" "p001")
 
-source1="even_and_odd_wall"
-source2="even_and_odd_wall/momentum"
-
 for mom in ${mom_arr[@]}
 do
 
@@ -20,7 +17,7 @@ do
 
 echo "====${sinks}===="
 
-for i_file in {101..200..1}
+for i_file in {102..200..1}
 do
 
 echo "    ${i_file}"
@@ -35,10 +32,8 @@ python aver_one.py <<EOF
 ${i_file}
 ${mass1}
 ${mass2}
-${source1}
-${source2}
 ${sinks}
-specmom${mom}
+specmomeow${mom}
 EOF
 
 

@@ -5,9 +5,6 @@ mas_len=${#masses[@]}
 
 sinks_arr=("PION_5")
 
-source1="even_and_odd_wall"
-source2="even_and_odd_wall/momentum"
-
 for sinks in ${sinks_arr[@]}
 do
 
@@ -28,14 +25,13 @@ python avermom_one.py <<EOF
 ${i_file}
 ${mass1}
 ${mass2}
-${source1}
-${source2}
 3
 p100
 p010
 p001
+p100
 ${sinks}
-specmom
+specmomrcw
 EOF
 
 

@@ -5,9 +5,6 @@ mas_len=${#masses[@]}
 
 sinks_arr=("PION_5")
 
-source1="even_and_odd_wall"
-source2="even_and_odd_wall/momentum"
-
 for sinks in "${sinks_arr[@]}"
 do
 
@@ -22,10 +19,8 @@ mass2=${mass1}
 python format_corrfitter_one.py <<EOF
 ${mass1}
 ${mass2}
-${source1}
-${source2}
 ${sinks}
-specmom
+specmomrcw_avp100
 EOF
 
 done # m1

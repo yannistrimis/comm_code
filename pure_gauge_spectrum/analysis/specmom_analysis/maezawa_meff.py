@@ -12,28 +12,25 @@ ens_name = vol+'b'+beta+'x'+x0+stream
 
 mass1 = input()
 mass2 = input()
-source1 = input()
-source2 = input()
 sinks = input()
 pre_name = input()
-fitter_tag = input()
 
 cur_dir = '/mnt/home/trimisio/plot_data/spec_data'
 
-f_read = open('%s/l%s/%s_m1_%s_m2_%s_%s.%s.measpoints'%(cur_dir,ens_name,pre_name,mass1,mass2,sinks,fitter_tag),'r')
+f_read = open('%s/l%s/%s_m1_%s_m2_%s_%s.averr'%(cur_dir,ens_name,pre_name,mass1,mass2,sinks),'r')
 content = f_read.readlines()
 f_read.close()
 
-y_av = np.zeros(int(nt/2))
+y_av = np.zeros(int(nt/2)+1)
 
 def main() :
-    meff_NO = np.zeros(int(nt/2)-3)
-    meff_O = np.zeros(int(nt/2)-3)
-    for i in range(int(nt/2)):    
+    meff_NO = np.zeros(int(nt/2)-2)
+    meff_O = np.zeros(int(nt/2)-2)
+    for i in range(int(nt/2)+1):    
         line = content[i].split(' ')
         y_av[i] = float(line[1])
 
-    for i in range(int(nt/2)-3) :
+    for i in range(int(nt/2)-2) :
 
         g0 = y_av[i]
         g1 = y_av[i+1]
