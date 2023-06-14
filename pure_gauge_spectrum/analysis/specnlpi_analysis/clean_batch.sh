@@ -3,19 +3,19 @@
 masses=("0.01576")
 mas_len=${#masses[@]}
 
-sinks_arr=("PION_5" "PION_i5" "PION_i" "PION_s")
-# sinks_arr=("PION_05" "PION_ij" "PION_i0" "PION_0")
+#sinks_arr=("PION_5" "PION_i5" "PION_i" "PION_s")
+sinks_arr=("PION_05" "PION_ij" "PION_i0" "PION_0")
 
 source1="even_and_odd_wall"
-source2="even_and_odd_wall/FUNNYWALL1"
-# source2="even_and_odd_wall/FUNNYWALL2"
+#source2="even_and_odd_wall/FUNNYWALL1"
+source2="even_and_odd_wall/FUNNYWALL2"
 
 for sinks in "${sinks_arr[@]}"
 do
 
 echo "====${sinks}===="
 
-for i_file in {101..500..1}
+for i_file in {101..110..1}
 do
 
 echo "    ${i_file}"

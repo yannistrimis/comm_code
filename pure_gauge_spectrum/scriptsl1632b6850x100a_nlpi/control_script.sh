@@ -34,10 +34,9 @@ do
 		rm "${file_name}"
 	fi
 	bash ${path}/make_input_nd.sh ${i_lat} ${seed} ${path}
-	bash ${path}/build_input.ks_spectrum_hisq.nlpi2v2.2.sh ${submit_dir}/param_input > ${submit_dir}/spec_input
+	bash ${path}/build_input.ks_spectrum_hisq.nlpi2v3.2.sh ${submit_dir}/param_input > ${submit_dir}/spec_input
 cd ${run_dir}
-	srun -n 128 ${path_build}/ks_spectrum_hisq_dbl_icc_20230125 ${submit_dir}/spec_input > ${file_name}
-#	${path_build}/ks_spectrum_hisq_dbl_scalar_icc_20230120 ${submit_dir}/spec_input > ${file_name}
+	srun -n 128 ${path_build}/ks_spectrum_hisq_dbl_icc_20230613 ${submit_dir}/spec_input > ${file_name}
 cd ${submit_dir}
 	text="RUNNING COMPLETED"
 	complete_flag=$(bash ${path}/is_complete.sh ${file_name} ${text})

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-n_of_lat=20
+n_of_lat=10
 
 nx=16
 ny=16
@@ -27,7 +27,7 @@ u0=1
 set_source_start=0
 n_sources=2
 source_inc=16
-source_prec=6 # CHANGE ACCORDING TO nt
+source_prec=7 # CHANGE ACCORDING TO nt
 
 nmasses=1
 mass1=0.01576
