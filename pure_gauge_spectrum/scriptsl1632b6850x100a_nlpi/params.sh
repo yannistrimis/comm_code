@@ -1,6 +1,6 @@
 #!/bin/bash
 
-n_of_lat=10
+n_of_lat=20
 
 nx=16
 ny=16
