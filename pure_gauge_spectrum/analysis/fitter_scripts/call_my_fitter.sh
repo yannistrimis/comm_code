@@ -4,6 +4,9 @@ source fitter_params.sh
 if [ ${my_fitter} = "scipy_fitter_n.py"  ]
 then
 echo "#tmin tmax chi2/dof Q Emean Esdev"
+elif [ ${my_fitter} = "scipy_fitter_o.py"  ]
+then
+echo "#tmin tmax chi2/dof Q EOmean EOsdev"
 elif [ ${my_fitter} = "scipy_fitter_no.py"  ]
 then
 echo "#tmin tmax chi2/dof Q Emean Esdev EOmean EOsdev"

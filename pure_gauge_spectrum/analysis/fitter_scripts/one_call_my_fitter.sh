@@ -21,6 +21,26 @@ ${En}
 $5
 EOF
 
+elif [ ${my_fitter} = "scipy_fitter_o.py"  ]
+then
+
+cat <<EOF > fitter_input.dat
+${nx}
+${nt}
+${beta}
+${x0}
+${stream}
+$1
+$2
+${sinks}
+${spec_type}
+$3
+$4
+${ao}
+${Eo}
+$5
+EOF
+
 elif [ ${my_fitter} = "scipy_fitter_no.py"  ]
 then
 

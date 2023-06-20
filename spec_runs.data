@@ -46,5 +46,5 @@ LOCAL HADRONS [tmin,tmax] {chisq/dof Q} # Other info
 NON LOCAL PIONS [tmin,tmax] {chisq/dof Q} # Other info
 
 2C	mPION_5	= 0.2552(5)	[5,15] {1.236 0.27} # 1+0 trf
-	mPION_s = ???(?)	[4,15] {1.014 0.42} # 1+1 trf
-	mPION_0
+	mPION_s = 0.391(6)	[4,16] {0.993 0.44} # 1+1 trf
+	mPION_0 = 0.3690(15)	[5,15] {0.574 0.82} # 0+1 trf

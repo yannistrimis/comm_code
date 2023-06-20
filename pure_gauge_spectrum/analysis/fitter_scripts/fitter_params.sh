@@ -15,7 +15,7 @@ mass2=0.01576
 sinks="PION_0"
 
 spec_type="specnlpi"
-my_fitter_suffix="no"
+my_fitter_suffix="o"
 my_fitter="scipy_fitter_${my_fitter_suffix}.py"
 
 # STARTING VALUES
@@ -31,5 +31,5 @@ E1n=0.1
 
 # PARAMETERS FOR one_call_my_fitter.sh SCRIPT
 
-one_tmin=4
+one_tmin=5
 one_tmax=15
