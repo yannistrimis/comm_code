@@ -35,7 +35,7 @@ def main() :
         c2 = c1 + 2 
         f = cosh(x*c1)/cosh(x*c2)-y_av[t]/y_av[t+2]
         if t % 2 == 0 :
-            meff[t] = nsolve(f,x,1)
+            meff[t] = nsolve(f,x,0.0)
             f_write.write( '%d %f\n'%(t,meff[t]) )
     f_write.close()
 

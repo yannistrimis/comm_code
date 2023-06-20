@@ -19,6 +19,9 @@ jobid=none
 inlat=${inlat}
 u0=${u0}
 
+ani_dir="t"
+ani_xiq=${xq_0}
+
 source_start=${source_start}
 source_inc=${source_inc}
 n_sources=${n_sources}

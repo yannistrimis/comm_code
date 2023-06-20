@@ -17,7 +17,7 @@ sinks = input()
 pre_name = input()
 
 first_file = 101
-last_file = 110
+last_file = 500
 
 ens_name = vol+'b'+beta+'x'+x0+stream
 

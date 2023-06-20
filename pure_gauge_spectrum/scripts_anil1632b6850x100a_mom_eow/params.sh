@@ -13,7 +13,8 @@ set_seed=5294
 beta_name="6850"
 
 xi_0_name="100"
-xq_0_name="100"
+xq_0_name="102"
+xq_0=1.02
 
 stream="a"
 lat_name="l${nx}${nt}b${beta_name}x${xi_0_name}${stream}"

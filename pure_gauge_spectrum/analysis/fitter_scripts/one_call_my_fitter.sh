@@ -12,8 +12,6 @@ ${x0}
 ${stream}
 $1
 $2
-${source1}
-${source2}
 ${sinks}
 ${spec_type}
 $3
@@ -34,8 +32,6 @@ ${x0}
 ${stream}
 $1
 $2
-${source1}
-${source2}
 ${sinks}
 ${spec_type}
 $3
@@ -58,8 +54,6 @@ ${x0}
 ${stream}
 $1
 $2
-${source1}
-${source2}
 ${sinks}
 ${spec_type}
 $3
