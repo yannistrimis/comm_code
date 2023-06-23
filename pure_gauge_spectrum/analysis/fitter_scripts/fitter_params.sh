@@ -12,7 +12,7 @@ tmax_arr=("14" "15" "16") # tmax IS ALSO INCLUDED !!!
 mass1=0.01576
 mass2=0.01576
 
-sinks="PION_0"
+sinks="PION_i0"
 
 spec_type="specnlpi"
 my_fitter_suffix="o"
@@ -23,7 +23,7 @@ my_fitter="scipy_fitter_${my_fitter_suffix}.py"
 an=0.1
 En=0.5
 
-ao=-0.1
+ao=0.1
 Eo=0.5
 
 a1n=0.001

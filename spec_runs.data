@@ -41,13 +41,16 @@ LOCAL HADRONS [tmin,tmax] {chisq/dof Q} # Other info
 
 2B	mETA_5   = 0.5558(5)	[6,15] {1.448 0.17} # 1+0 trf 
 	mPION_5	 = 0.2554(5)	[5,15] {1.412 0.18} # 1+0 trf
-	mPION_05 = 0.372(44)	[6,16] {1.005 0.42} # 1+1 trf - The oscillating state is quite pronounced
+	mPION_05 = 0.2961(16)	[5,15] {0.925 0.49} # 1+1 trf (osc)
 	mKAON_5	 = 0.4325(5)	[5,15] {1.157 0.32} # 1+0 trf
-	mRHO_i	 = 0.74(3)	[7,16] {1.147 0.33} # 1+0 trf - The oscillating state is quite suppressed
 
 NON LOCAL PIONS [tmin,tmax] {chisq/dof Q} # Other info
 
-2C	mPION_5	= 0.2552(5)	[5,15] {1.236 0.27} # 1+0 trf
-	mPION_s = 0.391(6)	[4,16] {0.993 0.44} # 1+1 trf
-	mPION_0 = 0.3690(15)	[5,15] {0.574 0.82} # 0+1 trf
-
+2C	mPION_5	 = 0.2552(5)	[5,15] {1.236 0.27} # 1+0 trf 
+	mPION_i5 = 0.2987(7)	[5,16] {1.002 0.43} # 1+1 trf
+	mPION_s  = 0.391(6)	[4,16] {0.993 0.44} # 1+1 trf (osc)
+	mPION_0  = 0.3690(15)	[5,15] {0.574 0.82} # 0+1 trf (osc)
+	mPION_05 = 0.2963(17)	[5,15] {0.939 0.47} # 1+1 trf (osc)
+	mPION_i  = 0.364(7)	[7,15] {1.768 0.12} # 1+1 trf (osc)
+	mPION_ij = 0.333(2)	[5,15] {0.940 0.47} # 1+1 trf (osc)
+	mPION_i0 = 0.3353(12)	[5,15] {0.808 0.61} # 0+1 trf (osc)
