@@ -1,6 +1,6 @@
 #!/bin/bash
 
-n_of_lat=1
+n_of_lat=3
 
 nx=16
 ny=16
@@ -13,8 +13,8 @@ set_seed=5294
 beta_name="6850"
 
 xi_0_name="100"
-xq_0_name="102"
-xq_0=1.02
+xq_name_arr=("098" "100" "102")
+xq_arr=(0.98 1.00 1.02)
 
 stream="a"
 lat_name="l${nx}${nt}b${beta_name}x${xi_0_name}${stream}"
@@ -33,9 +33,10 @@ source_inc=16
 source_prec=7 # CHANGE ACCORDING TO nt
 
 
-nmasses=1
-mass1=0.01576
-mass1_name="01576"
+nmasses=3
+mass1=0.06
+mass2=0.08
+mass3=0.1
 
 n_of_mom=10
 moml1="100"
