@@ -1,9 +1,10 @@
 #!/bin/bash
 
-masses=("0.01576" "0.0788")
+masses=("0.0372")
 mas_len=${#masses[@]}
 
-sinks_arr=("PION_5" "PION_05" "RHO_i" "RHO_i0")
+#sinks_arr=("PION_5" "PION_05" "RHO_i" "RHO_i0")
+sinks_arr=("PION_5")
 
 source1="CORNER"
 source2="CORNER"

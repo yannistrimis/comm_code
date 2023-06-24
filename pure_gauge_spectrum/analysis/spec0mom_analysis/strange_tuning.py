@@ -1,7 +1,7 @@
 import numpy as np
 from scipy.optimize import fsolve
 
-w0 = 0.87915
+w0 = 2.1641
 a = 0.17355/w0 # FLAG 2021
 
 m_ss = 685.8 # MeV FROM 0910.1229

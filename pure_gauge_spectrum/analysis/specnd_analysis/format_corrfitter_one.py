@@ -2,10 +2,10 @@
 import numpy as np
 
 out_dir = '/mnt/home/trimisio/plot_data/spec_data'
-nx=16
-nt=32
+nx=32
+nt=64
 vol = str(nx)+str(nt)
-beta = '6850'
+beta = '7600'
 x0 = '100'
 stream = 'a'
 
@@ -17,7 +17,7 @@ sinks = input()
 pre_name = input()
 
 first_file = 101
-last_file = 500
+last_file = 300
 
 ens_name = vol+'b'+beta+'x'+x0+stream
 
