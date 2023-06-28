@@ -14,7 +14,7 @@ fi
 
 cd ${submit_dir}
 
-for i in {1..20..1}
+for i in {1..2..1}
 do
 	if [ $i -eq 1 ]
 	then
