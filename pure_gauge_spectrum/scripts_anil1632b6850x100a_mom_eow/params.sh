@@ -13,8 +13,8 @@ set_seed=5294
 beta_name="6850"
 
 xi_0_name="100"
-xq_name_arr=("098" "100" "102")
-xq_arr=(0.98 1.00 1.02)
+xq_name_arr=("100" "102")
+xq_arr=(1.00 1.02)
 
 stream="a"
 lat_name="l${nx}${nt}b${beta_name}x${xi_0_name}${stream}"
@@ -33,22 +33,16 @@ source_inc=16
 source_prec=7 # CHANGE ACCORDING TO nt
 
 
-nmasses=3
-mass1=0.06
-mass2=0.08
-mass3=0.1
+nmasses=1
+mass1=0.0788
 
-n_of_mom=10
+n_of_mom=6
 moml1="100"
 moml2="010"
 moml3="001"
 moml4="110"
 moml5="101"
 moml6="011"
-moml7="111"
-moml8="200"
-moml9="020"
-moml10="002"
 
 err=1e-6
 max_cg_iterations=300
