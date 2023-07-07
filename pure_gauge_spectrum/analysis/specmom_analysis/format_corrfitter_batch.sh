@@ -1,6 +1,6 @@
 #!/bin/bash
 
-masses=("0.01576")
+masses=("0.0788")
 mas_len=${#masses[@]}
 
 sinks_arr=("PION_5")
@@ -20,7 +20,7 @@ python format_corrfitter_one.py <<EOF
 ${mass1}
 ${mass2}
 ${sinks}
-specmomrcw_avp100
+specmomeow_xq100avp110
 EOF
 
 done # m1

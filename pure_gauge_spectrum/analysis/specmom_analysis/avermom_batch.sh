@@ -1,8 +1,9 @@
 #!/bin/bash
 
-masses=("0.01576")
+masses=("0.0788")
 mas_len=${#masses[@]}
 
+xq_arr=("100" "102")
 sinks_arr=("PION_5")
 
 for sinks in ${sinks_arr[@]}
@@ -10,7 +11,7 @@ do
 
 echo "====${sinks}===="
 
-for i_file in {101..200..1}
+for i_file in {101..101..1}
 do
 
 echo "    ${i_file}"
@@ -21,6 +22,9 @@ do
 mass1=${masses[$m1]}
 mass2=${mass1}
 
+for xq in "${xq_arr[@]}"
+do
+
 python avermom_one.py <<EOF
 ${i_file}
 ${mass1}
@@ -29,11 +33,13 @@ ${mass2}
 p100
 p010
 p001
-p100
+avp100
 ${sinks}
-specmomrcw
+$xq
+specmomeow
 EOF
 
+done # xq
 
 done # m1
 

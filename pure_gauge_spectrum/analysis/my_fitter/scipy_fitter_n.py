@@ -49,8 +49,10 @@ def main() :
  
     y_cov = np.cov(y_arr)
     y_cov = y_cov / n_of_meas # NUMPY COV RETURNS COVARIANCE OF SAMPLE, 
-    y_sdev = np.diag(y_cov)
     # WHEREAS WE NEED COVARIANCE OF THE MEAN
+    y_sdev = np.zeros(len(y_arr))
+    for i in range(len(y_sdev)):
+        y_sdev[i] = np.sqrt(y_cov[i,i])
     y_av = np.average(y_arr,axis=1)   
 
     p0 = np.array([an_start,En_start])

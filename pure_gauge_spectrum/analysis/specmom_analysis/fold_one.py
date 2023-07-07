@@ -13,13 +13,15 @@ i_file = input() # FILE NUMBER
 mass1 = input()
 mass2 = input()
 sinks = input()
+xq = input()
+mom = input()
 pre_name = input()
 
 ens_name = vol+'b'+beta+'x'+x0+stream
 
 
-f_write = open('%s/l%s/%s_foldspec_m1_%s_m2_%s_%s.%s'%(out_dir,ens_name,pre_name,mass1,mass2,sinks,i_file),'w')
-f_read = open('%s/l%s/%s_spec_m1_%s_m2_%s_%s.%s'%(out_dir,ens_name,pre_name,mass1,mass2,sinks,i_file),'r')
+f_write = open('%s/l%s/%s_xq%s%s_foldspec_m1_%s_m2_%s_%s.%s'%(out_dir,ens_name,pre_name,xq,mom,mass1,mass2,sinks,i_file),'w')
+f_read = open('%s/l%s/%s_xq%s%s_spec_m1_%s_m2_%s_%s.%s'%(out_dir,ens_name,pre_name,xq,mom,mass1,mass2,sinks,i_file),'r')
 
 content = f_read.readlines()
 re = 0.0
