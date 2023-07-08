@@ -33,6 +33,8 @@ def jackknife(arr,nbins,fl):
         
         if fl=='bins':
                 return jack_bins
+        elif fl=='normal_bins':
+                return normal_bins
         elif fl=='average':
                 return av
         elif fl=='error':

@@ -34,7 +34,7 @@ for i in range(nt) :
 
 f_read.close()
 
-write_1_re = open('%s/l%s/%s_m1_%s_m2_%s_%s.fold.jack.data'%(cur_dir,ens_name,pre_name,mass1,mass2,sinks),'w')
+write_1_re = open('%s/l%s/%s_m1_%s_m2_%s_%s.fold.bin.data'%(cur_dir,ens_name,pre_name,mass1,mass2,sinks),'w')
 write_2_re = open('%s/l%s/%s_m1_%s_m2_%s_%s.averr'%(cur_dir,ens_name,pre_name,mass1,mass2,sinks),'w')
 
 my_bin_array_re = np.zeros(( nt , n_bins ))
@@ -48,7 +48,7 @@ for j in range(n_of_files) :
         my_array_re[i,j] =  float(line[i+1])
 
 for i in range(nt) :
-    my_bin_array_re[i,:] = jackknife(my_array_re[i,:],n_bins,'bins')
+    my_bin_array_re[i,:] = jackknife(my_array_re[i,:],n_bins,'normal_bins')
     my_av_re[i] = jackknife(my_array_re[i,:],n_bins,'average')    
     my_err_re[i] = jackknife(my_array_re[i,:],n_bins,'error')
  

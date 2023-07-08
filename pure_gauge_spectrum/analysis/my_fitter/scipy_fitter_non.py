@@ -100,6 +100,7 @@ def main() :
     chi2dof = chisq_by_dof(y_av,fit_points,y_cov,dof)
     q_val = q_value(chi2dof,dof)
 
+
     if to_print == 'yes' :
         print('FIT TYPE: non  tmin = %d  tmax = %d\n'%(tmin,tmax))
         print('STARTING VALUES FOR no:\n')
