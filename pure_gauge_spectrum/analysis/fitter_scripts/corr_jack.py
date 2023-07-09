@@ -37,7 +37,11 @@ f_read.close()
 write_1_re = open('%s/l%s/%s_m1_%s_m2_%s_%s.fold.bin.data'%(cur_dir,ens_name,pre_name,mass1,mass2,sinks),'w')
 write_2_re = open('%s/l%s/%s_m1_%s_m2_%s_%s.averr'%(cur_dir,ens_name,pre_name,mass1,mass2,sinks),'w')
 
+
 my_bin_array_re = np.zeros(( nt , n_bins ))
+my_jackbin_array_re = np.zeros(( nt , n_bins ))
+
+
 my_array_re = np.zeros(( nt , n_of_files ))
 my_av_re = np.zeros(nt)
 my_err_re = np.zeros(nt) 
@@ -49,6 +53,8 @@ for j in range(n_of_files) :
 
 for i in range(nt) :
     my_bin_array_re[i,:] = jackknife(my_array_re[i,:],n_bins,'normal_bins')
+    my_jackbin_array_re[i,:] = jackknife(my_array_re[i,:],n_bins,'bins')
+
     my_av_re[i] = jackknife(my_array_re[i,:],n_bins,'average')    
     my_err_re[i] = jackknife(my_array_re[i,:],n_bins,'error')
  
@@ -65,3 +71,8 @@ for i_bin in range(n_bins) :
 write_1_re.close()
 write_2_re.close()
 
+for i_bin in range(n_bins) :
+    write_jackbin = open('%s/l%s/%s_m1_%s_m2_%s_%s.jackbin_%d'%(cur_dir,ens_name,pre_name,mass1,mass2,sinks,i_bin),'w')
+    for i in range(nt) :
+        write_jackbin.write('%.16f\n'%(my_jackbin_array_re[i,i_bin]))
+    write_jackbin.close()

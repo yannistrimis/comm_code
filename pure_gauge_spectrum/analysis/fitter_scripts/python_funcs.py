@@ -16,7 +16,7 @@ def jackknife(arr,nbins,fl):
         for i in range(nbins) :
                 jack_bins[i] = total - normal_bins[i]
                 jack_bins[i] = jack_bins[i]/(ninbin*(nbins-1))
-                
+                normal_bins[i] = normal_bins[i]/ninbin
         av = 0
         
         for i in range(nbins) :
