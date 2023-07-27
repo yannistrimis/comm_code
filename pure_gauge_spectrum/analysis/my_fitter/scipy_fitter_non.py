@@ -38,7 +38,7 @@ E1n_start = float(str_E1n)
 
 cur_dir = '/mnt/home/trimisio/plot_data/spec_data'
 
-f_read = open('%s/l%s/%s_m1_%s_m2_%s_%s.fold.data'%(cur_dir,ens_name,pre_name,mass1,mass2,sinks),'r')
+f_read = open('%s/l%s/%s_m1_%s_m2_%s_%s.fold.bin.data'%(cur_dir,ens_name,pre_name,mass1,mass2,sinks),'r')
 content = f_read.readlines()
 f_read.close()
 n_of_meas = len(content)

@@ -14,7 +14,7 @@ mass2 = input()
 sinks = input()
 pre_name = input()
 
-n_bins = 40
+n_bins = 20
 
 nt = int(lat_nt/2)+1 # QUICK SOLUTION FOR FOLDED DATA
 
