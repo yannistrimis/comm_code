@@ -14,13 +14,13 @@ mass2=0.0788
 
 sinks="PION_5"
 
-spec_type="specmomeow_xq100avp100"
-my_fitter_suffix="no"
+spec_type="specnd"
+my_fitter_suffix="n"
 my_fitter="scipy_fitter_${my_fitter_suffix}.py"
 
 # STARTING VALUES
 
-an=2600
+an=960
 En=0.5
 
 ao=0.0
