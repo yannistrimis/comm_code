@@ -21,10 +21,10 @@ last_file = 500
 
 ens_name = vol+'b'+beta+'x'+x0+stream
 
-f_write = open('%s/l%s/%s_m1_%s_m2_%s_%s.fold.data'%(out_dir,ens_name,pre_name,mass1,mass2,sinks),'w')
+f_write = open('%s/l%s/%s_m1_%s_m2_%s_%s.data'%(out_dir,ens_name,pre_name,mass1,mass2,sinks),'w')
 
 for i_file in range(first_file,last_file+1):
-    f_read = open('%s/l%s/%s_foldspec_m1_%s_m2_%s_%s.%d'%(out_dir,ens_name,pre_name,mass1,mass2,sinks,i_file),'r')
+    f_read = open('%s/l%s/%s_spec_m1_%s_m2_%s_%s.%d'%(out_dir,ens_name,pre_name,mass1,mass2,sinks,i_file),'r')
     content = f_read.readlines()
     f_write.write( 'PROP' )
     for i_line in range(len(content)) :
