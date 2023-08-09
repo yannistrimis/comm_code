@@ -3,10 +3,10 @@
 masses=("0.0788")
 mas_len=${#masses[@]}
 
-xq_arr=("100" "102")
+xq_arr=("100")
 sinks_arr=("PION_5")
 
-mom_arr=("p100" "p010" "p001" "p110" "p101" "p011")
+mom_arr=("p100" "p010" "p001")
 
 for mom in ${mom_arr[@]}
 do
@@ -19,7 +19,7 @@ do
 
 echo "====${sinks}===="
 
-for i_file in {101..101..1}
+for i_file in {101..500..1}
 do
 
 echo "    ${i_file}"

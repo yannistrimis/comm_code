@@ -4,7 +4,7 @@ masses=("0.01576")
 mas_len=${#masses[@]}
 
 #sinks_arr=("PION_5" "PION_i5" "PION_i" "PION_s" "PION_05" "PION_ij" "PION_i0" "PION_0")
-sinks_arr=("PION_5")
+sinks_arr=("PION_05")
 
 source1="eow"
 source2="eow_fw"
