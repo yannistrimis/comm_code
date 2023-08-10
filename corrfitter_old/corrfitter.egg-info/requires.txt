@@ -1,0 +1,3 @@
+gvar>=11.6
+lsqfit>=11.6
+numpy>=1.7
