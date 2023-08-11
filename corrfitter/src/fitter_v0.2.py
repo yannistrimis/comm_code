@@ -29,6 +29,8 @@ def main():
 
         dof_real = len(my_tfit)-2*N
         chi2_real = fit.chi2
+        for dict_ind, dict_val in prior.items() :
+            print(dict_val)
 
         print_results(fit,N)
 
@@ -45,8 +47,8 @@ def make_prior(N):
     prior = collections.OrderedDict()
     prior['an'] = gv.gvar(N * ['2(2)'])
     prior['log(dEn)'] = gv.log(gv.gvar(N * ['0.5(6)']))
-    babis = gv.exp(prior['log(dEn)'])[0].sdev
-    print(babis)
+#    babis = gv.exp(prior['log(dEn)'])[0].sdev
+#    print(babis)
     return prior
 
 def print_results(fit,N):
