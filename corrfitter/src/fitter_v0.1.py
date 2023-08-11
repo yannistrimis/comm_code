@@ -7,7 +7,8 @@ import corrfitter as cf
 
 def main():
     osc = 'yes'
-    file_name = '/home/trimis/hpcc/plot_data/spec_data/l1632b6850x100a/specnlpi_m1_0.01576_m2_0.01576_PION_5.data'
+#    file_name = '/home/trimis/hpcc/plot_data/spec_data/l1632b6850x100a/specnlpi_m1_0.01576_m2_0.01576_PION_5.data' # CMSE
+    file_name = '/home/yannis/Physics/LQCD/hpcc/plot_data/spec_data/l1632b6850x100a/specnlpi_m1_0.01576_m2_0.01576_PION_5.data' # LAPTOP
     data = make_data(filename=file_name)
     fitter = cf.CorrFitter(models=make_models(osc))
     p0 = None
