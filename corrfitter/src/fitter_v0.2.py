@@ -4,15 +4,16 @@ import collections
 import gvar as gv
 import numpy as np
 import corrfitter as cf
+from scipy.special import gammainc
 
 def main():
 
-#    file_name = '/home/trimis/hpcc/plot_data/spec_data/l1632b6850x100a/specnlpi_m1_0.01576_m2_0.01576_PION_5.fold.data' # CMSE
-    file_name = '/home/yannis/Physics/LQCD/hpcc/plot_data/spec_data/l1632b6850x100a/specnlpi_m1_0.01576_m2_0.01576_PION_5.fold.data' # LAPTOP
+    file_name = '/home/trimis/hpcc/plot_data/spec_data/l1632b6850x100a/specnlpi_m1_0.01576_m2_0.01576_PION_5.fold.data' # CMSE
+#    file_name = '/home/yannis/Physics/LQCD/hpcc/plot_data/spec_data/l1632b6850x100a/specnlpi_m1_0.01576_m2_0.01576_PION_5.fold.data' # LAPTOP
 
     data = make_data(filename=file_name)
 
-    my_tfit = range(5,17)
+    my_tfit = range(8,17)
     my_tdata = range(0,17)
 
     fitter = cf.CorrFitter(models=make_models(my_tdata,my_tfit))
@@ -29,11 +30,16 @@ def main():
 
         dof_real = len(my_tfit)-2*N
         chi2_real = fit.chi2
-        for dict_ind, dict_val in prior.items() :
-            print(dict_val)
+
+        for i_state in range(N) :
+            chi2_real = chi2_real - ( prior['an'][i_state].mean - fit.p['an'][i_state].mean )**2 / ( prior['an'][i_state].sdev )**2
+            chi2_real = chi2_real - ( gv.exp(prior['log(dEn)'])[i_state].mean - fit.p['dEn'][i_state].mean )**2 / ( gv.exp(prior['log(dEn)'])[i_state].sdev )**2
+        Q_man = 1-gammainc(0.5*fit.dof,0.5*fit.chi2)
+        Q_real = 1-gammainc(0.5*dof_real,0.5*chi2_real)
 
         print_results(fit,N)
-
+        print('[','BY-HAND GOODNESS OF FIT:',']','\n',)
+        print( 'augmented chi2/dof [dof]: %.3f [%d]\tQ = %.2f\ndeaugmented chi2/dof [dof]:  %.3f [%d]\tQ = %.2f'%(fit.chi2/fit.dof,fit.dof,Q_man,chi2_real/dof_real,dof_real,Q_real) )
 def make_data(filename):
     """ Read data, compute averages/covariance matrix for G(t). """
     return gv.dataset.avg_data(cf.read_dataset(filename))
@@ -47,8 +53,6 @@ def make_prior(N):
     prior = collections.OrderedDict()
     prior['an'] = gv.gvar(N * ['2(2)'])
     prior['log(dEn)'] = gv.log(gv.gvar(N * ['0.5(6)']))
-#    babis = gv.exp(prior['log(dEn)'])[0].sdev
-#    print(babis)
     return prior
 
 def print_results(fit,N):
