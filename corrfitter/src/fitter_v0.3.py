@@ -8,12 +8,12 @@ from scipy.special import gammainc
 
 def main():
 
-    file_name = '/home/trimis/hpcc/plot_data/spec_data/l1632b6850x100a/specnlpi_m1_0.01576_m2_0.01576_PION_05.fold.data' # CMSE
-#    file_name = '/home/yannis/Physics/LQCD/hpcc/plot_data/spec_data/l1632b6850x100a/specnlpi_m1_0.01576_m2_0.01576_PION_5.fold.data' # LAPTOP
+#    file_name = '/home/trimis/hpcc/plot_data/spec_data/l1632b6850x100a/specnlpi_m1_0.01576_m2_0.01576_PION_05.fold.data' # CMSE
+    file_name = '/home/yannis/Physics/LQCD/hpcc/plot_data/spec_data/l1632b6850x100a/specnlpi_m1_0.01576_m2_0.01576_PION_05.fold.data' # LAPTOP
 
     data = make_data(filename=file_name)
 
-    my_tfit = range(5,16)
+    my_tfit = range(10,16)
     my_tdata = range(0,17)
 
     fitter = cf.CorrFitter(models=make_models(my_tdata,my_tfit))
@@ -45,7 +45,7 @@ def main():
 
             print_results(fit,N,M)
             print('[','BY-HAND GOODNESS OF FIT:',']','\n',)
-            print( 'augmented chi2/dof [dof]: %.3f [%d]\tQ = %.2f\ndeaugmented chi2/dof [dof]:  %.3f [%d]\tQ = %.2f'%(fit.chi2/fit.dof,fit.dof,Q_man,chi2_real/dof_real,dof_real,Q_real) )
+            print( 'augmented chi2/dof [dof]: %.3f [%d]\tQ = %.3f\ndeaugmented chi2/dof [dof]:  %.3f [%d]\tQ = %.3f'%(fit.chi2/fit.dof,fit.dof,Q_man,chi2_real/dof_real,dof_real,Q_real) )
 
 def make_data(filename):
     """ Read data, compute averages/covariance matrix for G(t). """
@@ -58,10 +58,10 @@ def make_models(my_tdata,my_tfit):
 def make_prior(N,M):
     """ Create prior for N-state fit. """
     prior = collections.OrderedDict()
-    prior['an'] = gv.gvar(N * ['0.5(20)'])
-    prior['log(dEn)'] = gv.log(gv.gvar(N * ['0.5(20)']))
-    prior['ao'] = gv.gvar(M * ['2(10)'])
-    prior['log(dEo)'] = gv.log(gv.gvar(M * ['0.5(10)']))
+    prior['an'] = gv.gvar(N * ['0.001(10.0)'])
+    prior['log(dEn)'] = gv.log(gv.gvar(N * ['0.5(5.0)']))
+    prior['ao'] = gv.gvar(M * ['0.4(1.0)'])
+    prior['log(dEo)'] = gv.log(gv.gvar(M * ['0.29(1.0)']))
     return prior
 
 def print_results(fit,N,M):
@@ -72,13 +72,10 @@ def print_results(fit,N,M):
     Eo = np.cumsum(p['dEo'])
     ao = p['ao']
 
-"""     if N >= 2 :
-        print('{:2}  {:15}  {:15}'.format('Eo', Eo[0], Eo[1]))
-        print('{:2}  {:15}  {:15}\n'.format('ao', ao[0], ao[1]))
-
-    elif N == 1 :
-        print('{:2}  {:15}'.format('Eo', Eo[0]))
-        print('{:2}  {:15}\n'.format('ao', ao[0])) """
+    for i_state in range(N) :
+        print('an[%d] = %s\t En[%d] = %s\n'%(i_state,an[i_state],i_state,En[i_state]))
+    for j_state in range(M) :
+        print('ao[%d] = %s\t Eo[%d] = %s\n'%(j_state,ao[j_state],j_state,Eo[j_state]))
 
 
 if __name__ == '__main__':
