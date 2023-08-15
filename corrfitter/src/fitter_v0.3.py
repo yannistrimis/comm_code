@@ -9,11 +9,11 @@ from scipy.special import gammainc
 def main():
 
 #    file_name = '/home/trimis/hpcc/plot_data/spec_data/l1632b6850x100a/specnlpi_m1_0.01576_m2_0.01576_PION_05.fold.data' # CMSE
-    file_name = '/home/yannis/Physics/LQCD/hpcc/plot_data/spec_data/l1632b6850x100a/specnlpi_m1_0.01576_m2_0.01576_PION_05.fold.data' # LAPTOP
+    file_name = '/home/yannis/Physics/LQCD/hpcc/plot_data/spec_data/l1632b6850x100a/specnlpi_m1_0.01576_m2_0.01576_PION_5.fold.data' # LAPTOP
 
     data = make_data(filename=file_name)
 
-    my_tfit = range(10,16)
+    my_tfit = range(5,16)
     my_tdata = range(0,17)
 
     fitter = cf.CorrFitter(models=make_models(my_tdata,my_tfit))
@@ -22,7 +22,7 @@ def main():
 
     print('data from: ',file_name)
     for N in [1]:
-        for M in [1]:
+        for M in [0]:
             print(30 * '=', 'nterm =', N,M)
             prior = make_prior(N,M)
             fit = fitter.lsqfit( data=data, prior=prior, p0=p0 )
@@ -58,10 +58,10 @@ def make_models(my_tdata,my_tfit):
 def make_prior(N,M):
     """ Create prior for N-state fit. """
     prior = collections.OrderedDict()
-    prior['an'] = gv.gvar(N * ['0.001(10.0)'])
-    prior['log(dEn)'] = gv.log(gv.gvar(N * ['0.5(5.0)']))
-    prior['ao'] = gv.gvar(M * ['0.4(1.0)'])
-    prior['log(dEo)'] = gv.log(gv.gvar(M * ['0.29(1.0)']))
+    prior['an'] = gv.gvar(N * ['0.0(100.0)'])
+    prior['log(dEn)'] = gv.log(gv.gvar(N * ['0.5(10.0)']))
+    prior['ao'] = gv.gvar(M * ['0.0(100.0)'])
+    prior['log(dEo)'] = gv.log(gv.gvar(M * ['0.5(10.0)']))
     return prior
 
 def print_results(fit,N,M):
