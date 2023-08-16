@@ -8,12 +8,12 @@ from scipy.special import gammainc
 
 def main():
 
-#    file_name = '/home/trimis/hpcc/plot_data/spec_data/l1632b6850x100a/specnlpi_m1_0.01576_m2_0.01576_PION_05.fold.data' # CMSE
-    file_name = '/home/yannis/Physics/LQCD/hpcc/plot_data/spec_data/l1632b6850x100a/specnlpi_m1_0.01576_m2_0.01576_PION_5.fold.data' # LAPTOP
+    file_name = '/home/trimis/hpcc/plot_data/spec_data/l1632b6850x100a/specmomeow_xq100avp100_m1_0.0788_m2_0.0788_PION_5.fold.data_HEAD' # CMSE
+#    file_name = '/home/yannis/Physics/LQCD/hpcc/plot_data/spec_data/l1632b6850x100a/specnlpi_m1_0.01576_m2_0.01576_PION_5.fold.data' # LAPTOP
 
     data = make_data(filename=file_name)
 
-    my_tfit = range(5,16)
+    my_tfit = range(12,17)
     my_tdata = range(0,17)
 
     fitter = cf.CorrFitter(models=make_models(my_tdata,my_tfit))
@@ -46,6 +46,7 @@ def main():
             print_results(fit,N,M)
             print('[','BY-HAND GOODNESS OF FIT:',']','\n',)
             print( 'augmented chi2/dof [dof]: %.3f [%d]\tQ = %.3f\ndeaugmented chi2/dof [dof]:  %.3f [%d]\tQ = %.3f'%(fit.chi2/fit.dof,fit.dof,Q_man,chi2_real/dof_real,dof_real,Q_real) )
+    
 
 def make_data(filename):
     """ Read data, compute averages/covariance matrix for G(t). """
