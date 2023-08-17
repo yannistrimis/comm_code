@@ -42,7 +42,7 @@
 
 	my password: Ka1imera!
 
-    ssh password: gitssh
+	ssh password: gitssh
 
 	token: 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
 	
@@ -51,12 +51,12 @@
 		or if you want to add a single file/folder: git add <name of file/folder>
 		
 	(bear in mind that those files/folders should ALREADY be inside the local
-    repository directory.
+	repository directory.
 	
 	and then:	git commit -m "some message"
 
-        This commits the changes to the local repository, in the sense that if you want to go
-        back to this stage you always can; each "commit" is a snapshot.
+	This commits the changes to the local repository, in the sense that if you want to go
+	back to this stage you always can; each "commit" is a snapshot.
 
 	and finally to push to the cloud:	git push origin master
 	
@@ -68,9 +68,11 @@
 	
 	git clone <web address of the repository>
 
-    c. To check branch: git status
-    c1. To change branch: git checkout <name of target branch>
+	c. To check branch: git status
+	c1. To change branch: git checkout <name of target branch>
 
+	d. EVERY TIME YOU WANT TO CLONE TO NEW MACHINE YOU HAVE TO CREATE AN AUTHENTICATION
+	   A SIGNING KEY (LOOK GIT DOCUMENTATION)
 
 
 
