@@ -37,6 +37,8 @@ g.	In order to submit a job to the queue, you have to use a script <SCRIPT_NAME>
 	That is the most minimal version. Then, to run the script use: sbatch <SCRIPT_NAME>.sb
 
 h.	In order to check the queue run: sq
+h1.	In order to check CPU time used/left, type: SLURMUsage
+
 
 i.	In order to check CPU time and memory left, run: quota
 

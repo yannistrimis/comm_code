@@ -3,9 +3,9 @@
 init_seed=1158
 n_of_lat=2
 
-nx=16
-ny=16
-nz=16
+nx=4
+ny=4
+nz=4
 nt=16
 
 # MILC convention in the improved action is: beta=10/g^2
@@ -36,16 +36,15 @@ ensemble="${nx}${nt}b${beta_name}x${xi_0_name}${stream}"
 lat_name="l${ensemble}"
 out_name="out${ensemble}"
 
-directory="/home/trimisio/lattices/${lat_name}"
-out_dir="/home/trimisio/outputs/${lat_name}"
-path_build="/home/trimisio/all/comm_code/fnal_code/pure_gauge_ani_generation/build"
-run_dir="/home/trimisio/runs/rungen${lat_name}"
-submit_dir="/home/trimisio/submits/subgen${lat_name}"
+directory="/mnt/scratch/trimisio/lattices/${lat_name}"
+out_dir="/mnt/home/trimisio/outputs/${lat_name}"
+path_build="/mnt/home/trimisio/comm_code/pure_gauge_ani_generation/build"
+run_dir="/mnt/scratch/trimisio/runs/rungen${lat_name}"
+submit_dir="/mnt/home/trimisio/submits/subgen${lat_name}"
 
 sbatch_time="00:30:00"
-sbatch_nodes=1
-sbatch_tasks=4
+sbatch_ntasks=4
 sbatch_jobname="test"
-sbatch_module="intel"
+sbatch_module="intel/2020b"
 
 erase="no"

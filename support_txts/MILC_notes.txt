@@ -25,3 +25,6 @@ e.g. set   CC = icc   in ../libraries/Make_vanilla
 Note: by default MILC may use more modern OneAPI version of
 intel compiler, icx, replace with icc.
 
+=== PURE GAUGE GENERATION ===
+
+0.   symzk0 refers to tree-level improved, symzk1 refers to 1-loop improved
