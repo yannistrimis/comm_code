@@ -1,5 +1,8 @@
 #!/bin/bash
 
+cluster="icer"
+#cluster="fnal"
+
 init_seed=1158
 n_of_lat=2
 
@@ -36,6 +39,9 @@ ensemble="${nx}${nt}b${beta_name}x${xi_0_name}${stream}"
 lat_name="l${ensemble}"
 out_name="out${ensemble}"
 
+if []
+then
+
 directory="/mnt/scratch/trimisio/lattices/${lat_name}"
 out_dir="/mnt/home/trimisio/outputs/${lat_name}"
 path_build="/mnt/home/trimisio/comm_code/pure_gauge_ani_generation/build"
@@ -47,4 +53,19 @@ sbatch_ntasks=4
 sbatch_jobname="test"
 sbatch_module="intel/2020b"
 
-erase="no"
+elif []
+then
+
+directory="/home/trimisio/lattices/${lat_name}"
+out_dir="/home/trimisio/outputs/${lat_name}"
+path_build="/home/trimisio/all/comm_code/fnal_code/pure_gauge_ani_generation/build"
+run_dir="/home/trimisio/runs/rungen${lat_name}"
+submit_dir="/home/trimisio/submits/subgen${lat_name}"
+
+sbatch_time="00:30:00"
+sbatch_nodes=1
+sbatch_ntasks=4
+sbatch_jobname="test"
+sbatch_module="intel"
+
+fi

@@ -25,6 +25,9 @@ fi
 
 cd ${submit_dir}
 
+if []
+then
+
 cat <<EOF > ${submit_dir}/submit_script.sb
 #!/bin/bash
 
@@ -39,6 +42,30 @@ module load ${sbatch_module}
 bash ${path}/control_script.sh ${path}
 
 EOF
+
+elif []
+then
+
+cat <<EOF > ${submit_dir}/submit_script.sb
+#!/bin/bash
+
+#SBATCH --time=${sbatch_time}
+#SBATCH --partition=lq1csl
+#SBATCH --nodes=${sbatch_nodes}
+#SBATCH --ntasks=${sbatch_ntasks}
+#SBATCH -A ahisq
+#SBATCH --qos=normal
+
+#SBATCH --job-name=${sbatch_jobname}
+
+module purge
+module load ${sbatch_module}
+
+bash ${path}/control_script.sh ${path}
+
+EOF
+
+fi
 
 for i in {1..2..1}
 do

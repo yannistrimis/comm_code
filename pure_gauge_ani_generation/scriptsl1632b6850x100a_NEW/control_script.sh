@@ -5,17 +5,17 @@ source ${path}/params.sh
 
 # guard FILE CONTAINS NUMBER AND SEED OF NEXT LATTICE TO BE PRODUCED
 
-if [ -f "${directory}/guard" ]
+if [ -f "${submit_dir}/guard" ]
 then
 
-i_lat=$(head -n 1 "${directory}/guard" | tail -n 1)
-seed=$(head -n 2 "${directory}/guard" | tail -n 1)
+i_lat=$(head -n 1 "${submit_dir}/guard" | tail -n 1)
+seed=$(head -n 2 "${submit_dir}/guard" | tail -n 1)
 
 else
 
 i_lat=1
 seed=${init_seed}
-cat << EOF > "${directory}/guard"
+cat << EOF > "${submit_dir}/guard"
 ${i_lat}
 ${seed}
 EOF
@@ -56,7 +56,7 @@ then
 n_produced=$((${n_produced}+1))
 i_lat=$(($i_lat+1))
 seed=$((${seed}+1))
-cat << EOF > "${directory}/guard"
+cat << EOF > "${submit_dir}/guard"
 ${i_lat}
 ${seed}
 EOF
