@@ -40,6 +40,7 @@ if how_input=="0" :
 
 f_write = open( '/mnt/home/trimisio/plot_data/flow_data/data_sflow%sb%sx%sxf%sdt%sobs_%s'%(vol,beta,x0,xf_vec[i_xf_rec],dt,obs_type) , 'w' )
 f_write.write( '#tau #Et #Et_err #Es #Es_err #dEt #dEt_err #dEs #dEs_err #ratio #ratio_err\n' )
+
 i_xf = -1
 for xf in xf_vec:	
 	i_xf = i_xf + 1
@@ -60,11 +61,12 @@ for xf in xf_vec:
 			dEs_arr = np.zeros(( n_steps , n_files , len(xf_vec) ))
 			dEt_arr = np.zeros(( n_steps , n_files , len(xf_vec) ))
 			ratio_arr = np.zeros(( n_steps , n_files , len(xf_vec) ))
+
 		i_time = 0
 		for i_line in range(len(content)):
 			my_line = content[ i_line ].split(' ')
 			if my_line[0] == 'RUNNING': # FOR SECURITY
-                		break
+                break
 			if my_line[0] == 'GFLOW:' :
 				if i_file == first_file and i_xf == 0 : #the tau_array will be the same for all, so we form it once
 					tau_arr[i_time] = float( my_line[1] )
@@ -83,16 +85,20 @@ for xf in xf_vec:
 
 		dEt_arr[:,i,i_xf] = deriv( Et_arr[:,i,i_xf] , float(dt) )
 		dEs_arr[:,i,i_xf] = deriv( Es_arr[:,i,i_xf] , float(dt) )
-### WE WILL OMIT THE FIRST ELEMENT FOR IT WOULD LEAD TO DIVISION BY ZERO
+
 		for i_time in range(0,n_steps) :
 			dEt_arr[i_time,i,i_xf] = dEt_arr[i_time,i,i_xf] * tau_arr[i_time]	
 			dEs_arr[i_time,i,i_xf] = dEs_arr[i_time,i,i_xf] * tau_arr[i_time]
 			if i_time>0 :
-				ratio_arr[i_time,i,i_xf] = (dEs_arr[i_time,i,i_xf])/(dEt_arr[i_time,i,i_xf])
+				ratio_arr[i_time,i,i_xf] = (dEs_arr[i_time,i,i_xf])/(dEt_arr[i_time,i,i_xf]) # WE OMIT THE FIRST ELEMENT; DIVISION BY ZERO
+
+### AT THIS STAGE dES AND RATIO MEASUREMENT POINTS HAVE BEEN FORMED
+
 dEs_binned = np.zeros( ( n_steps , n_bins , len(xf_vec) ) )
 ratio_binned = np.zeros( ( n_steps , n_bins , len(xf_vec) ) )
 dEs_weight = np.zeros( ( n_steps , len(xf_vec) ) )
 ratio_weight = np.zeros( ( n_steps , len(xf_vec) ) )
+
 for i_xf in range(len(xf_vec)):
 	for i_time in range(n_steps):	
 		dEs_binned[i_time,:,i_xf] = jackknife(dEs_arr[i_time,:,i_xf],n_bins,'bins')
@@ -102,6 +108,10 @@ for i_xf in range(len(xf_vec)):
 		if i_time > 0: # the first elements are not going to be needed anyways
 			dEs_weight[i_time,i_xf] = 1/(dEs_error)
 			ratio_weight[i_time,i_xf] = 1/(ratio_error)
+
+### AT THIS STAGE dES AND RATIO HAVE BEEN BINNED SO THAT JACKKNIFE PROCESS
+### CAN BE APPLIED ON THEM
+
 for i_time in range(n_steps):
 	Et_rec = jackknife(Et_arr[i_time,:,i_xf_rec],n_bins,'average')
 	Et_err_rec = jackknife(Et_arr[i_time,:,i_xf_rec],n_bins,'error')
@@ -120,6 +130,9 @@ del Es_arr
 del dEt_arr	
 del dEs_arr
 del ratio_arr	
+
+### AT THIS STAGE QUANTITES HAVE BEEN RECORDED FOR A SELECTED xf
+
 w0_arr = np.zeros( ( n_bins , len(xf_vec) ) )
 for i_xf in range(len(xf_vec)):
 	for i_bins in range(n_bins):
@@ -140,7 +153,9 @@ for i_xf in range(len(xf_vec)):
 			if solutions[ii] < tau_arr[clos_i+1] and solutions[ii] > tau_arr[clos_i-1] :
 				w0_arr[i_bins,i_xf] = np.real(solutions[ii])
 				break
-### AT THIS STAGE WE HAVE w0 POINTS
+
+### AT THIS STAGE WE HAVE w0 POINTS FOR EACH BIN
+
 ratio_val_arr = np.zeros( ( n_bins , len(xf_vec) ) )
 i_xf = -1
 for xf_float in xf_float_vec:
@@ -160,19 +175,27 @@ for xf_float in xf_float_vec:
 		ratio_val_arr[i_bins,i_xf] = np.real( np.polyval( coeffs , w0_arr[i_bins,i_xf] ) )
 del coeffs
 del solutions
-### AT THIS STAGE WE HAVE THE RATIO POINTS.
-### WE WILL CONSTRUCT #n_files FINAL SCALE AND ANISOTROPY VALUES ON OUR BINS.
+
+### AT THIS STAGE WE HAVE THE RATIO POINTS FOR EACH BIN
+
+### WE WILL CONSTRUCT FINAL SCALE AND ANISOTROPY VALUES ON OUR BINS.
+
 xi_g = np.zeros( n_bins )
 w0  = np.zeros( n_bins )
 for i_bins in range(n_bins):
 	coeffs = np.polyfit( xf_float_vec , ratio_val_arr[i_bins,:] , 1 ) # LINEAR FIT FOR SECURITY
 	coeffs[1] = coeffs[1] - 1.0
 	xi_g[ i_bins ] = np.real( np.roots(coeffs) )
-### AT THIS STAGE WE HAVE THE RENORMALIZED ANISOTROPY.	
+
+### AT THIS STAGE WE HAVE THE RENORMALIZED ANISOTROPY FOR EACH BIN
+
 	coeffs2 = np.polyfit( xf_float_vec , w0_arr[i_bins,:] , 2 )
 	w0[ i_bins ] = np.real( np.polyval( coeffs2 , xi_g[i_bins] ) )
 	w0[ i_bins ] = np.sqrt( w0[ i_bins ]  )		
+
+### AT THIS STAGE WE HAVE w0 FOR EACH BIN
 ### JACKKNIFE AVERAGING AND ERROR FOR SCALE AND ANISOTROPY FOLLOWS
+
 w0_av = 0
 xi_g_av = 0
 for i in range(n_bins) :
