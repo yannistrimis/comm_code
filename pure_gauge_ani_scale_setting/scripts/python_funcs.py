@@ -59,16 +59,16 @@ def jackknife_for_binned(arr):
 
 	avg = 0.0
 	err = 0.0
-
 	n_bins = len(arr)
 
 	for i in range(n_bins) :
-        avg = avg + arr[i] 
+		avg = avg + arr[i] 
+	
 	avg = avg / n_bins
 
 	err = 0
 	for i in range(n_bins) :
-        err = err + (arr[i]-avg)**2
+		err = err + (arr[i]-avg)**2
 
 	err = err*(n_bins-1)/n_bins
 	err = np.sqrt(err)

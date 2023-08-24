@@ -10,6 +10,7 @@ cur_dir = '/mnt/home/trimisio/outputs'
 vol = '1632'
 beta = '6850'
 xf = '200'
+xf_float = 2.0
 stream = 'a'
 flow_type = 's'
 obs_type = 'clover'
@@ -19,26 +20,9 @@ dt = '0.015625'
 n_files = 400
 first_file =101
 n_bins = 40
-i_x0_rec = 2 # WHICH ONE OF THE BARE ANISOTROPIES TO PICK FOR RECORDING
+i_x0_rec = 0 # WHICH ONE OF THE BARE ANISOTROPIES TO PICK FOR RECORDING
 
-how_input = input("type 0 for by-hand input or 1 for in-script values: ") 
-if how_input=="0" :
-    cur_dir = input()
-    vol = input() 
-    beta = input() 
-    xf = input() 
-    stream = input() 
-    flow_type = input() 
-    obs_type = input() 
-    x0_vec = input() 
-    x0_float_vec = input() 
-    dt = input() 
-    n_files = int(input())
-    first_file = int(input())
-    n_bins = int(input()) 
-    i_x0_rec = int(input()) # WHICH ONE OF THE BARE ANISOTROPIES TO PICK FOR RECORDING
-
-f_write = open( '/mnt/home/trimisio/plot_data/flow_data/data_wupnew_sflow%sb%sx%sxf%sdt%sobs_%s'%(vol,beta,x0[i_x0_rec],xf,dt,obs_type) , 'w' )
+f_write = open( '/mnt/home/trimisio/plot_data/flow_data/data_wupnew_sflow%sb%sx%sxf%sdt%sobs_%s'%(vol,beta,x0_vec[i_x0_rec],xf,dt,obs_type) , 'w' )
 f_write.write( '#tau #Et #Et_err #Es #Es_err #dEt #dEt_err #dEs #dEs_err\n' )
 
 i_x0 = -1
@@ -85,7 +69,7 @@ for x0 in x0_vec :
         dEs_arr[:,i,i_x0] = deriv( Es_arr[:,i,i_x0] , float(dt) )
 
         for i_time in range(0,n_steps) :
-            dEt_arr[i_time,i,i_x0] = xf**2 * dEt_arr[i_time,i,i_x0] * tau_arr[i_time]	
+            dEt_arr[i_time,i,i_x0] = xf_float**2 * dEt_arr[i_time,i,i_x0] * tau_arr[i_time]	
             dEs_arr[i_time,i,i_x0] = dEs_arr[i_time,i,i_x0] * tau_arr[i_time]
 
 ### AT THIS STAGE dES AND dEt MEASUREMENT POINTS HAVE BEEN FORMED
@@ -100,8 +84,8 @@ for i_x0 in range(len(x0_vec)):
     for i_time in range(n_steps):   
         dEs_binned[i_time,:,i_x0] = jackknife(dEs_arr[i_time,:,i_x0],n_bins,'bins')
         dEs_error = jackknife(dEs_arr[i_time,:,i_x0],n_bins,'error')
-        dEt_binned[i_time,:,i_x0] = jackknife(dEs_arr[i_time,:,i_x0],n_bins,'bins')
-        dEt_error = jackknife(dEs_arr[i_time,:,i_x0],n_bins,'error')
+        dEt_binned[i_time,:,i_x0] = jackknife(dEt_arr[i_time,:,i_x0],n_bins,'bins')
+        dEt_error = jackknife(dEt_arr[i_time,:,i_x0],n_bins,'error')
 
         if i_time > 0: # the first elements are not going to be needed anyways
             dEs_weight[i_time,i_x0] = 1/(dEs_error)
@@ -145,9 +129,9 @@ for i_x0 in range(len(x0_vec)):
             x_points[j] = tau_arr[clos_i+k]
             w_points[j] = dEs_weight[clos_i+k,i_x0]
 
-        coeffs = np.polyfit(x_points,y_points,4,w=w_points)
-        coeffs[4] = coeffs[4] - 0.15
-        solutions = np.roots(coeffs)
+        coeffs = np.polyfit(x_points,y_points,2,w=w_points)
+        coeffs[2] = coeffs[2] - 0.15
+        solutions = np.roots(coeffs)        
         for ii in range( len(solutions) ): # FOR SECURITY
             if solutions[ii] < tau_arr[clos_i+1] and solutions[ii] > tau_arr[clos_i-1] :
                 w0s_arr[i_bins,i_x0] = np.real(solutions[ii])
@@ -165,13 +149,19 @@ for i_x0 in range(len(x0_vec)):
             x_points[j] = tau_arr[clos_i+k]
             w_points[j] = dEt_weight[clos_i+k,i_x0]
 
-        coeffs = np.polyfit(x_points,y_points,4,w=w_points)
-        coeffs[4] = coeffs[4] - 0.15
+        coeffs = np.polyfit(x_points,y_points,2,w=w_points)
+        coeffs[2] = coeffs[2] - 0.15
         solutions = np.roots(coeffs)
         for ii in range( len(solutions) ): # FOR SECURITY
             if solutions[ii] < tau_arr[clos_i+1] and solutions[ii] > tau_arr[clos_i-1] :
                 w0t_arr[i_bins,i_x0] = np.real(solutions[ii])
                 break
+
+### START DEBUGGING
+# for i_bins in range(n_bins):
+#     print(w0s_arr[i_bins,1],w0t_arr[i_bins,1])
+### END DEBUGGING
+
 
 ### AT THIS STAGE WE HAVE w0s AND w0t POINTS PER x0 PER BIN
 
@@ -181,26 +171,33 @@ ratio_weights = np.zeros( len(x0_vec) )
 for i_x0 in range(len(x0_vec)):
     for i_bins in range(n_bins):
         ratios[i_bins,i_x0] = w0s_arr[i_bins,i_x0]/w0t_arr[i_bins,i_x0]
-    ratio_weights = 1.0 / jackknife_for_binned(ratios[:,i_x0])[1]
+    ratio_weights[i_x0] = 1.0 / jackknife_for_binned(ratios[:,i_x0])[1]
+
+### START DEBUGGING
+# for i_bins in range(n_bins):
+#     print(ratios[i_bins,1],ratio_weights[1])
+### END DEBUGGING
+
 
 ### AT THIS STAGE WE HAVE RATIO POINTS AND WEIGHTS PER x0 PER BIN
 
 predicted_x0_binned = np.zeros(n_bins)
 for i_bins in range(n_bins):
-    coeffs = np.polyfit(x0_float_vec,ratios[i_bins,i_x0],4,w=ratio_weights)
-    coeffs[4] = coeffs[4] - 1.0
+    coeffs = np.polyfit(x0_float_vec,ratios[i_bins,:],1,w=ratio_weights)
+    coeffs[1] = coeffs[1] - 1.0
     solutions = np.roots(coeffs)
-        for ii in range( len(solutions) ): # FOR SECURITY
-            if solutions[ii] < ( x0_float_vec[len(x0_float_vec)-1] + 0.5 ) and solutions[ii] > ( x0_float_vec[0] - 0.5 ) :
-                predicted_x0_binned[i_bins] = np.real(solutions[ii])
-                break
+    for ii in range( len(solutions) ): # FOR SECURITY
+        if solutions[ii] < ( x0_float_vec[len(x0_float_vec)-1] + 0.5 ) and solutions[ii] > ( x0_float_vec[0] - 0.5 ) :
+            predicted_x0_binned[i_bins] = np.real(solutions[ii])
+            break
 
 predicted_x0 = jackknife_for_binned(predicted_x0_binned)
 
 print(predicted_x0[0],predicted_x0[1])
 
 
-
-
-
-
+### START DEBUGGING 
+# for i_x0 in range(len(x0_vec)) :
+#     rat = jackknife_for_binned( ratios[:,i_x0] )
+#     print(rat)
+### END DEBUGGING
