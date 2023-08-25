@@ -122,7 +122,7 @@ void measurements(){
     int t_size = sizeof(t_wl)/sizeof(int);   
 
     plaq = plaquette();
-    printf(" %lf",plaq); /*I LEAVE GAP FIRST BECAUSE COUNTER IS PRINTED BY update() FUNCTION*/
+    printf(" %lf",plaq); // I LEAVE GAP FIRST BECAUSE COUNTER IS PRINTED BY update() FUNCTION
 
     #ifdef show_wilson_loop
     for(int ir=0;ir<r_size;ir++){

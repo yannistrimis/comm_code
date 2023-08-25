@@ -17,7 +17,7 @@ for i in ${!beta_arr[@]}; do
 beta=${beta_arr[$i]}
 beta_str=${beta_str_arr[$i]}
 seed=$((${seed}+1))
-out_name="${my_dir}/l${nx}${nt}b${beta_str}_plaq"
+out_name="${my_dir}/out.l${nx}${nt}b${beta_str}"
 
 cat <<EOF > input.dat
 seed = ${seed}
