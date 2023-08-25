@@ -1,13 +1,13 @@
 #!/bin/bash
 
 my_dir="/home/yannis/Physics/LQCD/pure_u1/data" # LAPTOP
-beta_arr=(0.125 0.25 0.5 1.0 2.0  4.0)
-beta_str_arr=("125" "250" "500" "1000" "2000" "4000")
+beta_arr=(0.5)
+beta_str_arr=("5000")
 
 seed=7832
 nx=8
 nt=8
-n_of_lat=100
+n_of_lat=2
 trajectories=4
 d_hot=1.0
 d_update=0.1
@@ -20,6 +20,7 @@ seed=$((${seed}+1))
 out_name="${my_dir}/out.l${nx}${nt}b${beta_str}"
 
 cat <<EOF > input.dat
+to_print = 1
 seed = ${seed}
 nx = ${nx}
 nt = ${nt}
@@ -33,4 +34,4 @@ EOF
 cat input.dat | ./pure_u1 > ${out_name} 
 echo "${beta_str} done"
 
-done
+done # betas

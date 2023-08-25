@@ -115,8 +115,8 @@ void measurements(){
     double plaq;
     wl_struct wl;
 
-    int r_wl[6] = {1,2,3,4,5,6};
-    int t_wl[8] = {1,2,3,4,5,6,7,8};
+    int r_wl[6] = {1,2};
+    int t_wl[8] = {1,2};
 
     int r_size = sizeof(r_wl)/sizeof(int);
     int t_size = sizeof(t_wl)/sizeof(int);   
@@ -145,6 +145,12 @@ double plaquette(){
 
 
 wl_struct wilson_loop(int r, int t){
+
+// THIS FUNCTION FIRST MEASURES THE LINE THAT
+// GOES FORWARD IN THE TIME DIRECTION. THEN IT CLOSES
+// THE LOOP IN ALL 3 SPATIAL WAYS. IT DOES THAT FOR EVERY POINT
+// AND IN THE END DIVIDES BY 3*VOLUME.
+    
     wl_struct wl;
 
     double tf;
@@ -155,30 +161,19 @@ wl_struct wilson_loop(int r, int t){
 
     int cursor;
     int milestone;
-    // int* helper; 
+ 
     wl.re = 0.0;
     wl.im = 0.0;
 
     for(int ind=0;ind<vol;ind++){
         tf = 0.0;
-        // printf("=======NEW POINT========\n");
+
         cursor = ind;
-        // helper = ind_to_vec(cursor);
-        // printf("START AT ( ");
-        // for(int gg=0;gg<4;gg++){
-        //     printf("%d ",*(helper+gg));
-        // }
-        // printf(")\n");
         for(int it=0;it<t;it++){
             tf = tf + lattice[3][cursor];
             cursor = nn(cursor,3);
         }
-        // helper = ind_to_vec(cursor);
-        // printf("MILESTONE AT ( ");
-        // for(int gg=0;gg<4;gg++){
-        //     printf("%d ",*(helper+gg));
-        // }
-        // printf(")\n");
+
         milestone = cursor;
         for(int a=0;a<3;a++){
             tb = 0.0;
@@ -190,32 +185,17 @@ wl_struct wilson_loop(int r, int t){
                 sf = sf + lattice[a][cursor];
                 cursor = nn(cursor,a);
             }
-            // helper = ind_to_vec(cursor);
-            // printf("2ND TURN AT ( ");
-            // for(int gg=0;gg<4;gg++){
-            //     printf("%d ",*(helper+gg));
-            // }
-            // printf(")\n");
+
             for(int it=0;it<t;it++){
                 cursor = pnn(cursor,3);
                 tb = tb - lattice[3][cursor];
             }
-            // helper = ind_to_vec(cursor);
-            // printf("3RD TURN AT ( ");
-            // for(int gg=0;gg<4;gg++){
-            //     printf("%d ",*(helper+gg));
-            // }
-            // printf(")\n");
+
             for(int ix=0;ix<r;ix++){
                 cursor = pnn(cursor,a);
                 sb = sb - lattice[a][cursor];
             }
-            // helper = ind_to_vec(cursor);
-            // printf("END AT ( ");
-            // for(int gg=0;gg<4;gg++){
-            //     printf("%d ",*(helper+gg));
-            // }
-            // printf(")\n=NEW DIRECTION=\n");            
+       
             loop = tf + sf + tb + sb;
             wl.re = wl.re + cos(loop);
             wl.im = wl.im + sin(loop);

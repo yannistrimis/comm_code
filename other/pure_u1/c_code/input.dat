@@ -1,8 +1,8 @@
-seed = 311
+seed = 7833
 nx = 8
 nt = 8
-beta = 2.0
-n_of_lat = 20
-trejectories = 1
+beta = 0.5
+n_of_lat = 2
+trajectories = 4
 d_hot = 1.0
 d_update = 0.1

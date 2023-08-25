@@ -17,12 +17,12 @@ double d_update;
 
 int main(void){
 
+    int to_print;
     int n_of_lat;
     int traj;
     int my_seed;
     double d_hot;
-
-    scanf("to print input (yes/no) = %s\n",&to_print)
+//    scanf("to_print = %d\n",&to_print);
     scanf("seed = %d\n",&my_seed);
     scanf("nx = %d\n",&nx);
     scanf("nt = %d\n",&nt);
@@ -33,17 +33,15 @@ int main(void){
     scanf("d_update = %lf\n",&d_update);
 
 
+    printf("seed = %d\n",my_seed);
+    printf("nx = %d\n",nx);
+    printf("nt = %d\n",nt);
+    printf("beta = %lf\n",beta);
+    printf("n_of_lat = %d\n",n_of_lat);
+    printf("trejectories = %d\n",traj);
+    printf("d_hot = %lf\n",d_hot);
+    printf("d_update = %lf\n",d_update);
 
-    if(to_print=="yes"){
-        printf("seed = %d\n",my_seed);
-        printf("nx = %d\n",nx);
-        printf("nt = %d\n",nt);
-        printf("beta = %lf\n",beta);
-        printf("n_of_lat = %d\n",n_of_lat);
-        printf("trejectories = %d\n",traj);
-        printf("d_hot = %lf\n",d_hot);
-        printf("d_update = %lf\n",d_update);
-    }
 
 
     vol = nx*nx*nx*nt;
@@ -72,7 +70,7 @@ int main(void){
 
     for(int i_lat=1;i_lat<=n_of_lat;i_lat++){
         update(traj); // ALSO PRINTS NUMBER OF LATTICE AND ACCEPTANCE (IF SELECTED)
-        measurements(); // PRINTS PLAQUETTE AND WILSON LOO ???
+        measurements(); // PRINTS PLAQUETTE AND WILSON LOOP
     }   
 
     for(int i=0;i<4;i++){
