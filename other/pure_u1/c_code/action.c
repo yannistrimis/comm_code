@@ -103,7 +103,7 @@ void update(int traj){
     }
     printf("%d",counter);
     counter = counter + 1;
-    
+
     #ifdef show_acceptance
     printf(" %lf",q_help);
     #endif
@@ -113,24 +113,26 @@ void update(int traj){
 
 void measurements(){
     double plaq;
-    wl_struct wl;
-
-    int r_wl[6] = {1,2};
-    int t_wl[8] = {1,2};
-
-    int r_size = sizeof(r_wl)/sizeof(int);
-    int t_size = sizeof(t_wl)/sizeof(int);   
 
     plaq = plaquette();
     printf(" %lf",plaq); // I LEAVE GAP FIRST BECAUSE COUNTER IS PRINTED BY update() FUNCTION
 
     #ifdef show_wilson_loop
+
+    wl_struct wl;
+    // SIZES OF WILSON LOOPS ARE DEFINED HERE:
+    int r_wl[1] = {2};
+    int t_wl[2] = {2,3};
+
+    int r_size = sizeof(r_wl)/sizeof(int);
+    int t_size = sizeof(t_wl)/sizeof(int);
     for(int ir=0;ir<r_size;ir++){
         for(int it=0;it<t_size;it++){
             wl = wilson_loop(r_wl[ir],t_wl[it]);
             printf(" %lf %lf",wl.re,wl.im);
         }
     }
+
     #endif
 
     printf("\n");
@@ -150,7 +152,7 @@ wl_struct wilson_loop(int r, int t){
 // GOES FORWARD IN THE TIME DIRECTION. THEN IT CLOSES
 // THE LOOP IN ALL 3 SPATIAL WAYS. IT DOES THAT FOR EVERY POINT
 // AND IN THE END DIVIDES BY 3*VOLUME.
-    
+
     wl_struct wl;
 
     double tf;
@@ -161,7 +163,7 @@ wl_struct wilson_loop(int r, int t){
 
     int cursor;
     int milestone;
- 
+
     wl.re = 0.0;
     wl.im = 0.0;
 
@@ -195,7 +197,7 @@ wl_struct wilson_loop(int r, int t){
                 cursor = pnn(cursor,a);
                 sb = sb - lattice[a][cursor];
             }
-       
+
             loop = tf + sf + tb + sb;
             wl.re = wl.re + cos(loop);
             wl.im = wl.im + sin(loop);
