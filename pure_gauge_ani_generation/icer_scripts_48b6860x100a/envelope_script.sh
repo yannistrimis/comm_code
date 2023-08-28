@@ -26,8 +26,7 @@ fi
 bash ${path}/make_submit.sh ${path}
 cd ${submit_dir}
 
-for i in {1..2..1}
-do
+for (( i=0; i<${n_of_sub}; i++ )); do
 
 if [ $i -eq 1 ]
 then

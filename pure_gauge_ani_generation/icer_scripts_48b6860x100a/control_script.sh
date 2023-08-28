@@ -44,7 +44,7 @@ fi
 bash ${path}/make_input.sh $i_lat $seed $path
 
 cd ${run_dir}
-srun -n ${sbatch_ntasks} ${path_build}/su3_ora_symzk0_a_dbl_icc_20230821 ${submit_dir}/input ${file_name}
+srun -n ${sbatch_ntasks} ${path_build}/${executable} ${submit_dir}/input ${file_name}
 cd ${submit_dir}
 
 text="Saved gauge configuration serially to binary file ${directory}/${lat_name}.${i_lat}"

@@ -21,7 +21,6 @@ warms $warms
 trajecs $trajecs
 traj_between_meas $traj_between_meas
 beta $beta_s $beta_t
-ani_dir t
 u0 $u0
 steps_per_trajectory $steps_per_trajectory
 qhb_steps $qhb_steps
@@ -44,7 +43,6 @@ warms $warms
 trajecs $trajecs
 traj_between_meas $traj_between_meas
 beta $beta_s $beta_t
-ani_dir t
 u0 $u0
 steps_per_trajectory $steps_per_trajectory
 qhb_steps $qhb_steps

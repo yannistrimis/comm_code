@@ -48,7 +48,7 @@ path_build="/mnt/home/trimisio/comm_code/pure_gauge_ani_generation/build"
 run_dir="/mnt/scratch/trimisio/runs/rungen${lat_name}"
 submit_dir="/mnt/home/trimisio/submits/subgen${lat_name}"
 
-exec="su3_ora_symzk0_a_dbl_icc_20230822_icer"
+executable="su3_ora_symzk0_a_dbl_intel_ICER_20230828"
 
 sbatch_time="00:30:00"
 sbatch_ntasks=4
@@ -64,7 +64,7 @@ path_build="/home/trimisio/all/comm_code/fnal_code/pure_gauge_ani_generation/bui
 run_dir="/home/trimisio/runs/rungen${lat_name}"
 submit_dir="/home/trimisio/submits/subgen${lat_name}"
 
-exec=""
+executable=" "
 
 sbatch_time="00:30:00"
 sbatch_nodes=1

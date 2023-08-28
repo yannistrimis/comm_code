@@ -16,7 +16,7 @@ cat <<EOF > ${submit_dir}/submit_script.sb
 module purge
 module load ${sbatch_module}
 
-bash ${path}/control_script.sh ${path}
+bash ${1}/control_script.sh ${1}
 
 EOF
 
@@ -38,7 +38,7 @@ cat <<EOF > ${submit_dir}/submit_script.sb
 module purge
 module load ${sbatch_module}
 
-bash ${path}/control_script.sh ${path}
+bash ${1}/control_script.sh ${1}
 
 EOF
 
