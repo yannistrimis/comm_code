@@ -28,7 +28,7 @@ cd ${submit_dir}
 
 for (( i=0; i<${n_of_sub}; i++ )); do
 
-if [ $i -eq 1 ]
+if [ $i -eq 0 ]
 then
 sbatch ${submit_dir}/submit_script.sb > ${submit_dir}/id_file
 prev_id=$( awk '{print $4}' ${submit_dir}/id_file )

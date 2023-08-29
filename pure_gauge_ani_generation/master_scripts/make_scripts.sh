@@ -1,28 +1,38 @@
 #!/bin/bash
 
+
+# THIS SCRIPT CREATES DIRECTORIES FOR PURE GAUGE ENSEMBLE GENERATION.
+# ALL THE PARAMETERS THAT DEFINE AN ENSEMBLE ARE PLACED IN ARRAYS OF AS MANY ELEMENTS
+# AS THE NUMBER OF ENSEMBLES TO BE GENERATED. IF A PARAMETER IS E.G. SAME IN TWO ENSEMBLES
+# THEN THE VALUE HAS TO BE REPEATED, I.E. THERE IS NO LOOP OVER INDIVIDUAL PARAMETERS, BUT 
+# ONLY OVER THE ENSEMBLES (i_ens).
+
+
+cluster="icer"
+n_of_ens=2
+
 # THE FOLLOWING ARRAYS SHOULD ALL HAVE
 # THE SAME LENGTH, EQUAL TO n_of_ens
 
-n_of_ens=1
+nx_arr=(4 4)
+nt_arr=(32 64)
 
-nx_arr=(4)
-nt_arr=(8)
+beta_s_arr=(6.86 3.43)
+beta_t_arr=(6.86 13.72)
 
-beta_s_arr=(6.860)
-beta_t_arr=(6.860)
+beta_name_arr=("6860" "6860")
+xi_0_name_arr=("100"  "200")
 
-beta_name_arr=("6860")
-xi_0_name_arr=("100")
+stream_arr=("a" "a")
 
-cluster="icer"
-sbatch_time_arr=("00:30:00")
-sbatch_nodes_arr=(1) # N/A WHEN icer IS SELECTED
-sbatch_ntasks_arr=(4)
-sbatch_jobname_arr=("gentest")
+sbatch_time_arr=("00:30:00" "00:31:00")
+sbatch_nodes_arr=(1 1)                         # N/A WHEN icer IS SELECTED
+sbatch_ntasks_arr=(4 8)
+sbatch_jobname_arr=("gentest1" "gentest2")
 
-n_of_sub=2
-n_of_lat=2
-stream="a"
+n_of_sub_arr=(2 2)
+n_of_lat_arr=(4 2)
+
 
 for (( i_ens=0; i_ens<${n_of_ens}; i_ens++ )); do
 
@@ -35,6 +45,8 @@ beta_t=${beta_t_arr[${i_ens}]}
 beta_name=${beta_name_arr[${i_ens}]}
 xi_0_name=${xi_0_name_arr[${i_ens}]}
 
+stream=${stream_arr[${i_ens}]}
+
 ensemble="${nx}${nt}b${beta_name}x${xi_0_name}${stream}"
 lat_name="l${ensemble}"
 out_name="out${ensemble}"
@@ -44,7 +56,10 @@ sbatch_nodes=${sbatch_nodes_arr[${i_ens}]} # N/A WHEN icer IS SELECTED
 sbatch_ntasks=${sbatch_ntasks_arr[${i_ens}]}        
 sbatch_jobname=${sbatch_jobname_arr[${i_ens}]}
 
-my_dir="${cluster}_scripts_${nx}${nt}b${beta_name}x${xi_0_name}${stream}"
+n_of_sub=${n_of_sub_arr[${i_ens}]}
+n_of_lat=${n_of_lat_arr[${i_ens}]}
+
+my_dir="${cluster}_scripts_${ensemble}"
 
 cd ..
 mkdir ${my_dir}
@@ -141,16 +156,15 @@ EOF
 
 fi
 
+# =====================================================================================
+# =====================================================================================
+
+
 cp control_script.sh ../${my_dir}/control_script.sh
 cp is_complete.sh ../${my_dir}/is_complete.sh
 cp make_input.sh ../${my_dir}/make_input.sh
 cp make_submit.sh ../${my_dir}/make_submit.sh
 cp envelope_script.sh ../${my_dir}/envelope_script.sh
 
-bash ../${my_dir}/envelope_script.sh
-
-
-# =====================================================================================
-# =====================================================================================
 
 done # i_ens
