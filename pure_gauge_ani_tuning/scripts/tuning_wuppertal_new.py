@@ -6,23 +6,25 @@ from matplotlib import pyplot as plt
 ### FOR PURE GAUGES ENSEMBLES. IT ALSO PRODUCES JACKKNIFE-BINNED DATA
 ### WHICH ARE STORED IN FILE FOR PLOTTING.
 
-cur_dir = '/mnt/home/trimisio/outputs'
+cur_dir = '/project/ahisq/puregauge/outputs'
+write_dir = '/home/trimisio/all/flow_data'
+
 vol = '1632'
-beta = '6850'
+beta = '7000'
 xf = '200'
 xf_float = 2.0
 stream = 'a'
-flow_type = 's'
-obs_type = 'clover'
-x0_vec = ['18900', '19300']
-x0_float_vec = [1.89, 1.93]
+flow_type = input()
+obs_type = input()
+x0_vec = ['1780','1800','1820','1840','1860','1880','1900','1920','1940']
+x0_float_vec = [1.78,1.80,1.82,1.84,1.86,1.88,1.90,1.92,1.94]
 dt = '0.015625'
 n_files = 400
 first_file =101
 n_bins = 40
 i_x0_rec = 0 # WHICH ONE OF THE BARE ANISOTROPIES TO PICK FOR RECORDING
 
-f_write = open( '/mnt/home/trimisio/plot_data/flow_data/data_wupnew_sflow%sb%sx%sxf%sdt%sobs_%s'%(vol,beta,x0_vec[i_x0_rec],xf,dt,obs_type) , 'w' )
+f_write = open( '%s/data_wupnew_%sflow%sb%sx%sxf%sdt%sobs_%s'%(write_dir,flow_type,vol,beta,x0_vec[i_x0_rec],xf,dt,obs_type) , 'w' )
 f_write.write( '#tau #Et #Et_err #Es #Es_err #dEt #dEt_err #dEs #dEs_err\n' )
 
 i_x0 = -1
@@ -183,8 +185,8 @@ for i_x0 in range(len(x0_vec)):
 
 predicted_x0_binned = np.zeros(n_bins)
 for i_bins in range(n_bins):
-    coeffs = np.polyfit(x0_float_vec,ratios[i_bins,:],1,w=ratio_weights)
-    coeffs[1] = coeffs[1] - 1.0
+    coeffs = np.polyfit(x0_float_vec,ratios[i_bins,:],2,w=ratio_weights)
+    coeffs[2] = coeffs[2] - 1.0
     solutions = np.roots(coeffs)
     for ii in range( len(solutions) ): # FOR SECURITY
         if solutions[ii] < ( x0_float_vec[len(x0_float_vec)-1] + 0.5 ) and solutions[ii] > ( x0_float_vec[0] - 0.5 ) :
@@ -193,7 +195,7 @@ for i_bins in range(n_bins):
 
 predicted_x0 = jackknife_for_binned(predicted_x0_binned)
 
-print(predicted_x0[0],predicted_x0[1])
+print(flow_type,obs_type,'x_0 = ',predicted_x0[0],' +- ',predicted_x0[1])
 
 
 ### START DEBUGGING 
