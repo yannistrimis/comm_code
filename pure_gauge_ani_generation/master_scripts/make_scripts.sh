@@ -8,30 +8,30 @@
 # ONLY OVER THE ENSEMBLES (i_ens).
 
 
-cluster="icer"
-n_of_ens=2
+cluster="fnal"
+n_of_ens=1
 
 # THE FOLLOWING ARRAYS SHOULD ALL HAVE
 # THE SAME LENGTH, EQUAL TO n_of_ens
 
-nx_arr=(4 4)
-nt_arr=(32 64)
+nx_arr=(4)
+nt_arr=(4)
 
-beta_s_arr=(6.86 3.43)
-beta_t_arr=(6.86 13.72)
+beta_s_arr=(6.86)
+beta_t_arr=(6.86)
 
-beta_name_arr=("6860" "6860")
-xi_0_name_arr=("100"  "200")
+beta_name_arr=("6860")
+xi_0_name_arr=("100")
 
-stream_arr=("a" "a")
+stream_arr=("a")
 
-sbatch_time_arr=("00:30:00" "00:31:00")
-sbatch_nodes_arr=(1 1)                         # N/A WHEN icer IS SELECTED
-sbatch_ntasks_arr=(4 8)
-sbatch_jobname_arr=("gentest1" "gentest2")
+sbatch_time_arr=("00:30:00")
+sbatch_nodes_arr=(1)                         # N/A WHEN icer IS SELECTED
+sbatch_ntasks_arr=(1)
+sbatch_jobname_arr=("gentest1")
 
-n_of_sub_arr=(2 2)
-n_of_lat_arr=(4 2)
+n_of_sub_arr=(2)
+n_of_lat_arr=(1)
 
 
 for (( i_ens=0; i_ens<${n_of_ens}; i_ens++ )); do
@@ -138,13 +138,13 @@ then
 
 cat <<EOF >> ../${my_dir}/params.sh
 
-directory="/home/trimisio/lattices/${lat_name}"
-out_dir="/home/trimisio/outputs/${lat_name}"
-path_build="/home/trimisio/all/comm_code/fnal_code/pure_gauge_ani_generation/build"
-run_dir="/home/trimisio/runs/rungen${lat_name}"
-submit_dir="/home/trimisio/submits/subgen${lat_name}"
+directory="/lustre1/ahisq/yannis_puregauge/lattices/${lat_name}"
+out_dir="/project/ahisq/yannis_puregauge/outputs/${lat_name}"
+path_build="/home/trimisio/all/comm_code/pure_gauge_ani_generation/build"
+run_dir="/project/ahisq/yannis_puregauge/runs/rungen${lat_name}"
+submit_dir="/project/ahisq/yannis_puregauge/submits/subgen${lat_name}"
 
-executable="<? ? ?>"
+executable="su3_ora_symzk0_a_dbl_intel_FNAL_20230829"
 
 sbatch_time="${sbatch_time}"
 sbatch_nodes="${sbatch_nodes}"
