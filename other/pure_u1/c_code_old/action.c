@@ -103,9 +103,10 @@ void update(int traj){
     }
     printf("%d",counter);
     counter = counter + 1;
-    printf(" %lf",q_help);
-    
 
+    #ifdef show_acceptance
+    printf(" %lf",q_help);
+    #endif
 
 }
 

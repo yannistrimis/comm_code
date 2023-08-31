@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include <string.h>
+#include <time.h>
 #include "lattice.h"
 #include "utils.h"
 #include "action.h"
@@ -17,65 +18,80 @@ double d_update;
 
 int main(void){
 
-    int to_print;
-    int n_of_lat;
+    time_t t = time(NULL);
+    struct tm tm = *localtime(&t);
+    printf("\nGENERATION OF PURE GAUGE U(1) CONFIGURATIONS\n");
+    printf("START: %d-%02d-%02d %02d:%02d:%02d\n\n", tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec);
+
+
     int traj;
     int my_seed;
     double d_hot;
-    scanf("to_print = %d\n",&to_print);
+
+    char startlat[10]; // "fresh" OR "reload"
+    char prevlat_name[100]; // DON'T LEAVE BLANK
+    char endlat[10]; // "save" OR "forget"
+    char lat_name[100]; // DON'T LEAVE BLANK
+
     scanf("seed = %d\n",&my_seed);
     scanf("nx = %d\n",&nx);
     scanf("nt = %d\n",&nt);
     scanf("beta = %lf\n",&beta);
-    scanf("n_of_lat = %d\n",&n_of_lat);
     scanf("trajectories = %d\n",&traj);
     scanf("d_hot = %lf\n",&d_hot);
     scanf("d_update = %lf\n",&d_update);
+    scanf("startlat = %s\n",&startlat);
+    scanf("prevlat_name = %s\n",&prevlat_name);
+    scanf("endlat = %s\n",&endlat);
+    scanf("lat_name = %s\n",&lat_name);
 
-    if( to_print == 1 ){
-        printf("to_print = %d\n",to_print);
-        printf("seed = %d\n",my_seed);
-        printf("nx = %d\n",nx);
-        printf("nt = %d\n",nt);
-        printf("beta = %lf\n",beta);
-        printf("n_of_lat = %d\n",n_of_lat);
-        printf("trajectories = %d\n",traj);
-        printf("d_hot = %lf\n",d_hot);
-        printf("d_update = %lf\n",d_update);
+
+    printf("seed = %d\n",my_seed);
+    printf("nx = %d\n",nx);
+    printf("nt = %d\n",nt);
+    printf("beta = %lf\n",beta);
+    printf("trajectories = %d\n",traj);
+    printf("d_hot = %lf\n",d_hot);
+    printf("d_update = %lf\n",d_update);
+    printf("startlat = %s\n",startlat);
+    if( strcmp(startlat,"reload")==0 ){    
+        printf("prevlat_name = %s\n",prevlat_name);
+    }
+    printf("endlat = %s\n",endlat);
+    if( strcmp(endlat,"save")==0 ){
+        printf("lat_name = %s\n",lat_name);   
     }
 
     vol = nx*nx*nx*nt;
 
-    initialize(my_seed, d_hot);
-    action_func();
+    // if( strcmp(startlat,"fresh")==0 ){
+    //     initialize(my_seed, d_hot);
+    //     printf("HOT START PERFORMED.\n");
+    // }else if(  strcmp(startlat,"reload")==0 ){
+    //     read_lattice(prevlat_name);
+    //     printf("READ FROM BINARY FILE %s\n",prevlat_name);    
+    // }
+    
+    // action_func(); // ACTION IS CALCULATED ONCE. FOR ALL NEXT STEPS ONLY DIFFERENCES
+    //                // ARE CALCULATED
 
-    // THE FOLLOWING WRITES DOWN TAGS FOR THE QUANTITIES
-    // TO BE RECORDED. NUMBER OF LATTICE AND PLAQUETTE ARE
-    // ALWAYS RECORDED.
+    // printf()
+    // update(traj);
 
-    printf("#no");
+    // if( strcmp(endlat,"save")==0 ){
+    //     save_lattice(lat_name);
+    //     printf("SAVED TO BINARY FILE %s\n",lat_name);
+    // }
 
-    #ifdef show_acceptance
-    printf(" #accept");
-    #endif
 
-    printf(" #plaq");
+    // for(int i=0;i<4;i++){
+    //     free(lattice[i]);
+    // }
 
-    #ifdef show_wilson_loop
-    printf(" #wl_re #wl_im");
-    #endif
+    t = time(NULL);
+    tm = *localtime(&t);
+    printf("\n\nEND: %d-%02d-%02d %02d:%02d:%02d\n", tm.tm_year + 1900, tm.tm_mon + 1, tm.tm_mday, tm.tm_hour, tm.tm_min, tm.tm_sec);
 
-    printf("\n");
 
-    // FOLLOWS THE OUTER-MOST LOOP
-
-    for(int i_lat=1;i_lat<=n_of_lat;i_lat++){
-        update(traj); // ALSO PRINTS NUMBER OF LATTICE AND ACCEPTANCE (IF SELECTED)
-        measurements(); // PRINTS PLAQUETTE AND WILSON LOOP
-    }
-
-    for(int i=0;i<4;i++){
-        free(lattice[i]);
-    }
     return 0;
 }

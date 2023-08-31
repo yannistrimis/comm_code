@@ -1,0 +1,9 @@
+to_print = 1
+seed = 7833
+nx = 8
+nt = 8
+beta = 0.5
+n_of_lat = 5
+trajectories = 4
+d_hot = 1.0
+d_update = 0.1
