@@ -9,21 +9,21 @@
 
 
 cluster="fnal"
-n_of_ens=1
+n_of_ens=9
 
 # THE FOLLOWING ARRAYS SHOULD ALL HAVE
 # THE SAME LENGTH, EQUAL TO n_of_ens
 
-nx_arr=(4)
-nt_arr=(4)
+nx_arr=(16 16 16 16 16 16 16 16 16)
+nt_arr=(32 32 32 32 32 32 32 32 32)
 
-beta_s_arr=(6.86)
-beta_t_arr=(6.86)
+beta_s_arr=()
+beta_t_arr=()
 
-beta_name_arr=("6860")
-xi_0_name_arr=("100")
+beta_name_arr=("6900" "6900" "6900" "6900" "6900" "6900" "6900" "6900" "6900")
+xi_0_name_arr=("178" "180" "182" "184" "186" "188" "190" "192" "194")
 
-stream_arr=("a")
+stream_arr=("a" "a" "a" "a" "a" "a" "a" "a" "a")
 
 sbatch_time_arr=("00:30:00")
 sbatch_nodes_arr=(1)                         # N/A WHEN icer IS SELECTED
@@ -144,13 +144,14 @@ path_build="/home/trimisio/all/comm_code/pure_gauge_ani_generation/build"
 run_dir="/project/ahisq/yannis_puregauge/runs/rungen${lat_name}"
 submit_dir="/project/ahisq/yannis_puregauge/submits/subgen${lat_name}"
 
-executable="su3_ora_symzk0_a_dbl_intel_FNAL_20230829"
+executable="su3_ora_symzk0_a_dbl_gnu8openmpi3_fnal_20230906"
 
 sbatch_time="${sbatch_time}"
 sbatch_nodes="${sbatch_nodes}"
 sbatch_ntasks="${sbatch_ntasks}"
 sbatch_jobname="${sbatch_jobname}"
-sbatch_module="intel"
+sbatch_module1="gnu8"
+sbatch_module2="openmpi3"
 
 EOF
 
