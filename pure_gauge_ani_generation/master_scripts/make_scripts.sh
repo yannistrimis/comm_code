@@ -17,21 +17,22 @@ n_of_ens=9
 nx_arr=(16 16 16 16 16 16 16 16 16)
 nt_arr=(32 32 32 32 32 32 32 32 32)
 
-beta_s_arr=()
-beta_t_arr=()
+beta_s_arr=( "3.87640449" "3.83333333" "3.79120879" "3.75000000" "3.70967742" "3.67021277" "3.63157895" "3.59375000" "3.55670103")
+beta_t_arr=( "12.28200000" "12.42000000" "12.55800000" "12.69600000" "12.83400000" "12.97200000" "13.11000000" "13.24800000" "13.38600000")
+
 
 beta_name_arr=("6900" "6900" "6900" "6900" "6900" "6900" "6900" "6900" "6900")
 xi_0_name_arr=("178" "180" "182" "184" "186" "188" "190" "192" "194")
 
 stream_arr=("a" "a" "a" "a" "a" "a" "a" "a" "a")
 
-sbatch_time_arr=("00:30:00")
-sbatch_nodes_arr=(1)                         # N/A WHEN icer IS SELECTED
-sbatch_ntasks_arr=(1)
-sbatch_jobname_arr=("gentest1")
+sbatch_time_arr=("03:00:00" "03:00:00" "03:00:00" "03:00:00" "03:00:00" "03:00:00" "03:00:00" "03:00:00" "03:00:00" )
+sbatch_nodes_arr=(4 4 4 4 4 4 4 4 4 )                         # N/A WHEN icer IS SELECTED
+sbatch_ntasks_arr=(128 128 128 128 128 128 128 128 128)
+sbatch_jobname_arr=("gen178" "gen180" "gen182" "gen184" "gen186" "gen188" "gen190" "gen192" "gen194")
 
-n_of_sub_arr=(2)
-n_of_lat_arr=(1)
+n_of_sub_arr=(1 1 1 1 1 1 1 1 1)
+n_of_lat_arr=(200 200 200 200 200 200 200 200 200)
 
 
 for (( i_ens=0; i_ens<${n_of_ens}; i_ens++ )); do
