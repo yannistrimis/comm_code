@@ -13,7 +13,7 @@ def main():
 
     data = make_data(filename=file_name)
 
-    my_tfit = range(8,17)
+    my_tfit = range(10,17)
     my_tdata = range(0,17)
 
     fitter = cf.CorrFitter(models=make_models(my_tdata,my_tfit))
@@ -21,7 +21,7 @@ def main():
     p0 = None
 
     print('data from: ',file_name)
-    for N in [1,2]:
+    for N in [1]:
         print(30 * '=', 'nterm =', N)
         prior = make_prior(N)
         fit = fitter.lsqfit(data=data, prior=prior, p0=p0)

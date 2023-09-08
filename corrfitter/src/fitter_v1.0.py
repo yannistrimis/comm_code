@@ -29,24 +29,27 @@ def main():
             print(fit)
             p0 = fit.pmean
 
+            fit_outs = cf.Corr2.fitfcn(p=fit.p)
+            print(fit_outs)
+
             dof_real = len(my_tfit)-2*N-2*M
             chi2_real = fit.chi2
 
             for i_state in range(N) :
                 chi2_real = chi2_real - ( prior['an'][i_state].mean - fit.p['an'][i_state].mean )**2 / ( prior['an'][i_state].sdev )**2
                 chi2_real = chi2_real - ( gv.exp(prior['log(dEn)'])[i_state].mean - fit.p['dEn'][i_state].mean )**2 / ( gv.exp(prior['log(dEn)'])[i_state].sdev )**2
-            
+
             for i_state in range(M) :
                 chi2_real = chi2_real - ( prior['ao'][i_state].mean - fit.p['ao'][i_state].mean )**2 / ( prior['ao'][i_state].sdev )**2
                 chi2_real = chi2_real - ( gv.exp(prior['log(dEo)'])[i_state].mean - fit.p['dEo'][i_state].mean )**2 / ( gv.exp(prior['log(dEo)'])[i_state].sdev )**2
-            
+
             Q_man = 1-gammainc(0.5*fit.dof,0.5*fit.chi2)
             Q_real = 1-gammainc(0.5*dof_real,0.5*chi2_real)
 
             print_results(fit,N,M)
             print('[','BY-HAND GOODNESS OF FIT:',']','\n',)
             print( 'augmented chi2/dof [dof]: %.3f [%d]\tQ = %.3f\ndeaugmented chi2/dof [dof]:  %.3f [%d]\tQ = %.3f'%(fit.chi2/fit.dof,fit.dof,Q_man,chi2_real/dof_real,dof_real,Q_real) )
-    
+
 
 def make_data(filename):
     """ Read data, compute averages/covariance matrix for G(t). """
