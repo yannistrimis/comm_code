@@ -9,29 +9,29 @@
 
 
 cluster="fnal"
-n_of_ens=1
+n_of_ens=9
 
 # THE FOLLOWING ARRAYS SHOULD ALL HAVE
 # THE SAME LENGTH, EQUAL TO n_of_ens
 
-nx_arr=(16) # 16 16 16 16 16 16 16 16)
-nt_arr=(32) # 32 32 32 32 32 32 32 32)
+nx_arr=(16 16 16 16 16 16 16 16 16)
+nt_arr=(32 32 32 32 32 32 32 32 32)
 
-beta_arr=(7.10) # 7.10 7.10 7.10 7.10 7.10 7.10 7.10 7.10)
-beta_name_arr=("7100") # "7100" "7100" "7100" "7100" "7100" "7100" "7100" "7100")
+beta_arr=(7.10 7.10 7.10 7.10 7.10 7.10 7.10 7.10 7.10)
+beta_name_arr=("7100" "7100" "7100" "7100" "7100" "7100" "7100" "7100" "7100")
 
-xi_0_arr=(1.78) # 1.80 1.82 1.84 1.86 1.88 1.90 1.92 1.94)
-xi_0_name_arr=("178") # "180" "182" "184" "186" "188" "190" "192" "194")
+xi_0_arr=(1.78 1.80 1.82 1.84 1.86 1.88 1.90 1.92 1.94)
+xi_0_name_arr=("178" "180" "182" "184" "186" "188" "190" "192" "194")
 
-stream_arr=("a") # "a" "a" "a" "a" "a" "a" "a" "a")
+stream_arr=("a" "a" "a" "a" "a" "a" "a" "a" "a")
 
-sbatch_time_arr=("03:00:00") # "03:00:00" "03:00:00" "03:00:00" "03:00:00" "03:00:00" "03:00:00" "03:00:00" "03:00:00" )
-sbatch_nodes_arr=(4) # 4 4 4 4 4 4 4 4 ) # N/A WHEN icer IS SELECTED
-sbatch_ntasks_arr=(128) # 128 128 128 128 128 128 128 128)
-sbatch_jobname_arr=("gen178") # "gen180" "gen182" "gen184" "gen186" "gen188" "gen190" "gen192" "gen194")
+sbatch_time_arr=("09:00:00" "09:00:00" "09:00:00" "09:00:00" "09:00:00" "09:00:00" "09:00:00" "09:00:00" "09:00:00")
+sbatch_nodes_arr=(4 4 4 4 4 4 4 4 4 ) # N/A WHEN icer IS SELECTED
+sbatch_ntasks_arr=(128 128 128 128 128 128 128 128 128)
+sbatch_jobname_arr=("gen178" "gen180" "gen182" "gen184" "gen186" "gen188" "gen190" "gen192" "gen194")
 
-n_of_sub_arr=(1) # 1 1 1 1 1 1 1 1)
-n_of_lat_arr=(100) # 100 100 100 100 100 100 100 100)
+n_of_sub_arr=(1 1 1 1 1 1 1 1 1)
+n_of_lat_arr=(500 500 500 500 500 500 500 500 500)
 
 
 for (( i_ens=0; i_ens<${n_of_ens}; i_ens++ )); do
@@ -39,8 +39,8 @@ for (( i_ens=0; i_ens<${n_of_ens}; i_ens++ )); do
 nx=${nx_arr[${i_ens}]}
 nt=${nt_arr[${i_ens}]}
 
-beta_s=$(python3 -c "b_s=${beta_arr[${i_ens}]}/${xi_0_arr[${i_ens}]};print('%.4lf'%b_s)")
-beta_t=$(python3 -c "b_t=${beta_arr[${i_ens}]}*${xi_0_arr[${i_ens}]};print('%.4lf'%b_t)")
+beta_s=$(python3 -c "b_s=${beta_arr[${i_ens}]}/${xi_0_arr[${i_ens}]};print('%.5lf'%b_s)")
+beta_t=$(python3 -c "b_t=${beta_arr[${i_ens}]}*${xi_0_arr[${i_ens}]};print('%.5lf'%b_t)")
 
 beta_name=${beta_name_arr[${i_ens}]}
 xi_0_name=${xi_0_name_arr[${i_ens}]}
