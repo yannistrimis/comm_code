@@ -73,7 +73,7 @@ number_of_base_sources 1
 point
 field_type KS
 subset full
-origin 0 0 0 0 
+origin 0 16 8 10 
 source_label pt_p0
 forget_source
 
