@@ -5,13 +5,13 @@
 # FOR THE CHANGING PARAMETERS.
 
 cluster="fnal"
-n_of_ens=1
+n_of_ens=9
 
 nx=16
 nt=32
 
-beta_name="6900"
-xi_0_name="178"
+beta_name="7100"
+xi_0_name_arr=("178" "180" "182" "184" "186" "188" "190" "192" "194")
 stream="a"
 
 xi_f=2.00
@@ -20,20 +20,23 @@ xi_f_name="200"
 flow_action="wilson"
 exp_order="16"
 dt="0.015625"
-stoptime="2.4"
+stoptime="2.6"
 
-sbatch_time="00:40:00"
+sbatch_time="04:00:00"
 sbatch_nodes=4 # N/A WHEN icer IS SELECTED
 sbatch_ntasks=128
-sbatch_jobname="sfl178"
+sbatch_jobname_arr=("wfl178" "wfl180" "wfl182" "wfl184" "wfl186" "wfl188" "wfl190" "wfl192" "fl194")
 
 n_of_sub=1
-n_of_lat=10
+n_of_lat=400
 
 for (( i_ens=0; i_ens<${n_of_ens}; i_ens++ )); do
 
 # SUBSTITUTE ARRAY ELEMENTS HERE, IF ANY
-# SUBSTITUTE ARRAY ELEMENTS HERE, IF ANY
+
+xi_0_name=${xi_0_name_arr[${i_ens}]}
+sbatch_jobname=${sbatch_jobname_arr[${i_ens}]}
+
 # SUBSTITUTE ARRAY ELEMENTS HERE, IF ANY
 # SUBSTITUTE ARRAY ELEMENTS HERE, IF ANY
 # SUBSTITUTE ARRAY ELEMENTS HERE, IF ANY
@@ -43,13 +46,16 @@ lat_name="l${ensemble}"
 
 ensemble_nostream="${nx}${nt}b${beta_name}x${xi_0_name}"
 
-if [ ${flow_action}=="wilson"  ]
-out_name="wflow${ensemble_nostream}xf${xi_f_name}${stream}_dt${dt}"
-elif [ ${flow_action}=="symanzik" ]
-out_name="sflow${ensemble_nostream}xf${xi_f_name}${stream}_dt${dt}"
+if [ ${flow_action} == "wilson"  ]
+then
+prefix="wflow"
+elif [ ${flow_action} == "symanzik" ]
+then
+prefix="sflow"
 fi
 
-my_dir="${cluster}_${flow_action}_scripts_${ensemble}"
+out_name="${prefix}${ensemble_nostream}xf${xi_f_name}${stream}_dt${dt}"
+my_dir="${cluster}_${prefix}_scripts_${ensemble}"
 
 cd ..
 mkdir ${my_dir}
@@ -91,8 +97,8 @@ cat <<EOF >> ../${my_dir}/params.sh
 directory="/mnt/scratch/trimisio/lattices/${lat_name}"
 out_dir="/mnt/home/trimisio/outputs/${lat_name}"
 path_build="/mnt/home/trimisio/comm_code/wilson_flow_ani/build"
-run_dir="/mnt/scratch/trimisio/runs/runflow${lat_name}"
-submit_dir="/mnt/home/trimisio/submits/subflow${lat_name}"
+run_dir="/mnt/scratch/trimisio/runs/run${prefix}${lat_name}"
+submit_dir="/mnt/home/trimisio/submits/sub${prefix}${lat_name}"
 
 executable=""
 
@@ -111,10 +117,10 @@ cat <<EOF >> ../${my_dir}/params.sh
 directory="/lustre1/ahisq/yannis_puregauge/lattices/${lat_name}"
 out_dir="/project/ahisq/yannis_puregauge/outputs/${lat_name}"
 path_build="/home/trimisio/all/comm_code/wilson_flow_ani/build"
-run_dir="/project/ahisq/yannis_puregauge/runs/runflow${lat_name}"
-submit_dir="/project/ahisq/yannis_puregauge/submits/subflow${lat_name}"
+run_dir="/project/ahisq/yannis_puregauge/runs/run${prefix}${lat_name}"
+submit_dir="/project/ahisq/yannis_puregauge/submits/sub${prefix}${lat_name}"
 
-executable=""
+executable="wilson_flow_bbb_a_dbl_gnu8openmpi3"
 
 sbatch_time="${sbatch_time}"
 sbatch_nodes="${sbatch_nodes}"
