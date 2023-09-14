@@ -12,11 +12,11 @@ nz=16
 nt=32
 
 lat_name="l1632b7100x180a"
-out_name="wflow1632b7100x180xf200a_dt0.015625"
+out_name="sflow1632b7100x180xf200a_dt0.015625"
 
 xi_f=2.00
 
-flow_action="wilson"
+flow_action="symanzik"
 exp_order="16"
 dt="0.015625"
 stoptime="2.6"
@@ -25,15 +25,15 @@ stoptime="2.6"
 directory="/lustre1/ahisq/yannis_puregauge/lattices/l1632b7100x180a"
 out_dir="/project/ahisq/yannis_puregauge/outputs/l1632b7100x180a"
 path_build="/home/trimisio/all/comm_code/wilson_flow_ani/build"
-run_dir="/project/ahisq/yannis_puregauge/runs/runwflowl1632b7100x180a"
-submit_dir="/project/ahisq/yannis_puregauge/submits/subwflowl1632b7100x180a"
+run_dir="/project/ahisq/yannis_puregauge/runs/runsflowl1632b7100x180a"
+submit_dir="/project/ahisq/yannis_puregauge/submits/subsflowl1632b7100x180a"
 
 executable="wilson_flow_bbb_a_dbl_gnu8openmpi3"
 
-sbatch_time="04:00:00"
+sbatch_time="09:00:00"
 sbatch_nodes="4"
 sbatch_ntasks="128"
-sbatch_jobname="wfl180"
+sbatch_jobname="sfl180"
 sbatch_module1="gnu8"
 sbatch_module2="openmpi3"
 
