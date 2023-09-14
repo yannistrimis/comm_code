@@ -191,7 +191,7 @@ forget_ksprop
 # QUARK 1
 propagator 0
 momentum
-momentum 1 0 0
+momentum -1 0 0
 op_label id_mom
 forget_ksprop
 
@@ -204,7 +204,7 @@ forget_ksprop
 # QUARK 3
 propagator 1
 momentum
-momentum 1 0 0
+momentum -1 0 0
 op_label id_mom
 forget_ksprop
 
@@ -217,7 +217,7 @@ forget_ksprop
 # QUARK 5
 propagator 2
 momentum
-momentum 1 0 0
+momentum -1 0 0
 op_label id_mom
 forget_ksprop
 
