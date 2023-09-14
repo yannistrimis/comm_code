@@ -7,7 +7,7 @@ ny=16
 nz=16
 nt=32
 
-set_i_lat=102
+set_i_lat=103
 set_seed=5294
 
 beta_name="6850"
