@@ -84,11 +84,16 @@ double single_update(int ind, int mu, double q_help){
 
 
 void update(int traj){
-    static int counter = 1;
     double q_help;
+    double plaq = 0.0;
     for(int i_traj=0;i_traj<traj;i_traj++){
 
         q_help = 0.0;
+        if(i_traj==0){
+            plaq = plaquette();
+            printf("%.2lf %.12lf\n",q_help,plaq);
+        }
+
         for(int ind=0;ind<vol;ind++){
             for(int mu=0;mu<4;mu++){
                 q_help = single_update(ind,mu,q_help);
@@ -100,11 +105,9 @@ void update(int traj){
         }else if(q_help<0.5){
             d_update = d_update - 0.1;
         }
+        plaq = plaquette();
+        printf("%.2lf %.12lf\n",q_help,plaq);
     }
-    printf("%d",counter);
-    counter = counter + 1;
-    printf(" %lf",q_help);
-    
 
 
 }

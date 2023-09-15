@@ -61,32 +61,36 @@ int main(void){
     if( strcmp(endlat,"save")==0 ){
         printf("lat_name = %s\n",lat_name);   
     }
+    printf("\n");
 
     vol = nx*nx*nx*nt;
 
-    // if( strcmp(startlat,"fresh")==0 ){
-    //     initialize(my_seed, d_hot);
-    //     printf("HOT START PERFORMED.\n");
-    // }else if(  strcmp(startlat,"reload")==0 ){
-    //     read_lattice(prevlat_name);
-    //     printf("READ FROM BINARY FILE %s\n",prevlat_name);    
-    // }
-    
-    // action_func(); // ACTION IS CALCULATED ONCE. FOR ALL NEXT STEPS ONLY DIFFERENCES
-    //                // ARE CALCULATED
+    if( strcmp(startlat,"fresh")==0 ){
+        initialize(my_seed, d_hot);
+        printf("HOT START PERFORMED.\n\n");
+    }else if(  strcmp(startlat,"reload")==0 ){
+        read_lattice(prevlat_name);
+        printf("READ FROM BINARY FILE %s\n\n",prevlat_name);    
+    }
 
-    // printf()
-    // update(traj);
+    action_func(); // ACTION IS CALCULATED ONCE. FOR ALL NEXT STEPS ONLY DIFFERENCES
+                   // ARE CALCULATED
 
-    // if( strcmp(endlat,"save")==0 ){
-    //     save_lattice(lat_name);
-    //     printf("SAVED TO BINARY FILE %s\n",lat_name);
-    // }
+    printf("ACCEP PLAQ\n");
+
+    update(traj);
+
+    printf("\n");
+
+    if( strcmp(endlat,"save")==0 ){
+        save_lattice(lat_name);
+        printf("SAVED TO BINARY FILE %s\n",lat_name);
+    }
 
 
-    // for(int i=0;i<4;i++){
-    //     free(lattice[i]);
-    // }
+    for(int i=0;i<4;i++){
+        free(lattice[i]);
+    }
 
     t = time(NULL);
     tm = *localtime(&t);

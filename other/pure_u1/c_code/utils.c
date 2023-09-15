@@ -4,6 +4,25 @@
 #include <stdlib.h>
 #include <math.h>
 
+void read_lattice(char* prevlat_name){
+    FILE *f1 = fopen(prevlat_name,"rb");
+    for(int i=0;i<4;i++){    
+        lattice[i] = malloc( sizeof( double ) * vol );
+    }
+    for(int i=0;i<4;i++){
+        fread(lattice[i], sizeof(lattice[i][0]), vol, f1);
+    }
+    fclose(f1);
+}
+
+void save_lattice(char* lat_name){
+    FILE *f2 = fopen(lat_name,"wb");
+    for(int i=0;i<4;i++){
+        fwrite(lattice[i], sizeof(lattice[i][0]), vol, f2);
+    }
+    fclose(f2);
+}
+
 void initialize (int my_seed, double d_hot){
     for(int i=0;i<4;i++){    
         lattice[i] = malloc( sizeof( double ) * vol );
