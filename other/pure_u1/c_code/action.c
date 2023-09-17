@@ -91,7 +91,7 @@ void update(int traj){
         q_help = 0.0;
         if(i_traj==0){
             plaq = plaquette();
-            printf("%.2lf %.12lf\n",q_help,plaq);
+            printf("%.4lf %.12lf\n",q_help,plaq);
         }
 
         for(int ind=0;ind<vol;ind++){
@@ -106,7 +106,7 @@ void update(int traj){
             d_update = d_update - 0.1;
         }
         plaq = plaquette();
-        printf("%.2lf %.12lf\n",q_help,plaq);
+        printf("%.4lf %.12lf\n",q_help,plaq);
     }
 
 
