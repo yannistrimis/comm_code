@@ -8,7 +8,7 @@ from scipy.special import gammainc
 
 def main():
 
-    file_name = '/home/trimis/hpcc/plot_data/spec_data/l1632b6850x100a/specnlpi_m1_0.01576_m2_0.01576_PION_5.fold.data' # CMSE
+    file_name = '/home/trimis/johannes_correlators/without_rcw/l2032bs3905bt12836a_dispavg-pt_2020_06_19/l2032bs3905bt12836a/corr_p100.fold.data' # CMSE
 #    file_name = '/home/yannis/Physics/LQCD/hpcc/plot_data/spec_data/l1632b6850x100a/specnlpi_m1_0.01576_m2_0.01576_PION_5.fold.data' # LAPTOP
 
     data = make_data(filename=file_name)
@@ -59,7 +59,7 @@ def make_models(my_tdata,my_tfit):
 def make_prior(N,M):
     """ Create prior for N-state fit. """
     prior = collections.OrderedDict()
-    prior['an'] = gv.gvar(N * ['2(2)'])
+    prior['an'] = gv.gvar(N * ['0.00001(2)'])
     prior['log(dEn)'] = gv.log(gv.gvar(N * ['0.5(6)']))
     prior['ao'] = gv.gvar(M * ['0.0(100.0)'])
     prior['log(dEo)'] = gv.log(gv.gvar(M * ['0.5(10.0)']))

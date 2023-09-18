@@ -1,0 +1,11 @@
+seed = 324
+nx = 4
+nt = 4
+beta = 0.25
+trajectories = 4
+d_hot = 1.0
+d_update = 0.1
+startlat = fresh
+prevlat_name = na
+endlat = forget
+lat_name = na

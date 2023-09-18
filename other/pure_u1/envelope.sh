@@ -89,7 +89,7 @@ EOF
 
 fi
 
-cat input.dat | ./c_code/pure_u1  > ${out_name}
+cat input.dat | ./generation/pure_u1  > ${out_name}
 
 seed=$((${seed}+1))
 ilat=$((${ilat}+1))
