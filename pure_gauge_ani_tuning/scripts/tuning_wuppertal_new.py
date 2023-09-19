@@ -185,8 +185,26 @@ for i_x0 in range(len(x0_vec)):
 
 predicted_x0_binned = np.zeros(n_bins)
 for i_bins in range(n_bins):
-    coeffs = np.polyfit(x0_float_vec,ratios[i_bins,:],2,w=ratio_weights)
-    coeffs[2] = coeffs[2] - 1.0
+    clos_i = closest(ratios[i_bins,:],1.0)
+    point_list = []
+    xpoints = np.zeros(3)
+    ypoints = np.zeros(3)
+    wpoints = np.zeros(3)
+    if clos_i == len(x0_vec)-1:
+        point_list = [clos_i-2,clos_i-1,clos_i]
+    elif clos_i == 0:
+        point_list = [clos_i,clos_i+1,clos_i+2]
+    else:
+        point_list = [clos_i-1,clos_i,clos_i+1]
+    k = 0
+    for point in point_list:
+        xpoints[k] = x0_float_vec[point]
+        ypoints[k] = ratios[i_bins,point]
+        wpoints[k] = ratio_weights[point]
+        k = k + 1
+
+    coeffs = np.polyfit(xpoints,ypoints,1,w=wpoints)
+    coeffs[1] = coeffs[1] - 1.0
     solutions = np.roots(coeffs)
     for ii in range( len(solutions) ): # FOR SECURITY
         if solutions[ii] < ( x0_float_vec[len(x0_float_vec)-1] + 0.5 ) and solutions[ii] > ( x0_float_vec[0] - 0.5 ) :
