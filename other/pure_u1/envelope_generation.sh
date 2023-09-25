@@ -1,7 +1,7 @@
 #!/bin/bash
 
-nx=16
-nt=16
+nx=4
+nt=4
 
 beta=1.25
 beta_name="1250"
@@ -17,8 +17,11 @@ d_update=0.9
 
 ens_name="l${nx}${nt}b${beta_name}${stream}"
 
-lat_dir="/home/yannis/Physics/LQCD/pure_u1/lattices/${ens_name}" # LAPTOP
-out_dir="/home/yannis/Physics/LQCD/pure_u1/outputs/${ens_name}"  # LAPTOP
+lat_dir="/home/trimis/data/pure_u1/lattices/${ens_name}" # CMSE
+out_dir="/home/trimis/data/pure_u1/outputs/${ens_name}"  # CMSE
+
+# lat_dir="/home/yannis/Physics/LQCD/pure_u1/lattices/${ens_name}" # LAPTOP
+# out_dir="/home/yannis/Physics/LQCD/pure_u1/outputs/${ens_name}"  # LAPTOP
 
 if [ ! -d "${lat_dir}" ]
 then

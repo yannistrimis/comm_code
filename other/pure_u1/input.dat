@@ -1,6 +1,6 @@
 seed = 7832
-nx = 16
-nt = 16
+nx = 4
+nt = 4
 beta = 1.25
 trajectories = 20
 d_hot = 1.0
@@ -8,5 +8,5 @@ d_update = 0.9
 startlat = fresh
 prevlat_name = NA
 endlat = save
-lat_name = /home/yannis/Physics/LQCD/pure_u1/lattices/l1616b1250a/l1616b1250a.1
+lat_name = /home/trimis/data/pure_u1/lattices/l44b1250a/l44b1250a.1
 

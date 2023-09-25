@@ -1,5 +1,5 @@
-FILES.c = control.c utils.c action.c
-FILES.h = lattice.h utils.h action.h
+FILES.c = control.c utils.c measurements.c
+FILES.h = lattice.h utils.h measurements.h
 FILES.o = ${FILES.c:.c=.o}
 
 wloop : $(FILES.o)
