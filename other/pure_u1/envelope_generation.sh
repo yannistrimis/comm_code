@@ -1,19 +1,23 @@
 #!/bin/bash
 
-nx=4
-nt=4
+n_of_ens=1
 
-beta=1.25
-beta_name="1250"
+nx=16
+nt=16
+
+beta=0.75
+beta_name="0750"
 stream="a"
 
 initial_seed=7832
 initial_ilat=1
 
 n_of_lat=1
-trajectories=20
+trajectories=10
 d_hot=1.0
-d_update=0.9
+d_update=1.0
+
+for(( i_ens=0; i_ens<${n_of_ens}; i_ens++ )); do
 
 ens_name="l${nx}${nt}b${beta_name}${stream}"
 
@@ -98,3 +102,4 @@ seed=$((${seed}+1))
 ilat=$((${ilat}+1))
 counter=$((${counter}+1))
 done # LATTICES
+done # ENSEMBLES

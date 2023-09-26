@@ -14,7 +14,7 @@ int vol;
 double beta;
 double action;
 
-double d_update;
+double d_update; // WILL BE READ FROM BINARY IF reload IS PERFORMED
 
 int main(void){
 
@@ -51,8 +51,12 @@ int main(void){
     printf("nt = %d\n",nt);
     printf("beta = %lf\n",beta);
     printf("trajectories = %d\n",traj);
-    printf("d_hot = %lf\n",d_hot);
-    printf("d_update = %lf\n",d_update);
+    if( strcmp(startlat,"fresh")==0 ){
+        printf("d_hot = %lf\n",d_hot);
+    }
+    if( strcmp(startlat,"fresh")==0 ){
+        printf("d_update = %lf\n",d_update);
+    }
     printf("startlat = %s\n",startlat);
     if( strcmp(startlat,"reload")==0 ){    
         printf("prevlat_name = %s\n",prevlat_name);
