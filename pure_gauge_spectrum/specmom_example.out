@@ -1,0 +1,410 @@
+SU3 staggered valence fermions
+MIMD version f5755-dirty
+Machine = MPI (portable), with 128 nodes
+Host(0) = lac-218
+Username = trimisio
+start: Wed Sep 27 14:45:02 2023
+
+Options selected...
+Generic double precision
+C_GLOBAL_INLINE
+DBLSTORE_FN
+D_FN_GATHER13
+FEWSUMS
+KS_MULTICG=HYBRID
+HISQ_REUNIT_ALLOW_SVD
+HISQ_REUNIT_SVD_REL_ERROR = 1e-08
+HISQ_REUNIT_SVD_ABS_ERROR = 1e-08
+type 0 for no prompts, 1 for prompts, or 2 for proofreading
+nx 16
+ny 16
+nz 16
+nt 32
+iseed 5294
+job_id none
+LAYOUT = Hypercubes, options = hyper_prime,
+automatic hyper_prime layout
+ON EACH NODE (RANK) 4 x 4 x 8 x 8
+Mallocing 0.7 MBytes per node for lattice
+WARNING!!: Resetting random seed
+
+
+######################################################################
+# source time 0
+######################################################################
+# GAUGE FIELD DESCRIPTION
+reload_serial /mnt/home/trimisio/scratch/lattices/l1632b6850x100a/l1632b6850x100a.lat.103
+u0 1
+coulomb_gauge_fix
+forget 
+staple_weight 0
+ape_iter 0
+coordinate_origin 0 0 0 0 
+time_bc antiperiodic
+# EIGENPAIRS
+max_number_of_eigenpairs 0
+# CHIRAL CONDENSATE AND RELATED MEASUREMENTS
+number_of_pbp_masses 0
+######################################################################
+# DESCRIPTION OF BASE SOURCES
+number_of_base_sources 1
+# SOURCE 0
+evenandodd_wall
+field_type KS
+subset full
+t0 0
+source_label eow
+forget_source 
+# DESCRIPTION OF MODIFIED SOURCES
+number_of_modified_sources 1
+# SOURCE 1
+source 0
+momentum
+momentum 1 0 0 
+op_label mom
+forget_source 
+# DESCRIPTION OF PROPAGATORS
+number_of_sets 2
+# PARAMETERS FOR SET 0
+set_type multimass
+inv_type UML
+max_cg_iterations 300
+max_cg_restarts 5
+check yes
+momentum_twist 0 0 0 
+precision 2
+source 0
+number_of_propagators 1
+# PROPAGATOR 0
+mass 0.08
+naik_term_epsilon 0
+error_for_propagator 1e-06
+rel_error_for_propagator 0
+fresh_ksprop 
+forget_ksprop 
+# PARAMETERS FOR SET 1
+set_type multimass
+inv_type UML
+max_cg_iterations 300
+max_cg_restarts 5
+check yes
+momentum_twist 0 0 0 
+precision 2
+source 1
+number_of_propagators 1
+# PROPAGATOR 1
+mass 0.08
+naik_term_epsilon 0
+error_for_propagator 1e-06
+rel_error_for_propagator 0
+fresh_ksprop 
+forget_ksprop 
+# DESCRIPTION OF QUARKS
+number_of_quarks 4
+# QUARK 0
+propagator 0
+identity
+op_label id
+forget_ksprop 
+# QUARK 1
+propagator 0
+momentum
+momentum 1 0 0 
+op_label id_mom
+forget_ksprop 
+# QUARK 2
+propagator 1
+identity
+op_label id
+forget_ksprop 
+# QUARK 3
+propagator 1
+momentum
+momentum 1 0 0 
+op_label id_mom
+forget_ksprop 
+# DESCRIPTION OF MESONS
+number_of_mesons 4
+pair 2 0 
+spectrum_request meson
+forget_corr 
+r_offset 0 0 0 0 
+number_of_correlators 1
+correlator PION_5 p100   1 * 1  pion5  1  0  0 EO EO EO
+pair 0 2 
+spectrum_request meson
+forget_corr 
+r_offset 0 0 0 0 
+number_of_correlators 1
+correlator PION_5 p100   1 * 1  pion5  1  0  0 EO EO EO
+pair 0 3 
+spectrum_request meson
+forget_corr 
+r_offset 0 0 0 0 
+number_of_correlators 1
+correlator PION_5 p000   1 * 1  pion5  0  0  0 EO EO EO
+pair 1 2 
+spectrum_request meson
+forget_corr 
+r_offset 0 0 0 0 
+number_of_correlators 1
+correlator PION_5 p000   1 * 1  pion5  0  0  0 EO EO EO
+# DESCRIPTION OF BARYONS
+number_of_baryons 0
+Restored binary gauge configuration serially from file /mnt/home/trimisio/scratch/lattices/l1632b6850x100a/l1632b6850x100a.lat.103
+Time stamp Thu Mar  9 21:09:30 2023
+Checksums 24adca16 395a48d2 OK
+Time to reload gauge configuration = 1.408470e-01
+CHECK PLAQ: 1.7555282437799977e+00 1.7545027255453214e+00
+CHECK NERSC LINKTR: 2.8677165916958405e-04 CKSUM: 27200f33
+Reunitarized for double precision. Max deviation 7.85e-08 changed to 5.55e-16
+Time to check unitarity = 9.398460e-04
+"Fat 7 (level 1)"
+path coefficients: npath  path_coeff
+                    0      1.250000e-01
+                    1      -6.250000e-02
+                    2      1.562500e-02
+                    3      -2.604167e-03
+Unitarization method = UNITARIZE_ANALYTIC
+Unitarization group = U(3)
+"Fat7 + 2xLepage"
+path coefficients: npath  path_coeff
+                    0      1.000000e+00
+                    1      -4.166667e-02
+                    2      -6.250000e-02
+                    3      1.562500e-02
+                    4      -2.604167e-03
+                    5      -1.250000e-01
+"1-link + Naik"
+path coefficients: npath  path_coeff
+                    0      1.250000e-01
+                    1      -4.166667e-02
+MAKING PATH TABLES
+Combined fattening and long-link calculation time: 0.027144
+Time to APE smear 2.768040e-04 sec
+Fixing to Coulomb gauge
+step 19 av gf action 8.58649593e-01, delta 6.954e-04
+step 39 av gf action 8.64246692e-01, delta 1.311e-04
+step 59 av gf action 8.65816093e-01, delta 4.948e-05
+step 79 av gf action 8.66517024e-01, delta 2.461e-05
+step 99 av gf action 8.66906123e-01, delta 1.563e-05
+step 119 av gf action 8.67159509e-01, delta 1.148e-05
+step 139 av gf action 8.67355321e-01, delta 8.431e-06
+step 159 av gf action 8.67487125e-01, delta 5.517e-06
+step 179 av gf action 8.67589162e-01, delta 4.838e-06
+step 199 av gf action 8.67698238e-01, delta 5.221e-06
+step 219 av gf action 8.67777825e-01, delta 3.362e-06
+step 239 av gf action 8.67846187e-01, delta 3.228e-06
+step 259 av gf action 8.67907792e-01, delta 3.126e-06
+step 279 av gf action 8.67968522e-01, delta 2.975e-06
+step 299 av gf action 8.68017036e-01, delta 2.118e-06
+GFIX: Ended at step 305. Av gf action 8.68029273e-01, delta 1.986e-06
+Time to APE smear 3.039837e-04 sec
+END OF HEADER
+Mass= 0.08 source even_and_odd_wall residue= 1e-06 rel= 0
+Combined fattening and long-link calculation time: 0.026945
+Turning ON boundary phases 0 0 0 0 to FN links r0 0 0 0 0
+solve_ksprop: color = 0
+UML inversion with mass 0.080000
+ OK converged final_rsq= 9.2e-13 (cf 1e-12) rel = 1 (cf 0) restarts = 1 iters= 178
+ OK converged final_rsq= 9e-13 (cf 1e-12) rel = 1 (cf 0) restarts = 1 iters= 11
+solve_ksprop: color = 1
+UML inversion with mass 0.080000
+ OK converged final_rsq= 9.2e-13 (cf 1e-12) rel = 1 (cf 0) restarts = 1 iters= 178
+ OK converged final_rsq= 8.9e-13 (cf 1e-12) rel = 1 (cf 0) restarts = 1 iters= 11
+solve_ksprop: color = 2
+UML inversion with mass 0.080000
+ OK converged final_rsq= 9.2e-13 (cf 1e-12) rel = 1 (cf 0) restarts = 1 iters= 178
+ OK converged final_rsq= 8.9e-13 (cf 1e-12) rel = 1 (cf 0) restarts = 1 iters= 11
+Turning OFF boundary phases 0 0 0 0 to FN links r0 0 0 0 0
+Mass= 0.08 source even_and_odd_wall/momentum residue= 1e-06 rel= 0
+Turning ON boundary phases 0 0 0 0 to FN links r0 0 0 0 0
+solve_ksprop: color = 0
+UML inversion with mass 0.080000
+ OK converged final_rsq= 9.3e-13 (cf 1e-12) rel = 1 (cf 0) restarts = 1 iters= 174
+ OK converged final_rsq= 8.8e-13 (cf 1e-12) rel = 1 (cf 0) restarts = 1 iters= 11
+solve_ksprop: color = 1
+UML inversion with mass 0.080000
+ OK converged final_rsq= 9.2e-13 (cf 1e-12) rel = 1 (cf 0) restarts = 1 iters= 174
+ OK converged final_rsq= 9.1e-13 (cf 1e-12) rel = 1 (cf 0) restarts = 1 iters= 11
+solve_ksprop: color = 2
+UML inversion with mass 0.080000
+ OK converged final_rsq= 9.1e-13 (cf 1e-12) rel = 1 (cf 0) restarts = 1 iters= 173
+ OK converged final_rsq= 8.9e-13 (cf 1e-12) rel = 1 (cf 0) restarts = 1 iters= 11
+Turning OFF boundary phases 0 0 0 0 to FN links r0 0 0 0 0
+destroy prop[0]
+destroy prop[1]
+Mesons for quarks 2 and 0
+STARTPROP
+MOMENTUM: p100
+MASSES: 0.08 0.08 
+SOURCE: even_and_odd_wall/momentum even_and_odd_wall
+SINKOPS: identity identity
+SINKS: PION_5
+0 2.716886e+03 1.864065e+03
+1 1.909273e+03 5.227771e+02
+2 9.401914e+02 6.033590e+02
+3 5.496565e+02 1.787948e+02
+4 2.600963e+02 1.355605e+02
+5 1.391040e+02 4.528924e+01
+6 6.635359e+01 3.335920e+01
+7 3.497126e+01 1.560468e+01
+8 1.554957e+01 9.640190e+00
+9 8.749910e+00 4.492725e+00
+10 3.881852e+00 2.863277e+00
+11 1.945182e+00 1.324486e+00
+12 9.275017e-01 6.225693e-01
+13 4.940740e-01 2.277409e-01
+14 2.618299e-01 1.105017e-01
+15 1.661321e-01 8.669589e-02
+16 1.729053e-01 1.143284e-01
+17 2.320054e-01 1.812521e-01
+18 3.969657e-01 2.429108e-01
+19 6.807240e-01 4.813053e-01
+20 1.133249e+00 8.316085e-01
+21 2.477971e+00 1.566656e+00
+22 4.959316e+00 3.438443e+00
+23 1.050289e+01 5.838871e+00
+24 1.938558e+01 1.244891e+01
+25 4.115904e+01 1.976221e+01
+26 6.879386e+01 4.625949e+01
+27 1.488268e+02 6.117560e+01
+28 2.620687e+02 1.765067e+02
+29 6.020606e+02 1.958148e+02
+30 9.578415e+02 6.356329e+02
+31 1.976748e+03 4.675642e+02
+ENDPROP
+Mesons for quarks 0 and 2
+STARTPROP
+MOMENTUM: p100
+MASSES: 0.08 0.08 
+SOURCE: even_and_odd_wall even_and_odd_wall/momentum
+SINKOPS: identity identity
+SINKS: PION_5
+0 -1.046024e+02 6.244964e+01
+1 -4.980098e+01 4.257931e+01
+2 -1.682038e+01 9.341916e+01
+3 -8.893136e+00 2.123049e+01
+4 -1.378240e+00 3.644200e+01
+5 -8.513541e+00 1.045991e+01
+6 -6.119352e+00 6.759861e+00
+7 -5.047101e+00 3.084499e+00
+8 -2.301108e+00 1.849118e+00
+9 -1.466468e+00 5.672942e-01
+10 -5.199102e-01 2.734777e-01
+11 -3.287304e-01 5.997019e-02
+12 -8.999885e-02 1.860160e-02
+13 -8.823725e-02 1.314555e-02
+14 -2.381446e-02 3.214176e-02
+15 -9.292972e-03 3.028680e-02
+16 -4.495788e-02 1.971785e-02
+17 -3.641163e-02 4.108959e-02
+18 1.541548e-02 6.529256e-02
+19 1.234006e-02 2.684146e-01
+20 -1.033053e-01 4.589569e-01
+21 -1.790391e-01 8.426187e-01
+22 4.942697e-02 1.587998e+00
+23 1.834769e-01 2.539505e+00
+24 -2.548093e-01 5.094380e+00
+25 -9.646526e-01 8.120262e+00
+26 2.061271e+00 1.612600e+01
+27 4.816767e+00 1.842127e+01
+28 1.692903e+00 2.868453e+01
+29 1.130973e+01 7.489892e+00
+30 -2.746692e+01 3.883871e+01
+31 -1.413180e+01 -9.235076e+00
+ENDPROP
+Mesons for quarks 0 and 3
+STARTPROP
+MOMENTUM: p000
+MASSES: 0.08 0.08 
+SOURCE: even_and_odd_wall even_and_odd_wall/momentum
+SINKOPS: identity momentum
+SINKS: PION_5
+0 -1.046024e+02 6.244964e+01
+1 -4.980098e+01 4.257931e+01
+2 -1.682038e+01 9.341916e+01
+3 -8.893136e+00 2.123049e+01
+4 -1.378240e+00 3.644200e+01
+5 -8.513541e+00 1.045991e+01
+6 -6.119352e+00 6.759861e+00
+7 -5.047101e+00 3.084499e+00
+8 -2.301108e+00 1.849118e+00
+9 -1.466468e+00 5.672942e-01
+10 -5.199102e-01 2.734777e-01
+11 -3.287304e-01 5.997019e-02
+12 -8.999885e-02 1.860160e-02
+13 -8.823725e-02 1.314555e-02
+14 -2.381446e-02 3.214176e-02
+15 -9.292972e-03 3.028680e-02
+16 -4.495788e-02 1.971785e-02
+17 -3.641163e-02 4.108959e-02
+18 1.541548e-02 6.529256e-02
+19 1.234006e-02 2.684146e-01
+20 -1.033053e-01 4.589569e-01
+21 -1.790391e-01 8.426187e-01
+22 4.942697e-02 1.587998e+00
+23 1.834769e-01 2.539505e+00
+24 -2.548093e-01 5.094380e+00
+25 -9.646526e-01 8.120262e+00
+26 2.061271e+00 1.612600e+01
+27 4.816767e+00 1.842127e+01
+28 1.692903e+00 2.868453e+01
+29 1.130973e+01 7.489892e+00
+30 -2.746692e+01 3.883871e+01
+31 -1.413180e+01 -9.235076e+00
+ENDPROP
+Mesons for quarks 1 and 2
+STARTPROP
+MOMENTUM: p000
+MASSES: 0.08 0.08 
+SOURCE: even_and_odd_wall even_and_odd_wall/momentum
+SINKOPS: momentum identity
+SINKS: PION_5
+0 2.716886e+03 -1.864065e+03
+1 1.909273e+03 -5.227771e+02
+2 9.401914e+02 -6.033590e+02
+3 5.496565e+02 -1.787948e+02
+4 2.600963e+02 -1.355605e+02
+5 1.391040e+02 -4.528924e+01
+6 6.635359e+01 -3.335920e+01
+7 3.497126e+01 -1.560468e+01
+8 1.554957e+01 -9.640190e+00
+9 8.749910e+00 -4.492725e+00
+10 3.881852e+00 -2.863277e+00
+11 1.945182e+00 -1.324486e+00
+12 9.275017e-01 -6.225693e-01
+13 4.940740e-01 -2.277409e-01
+14 2.618299e-01 -1.105017e-01
+15 1.661321e-01 -8.669589e-02
+16 1.729053e-01 -1.143284e-01
+17 2.320054e-01 -1.812521e-01
+18 3.969657e-01 -2.429108e-01
+19 6.807240e-01 -4.813053e-01
+20 1.133249e+00 -8.316085e-01
+21 2.477971e+00 -1.566656e+00
+22 4.959316e+00 -3.438443e+00
+23 1.050289e+01 -5.838871e+00
+24 1.938558e+01 -1.244891e+01
+25 4.115904e+01 -1.976221e+01
+26 6.879386e+01 -4.625949e+01
+27 1.488268e+02 -6.117560e+01
+28 2.620687e+02 -1.765067e+02
+29 6.020606e+02 -1.958148e+02
+30 9.578415e+02 -6.356329e+02
+31 1.976748e+03 -4.675642e+02
+ENDPROP
+RUNNING COMPLETED
+Time = 2.383864e+00 seconds
+total_iters = 1121
+destroy quark[0]
+destroy quark[1]
+destroy quark[2]
+destroy quark[3]
+destroy source[0]
+destroy source[1]
+
+
+ask_starting_lattice(0): EOF on input.
+exit: Wed Sep 27 14:45:04 2023
+

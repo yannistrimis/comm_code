@@ -10,13 +10,13 @@ cur_dir = '/mnt/home/trimisio/from_scp/outputs'
 write_dir = '/mnt/home/trimisio/flow_data'
 
 vol = '1632'
-beta = '6900'
+beta = '7000'
 xf = '200'
 xf_float = 2.0
 stream = 'a'
 flow_type = input()
 obs_type = input()
-x0_vec = ['178','180','182','184','186','188','190','192','194']
+x0_vec = ['1780','1800','1820','1840','1860','1880','1900','1920','1940']
 x0_float_vec = [1.78,1.80,1.82,1.84,1.86,1.88,1.90,1.92,1.94]
 dt = '0.015625'
 n_files = 400
@@ -32,7 +32,7 @@ for x0 in x0_vec :
     i_x0 += 1
     for i_file in range(first_file,n_files+first_file):
         i = i_file - first_file
-        f_read = open( '%s/l%sb%sx%s%s/%sflow%sb%sx%sxf%s%s_dt%s.%d'%(cur_dir,vol,beta,x0,stream,flow_type,vol,beta,x0,xf,stream,dt,i_file) , 'r' )
+        f_read = open( '%s/l%sb%sx%s%s/%sflow%sb%sx%sxf%s%s_dt%s.lat.%d'%(cur_dir,vol,beta,x0,stream,flow_type,vol,beta,x0,xf,stream,dt,i_file) , 'r' )
         content = f_read.readlines()
         f_read.close()
         if i_file == first_file and i_x0 == 0 : ### WE DECLARE THE ARRAYS ONLY ONCE
