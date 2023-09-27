@@ -10,13 +10,13 @@ cur_dir = '/mnt/home/trimisio/from_scp/outputs'
 write_dir = '/mnt/home/trimisio/flow_data'
 
 vol = '1632'
-beta = '7000'
+beta = '7100'
 xf = '200'
 xf_float = 2.0
 stream = 'a'
 flow_type = input()
 obs_type = input()
-x0_vec = ['1780','1800','1820','1840','1860','1880','1900','1920','1940']
+x0_vec = ['178','180','182','184','186','188','190','192','194']
 x0_float_vec = [1.78,1.80,1.82,1.84,1.86,1.88,1.90,1.92,1.94]
 dt = '0.015625'
 n_files = 400
@@ -32,7 +32,7 @@ for x0 in x0_vec :
     i_x0 += 1
     for i_file in range(first_file,n_files+first_file):
         i = i_file - first_file
-        f_read = open( '%s/l%sb%sx%s%s/%sflow%sb%sx%sxf%s%s_dt%s.lat.%d'%(cur_dir,vol,beta,x0,stream,flow_type,vol,beta,x0,xf,stream,dt,i_file) , 'r' )
+        f_read = open( '%s/l%sb%sx%s%s/%sflow%sb%sx%sxf%s%s_dt%s.%d'%(cur_dir,vol,beta,x0,stream,flow_type,vol,beta,x0,xf,stream,dt,i_file) , 'r' )
         content = f_read.readlines()
         f_read.close()
         if i_file == first_file and i_x0 == 0 : ### WE DECLARE THE ARRAYS ONLY ONCE
@@ -119,6 +119,8 @@ del dEs_arr
 w0s_arr = np.zeros( ( n_bins , len(x0_vec) ) )
 w0t_arr = np.zeros( ( n_bins , len(x0_vec) ) )
 
+w0s_weight = np.zeros( len(x0_vec) )
+
 for i_x0 in range(len(x0_vec)):
     for i_bins in range(n_bins):
         y_points = np.zeros(7) # dEs_arr VALUES
@@ -138,6 +140,7 @@ for i_x0 in range(len(x0_vec)):
             if solutions[ii] < tau_arr[clos_i+1] and solutions[ii] > tau_arr[clos_i-1] :
                 w0s_arr[i_bins,i_x0] = np.real(solutions[ii])
                 break
+    w0s_weight[i_x0] = 1 / ( jackknife_for_binned(w0s_arr[:,i_x0])[1] )
 
 for i_x0 in range(len(x0_vec)):
     for i_bins in range(n_bins):
@@ -184,6 +187,8 @@ for i_x0 in range(len(x0_vec)):
 ### AT THIS STAGE WE HAVE RATIO POINTS AND WEIGHTS PER x0 PER BIN
 
 predicted_x0_binned = np.zeros(n_bins)
+predicted_w0s_binned = np.zeros(n_bins)
+
 for i_bins in range(n_bins):
     clos_i = closest(ratios[i_bins,:],1.0)
     point_list = []
@@ -210,10 +215,21 @@ for i_bins in range(n_bins):
         if solutions[ii] < ( x0_float_vec[len(x0_float_vec)-1] + 0.5 ) and solutions[ii] > ( x0_float_vec[0] - 0.5 ) :
             predicted_x0_binned[i_bins] = np.real(solutions[ii])
             break
+    k = 0
+    for point in point_list:
+        ypoints[k] = w0s_arr[i_bins,point]
+        wpoints[k] = w0s_weight[point]
+        k = k + 1
+    coeffs = np.polyfit(xpoints,ypoints,1,w=wpoints)
+    predicted_w0s_binned[i_bins] = np.polyval(coeffs,predicted_x0_binned[i_bins])
+
 
 predicted_x0 = jackknife_for_binned(predicted_x0_binned)
+predicted_w0s = jackknife_for_binned(predicted_w0s_binned)
 
-print(flow_type,obs_type,'x_0 = ',predicted_x0[0],' +- ',predicted_x0[1])
+
+
+print( flow_type,obs_type,'x_0 = ',predicted_x0[0],' +- ',predicted_x0[1],'  w_0s = ',predicted_w0s[0],' +- ',predicted_w0s[1] )
 
 
 ### START DEBUGGING 
