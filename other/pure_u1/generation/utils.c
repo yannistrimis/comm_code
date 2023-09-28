@@ -2,26 +2,33 @@
 #include "lattice.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <math.h>
 
 void read_lattice(char* prevlat_name){
     FILE *f1 = fopen(prevlat_name,"rb");
+    char d_update_char[8];
+
     for(int i=0;i<4;i++){    
         lattice[i] = malloc( sizeof( double ) * vol );
     }
     for(int i=0;i<4;i++){
         fread(lattice[i], sizeof(lattice[i][0]), vol, f1);
     }
-    fread(d_update, sizeof(double),1,f1);
+    fread(&d_update_char, sizeof(double),1,f1);
+    d_update = *((double*)d_update_char);
     fclose(f1);
 }
 
 void save_lattice(char* lat_name){
     FILE *f2 = fopen(lat_name,"wb");
+    char d_update_char[8];
+    memcpy(d_update_char,&d_update,sizeof(double));
+
     for(int i=0;i<4;i++){
         fwrite(lattice[i], sizeof(lattice[i][0]), vol, f2);
     }
-    fwrite(d_update, sizeof(double),1,f2);
+    fwrite(&d_update_char, sizeof(double),1,f2);
     fclose(f2);
 }
 
