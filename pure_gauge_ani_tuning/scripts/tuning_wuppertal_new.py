@@ -10,7 +10,7 @@ cur_dir = '/mnt/home/trimisio/from_scp/outputs'
 write_dir = '/mnt/home/trimisio/flow_data'
 
 vol = '1632'
-beta = '7100'
+beta = '6900'
 xf = '200'
 xf_float = 2.0
 stream = 'a'
@@ -210,6 +210,8 @@ for i_bins in range(n_bins):
 
     coeffs = np.polyfit(xpoints,ypoints,1,w=wpoints)
     coeffs[1] = coeffs[1] - 1.0
+#    coeffs = np.polyfit(x0_float_vec,ratios[i_bins,:],3,w=ratio_weights)
+#    coeffs[3] = coeffs[3] - 1.0
     solutions = np.roots(coeffs)
     for ii in range( len(solutions) ): # FOR SECURITY
         if solutions[ii] < ( x0_float_vec[len(x0_float_vec)-1] + 0.5 ) and solutions[ii] > ( x0_float_vec[0] - 0.5 ) :
@@ -221,6 +223,8 @@ for i_bins in range(n_bins):
         wpoints[k] = w0s_weight[point]
         k = k + 1
     coeffs = np.polyfit(xpoints,ypoints,1,w=wpoints)
+#    coeffs = np.polyfit(x0_float_vec,w0s_arr[i_bins,:],3,w=w0s_weight)
+
     predicted_w0s_binned[i_bins] = np.polyval(coeffs,predicted_x0_binned[i_bins])
 
 
@@ -237,3 +241,14 @@ print( flow_type,obs_type,'x_0 = ',predicted_x0[0],' +- ',predicted_x0[1],'  w_0
 #     rat = jackknife_for_binned( ratios[:,i_x0] )
 #     print(rat)
 ### END DEBUGGING
+
+
+f_rec = open('%s%s%s_fitstudy.data'%(flow_type,obs_type,beta),'w')
+w0s_rec = np.zeros(2)
+ratio_rec = np.zeros(2)
+for i_x0 in range(len(x0_vec)):
+    w0s_rec = jackknife_for_binned(w0s_arr[:,i_x0])
+    ratio_rec = jackknife_for_binned(ratios[:,i_x0])
+    f_rec.write( '%f %f %f %f %f\n'%(x0_float_vec[i_x0],w0s_rec[0],w0s_rec[1],ratio_rec[0],ratio_rec[1]) )    
+
+f_rec.close()
