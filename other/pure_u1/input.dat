@@ -1,12 +1,12 @@
-seed = 7832
-nx = 16
-nt = 16
+seed = 7835
+nx = 4
+nt = 4
 beta = 0.75
-trajectories = 10
+trajectories = 100
+startlat = reload
 d_hot = 1.0
-d_update = 1.0
-startlat = fresh
-prevlat_name = NA
+d_update = 25.0
+prevlat_name = /home/trimis/data/pure_u1/lattices/l44b0750a/l44b0750a.3
 endlat = save
-lat_name = /home/trimis/data/pure_u1/lattices/l1616b0750a/l1616b0750a.1
+lat_name = /home/trimis/data/pure_u1/lattices/l44b0750a/l44b0750a.4
 

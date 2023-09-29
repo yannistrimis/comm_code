@@ -15,7 +15,7 @@ void read_lattice(char* prevlat_name){
     for(int i=0;i<4;i++){
         fread(lattice[i], sizeof(lattice[i][0]), vol, f1);
     }
-    fread(&d_update_char, sizeof(double),1,f1);
+    fread(&d_update_char, sizeof(d_update_char),1,f1);
     d_update = *((double*)d_update_char);
     fclose(f1);
 }
@@ -28,7 +28,7 @@ void save_lattice(char* lat_name){
     for(int i=0;i<4;i++){
         fwrite(lattice[i], sizeof(lattice[i][0]), vol, f2);
     }
-    fwrite(&d_update_char, sizeof(double),1,f2);
+    fwrite(&d_update_char, sizeof(d_update_char),1,f2);
     fclose(f2);
 }
 

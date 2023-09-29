@@ -1,23 +1,25 @@
 #!/bin/bash
 
-n_of_ens=1
+n_of_ens=4
 
 nx=16
 nt=16
 
-beta=0.75
-beta_name="0750"
+beta_arr=( 0.25 0.50 0.75 1.00 )
+beta_name_arr=( "0250" "0500" "0750" "1000" )
 stream="a"
 
 initial_seed=7832
 initial_ilat=1
 
-n_of_lat=1
+n_of_lat=200
 trajectories=10
 d_hot=1.0
-d_update=1.0
+d_update=2.0
 
 for(( i_ens=0; i_ens<${n_of_ens}; i_ens++ )); do
+beta=${beta_arr[${iens}]}
+beta_name=${beta_name_arr[${iens}]}
 
 ens_name="l${nx}${nt}b${beta_name}${stream}"
 
@@ -85,9 +87,9 @@ nx = ${nx}
 nt = ${nt}
 beta = ${beta}
 trajectories = ${trajectories}
+startlat = reload
 d_hot = ${d_hot}
 d_update = ${d_update}
-startlat = reload
 prevlat_name = ${prevlat_name}
 endlat = save
 lat_name = ${lat_name}

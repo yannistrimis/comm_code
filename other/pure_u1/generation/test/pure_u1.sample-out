@@ -1,15 +1,15 @@
 
 GENERATION OF PURE GAUGE U(1) CONFIGURATIONS
-START: 2023-09-17 19:51:45
+START: 2023-09-29 13:20:59
 
 seed = 324
 nx = 4
 nt = 4
 beta = 0.250000
 trajectories = 4
+startlat = fresh
 d_hot = 1.000000
 d_update = 0.100000
-startlat = fresh
 endlat = forget
 
 HOT START PERFORMED.
@@ -23,4 +23,4 @@ ACCEP PLAQ
 
 
 
-END: 2023-09-17 19:51:45
+END: 2023-09-29 13:20:59

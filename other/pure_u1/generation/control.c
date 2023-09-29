@@ -14,7 +14,7 @@ int vol;
 double beta;
 double action;
 
-double d_update = 0.0; // WILL BE READ FROM BINARY IF reload IS PERFORMED
+double d_update; // WILL BE READ FROM BINARY IF reload IS PERFORMED
 
 int main(void){
 
