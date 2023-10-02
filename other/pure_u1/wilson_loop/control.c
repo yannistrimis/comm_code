@@ -47,7 +47,7 @@ int main(void){
 
     read_lattice(lat_name);
     printf("READ FROM BINARY FILE %s\n\n",lat_name);    
-    printf("R T IMWLOOP REWLOOP\n");
+    printf("R T REWLOOP IMWLOOP\n");
     for(int ir=r_min; ir<=r_max; ir=ir+r_step){
         for(int it=t_min; it<=t_max; it=it+t_step){
             wilson_loop(ir,it);

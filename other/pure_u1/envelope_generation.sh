@@ -1,12 +1,12 @@
 #!/bin/bash
 
-n_of_ens=4
+n_of_ens=3
 
 nx=16
 nt=16
 
-beta_arr=( 0.25 0.50 0.75 1.00 )
-beta_name_arr=( "0250" "0500" "0750" "1000" )
+beta_arr=( 0.75 1.00 1.25 )
+beta_name_arr=( "0750" "1000" "1250" )
 stream="a"
 
 initial_seed=7832
@@ -17,9 +17,9 @@ trajectories=10
 d_hot=1.0
 d_update=2.0
 
-for(( i_ens=0; i_ens<${n_of_ens}; i_ens++ )); do
-beta=${beta_arr[${iens}]}
-beta_name=${beta_name_arr[${iens}]}
+for (( i_ens=0; i_ens<${n_of_ens}; i_ens++ )); do
+beta=${beta_arr[${i_ens}]}
+beta_name=${beta_name_arr[${i_ens}]}
 
 ens_name="l${nx}${nt}b${beta_name}${stream}"
 
@@ -103,5 +103,6 @@ cat input.dat | ./generation/pure_u1  > ${out_name}
 seed=$((${seed}+1))
 ilat=$((${ilat}+1))
 counter=$((${counter}+1))
+
 done # LATTICES
 done # ENSEMBLES
