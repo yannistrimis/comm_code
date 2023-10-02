@@ -1,63 +1,46 @@
 #!/bin/bash
 
-
 # THIS SCRIPT CREATES DIRECTORIES FOR PURE GAUGE ENSEMBLE GENERATION.
-# ALL THE PARAMETERS THAT DEFINE AN ENSEMBLE ARE PLACED IN ARRAYS OF AS MANY ELEMENTS
-# AS THE NUMBER OF ENSEMBLES TO BE GENERATED. IF A PARAMETER IS E.G. SAME IN TWO ENSEMBLES
-# THEN THE VALUE HAS TO BE REPEATED, I.E. THERE IS NO LOOP OVER INDIVIDUAL PARAMETERS, BUT 
-# ONLY OVER THE ENSEMBLES (i_ens).
+# IF MULTIPLE DIRECTORIES ARE NEEDED, THE USER CAN CREATE ARRAYS
+# FOR THE CHANGING PARAMETERS.
 
-
-cluster="fnal"
+cluster="icer"
 n_of_ens=9
 
-# THE FOLLOWING ARRAYS SHOULD ALL HAVE
-# THE SAME LENGTH, EQUAL TO n_of_ens
+nx=20
+nt=40
 
-nx_arr=(16 16 16 16 16 16 16 16 16)
-nt_arr=(32 32 32 32 32 32 32 32 32)
-
-beta_arr=(7.10 7.10 7.10 7.10 7.10 7.10 7.10 7.10 7.10)
-beta_name_arr=("7100" "7100" "7100" "7100" "7100" "7100" "7100" "7100" "7100")
+beta=7.20
+beta_name="7200"
 
 xi_0_arr=(1.78 1.80 1.82 1.84 1.86 1.88 1.90 1.92 1.94)
-xi_0_name_arr=("178" "180" "182" "184" "186" "188" "190" "192" "194")
+xi_0_name_arr=("1780" "1800" "1820" "1840" "1860" "1880" "1900" "1920" "1940")
 
-stream_arr=("a" "a" "a" "a" "a" "a" "a" "a" "a")
+stream="a"
 
-sbatch_time_arr=("09:00:00" "09:00:00" "09:00:00" "09:00:00" "09:00:00" "09:00:00" "09:00:00" "09:00:00" "09:00:00")
-sbatch_nodes_arr=(4 4 4 4 4 4 4 4 4 ) # N/A WHEN icer IS SELECTED
-sbatch_ntasks_arr=(128 128 128 128 128 128 128 128 128)
+sbatch_time="03:00:00"
+sbatch_nodes=4 # N/A WHEN icer IS SELECTED
+sbatch_ntasks=128
 sbatch_jobname_arr=("gen178" "gen180" "gen182" "gen184" "gen186" "gen188" "gen190" "gen192" "gen194")
 
-n_of_sub_arr=(1 1 1 1 1 1 1 1 1)
-n_of_lat_arr=(500 500 500 500 500 500 500 500 500)
+n_of_sub=1
+n_of_lat=50
 
 
 for (( i_ens=0; i_ens<${n_of_ens}; i_ens++ )); do
 
-nx=${nx_arr[${i_ens}]}
-nt=${nt_arr[${i_ens}]}
-
-beta_s=$(python3 -c "b_s=${beta_arr[${i_ens}]}/${xi_0_arr[${i_ens}]};print('%.5lf'%b_s)")
-beta_t=$(python3 -c "b_t=${beta_arr[${i_ens}]}*${xi_0_arr[${i_ens}]};print('%.5lf'%b_t)")
-
-beta_name=${beta_name_arr[${i_ens}]}
+# SUBSTITUTE ARRAY ELEMENTS HERE, IF ANY
+xi_0=${xi_0_arr[${i_ens}]}
 xi_0_name=${xi_0_name_arr[${i_ens}]}
+sbatch_jobname=${sbatch_jobname_arr[${i_ens}]}
 
-stream=${stream_arr[${i_ens}]}
+
+beta_s=$(python3 -c "b_s=${beta}/${xi_0};print('%.5lf'%b_s)")
+beta_t=$(python3 -c "b_t=${beta}*${xi_0};print('%.5lf'%b_t)")
 
 ensemble="${nx}${nt}b${beta_name}x${xi_0_name}${stream}"
 lat_name="l${ensemble}"
 out_name="out${ensemble}"
-
-sbatch_time=${sbatch_time_arr[${i_ens}]}
-sbatch_nodes=${sbatch_nodes_arr[${i_ens}]} # N/A WHEN icer IS SELECTED
-sbatch_ntasks=${sbatch_ntasks_arr[${i_ens}]}        
-sbatch_jobname=${sbatch_jobname_arr[${i_ens}]}
-
-n_of_sub=${n_of_sub_arr[${i_ens}]}
-n_of_lat=${n_of_lat_arr[${i_ens}]}
 
 my_dir="${cluster}_scripts_${ensemble}"
 
@@ -72,7 +55,6 @@ cat <<EOF > ../${my_dir}/params.sh
 #!/bin/bash
 
 cluster=${cluster}
-
 
 init_seed=1158
 n_of_lat=${n_of_lat}
