@@ -4,8 +4,8 @@
 cluster=icer
 
 init_seed=1158
-n_of_lat=50
-n_of_sub=1
+n_of_lat=100
+n_of_sub=5
 
 nx=20
 ny=20
@@ -49,8 +49,8 @@ submit_dir="/mnt/home/trimisio/submits/subgenl2040b7200x1780a"
 
 executable="su3_ora_symzk0_a_dbl_intel_ICER_20230828"
 
-sbatch_time="03:00:00"
-sbatch_ntasks="128"
+sbatch_time="04:00:00"
+sbatch_ntasks="250"
 sbatch_jobname="gen178"
 sbatch_module="intel/2020b"
 
