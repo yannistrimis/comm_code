@@ -1,0 +1,10 @@
+lat_name = /home/trimis/data/pure_u1/lattices/l1616b0750a/l1616b0750a.175
+nx = 16
+nt = 16
+r_min = 1
+r_step = 1
+r_max = 6
+t_min = 1
+t_step = 1
+t_max = 8
+
