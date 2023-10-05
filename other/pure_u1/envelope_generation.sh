@@ -1,19 +1,19 @@
 #!/bin/bash
 
-n_of_ens=3
+n_of_ens=5
 
 nx=16
 nt=16
 
-beta_arr=( 0.75 1.00 1.25 )
-beta_name_arr=( "0750" "1000" "1250" )
+beta_arr=( 0.25 0.50 0.75 1.00 1.25 )
+beta_name_arr=( "0250" "0500" "0750" "1000" "1250" )
 stream="a"
 
 initial_seed=7832
 initial_ilat=1
 
-n_of_lat=200
-trajectories=10
+n_of_lat=210
+trajectories=20
 d_hot=1.0
 d_update=2.0
 
@@ -100,9 +100,14 @@ fi
 
 cat input.dat | ./generation/pure_u1  > ${out_name}
 
+text="END:"
+complete_flag=$(bash is_complete.sh ${out_name} ${text})
+if [ "${complete_flag}" = "1" ]
+then
 seed=$((${seed}+1))
 ilat=$((${ilat}+1))
-counter=$((${counter}+1))
+fi
 
+counter=$((${counter}+1))
 done # LATTICES
 done # ENSEMBLES

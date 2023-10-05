@@ -1,11 +1,11 @@
 #!/bin/bash
 
-n_of_ens=5
+n_of_ens=2
 
 nx=16
 nt=16
 
-beta_name_arr=( "0250" "0500" "0750" "1000" "1250" )
+beta_name_arr=( "0250" "0500" )
 stream="a"
 
 initial_ilat=101
@@ -58,8 +58,13 @@ EOF
 
 cat wloop_input.dat | ./wilson_loop/wloop  > ${out_name}
 
+text="END:"
+complete_flag=$(bash is_complete.sh ${out_name} ${text})
+if [ "${complete_flag}" = "1" ]
+then
 ilat=$((${ilat}+1))
-counter=$((${counter}+1))
+fi
 
+counter=$((${counter}+1))
 done # LATTICES
 done # ENSEMBLES
