@@ -1,11 +1,11 @@
 #!/bin/bash
 
-n_of_ens=2
+n_of_ens=3
 
 nx=16
 nt=16
 
-beta_name_arr=( "0250" "0500" )
+beta_name_arr=( "0750" "1000" "1250" )
 stream="a"
 
 initial_ilat=101
