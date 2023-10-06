@@ -18,13 +18,13 @@ xi_0_name_arr=("1760" "1780" "1800" "1820" "1840" "1860" "1880" "1900" "1920")
 
 stream="a"
 
-sbatch_time="04:00:00"
+sbatch_time="02:00:00"
 sbatch_nodes=4 # N/A WHEN icer IS SELECTED
 sbatch_ntasks=250
 sbatch_jobname_arr=("gen176" "gen178" "gen180" "gen182" "gen184" "gen186" "gen188" "gen190" "gen192")
 
-n_of_sub=5
-n_of_lat=100
+n_of_sub=1
+n_of_lat=20
 
 
 for (( i_ens=0; i_ens<${n_of_ens}; i_ens++ )); do
