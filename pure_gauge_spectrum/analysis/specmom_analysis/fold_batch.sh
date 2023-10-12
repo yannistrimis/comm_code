@@ -1,24 +1,25 @@
 #!/bin/bash
-
+nt=32
+ens_name="1632b6850x100"
 masses=("0.0788")
 mas_len=${#masses[@]}
 
+xq_arr=("100")
 sinks_arr=("PION_5")
-xq_arr=("100" "102")
-mom_arr=("p100" "p010" "p001" "p110" "p101" "p011")
+
+mom_arr=("p100")
 
 for mom in ${mom_arr[@]}
 do
 
 echo "    ${mom}"
 
-
-for sinks in "${sinks_arr[@]}"
+for sinks in ${sinks_arr[@]}
 do
 
 echo "====${sinks}===="
 
-for i_file in {101..101..1}
+for i_file in {101..500..1}
 do
 
 echo "    ${i_file}"
@@ -29,20 +30,18 @@ do
 mass1=${masses[$m1]}
 mass2=${mass1}
 
-for xq in ${xq_arr[@]}
+for xq in "${xq_arr[@]}"
 do
 
 python fold_one.py <<EOF
+${nt}
+${ens_name}a
+averspec${mom}rcw${ens_name}xq${xq}a_m${mass1}m${mass2}${sinks}
 ${i_file}
-${mass1}
-${mass2}
-${sinks}
-${xq}
-${mom}
-specmomeow
+foldspec${mom}rcw${ens_name}xq${xq}a_m${mass1}m${mass2}${sinks}
 EOF
 
-done # xq
+done #xq
 
 done # m1
 

@@ -1,12 +1,13 @@
 #!/bin/bash
 
+ens_name="1632b6850x100"
 masses=("0.0788")
 mas_len=${#masses[@]}
 
 xq_arr=("100")
 sinks_arr=("PION_5")
 
-mom_arr=("p100" "p010" "p001")
+mom_arr=("p100")
 
 for mom in ${mom_arr[@]}
 do
@@ -33,13 +34,10 @@ for xq in "${xq_arr[@]}"
 do
 
 python aver_one.py <<EOF
+${ens_name}a
+cleanspec${mom}rcw${ens_name}xq${xq}a_m${mass1}m${mass2}${sinks}
 ${i_file}
-${mass1}
-${mass2}
-${sinks}
-${xq}
-${mom}
-specmomeow
+averspec${mom}rcw${ens_name}xq${xq}a_m${mass1}m${mass2}${sinks}
 EOF
 
 done #xq

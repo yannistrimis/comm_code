@@ -3,9 +3,8 @@
 
 cluster=icer
 
-n_of_lat=100
-n_of_sub=4
-
+n_of_lat=25
+n_of_sub=1
 nx=20
 ny=20
 nz=20

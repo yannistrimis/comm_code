@@ -1,18 +1,22 @@
 #!/bin/bash
 
+ens_name="1632b6850x100"
 masses=("0.0788")
 mas_len=${#masses[@]}
 
 xq_arr=("100")
 sinks_arr=("PION_5")
 
-mom_arr=("p100" "p010" "p001")
+mom_arr=("p100")
 
 for mom in ${mom_arr[@]}
 do
 
-source1="even_and_odd_wall"
-source2="even_and_odd_wall/momentum"
+source1="random_color_wall/momentum"
+source2="random_color_wall"
+
+sinkop1="identity"
+sinkop2="identity"
 
 for sinks in "${sinks_arr[@]}"
 do
@@ -34,15 +38,18 @@ for xq in "${xq_arr[@]}"
 do
 
 python clean_one.py <<EOF
+${ens_name}a
+specmomwall${ens_name}xq${xq}a
 ${i_file}
+${mom}
 ${mass1}
 ${mass2}
 ${source1}
 ${source2}
+${sinkop1}
+${sinkop2}
 ${sinks}
-$xq
-$mom
-specmomeow
+cleanspecp100rcw${ens_name}xq${xq}a_m${mass1}m${mass2}${sinks}
 EOF
 
 done #xq

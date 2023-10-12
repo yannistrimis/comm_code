@@ -2,26 +2,17 @@
 import numpy as np
 
 out_dir = '/mnt/home/trimisio/plot_data/spec_data'
-nx=16
-nt=32
-vol = str(nx)+str(nt)
-beta = '6850'
-x0 = '100'
-stream = 'a'
 
-i_file = input() # FILE NUMBER
-mass1 = input()
-mass2 = input()
-sinks = input()
-xq = input()
-mom = input()
+str_nt = input()
+ens_name = input()
 pre_name = input()
+i_file = input()
+out_name = input()
 
-ens_name = vol+'b'+beta+'x'+x0+stream
+nt = int(str_nt)
 
-
-f_write = open('%s/l%s/%s_xq%s%s_foldspec_m1_%s_m2_%s_%s.%s'%(out_dir,ens_name,pre_name,xq,mom,mass1,mass2,sinks,i_file),'w')
-f_read = open('%s/l%s/%s_xq%s%s_spec_m1_%s_m2_%s_%s.%s'%(out_dir,ens_name,pre_name,xq,mom,mass1,mass2,sinks,i_file),'r')
+f_write = open('%s/l%s/%s.%s'%(out_dir,ens_name,out_name,i_file),'w')
+f_read = open('%s/l%s/%s.%s'%(out_dir,ens_name,pre_name,i_file),'r')
 
 content = f_read.readlines()
 re = 0.0

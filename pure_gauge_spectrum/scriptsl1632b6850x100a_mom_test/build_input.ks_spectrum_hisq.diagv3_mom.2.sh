@@ -184,7 +184,7 @@ EOF
 cat  <<EOF
 # DESCRIPTION OF MESONS
 
-number_of_mesons 4
+number_of_mesons 5
 
 pair 2 0
 spectrum_request meson
@@ -217,6 +217,16 @@ number_of_correlators 1
 correlator PION_5  p000  1 * 1 pion5  0 0 0 EO EO EO
 
 pair 1 2
+spectrum_request meson
+
+forget_corr
+r_offset 0 0 0 ${t0}
+
+number_of_correlators 1
+
+correlator PION_5  p000  1 * 1 pion5  0 0 0 EO EO EO
+
+pair 2 1
 spectrum_request meson
 
 forget_corr
