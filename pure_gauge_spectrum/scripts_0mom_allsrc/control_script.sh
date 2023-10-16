@@ -10,18 +10,18 @@ fi
 
 ### guard_mom_ani FILE CONTAINS NUMBER OF THE NEXT LATTICE TO BE MEASURED
 
-if [ -f "${directory}/guard_mom_ani" ]
+if [ -f "${submit_dir}/guard_mom_ani" ]
 then
 
-i_lat=$(head -1 "${directory}/guard_mom_ani")
-seed=$(tail -1 "${directory}/guard_mom_ani")
+i_lat=$(head -1 "${submit_dir}/guard_mom_ani")
+seed=$(tail -1 "${submit_dir}/guard_mom_ani")
 
 else 
 
 i_lat=${set_i_lat}
 seed=${set_seed}
 
-cat << EOF > "${directory}/guard_mom_ani"
+cat << EOF > "${submit_dir}/guard_mom_ani"
 ${i_lat}
 ${seed}
 EOF
@@ -42,7 +42,7 @@ for i_xq in ${!xq_arr[@]}; do
 xq_0=${xq_arr[$i_xq]}
 xq_0_name=${xq_name_arr[$i_xq]}
 
-file_name="${directory}/specmomeow${nx}${nt}b${beta_name}x${xi_0_name}xq${xq_0_name}${stream}.${i_lat}"
+file_name="${directory}/spec0mom_allsrc${nx}${nt}b${beta_name}x${xi_0_name}xq${xq_0_name}${stream}.${i_lat}"
 
 if [ -f "${file_name}" ]
 then
@@ -50,10 +50,10 @@ rm "${file_name}"
 fi
 
 bash ${path}/make_input.sh ${i_lat} ${seed} ${path} ${xq_0}
-bash ${path}/build_input.ks_spectrum_ani_hisq.diagv3_mom.2.sh ${submit_dir}/param_input > ${submit_dir}/spec_input
+bash ${path}/build_input.sh ${submit_dir}/param_input > ${submit_dir}/spec_input
 
 cd ${run_dir}
-srun -n 128 ${path_build}/ks_spectrum_ani_hisq_icc_dbl_20230619 ${submit_dir}/spec_input > ${file_name}
+srun -n 128 ${path_build}/ks_spectrum_ani_hisq_icc_dbl_20230619 ${submit_dir}/spec_input  > ${file_name}
 cd ${submit_dir}
 
 text="RUNNING COMPLETED"
@@ -78,7 +78,7 @@ n_produced=$((${n_produced}+1))
 i_lat=$((${i_lat}+1)) 
 seed=$((${seed}+1))
 
-cat << EOF > "${directory}/guard_mom_ani"
+cat << EOF > "${submit_dir}/guard_mom_ani"
 ${i_lat}
 ${seed}
 EOF

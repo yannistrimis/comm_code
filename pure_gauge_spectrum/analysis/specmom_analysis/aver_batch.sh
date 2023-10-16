@@ -35,9 +35,9 @@ do
 
 python aver_one.py <<EOF
 ${ens_name}a
-cleanspec${mom}rcw${ens_name}xq${xq}a_m${mass1}m${mass2}${sinks}
+cleanspec${mom}cw${ens_name}xq${xq}a_m${mass1}m${mass2}${sinks}
 ${i_file}
-averspec${mom}rcw${ens_name}xq${xq}a_m${mass1}m${mass2}${sinks}
+averspec${mom}cw${ens_name}xq${xq}a_m${mass1}m${mass2}${sinks}
 EOF
 
 done #xq

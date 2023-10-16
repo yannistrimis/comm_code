@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/bin/bash
 
 paramfile=$1
 
@@ -35,7 +35,9 @@ iseed ${iseed}
 job_id ${jobid}
 EOF
 
-t0=0
+# ITERATE OVER SOURCE TIME SLICES
+for ((i=0; i<${n_sources}; i++)); do
+t0=$[${source_start}+${i}*${source_inc}]
 
 cat  <<EOF 
 
@@ -54,6 +56,11 @@ ape_iter 0
 coordinate_origin 0 0 0 0
 time_bc antiperiodic
 
+# ANISOTROPY
+ani_dir ${ani_dir}
+ani_xiq ${ani_xiq}
+
+
 # EIGENPAIRS
 
 max_number_of_eigenpairs 0
@@ -68,39 +75,28 @@ number_of_pbp_masses 0
 
 number_of_base_sources 1
 
-# SOURCE 0
-evenandodd_wall
+# BASE, SOURCE 0
+
+point
 field_type KS
 subset full
-t0 0
-source_label eow
+origin 0 0 0 0 
+source_label pt
 forget_source
 
 # DESCRIPTION OF MODIFIED SOURCES
 
-number_of_modified_sources 1
-
-# SOURCE 1
-source 0
-momentum
-momentum 1 0 0
-op_label mom
-forget_source
-
-EOF
+number_of_modified_sources 0
 
 ######################################################################
-# PROPAGATORS
 
-cat  <<EOF
+# PROPAGATORS
 
 # DESCRIPTION OF PROPAGATORS
 
-number_of_sets 2
+number_of_sets 1
 
 # PARAMETERS FOR SET 0
-set_type multimass
-inv_type UML
 max_cg_iterations ${max_cg_iterations}
 max_cg_restarts 5
 check yes
@@ -117,38 +113,12 @@ rel_error_for_propagator 0
 fresh_ksprop
 forget_ksprop
 
-
-# PARAMETERS FOR SET 1
-set_type multimass
-inv_type UML
-max_cg_iterations ${max_cg_iterations}
-max_cg_restarts 5
-check yes
-momentum_twist 0 0 0
-precision ${precision}
-source 1
-number_of_propagators 1
-
-# PROPAGATOR 1
-mass ${mass[0]}
-${naik_cmd[0]}
-error_for_propagator ${error_for_propagator[0]}
-rel_error_for_propagator 0
-fresh_ksprop
-forget_ksprop
-
-
-EOF
-
-
 ######################################################################
 # QUARKS
 
-cat  <<EOF
-
 # DESCRIPTION OF QUARKS
 
-number_of_quarks 4
+number_of_quarks 1
 
 # QUARK 0
 propagator 0
@@ -156,96 +126,34 @@ identity
 op_label id
 forget_ksprop
 
-# QUARK 1
-propagator 0
-momentum
-momentum 1 0 0
-op_label id_mom
-forget_ksprop
-
-# QUARK 2
-propagator 1
-identity
-op_label id
-forget_ksprop
-
-# QUARK 3
-propagator 1
-momentum
-momentum 1 0 0
-op_label id_mom
-forget_ksprop
-
-EOF
-
 ######################################################################
 # MESONS
 
-cat  <<EOF
 # DESCRIPTION OF MESONS
 
-number_of_mesons 5
+number_of_mesons 1
 
-pair 2 0
+pair 0 0
 spectrum_request meson
 
 forget_corr
+
 r_offset 0 0 0 ${t0}
 
-number_of_correlators 1
+number_of_correlators 3
 
-correlator PION_5  p100  1 * 1 pion5  1 0 0 EO EO EO
-
-pair 0 2
-spectrum_request meson
-
-forget_corr
-r_offset 0 0 0 ${t0}
-
-number_of_correlators 1
-
-correlator PION_5  p100  1 * 1 pion5  1 0 0 EO EO EO
-
-pair 0 3
-spectrum_request meson
-
-forget_corr
-r_offset 0 0 0 ${t0}
-
-number_of_correlators 1
-
-correlator PION_5  p000  1 * 1 pion5  0 0 0 EO EO EO
-
-pair 1 2
-spectrum_request meson
-
-forget_corr
-r_offset 0 0 0 ${t0}
-
-number_of_correlators 1
-
-correlator PION_5  p000  1 * 1 pion5  0 0 0 EO EO EO
-
-pair 2 1
-spectrum_request meson
-
-forget_corr
-r_offset 0 0 0 ${t0}
-
-number_of_correlators 1
-
-correlator PION_5  p000  1 * 1 pion5  0 0 0 EO EO EO
-
-EOF
+correlator PION_5  p100 1 * 1 pion5  1 0 0 EO EO EO
+correlator PION_5  p100 1 * 1 pion5  0 1 0 EO EO EO
+correlator PION_5  p100 1 * 1 pion5  0 0 1 EO EO EO
 
 ######################################################################
 # BARYONS
 
-cat  <<EOF
 # DESCRIPTION OF BARYONS
 number_of_baryons 0
+
 EOF
 
 reload_gauge_cmd="continue"
 
-
+done # t0

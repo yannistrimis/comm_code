@@ -19,15 +19,15 @@ jobid=none
 inlat=${inlat}
 u0=${u0}
 
+ani_dir="t"
+ani_xiq=$4
+
 source_start=${source_start}
 source_inc=${source_inc}
 n_sources=${n_sources}
 
 nmasses=${nmasses}
 mass=( ${mass1} ${mass2} ${mass3} ${mass4} ${mass5} )
-
-n_of_mom=${n_of_mom}
-mom_labels=( ${moml1} ${moml2} ${moml3} ${moml4} ${moml5} ${moml6} ${moml7} ${moml8} ${moml9} ${moml10} )
 
 naik_term_epsilon=( 0 0 0 0 0 )
 error_for_propagator=( ${err} ${err} ${err} ${err} ${err} )

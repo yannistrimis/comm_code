@@ -12,8 +12,8 @@ mom_arr=("p100")
 for mom in ${mom_arr[@]}
 do
 
-source1="random_color_wall/momentum"
-source2="random_color_wall"
+source1="CORNER/momentum"
+source2="CORNER"
 
 sinkop1="identity"
 sinkop2="identity"
@@ -39,7 +39,7 @@ do
 
 python clean_one.py <<EOF
 ${ens_name}a
-specmomwall${ens_name}xq${xq}a
+specmomcornwall${ens_name}xq${xq}a
 ${i_file}
 ${mom}
 ${mass1}
@@ -49,7 +49,7 @@ ${source2}
 ${sinkop1}
 ${sinkop2}
 ${sinks}
-cleanspecp100rcw${ens_name}xq${xq}a_m${mass1}m${mass2}${sinks}
+cleanspecp100cw${ens_name}xq${xq}a_m${mass1}m${mass2}${sinks}
 EOF
 
 done #xq
