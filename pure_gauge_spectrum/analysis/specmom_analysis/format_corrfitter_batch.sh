@@ -30,7 +30,7 @@ do
 
 python format_corrfitter_one.py <<EOF
 ${ens_name}a
-${mom}cw${ens_name}xq${xq}a_m${mass1}m${mass2}${sinks}
+${mom}pt${ens_name}xq${xq}a_m${mass1}m${mass2}${sinks}
 101
 500
 EOF

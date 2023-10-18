@@ -12,18 +12,18 @@ stream = 'a'
 cur_dir = '/mnt/home/trimisio/plot_data/spec_data/l'+vol+'b'+beta+'x'+x0+stream
 
 
-f1 = input()
+pre_name = input()
 str_n_bins = input()
 n_bins = int(str_n_bins)
 
-f_write = open('%s/%s.coshmeff.data'%(cur_dir,f1),'w')
+f_write = open('%s/%s.coshmeffdata'%(cur_dir,pre_name),'w')
 
 def main() :
 
     meff = np.zeros( (int(nt/2)-1,n_bins) )
 
     for i_bin in range(n_bins):
-        f_read = open('%s/%s.jackbin_%d'%(cur_dir,f1,i_bin),'r')
+        f_read = open('%s/%s.specdata.jackbin_%d'%(cur_dir,pre_name,i_bin),'r')
         content = f_read.readlines()
         f_read.close()
 

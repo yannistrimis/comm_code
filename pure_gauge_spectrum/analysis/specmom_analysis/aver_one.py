@@ -22,8 +22,8 @@ for i_line in range(len(content_a)) :
     split_a = content_a[i_line].split(' ')
     split_b = content_b[i_line].split(' ')
 
-    re = 0.5*( float(split_a[1]) + float(split_b[1]) )
-    im = 0.5*( float(split_a[2]) + float(split_b[2]) )
+    re = 0.5*( float(split_a[1]) + float(split_a[1]) )
+    im = 0.5*( float(split_a[2]) + float(split_a[2]) )
 
     f_write.write('%s %.16f %.16f\n'%(split_a[0],re,im))
 

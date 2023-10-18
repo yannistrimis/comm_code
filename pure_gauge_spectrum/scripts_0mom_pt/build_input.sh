@@ -140,11 +140,9 @@ forget_corr
 
 r_offset 0 0 0 ${t0}
 
-number_of_correlators 3
+number_of_correlators 1
 
-correlator PION_5  p100 1 * 1 pion5  1 0 0 EO EO EO
-correlator PION_5  p100 1 * 1 pion5  0 1 0 EO EO EO
-correlator PION_5  p100 1 * 1 pion5  0 0 1 EO EO EO
+correlator PION_5  p000 1 * 1 pion5  0 0 0 EO EO EO
 
 ######################################################################
 # BARYONS

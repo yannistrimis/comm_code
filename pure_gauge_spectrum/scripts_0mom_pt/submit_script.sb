@@ -4,7 +4,7 @@
 #SBATCH --ntasks=128
 #SBATCH --constraint=intel16
 #SBATCH --exclude=lac-[084-124]
-#SBATCH --job-name pt
+#SBATCH --job-name 0pt
 
 module load intel/2020b
 path=$1

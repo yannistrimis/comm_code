@@ -109,7 +109,7 @@ forget_source
 point
 field_type KS
 subset full
-origin 0 0 0 0 
+origin 0 0 0 ${t0} 
 source_label pt
 forget_source
 

@@ -1,6 +1,9 @@
 import numpy as np
-from python_funcs import *
 from matplotlib import pyplot as plt
+import sys
+sys.path.insert(0, '../..') # icer
+
+from python_funcs import *
 
 ### THIS SCRIPT SETS THE w0 SCALE AND RENORMALIZED GAUGE ANISOTROPY
 ### FOR PURE GAUGES ENSEMBLES. IT ALSO PRODUCES JACKKNIFE-BINNED DATA

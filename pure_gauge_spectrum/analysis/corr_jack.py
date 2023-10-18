@@ -1,4 +1,7 @@
 import numpy as np
+import sys
+sys.path.insert(0, '../..') # icer
+
 from python_funcs import *
 
 nx = 16
@@ -9,19 +12,16 @@ x0 = '100'
 stream = 'a'
 ens_name = vol+'b'+beta+'x'+x0+stream
 
-mass1 = input()
-mass2 = input()
-sinks = input()
 pre_name = input()
 
-n_bins = 20
+n_bins = 40
 
 nt = int(lat_nt/2)+1 # QUICK SOLUTION FOR FOLDED DATA
 
 
 cur_dir = '/mnt/home/trimisio/plot_data/spec_data'
 
-f_read = open('%s/l%s/%s_m1_%s_m2_%s_%s.fold.data'%(cur_dir,ens_name,pre_name,mass1,mass2,sinks),'r')
+f_read = open('%s/l%s/%s.specdata'%(cur_dir,ens_name,pre_name),'r')
 content = f_read.readlines()
 n_of_files = len(content)
 
@@ -34,8 +34,8 @@ for i in range(nt) :
 
 f_read.close()
 
-write_1_re = open('%s/l%s/%s_m1_%s_m2_%s_%s.fold.bin.data'%(cur_dir,ens_name,pre_name,mass1,mass2,sinks),'w')
-write_2_re = open('%s/l%s/%s_m1_%s_m2_%s_%s.averr'%(cur_dir,ens_name,pre_name,mass1,mass2,sinks),'w')
+write_1_re = open('%s/l%s/%s.specdata.bin'%(cur_dir,ens_name,pre_name),'w')
+write_2_re = open('%s/l%s/%s.specdata.averr'%(cur_dir,ens_name,pre_name),'w')
 
 
 my_bin_array_re = np.zeros(( nt , n_bins ))
@@ -72,7 +72,7 @@ write_1_re.close()
 write_2_re.close()
 
 for i_bin in range(n_bins) :
-    write_jackbin = open('%s/l%s/%s_m1_%s_m2_%s_%s.jackbin_%d'%(cur_dir,ens_name,pre_name,mass1,mass2,sinks,i_bin),'w')
+    write_jackbin = open('%s/l%s/%s.specdata.jackbin_%d'%(cur_dir,ens_name,pre_name,i_bin),'w')
     for i in range(nt) :
         write_jackbin.write('%.16f\n'%(my_jackbin_array_re[i,i_bin]))
     write_jackbin.close()
