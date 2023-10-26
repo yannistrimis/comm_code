@@ -7,7 +7,8 @@ mas_len=${#masses[@]}
 xq_arr=("100")
 sinks_arr=("PION_5")
 
-mom_arr=("p100")
+mom_arr=("p110")
+src_label="pt"
 
 for mom in ${mom_arr[@]}
 do
@@ -35,9 +36,9 @@ do
 
 python aver_one.py <<EOF
 ${ens_name}a
-cleanspec${mom}pt${ens_name}xq${xq}a_m${mass1}m${mass2}${sinks}
+cleanspec${mom}${src_label}${ens_name}xq${xq}a_m${mass1}m${mass2}${sinks}
 ${i_file}
-averspec${mom}pt${ens_name}xq${xq}a_m${mass1}m${mass2}${sinks}
+averspec${mom}${src_label}${ens_name}xq${xq}a_m${mass1}m${mass2}${sinks}
 EOF
 
 done #xq

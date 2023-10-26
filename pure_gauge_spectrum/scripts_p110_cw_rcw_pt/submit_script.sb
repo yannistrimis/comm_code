@@ -1,0 +1,11 @@
+#!/bin/bash --login
+
+#SBATCH --time=02:00:00
+#SBATCH --ntasks=128
+#SBATCH --constraint=intel16
+#SBATCH --exclude=lac-[084-124]
+#SBATCH --job-name ani
+
+module load intel/2020b
+path=$1
+bash ${path}/control_script.sh ${path}

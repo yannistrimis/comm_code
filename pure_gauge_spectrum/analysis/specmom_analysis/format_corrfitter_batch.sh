@@ -7,7 +7,8 @@ mas_len=${#masses[@]}
 xq_arr=("100")
 sinks_arr=("PION_5")
 
-mom_arr=("p100")
+mom_arr=("p110")
+src_label="pt"
 
 for mom in ${mom_arr[@]}
 do
@@ -30,7 +31,7 @@ do
 
 python format_corrfitter_one.py <<EOF
 ${ens_name}a
-${mom}pt${ens_name}xq${xq}a_m${mass1}m${mass2}${sinks}
+${mom}${src_label}${ens_name}xq${xq}a_m${mass1}m${mass2}${sinks}
 101
 500
 EOF

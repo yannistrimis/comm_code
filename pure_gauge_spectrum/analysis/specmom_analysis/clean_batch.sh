@@ -7,13 +7,15 @@ mas_len=${#masses[@]}
 xq_arr=("100")
 sinks_arr=("PION_5")
 
-mom_arr=("p100")
+mom_arr=("p110")
 
 for mom in ${mom_arr[@]}
 do
 
 source1="point"
 source2="point"
+
+src_label="pt"
 
 sinkop1="identity"
 sinkop2="identity"
@@ -39,7 +41,7 @@ do
 
 python clean_one.py <<EOF
 ${ens_name}a
-specmompt${ens_name}xq${xq}a
+specmom${mom}_allsrc${ens_name}xq${xq}a
 ${i_file}
 ${mom}
 ${mass1}
@@ -49,7 +51,7 @@ ${source2}
 ${sinkop1}
 ${sinkop2}
 ${sinks}
-cleanspecp100pt${ens_name}xq${xq}a_m${mass1}m${mass2}${sinks}
+cleanspec${mom}${src_label}${ens_name}xq${xq}a_m${mass1}m${mass2}${sinks}
 EOF
 
 done #xq

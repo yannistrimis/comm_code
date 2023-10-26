@@ -19,10 +19,11 @@ n_bins = int(str_n_bins)
 f_write = open('%s/%s.coshmeffdata'%(cur_dir,pre_name),'w')
 
 def main() :
-
+    
     meff = np.zeros( (int(nt/2)-1,n_bins) )
 
     for i_bin in range(n_bins):
+        print('i_bin=',i_bin)   
         f_read = open('%s/%s.specdata.jackbin_%d'%(cur_dir,pre_name,i_bin),'r')
         content = f_read.readlines()
         f_read.close()
@@ -30,15 +31,16 @@ def main() :
         y_av = np.zeros(int(nt/2)+1)
 
         for i in range(int(nt/2)+1):
-            line = content[i].split(' ')
-            y_av[i] = float(line[0])
+            line = content[i].strip()
+            y_av[i] = float(line)
 
         for t in range(int(nt/2)-1):
             c1 = t - nt/2
             c2 = c1 + 2 
             f = cosh(x*c1)/cosh(x*c2)-y_av[t]/y_av[t+2]
             if t % 2 == 0 :
-                meff[t,i_bin] = nsolve(f,x,0.0)
+                print('t=',t)
+                meff[t,i_bin] = nsolve(f,x,0.0,verify=False)
 
     meff_averr = np.zeros( (int(nt/2)-1,2) )
     for t in range(int(nt/2)-1):

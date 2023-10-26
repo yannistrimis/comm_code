@@ -9,12 +9,11 @@ from python_funcs import *
 
 def main():
 
-#    file_name = '/mnt/home/trimisio/plot_data/spec_data/l1632b6850x100a/specnd_m1_0.01576_m2_0.01576_PION_5.fold.data'
-    file_name = '/mnt/home/trimisio/plot_data/spec_data/l1632b6850x100a/p100rcw1632b6850x100xq100a_m0.0788m0.0788PION_5.specdata'
+    file_name = '/mnt/home/trimisio/plot_data/spec_data/l1632b6850x100a/p110cw1632b6850x100xq100a_m0.0788m0.0788PION_5.specdata'
 
     data = make_data(filename=file_name)
 
-    my_tfit = range(0,17)
+    my_tfit = range(12,17)
     my_tdata = range(0,17)
     my_models = make_models(my_tdata,my_tfit)
     fitter = cf.CorrFitter(models=my_models)
@@ -76,7 +75,7 @@ def main():
             
 def make_data(filename):
     """ Read data, compute averages/covariance matrix for G(t). """
-    return gv.dataset.avg_data(cf.read_dataset(filename,binsize=4))
+    return gv.dataset.avg_data(cf.read_dataset(filename,binsize=1))
 
 def make_models(my_tdata,my_tfit):
     """ Create corrfitter model for G(t). """
@@ -85,10 +84,10 @@ def make_models(my_tdata,my_tfit):
 def make_prior(N,M):
     """ Create prior for N-state fit. """
     prior = collections.OrderedDict()
-    prior['an'] = gv.gvar(N * ['0.0(1000.0)'])
-    prior['log(dEn)'] = gv.log(gv.gvar(N * ['0.5(10.0)']))
-    prior['ao'] = gv.gvar(M * ['0.0(2000)'])
-    prior['log(dEo)'] = gv.log(gv.gvar(M * ['0.5(10.0)']))
+    prior['an'] = gv.gvar(N * ['0.0(10000.0)'])
+    prior['log(dEn)'] = gv.log(gv.gvar(N * ['0.5(100.0)']))
+    prior['ao'] = gv.gvar(M * ['0.0(10000.0)'])
+    prior['log(dEo)'] = gv.log(gv.gvar(M * ['0.5(100.0)']))
     return prior
 
 def print_results(fit,N,M):

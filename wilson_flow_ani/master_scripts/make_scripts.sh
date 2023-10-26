@@ -17,7 +17,7 @@ stream="a"
 xi_f=2.00
 xi_f_name="200"
 
-flow_action="symanzik"
+flow_action="wilson"
 exp_order="16"
 dt="0.015625"
 stoptime="3.0"
@@ -25,7 +25,7 @@ stoptime="3.0"
 sbatch_time="08:00:00"
 sbatch_nodes=4 # N/A WHEN icer IS SELECTED
 sbatch_ntasks=125
-sbatch_jobname_arr=("sfl176" "sfl178" "sfl180" "sfl182" "sfl184" "sfl186" "sfl188" "sfl190" "sfl192")
+sbatch_jobname_arr=("wfl176" "wfl178" "wfl180" "wfl182" "wfl184" "wfl186" "wfl188" "wfl190" "wfl192")
 
 n_of_sub=4
 n_of_lat=100

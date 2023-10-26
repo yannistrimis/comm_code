@@ -13,8 +13,9 @@ stream = 'a'
 ens_name = vol+'b'+beta+'x'+x0+stream
 
 pre_name = input()
+str_n_bins = input()
 
-n_bins = 40
+n_bins = int(str_n_bins)
 
 nt = int(lat_nt/2)+1 # QUICK SOLUTION FOR FOLDED DATA
 
