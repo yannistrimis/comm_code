@@ -4,7 +4,7 @@
 # IF MULTIPLE DIRECTORIES ARE NEEDED, THE USER CAN CREATE ARRAYS
 # FOR THE CHANGING PARAMETERS.
 
-cluster="icer"
+cluster="fnal"
 n_of_ens=2
 
 nx_arr=(16 16)
@@ -20,7 +20,7 @@ stream="a"
 
 sbatch_time="02:00:00"
 sbatch_nodes=4 # N/A WHEN icer IS SELECTED
-sbatch_ntasks=256
+sbatch_ntasks=128
 sbatch_jobname_arr=("gen2" "gen4")
 
 n_of_sub=1
@@ -133,14 +133,14 @@ path_build="/home/trimisio/all/comm_code/pure_gauge_ani_generation/build"
 run_dir="/project/ahisq/yannis_puregauge/runs/rungen${lat_name}"
 submit_dir="/project/ahisq/yannis_puregauge/submits/subgen${lat_name}"
 
-executable="su3_ora_symzk0_a_dbl_gnu8openmpi3_fnal_20230906"
+executable="su3_ora_symzk0_a_dbl_gcc12openmpi4_20231030"
 
 sbatch_time="${sbatch_time}"
 sbatch_nodes="${sbatch_nodes}"
 sbatch_ntasks="${sbatch_ntasks}"
 sbatch_jobname="${sbatch_jobname}"
-sbatch_module1="gnu8"
-sbatch_module2="openmpi3"
+sbatch_module1="gcc/12"
+sbatch_module2="openmpi/4"
 
 EOF
 

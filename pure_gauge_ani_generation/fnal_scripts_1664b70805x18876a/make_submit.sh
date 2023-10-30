@@ -27,7 +27,7 @@ cat <<EOF > ${submit_dir}/submit_script.sb
 #!/bin/bash
 
 #SBATCH --time=${sbatch_time}
-#SBATCH --partition=lq1csl
+#SBATCH --partition=lq1_cpu
 #SBATCH --nodes=${sbatch_nodes}
 #SBATCH --ntasks=${sbatch_ntasks}
 #SBATCH -A ahisq

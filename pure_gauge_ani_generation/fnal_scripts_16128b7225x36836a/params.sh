@@ -1,7 +1,7 @@
 
 #!/bin/bash
 
-cluster=icer
+cluster=fnal
 
 init_seed=1158
 n_of_lat=5
@@ -41,16 +41,18 @@ lat_name="l16128b7225x36836a"
 out_name="out16128b7225x36836a"
 
 
-directory="/mnt/scratch/trimisio/lattices/l16128b7225x36836a"
-out_dir="/mnt/home/trimisio/outputs/l16128b7225x36836a"
-path_build="/mnt/home/trimisio/comm_code/pure_gauge_ani_generation/build"
-run_dir="/mnt/scratch/trimisio/runs/rungenl16128b7225x36836a"
-submit_dir="/mnt/home/trimisio/submits/subgenl16128b7225x36836a"
+directory="/lustre1/ahisq/yannis_puregauge/lattices/l16128b7225x36836a"
+out_dir="/project/ahisq/yannis_puregauge/outputs/l16128b7225x36836a"
+path_build="/home/trimisio/all/comm_code/pure_gauge_ani_generation/build"
+run_dir="/project/ahisq/yannis_puregauge/runs/rungenl16128b7225x36836a"
+submit_dir="/project/ahisq/yannis_puregauge/submits/subgenl16128b7225x36836a"
 
-executable="su3_ora_symzk0_a_dbl_intel_ICER_20230828"
+executable="su3_ora_symzk0_a_dbl_gcc12openmpi4_20231030"
 
 sbatch_time="02:00:00"
-sbatch_ntasks="256"
+sbatch_nodes="4"
+sbatch_ntasks="128"
 sbatch_jobname="gen4"
-sbatch_module="intel/2020b"
+sbatch_module1="gcc/12"
+sbatch_module2="openmpi/4"
 
