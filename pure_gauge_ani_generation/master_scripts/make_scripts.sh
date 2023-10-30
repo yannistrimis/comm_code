@@ -4,7 +4,7 @@
 # IF MULTIPLE DIRECTORIES ARE NEEDED, THE USER CAN CREATE ARRAYS
 # FOR THE CHANGING PARAMETERS.
 
-cluster="fnal"
+cluster="icer"
 n_of_ens=2
 
 nx_arr=(16 16)
