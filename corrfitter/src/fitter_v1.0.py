@@ -9,7 +9,7 @@ from python_funcs import *
 
 def main():
 
-    file_name = '/mnt/home/trimisio/plot_data/spec_data/l1632b6850x100a/p110cw1632b6850x100xq100a_m0.0788m0.0788PION_5.specdata'
+    file_name = '/mnt/home/trimisio/plot_data/spec_data/l1632b6850x100a/p100rcw1632b6850x100xq100a_m0.0788m0.0788PION_5.specdata'
 
     data = make_data(filename=file_name)
 
@@ -33,11 +33,11 @@ def main():
             chi2_real = fit.chi2
 
             for i_state in range(N) :
-                chi2_real = chi2_real - ( prior['an'][i_state].mean - fit.p['an'][i_state].mean )**2 / ( prior['an'][i_state].sdev )**2
+                chi2_real = chi2_real - ( gv.exp(prior['log(an)'])[i_state].mean - fit.p['an'][i_state].mean )**2 / ( gv.exp(prior['log(an)'])[i_state].sdev )**2
                 chi2_real = chi2_real - ( gv.exp(prior['log(dEn)'])[i_state].mean - fit.p['dEn'][i_state].mean )**2 / ( gv.exp(prior['log(dEn)'])[i_state].sdev )**2
             
             for i_state in range(M) :
-                chi2_real = chi2_real - ( prior['ao'][i_state].mean - fit.p['ao'][i_state].mean )**2 / ( prior['ao'][i_state].sdev )**2
+                chi2_real = chi2_real - ( gv.exp(prior['log(ao)'])[i_state].mean - fit.p['ao'][i_state].mean )**2 / ( gv.exp(prior['log(ao)'])[i_state].sdev )**2
                 chi2_real = chi2_real - ( gv.exp(prior['log(dEo)'])[i_state].mean - fit.p['dEo'][i_state].mean )**2 / ( gv.exp(prior['log(dEo)'])[i_state].sdev )**2
             
             Q_man = 1-gammainc(0.5*fit.dof,0.5*fit.chi2)
@@ -45,7 +45,7 @@ def main():
             
             print('\n')
             print_results(fit,N,M)
-            print('[','BY-HAND GOODNESS OF FIT:',']','\n',)
+            print('[','MY GOODNESS OF FIT:',']','\n',)
             print( 'augmented chi2/dof [dof]: %.3f [%d]\tQ = %.3f\ndeaugmented chi2/dof [dof]:  %.3f [%d]\tQ = %.3f\n'%(fit.chi2/fit.dof,fit.dof,Q_man,chi2_real/dof_real,dof_real,Q_real) )
             print('\n')
             print('#DATA dDATA FIT dFIT REDUCED_DIST')
@@ -53,7 +53,7 @@ def main():
                 it_shift = it - my_tfit[0]
                 print(data['PROP'][it].mean, data['PROP'][it].sdev, my_models[0].fitfcn(p=fit.p,t=my_tfit)[it_shift].mean, my_models[0].fitfcn(p=fit.p,t=my_tfit)[it_shift].sdev,(data['PROP'][it].mean-my_models[0].fitfcn(p=fit.p,t=my_tfit)[it_shift].mean)/data['PROP'][it].sdev)
             print('\n')
-            print('[','GOODNESS OF FIT FROM FIT POINTS:',']','\n')
+            print('[','GOODNESS OF FIT FROM FIT POINTS (ONLY FOR INFINITELY WIDE PRIORS):',']','\n')
 
             cov_matrix = np.zeros((len(my_tfit),len(my_tfit)))
             meas_arr = np.zeros(len(my_tfit))
@@ -67,8 +67,6 @@ def main():
                 meas_arr[i_shift] = data['PROP'][i].mean
                 fit_arr[i_shift] = my_models[0].fitfcn(p=fit.p,t=my_tfit)[i_shift].mean                 
 
-#            print(gv.evalcov(data))
-#            print(cov_matrix)
             chi2bydof_from_points = chisq_by_dof(meas_arr,fit_arr,cov_matrix,dof_real)
             Q_from_points = q_value(chi2bydof_from_points,dof_real)
             print( 'chi2/dof from fit points [dof]: %.3f [%d]\tQ = %.3f\n'%(chi2bydof_from_points,dof_real,Q_from_points) )
@@ -82,12 +80,12 @@ def make_models(my_tdata,my_tfit):
     return [cf.Corr2( datatag='PROP', tp=32, tdata=my_tdata, tfit=my_tfit, a=('an','ao'), b=('an','ao'), dE=('dEn','dEo'), s=(1.0,1.0) )]
 
 def make_prior(N,M):
-    """ Create prior for N-state fit. """
+    """ Create prior for (N,M)-state fit. """
     prior = collections.OrderedDict()
-    prior['an'] = gv.gvar(N * ['0.0(10000.0)'])
-    prior['log(dEn)'] = gv.log(gv.gvar(N * ['0.5(100.0)']))
-    prior['ao'] = gv.gvar(M * ['0.0(10000.0)'])
-    prior['log(dEo)'] = gv.log(gv.gvar(M * ['0.5(100.0)']))
+    prior['log(an)'] = gv.log(gv.gvar(N * ['0.1(10000.0)']))
+    prior['log(dEn)'] = gv.log(gv.gvar(N * ['0.1(1000.0)']))
+    prior['log(ao)'] = gv.log(gv.gvar(M * ['0.1(10000.0)']))
+    prior['log(dEo)'] = gv.log(gv.gvar(M * ['0.1(1000.0)']))
     return prior
 
 def print_results(fit,N,M):
