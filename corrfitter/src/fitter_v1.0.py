@@ -13,7 +13,7 @@ def main():
 
     data = make_data(filename=file_name)
 
-    my_tfit = range(12,17)
+    my_tfit = range(4,17)
     my_tdata = range(0,17)
     my_models = make_models(my_tdata,my_tfit)
     fitter = cf.CorrFitter(models=my_models)
@@ -21,8 +21,8 @@ def main():
     p0 = None
 
     print('\ndata from: ',file_name,'\n')
-    for N in [1]:
-        for M in [0]:
+    for N in [1,2]:
+        for M in [0,1]:
             print(30 * '=', 'nterm =', N,M)
             prior = make_prior(N,M)
             fit = fitter.lsqfit( data=data, prior=prior, p0=p0 )
@@ -77,7 +77,7 @@ def make_data(filename):
 
 def make_models(my_tdata,my_tfit):
     """ Create corrfitter model for G(t). """
-    return [cf.Corr2( datatag='PROP', tp=32, tdata=my_tdata, tfit=my_tfit, a=('an','ao'), b=('an','ao'), dE=('dEn','dEo'), s=(1.0,1.0) )]
+    return [cf.Corr2( datatag='PROP', tp=32, tdata=my_tdata, tfit=my_tfit, a=('an','ao'), b=('an','ao'), dE=('dEn','dEo'), s=(1.0,-1.0) )]
 
 def make_prior(N,M):
     """ Create prior for (N,M)-state fit. """
