@@ -8,13 +8,13 @@ cluster="fnal"
 n_of_ens=1
 
 nx=16
-nt=32
+nt=64
 
 set_i_lat=101
 set_seed=78324
 
-beta_name="6850"
-xi_0_name="100"
+beta_name="70805"
+xi_0_name="18876"
 stream="a"
 
 u0=1
@@ -29,15 +29,15 @@ mass1=0.02
 mass2=0.06
 
 nxq=4
-xq1=0.92
-xq2=0.96
-xq3=1.00
-xq4=1.04
+xq1=1.88
+xq2=1.94
+xq3=2.00
+xq4=2.06
 
-xq1_name="0920"
-xq2_name="0960"
-xq3_name="1000"
-xq4_name="1040"
+xq1_name="1880"
+xq2_name="1940"
+xq3_name="2000"
+xq4_name="2060"
 
 err=1e-6
 max_cg_iterations=300
@@ -47,7 +47,7 @@ precision=2
 sbatch_time="02:00:00"
 sbatch_nodes=4 # N/A WHEN icer IS SELECTED
 sbatch_ntasks=128
-sbatch_jobname_arr=("sptest")
+sbatch_jobname="sptest"
 
 n_of_sub=1
 n_of_lat=1
@@ -56,10 +56,9 @@ for (( i_ens=0; i_ens<${n_of_ens}; i_ens++ )); do
 
 # SUBSTITUTE ARRAY ELEMENTS HERE, IF ANY
 
-ensemble="${nx}${nt}b${beta_name}x${xi_0_name}${stream}"
-lat_name="l${ensemble}"
-
 ensemble_nostream="${nx}${nt}b${beta_name}x${xi_0_name}"
+ensemble="${ensemble_nostream}${stream}"
+lat_name="l${ensemble}"
 
 prefix="tun"
 
@@ -113,6 +112,7 @@ max_cg_iterations=${max_cg_iterations}
 action=${action}
 precision=${precision}
 
+build_script=${build_script}
 
 EOF
 
