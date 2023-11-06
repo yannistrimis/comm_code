@@ -5,10 +5,10 @@ sys.path.insert(0, '../..') # icer
 from python_funcs import *
 
 nx = 16
-lat_nt = 32
+lat_nt = 64
 vol = str(nx) + str(lat_nt)
-beta = '6850'
-x0 = '100'
+beta = '70805'
+x0 = '18876'
 stream = 'a'
 ens_name = vol+'b'+beta+'x'+x0+stream
 
@@ -20,7 +20,8 @@ n_bins = int(str_n_bins)
 nt = int(lat_nt/2)+1 # QUICK SOLUTION FOR FOLDED DATA
 
 
-cur_dir = '/mnt/home/trimisio/plot_data/spec_data'
+# cur_dir = '/mnt/home/trimisio/plot_data/spec_data' # ICER
+cur_dir = '/home/trimisio/all/spec_data' # FNAL
 
 f_read = open('%s/l%s/%s.specdata'%(cur_dir,ens_name,pre_name),'r')
 content = f_read.readlines()

@@ -3,14 +3,14 @@ from sympy import cosh, nsolve
 from sympy.abc import x
 
 nx=16
-nt=32
+nt=64
 vol = str(nx)+str(nt)
-beta = '6850'
-x0 = '100'
+beta = '70805'
+x0 = '18876'
 stream = 'a'
 
-cur_dir = '/mnt/home/trimisio/plot_data/spec_data/l'+vol+'b'+beta+'x'+x0+stream
-
+# cur_dir = '/mnt/home/trimisio/plot_data/spec_data/l'+vol+'b'+beta+'x'+x0+stream # ICER
+cur_dir = '/home/trimisio/all/spec_data/l'+vol+'b'+beta+'x'+x0+stream # FNAL
 
 pre_name = input()
 str_n_bins = input()
@@ -19,7 +19,7 @@ n_bins = int(str_n_bins)
 f_write = open('%s/%s.coshmeffdata'%(cur_dir,pre_name),'w')
 
 def main() :
-    
+
     meff = np.zeros( (int(nt/2)-1,n_bins) )
 
     for i_bin in range(n_bins):
