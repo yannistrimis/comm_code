@@ -1,12 +1,15 @@
 # 4 SPACES INSTEAD OF TAB
 import numpy as np
 
-out_dir = '/mnt/home/trimisio/plot_data/spec_data'
-
 ens_name = input()
 pre_name = input()
 i_file = input()
 out_name = input()
+
+# out_dir = '/mnt/home/trimisio/plot_data/spec_data' # ICER
+
+out_dir = '/home/trimisio/all/spec_data' # FNAL
+
 
 f_write = open('%s/l%s/%s.%s'%(out_dir,ens_name,out_name,i_file),'w')
 f_read_a = open('%s/l%s/%s.%sa'%(out_dir,ens_name,pre_name,i_file),'r')

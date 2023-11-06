@@ -1,24 +1,26 @@
 #!/bin/bash
 
-ens_name="1632b6850x100"
-masses=("0.0788")
+ens_name="1664b70805x18876"
+masses=("0.02" "0.06")
 mas_len=${#masses[@]}
 
-xq_arr=("100")
+xq_arr=("1880" "1940" "2000" "2060")
 sinks_arr=("PION_5")
 
-mom_arr=("p110")
+mom_arr=("p000" "p100" "p110")
 src_label="pt"
+
+first=101
+last=200
 
 for mom in ${mom_arr[@]}
 do
-
-echo "    ${mom}"
+echo "${mom}"
 
 for sinks in ${sinks_arr[@]}
 do
 
-echo "====${sinks}===="
+echo "${sinks}"
 
 for (( m1=0 ; m1<${mas_len} ; m1++ ));
 do
@@ -31,9 +33,9 @@ do
 
 python format_corrfitter_one.py <<EOF
 ${ens_name}a
-${mom}${src_label}${ens_name}xq${xq}a_m${mass1}m${mass2}${sinks}
-101
-500
+${mom}${src_label}${ens_name}xq${xq}_m${mass1}m${mass2}${sinks}
+${first}
+${last}
 EOF
 
 done #xq

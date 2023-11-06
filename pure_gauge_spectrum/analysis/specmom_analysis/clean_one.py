@@ -1,8 +1,5 @@
 import numpy as np
 
-cur_dir = '/mnt/home/trimisio/outputs/pure_gauge_spec'
-out_dir = '/mnt/home/trimisio/plot_data/spec_data'
-
 ens_name = input()
 pre_name = input()
 i_file = input()
@@ -15,6 +12,13 @@ sinkop1 = input()
 sinkop2 = input()
 sinks = input()
 out_name = input()
+
+# cur_dir = '/mnt/home/trimisio/outputs/pure_gauge_spec' # ICER
+# out_dir = '/mnt/home/trimisio/plot_data/spec_data' # ICER
+
+cur_dir = '/project/ahisq/yannis_puregauge/outputs/pure_gauge_spec' # FNAL
+out_dir = '/home/trimisio/all/spec_data' # FNAL
+
 
 f_read = open('%s/l%s/%s.%s'%(cur_dir,ens_name,pre_name,i_file),'r')
 
