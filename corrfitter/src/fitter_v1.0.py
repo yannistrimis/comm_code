@@ -1,5 +1,8 @@
 from __future__ import print_function   # makes this work for python2 and 3
 
+# RUN conda deactivate IF ON CMSE WORKSTATION
+# CHANGE my_tdata AND tp
+
 import collections
 import gvar as gv
 import numpy as np
@@ -9,24 +12,35 @@ from python_funcs import *
 
 def main():
 
-    file_name = '/mnt/home/trimisio/plot_data/spec_data/l1632b6850x100a/p100rcw1632b6850x100xq100a_m0.0788m0.0788PION_5.specdata'
+    my_dir = input()
+    file_name = input()
+    str_tmin = input()
+    str_tmax = input()
+    str_tdatamax = input()
+    str_tp = input()
+
+    file_name = my_dir+'/'+file_name
+    tmin = int(str_tmin)
+    tmax = int(str_tmax)
+    tdatamax = int(str_tdatamax)
+    my_tp = int(str_tp)
 
     data = make_data(filename=file_name)
 
-    my_tfit = range(4,17)
-    my_tdata = range(0,17)
-    my_models = make_models(my_tdata,my_tfit)
+    my_tfit = range(tmin,tmax)
+    my_tdata = range(0,tdatamax)
+    my_models = make_models(my_tdata,my_tfit,my_tp)
     fitter = cf.CorrFitter(models=my_models)
 
     p0 = None
 
-    print('\ndata from: ',file_name,'\n')
-    for N in [1,2]:
-        for M in [0,1]:
-            print(30 * '=', 'nterm =', N,M)
+#    print('\ndata from: ',file_name,'\n')
+    for N in [2]:
+       for M in [1]:
+#            print(30 * '=', 'nterm =', N,M)
             prior = make_prior(N,M)
             fit = fitter.lsqfit( data=data, prior=prior, p0=p0 )
-            print(fit)
+#            print(fit)
             p0 = fit.pmean
 
             dof_real = len(my_tfit)-2*N-2*M
@@ -43,17 +57,17 @@ def main():
             Q_man = 1-gammainc(0.5*fit.dof,0.5*fit.chi2)
             Q_real = 1-gammainc(0.5*dof_real,0.5*chi2_real)
 
-            print('\n')
-            print_results(fit,N,M)
-            print('[','MY GOODNESS OF FIT:',']','\n',)
-            print( 'augmented chi2/dof [dof]: %.3f [%d]\tQ = %.3f\ndeaugmented chi2/dof [dof]:  %.3f [%d]\tQ = %.3f\n'%(fit.chi2/fit.dof,fit.dof,Q_man,chi2_real/dof_real,dof_real,Q_real) )
-            print('\n')
-            print('#DATA dDATA FIT dFIT REDUCED_DIST')
+#            print('\n')
+#            print_results(fit,N,M)
+#            print('[','MY GOODNESS OF FIT:',']','\n',)
+#            print( 'augmented chi2/dof [dof]: %.3f [%d]\tQ = %.3f\ndeaugmented chi2/dof [dof]:  %.3f [%d]\tQ = %.3f\n'%(fit.chi2/fit.dof,fit.dof,Q_man,chi2_real/dof_real,dof_real,Q_real) )
+#            print('\n')
+#            print('#DATA dDATA FIT dFIT REDUCED_DIST')
             for it in my_tfit :
                 it_shift = it - my_tfit[0]
-                print(data['PROP'][it].mean, data['PROP'][it].sdev, my_models[0].fitfcn(p=fit.p,t=my_tfit)[it_shift].mean, my_models[0].fitfcn(p=fit.p,t=my_tfit)[it_shift].sdev,(data['PROP'][it].mean-my_models[0].fitfcn(p=fit.p,t=my_tfit)[it_shift].mean)/data['PROP'][it].sdev)
-            print('\n')
-            print('[','GOODNESS OF FIT FROM FIT POINTS (ONLY FOR INFINITELY WIDE PRIORS):',']','\n')
+#                print(data['PROP'][it].mean, data['PROP'][it].sdev, my_models[0].fitfcn(p=fit.p,t=my_tfit)[it_shift].mean, my_models[0].fitfcn(p=fit.p,t=my_tfit)[it_shift].sdev,(data['PROP'][it].mean-my_models[0].fitfcn(p=fit.p,t=my_tfit)[it_shift].mean)/data['PROP'][it].sdev)
+#            print('\n')
+#            print('[','GOODNESS OF FIT FROM FIT POINTS (ONLY FOR INFINITELY WIDE PRIORS):',']','\n')
 
             cov_matrix = np.zeros((len(my_tfit),len(my_tfit)))
             meas_arr = np.zeros(len(my_tfit))
@@ -69,18 +83,17 @@ def main():
 
             chi2bydof_from_points = chisq_by_dof(meas_arr,fit_arr,cov_matrix,dof_real)
             Q_from_points = q_value(chi2bydof_from_points,dof_real)
-            print( 'chi2/dof from fit points [dof]: %.3f [%d]\tQ = %.3f\n'%(chi2bydof_from_points,dof_real,Q_from_points) )
+#            print( 'chi2/dof from fit points [dof]: %.3f [%d]\tQ = %.3f\n'%(chi2bydof_from_points,dof_real,Q_from_points) )
+            print(N,M,tmin,tmax,chi2bydof_from_points,dof_real,fit.p['dEn'][0].mean,fit.p['dEn'][0].sdev)
+
 
 def make_data(filename):
-    """ Read data, compute averages/covariance matrix for G(t). """
     return gv.dataset.avg_data(cf.read_dataset(filename,binsize=1))
 
-def make_models(my_tdata,my_tfit):
-    """ Create corrfitter model for G(t). """
-    return [cf.Corr2( datatag='PROP', tp=32, tdata=my_tdata, tfit=my_tfit, a=('an','ao'), b=('an','ao'), dE=('dEn','dEo'), s=(1.0,-1.0) )]
+def make_models(my_tdata,my_tfit,my_tp):
+    return [cf.Corr2( datatag='PROP', tp=my_tp, tdata=my_tdata, tfit=my_tfit, a=('an','ao'), b=('an','ao'), dE=('dEn','dEo'), s=(1.0,-1.0) )]
 
 def make_prior(N,M):
-    """ Create prior for (N,M)-state fit. """
     prior = collections.OrderedDict()
     prior['log(an)'] = gv.log(gv.gvar(N * ['0.1(10000.0)']))
     prior['log(dEn)'] = gv.log(gv.gvar(N * ['0.1(1000.0)']))
