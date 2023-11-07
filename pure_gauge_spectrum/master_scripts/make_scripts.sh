@@ -21,8 +21,8 @@ u0=1
 
 set_source_start=0
 n_sources=2
-source_inc=16
-source_prec=7 # CHANGE ACCORDING TO nt
+source_inc=32 # CHANGE ACCORDING TO nt
+source_prec=17 # CHANGE ACCORDING TO nt
 
 nmasses=2
 mass1=0.02
@@ -44,13 +44,13 @@ max_cg_iterations=300
 action=hisq
 precision=2
 
-sbatch_time="02:00:00"
+sbatch_time="06:00:00"
 sbatch_nodes=4 # N/A WHEN icer IS SELECTED
 sbatch_ntasks=128
-sbatch_jobname="sptest"
+sbatch_jobname="sp_xi2"
 
-n_of_sub=1
-n_of_lat=1
+n_of_sub=8
+n_of_lat=50
 
 for (( i_ens=0; i_ens<${n_of_ens}; i_ens++ )); do
 
