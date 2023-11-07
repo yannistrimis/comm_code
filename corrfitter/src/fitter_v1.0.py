@@ -9,18 +9,23 @@ from python_funcs import *
 
 def main():
 
-    file_name = '/mnt/home/trimisio/plot_data/spec_data/l1632b6850x100a/p100rcw1632b6850x100xq100a_m0.0788m0.0788PION_5.specdata'
+#    my_dir = '/mnt/home/trimisio/plot_data/spec_data/<ENSEMBLE_DIR>' # ICER
+    my_dir = '/home/trimisio/all/spec_data/l1664b70805x18876a' # FNAL
+
+    file_name = input()
+    tmin = input()
+    tmax = input()
+    tdata = input()
 
     data = make_data(filename=file_name)
-
-    my_tfit = range(4,17)
-    my_tdata = range(0,17)
+    my_tfit = range(tmin,tmax)
+    my_tdata = range(0,tdata)
     my_models = make_models(my_tdata,my_tfit)
     fitter = cf.CorrFitter(models=my_models)
 
     p0 = None
 
-    print('\ndata from: ',file_name,'\n')
+    print('\ndata from: ',file_name,'\n','tmin = ',tmin,'  tmax = ',tmax,'\n')
     for N in [1,2]:
         for M in [0,1]:
             print(30 * '=', 'nterm =', N,M)
