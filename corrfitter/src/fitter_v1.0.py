@@ -9,23 +9,18 @@ from python_funcs import *
 
 def main():
 
-#    my_dir = '/mnt/home/trimisio/plot_data/spec_data/<ENSEMBLE_DIR>' # ICER
-    my_dir = '/home/trimisio/all/spec_data/l1664b70805x18876a' # FNAL
-
-    file_name = input()
-    tmin = input()
-    tmax = input()
-    tdata = input()
+    file_name = '/home/trimis/hpcc/plot_data/spec_data/l1632b6850x100a/p100rcw1632b6850x100xq100a_m0.0788m0.0788PION_5.specdata'
 
     data = make_data(filename=file_name)
-    my_tfit = range(tmin,tmax)
-    my_tdata = range(0,tdata)
+
+    my_tfit = range(4,17)
+    my_tdata = range(0,17)
     my_models = make_models(my_tdata,my_tfit)
     fitter = cf.CorrFitter(models=my_models)
 
     p0 = None
 
-    print('\ndata from: ',file_name,'\n','tmin = ',tmin,'  tmax = ',tmax,'\n')
+    print('\ndata from: ',file_name,'\n')
     for N in [1,2]:
         for M in [0,1]:
             print(30 * '=', 'nterm =', N,M)
@@ -40,14 +35,14 @@ def main():
             for i_state in range(N) :
                 chi2_real = chi2_real - ( gv.exp(prior['log(an)'])[i_state].mean - fit.p['an'][i_state].mean )**2 / ( gv.exp(prior['log(an)'])[i_state].sdev )**2
                 chi2_real = chi2_real - ( gv.exp(prior['log(dEn)'])[i_state].mean - fit.p['dEn'][i_state].mean )**2 / ( gv.exp(prior['log(dEn)'])[i_state].sdev )**2
-            
+
             for i_state in range(M) :
                 chi2_real = chi2_real - ( gv.exp(prior['log(ao)'])[i_state].mean - fit.p['ao'][i_state].mean )**2 / ( gv.exp(prior['log(ao)'])[i_state].sdev )**2
                 chi2_real = chi2_real - ( gv.exp(prior['log(dEo)'])[i_state].mean - fit.p['dEo'][i_state].mean )**2 / ( gv.exp(prior['log(dEo)'])[i_state].sdev )**2
-            
+
             Q_man = 1-gammainc(0.5*fit.dof,0.5*fit.chi2)
             Q_real = 1-gammainc(0.5*dof_real,0.5*chi2_real)
-            
+
             print('\n')
             print_results(fit,N,M)
             print('[','MY GOODNESS OF FIT:',']','\n',)
@@ -70,12 +65,12 @@ def main():
                     j_shift = j - my_tfit[0]
                     cov_matrix[i_shift,j_shift] = gv.evalcov(data)['PROP','PROP'][i,j]
                 meas_arr[i_shift] = data['PROP'][i].mean
-                fit_arr[i_shift] = my_models[0].fitfcn(p=fit.p,t=my_tfit)[i_shift].mean                 
+                fit_arr[i_shift] = my_models[0].fitfcn(p=fit.p,t=my_tfit)[i_shift].mean
 
             chi2bydof_from_points = chisq_by_dof(meas_arr,fit_arr,cov_matrix,dof_real)
             Q_from_points = q_value(chi2bydof_from_points,dof_real)
             print( 'chi2/dof from fit points [dof]: %.3f [%d]\tQ = %.3f\n'%(chi2bydof_from_points,dof_real,Q_from_points) )
-            
+
 def make_data(filename):
     """ Read data, compute averages/covariance matrix for G(t). """
     return gv.dataset.avg_data(cf.read_dataset(filename,binsize=1))
@@ -111,3 +106,4 @@ def print_results(fit,N,M):
 
 if __name__ == '__main__':
     main()
+
