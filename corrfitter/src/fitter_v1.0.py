@@ -9,7 +9,7 @@ from python_funcs import *
 
 def main():
 
-    file_name = '/home/trimis/hpcc/plot_data/spec_data/l1632b6850x100a/p100rcw1632b6850x100xq100a_m0.0788m0.0788PION_5.specdata'
+    file_name = '/mnt/home/trimisio/plot_data/spec_data/l1632b6850x100a/p100rcw1632b6850x100xq100a_m0.0788m0.0788PION_5.specdata'
 
     data = make_data(filename=file_name)
 
