@@ -17,7 +17,7 @@ for ((tmin=${tmin_min};tmin<=${tmin_max};tmin++));do
 for ((tmax=${tmax_min};tmax<=${tmax_max};tmax++));do
 
 python3 fitter_v1.0.py <<EOF
-/home/trimis/fnal/all/spec_data/l1664b70805x18876a
+/home/yannis/Physics/LQCD/fnal/all/spec_data/l1664b70805x18876a
 ${mom}pt1664b70805x18876xq${xq}_m0.06m0.06PION_5.specdata
 ${tmin}
 ${tmax}
