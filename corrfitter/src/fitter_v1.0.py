@@ -1,7 +1,6 @@
 from __future__ import print_function   # makes this work for python2 and 3
 
 # RUN conda deactivate IF ON CMSE WORKSTATION
-# CHANGE my_tdata AND tp
 
 import collections
 import gvar as gv
@@ -18,6 +17,9 @@ def main():
     str_tmax = input()
     str_tdatamax = input()
     str_tp = input()
+    str_N = input()
+    str_M = input()
+    fittype = input()
 
     file_name = my_dir+'/'+file_name
     tmin = int(str_tmin)
@@ -34,13 +36,16 @@ def main():
 
     p0 = None
 
-#    print('\ndata from: ',file_name,'\n')
-    for N in [2]:
-       for M in [1]:
-#            print(30 * '=', 'nterm =', N,M)
+    if fittype == 'onefit' :
+        print('\ndata from: ',file_name,'\n')
+
+    for N in [int(str_N)]:
+       for M in [int(str_M)]:
             prior = make_prior(N,M)
             fit = fitter.lsqfit( data=data, prior=prior, p0=p0 )
-#            print(fit)
+            if fittype == 'onefit' :
+                print(30 * '=', 'nterm =', N,M)
+                print(fit)
             p0 = fit.pmean
 
             dof_real = len(my_tfit)-2*N-2*M
@@ -56,18 +61,16 @@ def main():
 
             Q_man = 1-gammainc(0.5*fit.dof,0.5*fit.chi2)
             Q_real = 1-gammainc(0.5*dof_real,0.5*chi2_real)
-
-#            print('\n')
-#            print_results(fit,N,M)
-#            print('[','MY GOODNESS OF FIT:',']','\n',)
-#            print( 'augmented chi2/dof [dof]: %.3f [%d]\tQ = %.3f\ndeaugmented chi2/dof [dof]:  %.3f [%d]\tQ = %.3f\n'%(fit.chi2/fit.dof,fit.dof,Q_man,chi2_real/dof_real,dof_real,Q_real) )
-#            print('\n')
-#            print('#DATA dDATA FIT dFIT REDUCED_DIST')
-            for it in my_tfit :
-                it_shift = it - my_tfit[0]
-#                print(data['PROP'][it].mean, data['PROP'][it].sdev, my_models[0].fitfcn(p=fit.p,t=my_tfit)[it_shift].mean, my_models[0].fitfcn(p=fit.p,t=my_tfit)[it_shift].sdev,(data['PROP'][it].mean-my_models[0].fitfcn(p=fit.p,t=my_tfit)[it_shift].mean)/data['PROP'][it].sdev)
-#            print('\n')
-#            print('[','GOODNESS OF FIT FROM FIT POINTS (ONLY FOR INFINITELY WIDE PRIORS):',']','\n')
+            if fittype == 'onefit' :
+                print('\n')
+                print_results(fit,N,M)
+                print('[','GOODNESS OF FIT FROM corrfitter CHI_2:',']','\n',)
+                print( 'augmented chi2/dof [dof]: %.3f [%d]\tQ = %.3f\ndeaugmented chi2/dof [dof]:  %.3f [%d]\tQ = %.3f\n'%(fit.chi2/fit.dof,fit.dof,Q_man,chi2_real/dof_real,dof_real,Q_real) )
+                print('\n')
+                print('#DATA dDATA FIT dFIT REDUCED_DIST')
+                for it in my_tfit :
+                    it_shift = it - my_tfit[0]
+                    print(data['PROP'][it].mean, data['PROP'][it].sdev, my_models[0].fitfcn(p=fit.p,t=my_tfit)[it_shift].mean, my_models[0].fitfcn(p=fit.p,t=my_tfit)[it_shift].sdev,(data['PROP'][it].mean-my_models[0].fitfcn(p=fit.p,t=my_tfit)[it_shift].mean)/data['PROP'][it].sdev)
 
             cov_matrix = np.zeros((len(my_tfit),len(my_tfit)))
             meas_arr = np.zeros(len(my_tfit))
@@ -83,9 +86,15 @@ def main():
 
             chi2bydof_from_points = chisq_by_dof(meas_arr,fit_arr,cov_matrix,dof_real)
             Q_from_points = q_value(chi2bydof_from_points,dof_real)
-#            print( 'chi2/dof from fit points [dof]: %.3f [%d]\tQ = %.3f\n'%(chi2bydof_from_points,dof_real,Q_from_points) )
-            print(N,M,tmin,tmax,chi2bydof_from_points,dof_real,fit.p['dEn'][0].mean,fit.p['dEn'][0].sdev)
-
+            if fittype == 'onefit' :
+                print('\n')
+                print('[','GOODNESS OF FIT FROM MANUALLY CALCD CHI_2 (ONLY FOR INFINITELY WIDE PRIORS):',']','\n')
+                print( 'chi2/dof from fit points [dof]: %.3f [%d]\tQ = %.3f\n'%(chi2bydof_from_points,dof_real,Q_from_points) )
+            elif fittype == 'scanfit' :
+#                if test_param(fit,N,M) == 'ok' :
+                print(N,M,tmin,tmax,chi2bydof_from_points,dof_real,fit.p['dEn'][0].mean,fit.p['dEn'][0].sdev)
+#                elif test_param(fit,N,M) == 'not_ok' :
+#                    print(N,M,tmin,tmax,0,0,0,0)
 
 def make_data(filename):
     return gv.dataset.avg_data(cf.read_dataset(filename,binsize=1))
@@ -115,6 +124,30 @@ def print_results(fit,N,M):
         print('an[%d] = %s\t En[%d] = %s\n'%(i_state,an[i_state],i_state,En[i_state]))
     for j_state in range(M) :
         print('ao[%d] = %s\t Eo[%d] = %s\n'%(j_state,ao[j_state],j_state,Eo[j_state]))
+
+def test_param(fit,N,M):
+
+    p = fit.p
+
+    En = np.cumsum(p['dEn'])
+    an = p['an']
+
+    if np.abs(an[0].sdev) > np.abs(an[0].mean) :
+        return 'not_ok'
+
+    if M>0:
+        Eo = np.cumsum(p['dEo'])
+        ao = p['ao']
+
+    for i_state in range(1,N) :
+        if ( np.abs(an[i_state].mean) > 10*np.abs(an[0].mean) ) or ( np.abs(an[i_state].sdev) > 100*np.abs(an[0].sdev) ) :
+            return 'not_ok'
+
+    for j_state in range(M) :
+        if ( np.abs(ao[j_state].mean) > 10*np.abs(an[0].mean) ) or ( np.abs(ao[j_state].sdev) > 100*np.abs(an[0].sdev) ) :
+            return 'not_ok'
+
+    return 'ok'
 
 
 if __name__ == '__main__':
