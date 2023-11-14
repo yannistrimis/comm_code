@@ -1,17 +1,17 @@
 #!/bin/bash
 
 ens_name="1664b70805x18876"
-masses=("0.02" "0.06")
+masses=("0.06")
 mas_len=${#masses[@]}
 
 xq_arr=("1880" "1940" "2000" "2060")
 sinks_arr=("PION_5")
 
 mom_arr=("p000" "p100" "p110")
-src_label="pt"
+src_label="rcw"
 
 first=101
-last=200
+last=500
 
 for mom in ${mom_arr[@]}
 do

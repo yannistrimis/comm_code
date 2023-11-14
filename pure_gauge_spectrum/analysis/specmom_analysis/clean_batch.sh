@@ -1,22 +1,22 @@
 #!/bin/bash
 
 ens_name="1664b70805x18876"
-masses=("0.02" "0.06")
+masses=("0.06")
 mas_len=${#masses[@]}
 
 xq_arr=("1880" "1940" "2000" "2060")
 sinks_arr=("PION_5")
 
-mom_arr=("p000" "p100" "p110")
+mom_arr=("p100" "p110")
 
 for mom in ${mom_arr[@]}
 do
 echo "${mom}"
 
-source1="point"
-source2="point"
+source1="random_color_wall/momentum"
+source2="random_color_wall"
 
-src_label="pt"
+src_label="rcw"
 
 sinkop1="identity"
 sinkop2="identity"
@@ -25,7 +25,7 @@ for sinks in "${sinks_arr[@]}"
 do
 echo "${sinks}"
 
-for i_file in {101..200..1}
+for i_file in {101..500..1}
 do
 
 echo "    ${i_file}"
