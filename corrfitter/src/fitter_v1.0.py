@@ -91,10 +91,10 @@ def main():
                 print('[','GOODNESS OF FIT FROM MANUALLY CALCD CHI_2 (ONLY FOR INFINITELY WIDE PRIORS):',']','\n')
                 print( 'chi2/dof from fit points [dof]: %.3f [%d]\tQ = %.3f\n'%(chi2bydof_from_points,dof_real,Q_from_points) )
             elif fittype == 'scanfit' :
-#                if test_param(fit,N,M) == 'ok' :
-                print(N,M,tmin,tmax,chi2bydof_from_points,dof_real,fit.p['dEn'][0].mean,fit.p['dEn'][0].sdev)
-#                elif test_param(fit,N,M) == 'not_ok' :
-#                    print(N,M,tmin,tmax,0,0,0,0)
+                if test_param(fit,N,M) == 'ok' :
+                    print(N,M,tmin,tmax,chi2bydof_from_points,dof_real,Q_from_points,fit.p['dEn'][0].mean,fit.p['dEn'][0].sdev)
+                elif test_param(fit,N,M) == 'not_ok' :
+                    print(N,M,tmin,tmax,0,0,0,0,0)
 
 def make_data(filename):
     return gv.dataset.avg_data(cf.read_dataset(filename,binsize=1))

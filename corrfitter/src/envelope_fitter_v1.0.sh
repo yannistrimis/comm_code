@@ -3,22 +3,24 @@
 vol=1664
 beta=70805
 xg=18876
-src="pt"
+src="rcw"
 mass="0.06"
 taste="PION_5"
 
-fitdir="/home/yannis/Physics/LQCD"
-dir="/home/yannis/Physics/LQCD/fnal/all/spec_data/l${vol}b${beta}x${xg}a"
+fitdir="/home/trimis/local_code" # CMSE
+dir="/home/trimis/fnal/all/spec_data/l${vol}b${beta}x${xg}a" # CMSE
+# fitdir="/home/yannis/Physics/LQCD" # LAPTOP
+# dir="/home/yannis/Physics/LQCD/fnal/all/spec_data/l${vol}b${beta}x${xg}a" # LAPTOP
 tdata=33
 tp=64
-n_states=1
-m_states=0
+n_states=2
+m_states=1
 
 if [ $1 == "scan" ]
 then
 
-xq_arr=( "2000" )
-mom_arr=( "p000" )
+xq_arr=( "1880" "1940" "2000" "2060")
+mom_arr=( "p100" "p110")
 
 for xq in ${xq_arr[@]};do
 echo "xq = ${xq}"
@@ -31,8 +33,8 @@ rm ${fitdir}/${mom}${src}${vol}b${beta}x${xg}xq${xq}_m${mass}m${mass}${taste}.sc
 fi
 
 
-tmin_min=8
-tmin_max=29
+tmin_min=3
+tmin_max=20
 
 tmax_min=33
 tmax_max=33
