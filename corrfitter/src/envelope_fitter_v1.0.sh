@@ -4,7 +4,7 @@ vol=1664
 beta=70805
 xg=18876
 src="rcw"
-mass="0.06"
+mass="0.02"
 taste="PION_5"
 
 # fitdir="/home/trimis/local_code" # CMSE
@@ -14,13 +14,13 @@ dir="/home/yannis/Physics/LQCD/fnal/all/spec_data/l${vol}b${beta}x${xg}a" # LAPT
 tdata=33
 tp=64
 n_states=2
-m_states=2
+m_states=1
 
 if [ $1 == "scan" ]
 then
 
 xq_arr=( "1880" "1940" "2000" "2060" )
-mom_arr=( "p110" )
+mom_arr=( "p100" "p110" )
 
 for xq in ${xq_arr[@]};do
 echo "xq = ${xq}"
@@ -34,7 +34,7 @@ fi
 
 
 tmin_min=3
-tmin_max=12
+tmin_max=20
 
 tmax_min=33
 tmax_max=33
