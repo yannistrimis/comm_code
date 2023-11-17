@@ -9,11 +9,11 @@ taste="PION_5"
 
 # fitdir="/home/trimis/local_code" # CMSE
 # dir="/home/trimis/fnal/all/spec_data/l${vol}b${beta}x${xg}a" # CMSE
-fitdir="/home/yannis/Physics/LQCD" # LAPTOP
+fitdir="/home/yannis/Physics/LQCD/spec_data" # LAPTOP
 dir="/home/yannis/Physics/LQCD/fnal/all/spec_data/l${vol}b${beta}x${xg}a" # LAPTOP
 tdata=33
 tp=64
-n_states=2
+n_states=1
 m_states=1
 
 if [ $1 == "scan" ]
