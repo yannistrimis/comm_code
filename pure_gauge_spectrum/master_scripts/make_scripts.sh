@@ -8,49 +8,46 @@ cluster="fnal"
 n_of_ens=1
 
 nx=16
-nt=64
+nt=128
 
 set_i_lat=101
 set_seed=78324
 
-beta_name="70805"
-xi_0_name="18876"
+beta_name="7225"
+xi_0_name="36836"
 stream="a"
 
 u0=1
 
 set_source_start=0
 n_sources=2
-source_inc=32 # CHANGE ACCORDING TO nt
-source_prec=17 # CHANGE ACCORDING TO nt
+source_inc=64 # CHANGE ACCORDING TO nt
+source_prec=31 # CHANGE ACCORDING TO nt
 
-nmasses=2
-mass1=0.02
-mass2=0.06
+nmasses=1
+mass1=0.05
 
-nxq=4
-xq1=1.88
-xq2=1.94
-xq3=2.00
-xq4=2.06
+nxq=3
+xq1=3.76
+xq2=3.88
+xq3=4.00
 
-xq1_name="1880"
-xq2_name="1940"
-xq3_name="2000"
-xq4_name="2060"
+xq1_name="3760"
+xq2_name="3880"
+xq3_name="4000"
 
 err=1e-6
 max_cg_iterations=300
 action=hisq
 precision=2
 
-sbatch_time="06:00:00"
+sbatch_time="04:00:00"
 sbatch_nodes=4 # N/A WHEN icer IS SELECTED
 sbatch_ntasks=128
-sbatch_jobname="sp_xi2"
+sbatch_jobname="xtun_xi4"
 
-n_of_sub=8
-n_of_lat=50
+n_of_sub=1
+n_of_lat=5
 
 for (( i_ens=0; i_ens<${n_of_ens}; i_ens++ )); do
 
@@ -96,7 +93,7 @@ out_name="${out_name}"
 nmasses=${nmasses}
 mass_arr=( ${mass1} ${mass2} ${mass3} ${mass4} ${mass5} ${mass6} )
 
-nxq=4
+nxq=${nxq}
 xq_arr=( ${xq1} ${xq2} ${xq3} ${xq4} ${xq5} ${xq6} )
 xq_name_arr=( ${xq1_name} ${xq2_name} ${xq3_name} ${xq4_name} ${xq5_name} ${xq6_name} )
 
