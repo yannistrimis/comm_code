@@ -98,7 +98,7 @@ EOF
 
 fi
 
-cat input.dat | ./generation/pure_u1  > ${out_name}
+cat input.dat | ./pure_u1  > ${out_name}
 
 text="END:"
 complete_flag=$(bash is_complete.sh ${out_name} ${text})

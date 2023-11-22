@@ -56,7 +56,7 @@ t_max = ${t_max}
 
 EOF
 
-cat wloop_input.dat | ./wilson_loop/wloop  > ${out_name}
+cat wloop_input.dat | ./wloop  > ${out_name}
 
 text="END:"
 complete_flag=$(bash is_complete.sh ${out_name} ${text})
