@@ -156,6 +156,8 @@ cat <<EOF
 
 number_of_mesons ${nmasses}
 
+EOF
+
 for (( i_mass=0; i_mass<${nmasses}; i_mass++ )); do
 
 cat <<EOF

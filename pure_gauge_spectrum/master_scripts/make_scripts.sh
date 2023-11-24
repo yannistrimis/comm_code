@@ -8,43 +8,44 @@ cluster="fnal"
 n_of_ens=1
 
 nx=16
-nt=128
+nt=64
 
 set_i_lat=101
 set_seed=78324
 
-beta_name="7225"
-xi_0_name="36836"
+beta_name="70805"
+xi_0_name="18876"
 stream="a"
 
 u0=1
 
 set_source_start=0
 n_sources=2
-source_inc=64 # CHANGE ACCORDING TO nt
-source_prec=31 # CHANGE ACCORDING TO nt
+source_inc=32 # CHANGE ACCORDING TO nt
+source_prec=17 # CHANGE ACCORDING TO nt
 
-nmasses=1
-mass1=0.05
+nmasses=4
+mass1=0.02
+mass2=0.04
+mass3=0.06
+mass4=0.08
 
-nxq=3
-xq1=3.76
-xq2=3.88
-xq3=4.00
+nxq=1
+xq1=1.95
 
-xq1_name="3760"
-xq2_name="3880"
-xq3_name="4000"
+xq1_name="1950"
 
 err=1e-6
 max_cg_iterations=300
 action=hisq
 precision=2
 
-sbatch_time="04:00:00"
+sbatch_time="02:00:00"
 sbatch_nodes=4 # N/A WHEN icer IS SELECTED
 sbatch_ntasks=128
-sbatch_jobname="xtun_xi4"
+sbatch_jobname="str_xi2"
+
+prefix="str"
 
 n_of_sub=1
 n_of_lat=5
@@ -56,8 +57,6 @@ for (( i_ens=0; i_ens<${n_of_ens}; i_ens++ )); do
 ensemble_nostream="${nx}${nt}b${beta_name}x${xi_0_name}"
 ensemble="${ensemble_nostream}${stream}"
 lat_name="l${ensemble}"
-
-prefix="tun"
 
 out_name="spec${prefix}${ensemble_nostream}"
 my_dir="${cluster}_${prefix}_scripts_${ensemble}"
