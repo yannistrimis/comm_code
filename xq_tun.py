@@ -76,7 +76,7 @@ for ii in range( len(solutions) ):
 
 print('predicted xq0: %.5f'%predicted_xq0)
 
-#plt.errorbar(x0_arr[:],x_arr[:,0],yerr=x_arr[:,1],fmt='o')
+plt.errorbar(x0_arr[:],x_arr[:,0],yerr=x_arr[:,1],fmt='o')
 
 
 
