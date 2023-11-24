@@ -1,10 +1,12 @@
 #!/bin/bash
 
-ens_name="1664b70805x18876"
-masses=("0.06")
+ens_name="16128b7225x36836"
+masses=("0.05")
 mas_len=${#masses[@]}
 
-xq_arr=("1880" "1940" "2000" "2060")
+prefix="tun"
+
+xq_arr=("3760" "3880" "4000")
 sinks_arr=("PION_5")
 
 mom_arr=("p000" "p100" "p110")
@@ -35,9 +37,9 @@ do
 
 python3 aver_one.py <<EOF
 ${ens_name}a
-cleanspec${mom}${src_label}${ens_name}xq${xq}_m${mass1}m${mass2}${sinks}
+cleanspec${prefix}${mom}${src_label}${ens_name}xq${xq}_m${mass1}m${mass2}${sinks}
 ${i_file}
-averspec${mom}${src_label}${ens_name}xq${xq}_m${mass1}m${mass2}${sinks}
+averspec${prefix}${mom}${src_label}${ens_name}xq${xq}_m${mass1}m${mass2}${sinks}
 EOF
 
 done #xq

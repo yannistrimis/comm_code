@@ -1,10 +1,12 @@
 #!/bin/bash
 nt=64
-ens_name="1664b70805x18876"
-masses=("0.06")
+ens_name="16128b7225x36836"
+masses=("0.05")
 mas_len=${#masses[@]}
 
-xq_arr=("1880" "1940" "2000" "2060")
+prefix="tun"
+
+xq_arr=("3760" "3880" "4000")
 sinks_arr=("PION_5")
 
 mom_arr=("p000" "p100" "p110")
@@ -34,9 +36,9 @@ do
 python fold_one.py <<EOF
 ${nt}
 ${ens_name}a
-averspec${mom}${src_label}${ens_name}xq${xq}_m${mass1}m${mass2}${sinks}
+averspec${prefix}${mom}${src_label}${ens_name}xq${xq}_m${mass1}m${mass2}${sinks}
 ${i_file}
-foldspec${mom}${src_label}${ens_name}xq${xq}_m${mass1}m${mass2}${sinks}
+foldspec${prefix}${mom}${src_label}${ens_name}xq${xq}_m${mass1}m${mass2}${sinks}
 EOF
 
 done #xq

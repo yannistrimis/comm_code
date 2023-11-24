@@ -1,19 +1,21 @@
 #!/bin/bash
 
-ens_name="1664b70805x18876"
-masses=("0.06")
+ens_name="16128b7225x36836"
+masses=("0.05")
 mas_len=${#masses[@]}
 
-xq_arr=("1880" "1940" "2000" "2060")
+prefix="tun"
+
+xq_arr=("3760" "3880" "4000")
 sinks_arr=("PION_5")
 
-mom_arr=("p100" "p110")
+mom_arr=("p000")
 
 for mom in ${mom_arr[@]}
 do
 echo "${mom}"
 
-source1="random_color_wall/momentum"
+source1="random_color_wall"
 source2="random_color_wall"
 
 src_label="rcw"
@@ -41,7 +43,7 @@ do
 
 python3 clean_one.py <<EOF
 ${ens_name}a
-spectun${ens_name}xq${xq}
+spec${prefix}${ens_name}xq${xq}
 ${i_file}
 ${mom}
 ${mass1}
@@ -51,7 +53,7 @@ ${source2}
 ${sinkop1}
 ${sinkop2}
 ${sinks}
-cleanspec${mom}${src_label}${ens_name}xq${xq}_m${mass1}m${mass2}${sinks}
+cleanspec${prefix}${mom}${src_label}${ens_name}xq${xq}_m${mass1}m${mass2}${sinks}
 EOF
 
 done #xq
