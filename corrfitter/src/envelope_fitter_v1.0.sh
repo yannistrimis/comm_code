@@ -15,13 +15,13 @@ dir="/home/yannis/Physics/LQCD/fnal/all/spec_data/l${vol}b${beta}x${xg}a" # LAPT
 tdata=65
 tp=128
 n_states=1
-m_states=0
+m_states=1
 
 if [ $1 == "scan" ]
 then
 
 xq_arr=( "3760" "3880" "4000" )
-mom_arr=( "p000" )
+mom_arr=( "p100" "p110" )
 
 for xq in ${xq_arr[@]};do
 echo "xq = ${xq}"
@@ -35,7 +35,7 @@ fi
 
 
 tmin_min=10
-tmin_max=50
+tmin_max=45
 
 tmax_min=65
 tmax_max=65
@@ -64,10 +64,10 @@ done # xq
 elif [ $1 == "one"  ]
 then
 
-xq="3880"
-mom="p000"
-tmin=0
-tmax=0
+xq="3760"
+mom="p110"
+tmin=35
+tmax=65
 
 python3 fitter_v1.0.py <<EOF
 ${dir}

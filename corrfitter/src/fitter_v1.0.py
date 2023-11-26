@@ -38,7 +38,7 @@ def main():
 
     if fittype == 'onefit' :
         print('\ndata from: ',file_name,'\n')
-
+        print('tmin = ',tmin,'   tmax = ',tmax,'\n')
     for N in [int(str_N)]:
        for M in [int(str_M)]:
             prior = make_prior(N,M)
