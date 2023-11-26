@@ -1,5 +1,5 @@
 #!/bin/bash
-nt=64
+nt=128 # DON'T FORGET TO CHANGE !!!
 ens_name="16128b7225x36836"
 masses=("0.05")
 mas_len=${#masses[@]}
