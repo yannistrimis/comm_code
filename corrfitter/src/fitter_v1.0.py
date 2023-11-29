@@ -20,6 +20,7 @@ def main():
     str_N = input()
     str_M = input()
     fittype = input()
+    print_state = input()
 
     file_name = my_dir+'/'+file_name
     tmin = int(str_tmin)
@@ -92,7 +93,10 @@ def main():
                 print( 'chi2/dof from fit points [dof]: %.3f [%d]\tQ = %.3f\n'%(chi2bydof_from_points,dof_real,Q_from_points) )
             elif fittype == 'scanfit' :
                 if test_param(fit,N,M) == 'ok' :
-                    print(N,M,tmin,tmax,chi2bydof_from_points,dof_real,Q_from_points,fit.p['dEn'][0].mean,fit.p['dEn'][0].sdev)
+                    if print_state == 'n0' :
+                        print(N,M,tmin,tmax,chi2bydof_from_points,dof_real,Q_from_points,fit.p['dEn'][0].mean,fit.p['dEn'][0].sdev)
+                    elif print_state == 'o0' :
+                        print(N,M,tmin,tmax,chi2bydof_from_points,dof_real,Q_from_points,fit.p['dEo'][0].mean,fit.p['dEo'][0].sdev)
                 elif test_param(fit,N,M) == 'not_ok' :
                     print(N,M,tmin,tmax,0,0,0,0,0)
 
