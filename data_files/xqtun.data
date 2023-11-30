@@ -1,6 +1,12 @@
-### ENSEMBLE l1664b70805x18876a ( x = 2.00, a = 0.16 fm )
+# # #  Q U A R K  A N I S O T R O P Y  A N D  S T R A N G E  M A S S  T U N I N G # # # #
 
-# am = 0.06
+# w0_phys = 0.17355 fm (FLAG 2021 review) 
+# mss_phys = 685.8 MeV (HPQCD 0910.1229)
+
+
+# # # ENSEMBLE l1664b70805x18876a ( x = 2.00, a = 0.16 fm,  w0 = 1.08403 )
+
+# m = 0.06
 
 # 		x = 1.88			1.94				2.00				2.06
 # mom^2		E		dE		E		dE		E		dE		E		dE
@@ -20,21 +26,19 @@
 
 # WE GET: xq0 = 1.94598
 
-# STRANGE QUARK MASS TUNING, WITH :
-# w0_phys = 0.17355 fm (FLAG 2021 review) 
-# mss_phys = 685.8 MeV (HPQCD 0910.1229)
+# STRANGE MASS TUNING ( WITH xq0 = 1.95 ) :
 
 # mass		E		dE
-0.02		0.14508		0.00029
+0.02		0.14522		0.00032
 0.04		0.20210		0.00029
-0.06		0.24636		0.00028
+0.06		0.24634		0.00029
 0.08		0.28441		0.00028
 
-# WE GET: ams0 = 
+# WE GET: ms0 = 
 
-### ENSEMBLE l16128b7225x36836a ( x = 4.00, a = 0.16 fm )
+# # # ENSEMBLE l16128b7225x36836a ( x = 4.00, a = 0.16 fm, w0 = 1.08461 )
 
-# am = 0.05
+# m = 0.05
 
 # 		x = 3.76			3.88				4.00					
 # mom^2		E		dE		E		dE		E		dE
@@ -43,3 +47,15 @@
 2.00		0.1805		0.0010		0.17744		0.00094		0.17451		0.00088
 
 # WE GET: xq0 = 3.74505
+
+# STRANGE MASS TUNING ( WITH xq0 = 3.75 ) :
+
+# mass		E		dE
+0.017		0.06852		0.00012
+0.037		0.09963		0.00016
+0.057		0.12333		0.00014
+0.077		0.14351		0.00013
+
+
+
+
