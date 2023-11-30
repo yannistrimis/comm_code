@@ -17,8 +17,8 @@ nt=64
 lat_name="l1664b70805x18876a"
 out_name="specstr1664b70805x18876"
 
-nmasses=4
-mass_arr=( 0.02 0.04 0.06 0.08   )
+nmasses=2
+mass_arr=( 0.10 0.12   )
 
 nxq=1
 xq_arr=( 1.95      )
