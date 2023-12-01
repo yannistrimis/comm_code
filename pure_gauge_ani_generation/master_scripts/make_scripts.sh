@@ -5,42 +5,38 @@
 # FOR THE CHANGING PARAMETERS.
 
 cluster="fnal"
-n_of_ens=2
+n_of_ens=7
 
-nx_arr=(16 16)
-nt_arr=(64 128)
+nx=24
+nt=48
 
-beta_arr=(7.0805 7.225)
-beta_name_arr=("70805" "7225")
+beta=7.3
+beta_name="7300"
 
-xi_0_arr=(1.8876 3.6836)
-xi_0_name_arr=("18876" "36836")
+xi_0_arr=(1.76 1.78 1.80 1.82 1.84 1.86 1.88)
+xi_0_name_arr=("1760" "1780" "1800" "1820" "1840" "1860" "1880")
 
 stream="a"
 
-sbatch_time="02:00:00"
+sbatch_time="08:00:00"
 sbatch_nodes=4 # N/A WHEN icer IS SELECTED
 sbatch_ntasks=128
-sbatch_jobname_arr=("gen2" "gen4")
+sbatch_jobname_arr=("g176" "g178" "g180" "g182" "g184" "g186" "g188")
 
-n_of_sub=1
-n_of_lat=5
+n_of_sub=25
+n_of_lat=20
 
 
 for (( i_ens=0; i_ens<${n_of_ens}; i_ens++ )); do
 
 # SUBSTITUTE ARRAY ELEMENTS HERE, IF ANY
-nx=${nx_arr[${i_ens}]}
-nt=${nt_arr[${i_ens}]}
-
-beta=${beta_arr[${i_ens}]}
-beta_name=${beta_name_arr[${i_ens}]}
 
 xi_0=${xi_0_arr[${i_ens}]}
 xi_0_name=${xi_0_name_arr[${i_ens}]}
 
 sbatch_jobname=${sbatch_jobname_arr[${i_ens}]}
 
+#
 
 beta_s=$(python3 -c "b_s=${beta}/${xi_0};print('%.5lf'%b_s)")
 beta_t=$(python3 -c "b_t=${beta}*${xi_0};print('%.5lf'%b_t)")
@@ -133,7 +129,7 @@ path_build="/home/trimisio/all/comm_code/pure_gauge_ani_generation/build"
 run_dir="/project/ahisq/yannis_puregauge/runs/rungen${lat_name}"
 submit_dir="/project/ahisq/yannis_puregauge/submits/subgen${lat_name}"
 
-executable="su3_ora_symzk0_a_dbl_gcc12openmpi4_20231030"
+executable="su3_ora_symzk0_a_dbl_gcc12openmpi4_20231201"
 
 sbatch_time="${sbatch_time}"
 sbatch_nodes="${sbatch_nodes}"
