@@ -46,6 +46,7 @@ sbatch_ntasks=128
 sbatch_jobname="str_xi4"
 
 prefix="str"
+build_prefix="str"
 
 n_of_sub=1
 n_of_lat=5
@@ -61,7 +62,7 @@ lat_name="l${ensemble}"
 out_name="spec${prefix}${ensemble_nostream}"
 my_dir="${cluster}_${prefix}_scripts_${ensemble}"
 
-build_script="build_input_${prefix}.sh"
+build_script="build_input_${build_prefix}.sh"
 
 cd ..
 mkdir ${my_dir}
@@ -143,7 +144,7 @@ path_build="/home/trimisio/all/comm_code/pure_gauge_spectrum/build"
 run_dir="/project/ahisq/yannis_puregauge/runs/runspec${prefix}${lat_name}"
 submit_dir="/project/ahisq/yannis_puregauge/submits/subspec${prefix}${lat_name}"
 
-executable="ks_spectrum_ani_hisq_dbl_gcc12openmpi4_20231030"
+executable="ks_spectrum_ani_hisq_dbl_gcc12openmpi4_20231204"
 
 sbatch_time="${sbatch_time}"
 sbatch_nodes="${sbatch_nodes}"
