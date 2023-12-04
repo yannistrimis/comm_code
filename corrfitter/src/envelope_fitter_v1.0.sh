@@ -14,21 +14,21 @@ dir="/home/trimis/fnal/all/spec_data/l${vol}b${beta}x${xg}a" # CMSE
 # dir="/home/yannis/Physics/LQCD/fnal/all/spec_data/l${vol}b${beta}x${xg}a" # LAPTOP
 tdata=65
 tp=128
-n_states=2
+n_states=1
 m_states=0
 
 if [ $1 == "scan" ]
 then
 
-tmin_min=1
-tmin_max=55
+tmin_min=5
+tmin_max=59
 
 tmax_min=65
 tmax_max=65
 
 xq_arr=( "3750" )
 mom_arr=( "p000" )
-mass_arr=( "0.017" ) # "0.037" "0.057" "0.077" )
+mass_arr=( "0.117" "0.097" )
 
 for xq in ${xq_arr[@]};do
 echo "xq = ${xq}"
