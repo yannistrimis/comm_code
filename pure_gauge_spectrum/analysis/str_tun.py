@@ -5,37 +5,25 @@ from matplotlib import pyplot as plt
 def func(x,a,b,c):
     return a*x*x+b*x+c
 
-'''
-xi_ren = 2.00
-'''
-
-xi_ren = 4.00
-
+# PARAMS
 w0_phys = 0.17355
 mss_phys = 685.8
 hc = 197.327
+# END OF PARAMS
 
-'''
-w0_lat = 1.08403
-'''
-
+# INPUT
 w0_lat = 1.08461
-
-mss_lat = (w0_phys/w0_lat) * mss_phys / hc
-
-'''
-my_arr = np.array([ [0.04, 0.20210, 0.00029],\
-[0.06, 0.24634, 0.00029],\
-[0.08, 0.28441, 0.00028],\
-[0.10, 0.31876, 0.00026],\
-[0.12, 0.35054, 0.00026] ])
-'''
+xi_ren = 4.00
 
 my_arr = np.array([ [0.037, 0.09963, 0.00016],\
 [0.057, 0.12333, 0.00014],\
 [0.077, 0.14351, 0.00013],\
 [0.097, 0.16167, 0.00013],\
 [0.117, 0.17848, 0.00012] ])
+# END OF INPUT
+
+
+mss_lat = (w0_phys/w0_lat) * mss_phys / hc
 
 pmean, pcov = curve_fit( func, my_arr[:,0], xi_ren*my_arr[:,1], sigma=xi_ren*my_arr[:,2] )
 

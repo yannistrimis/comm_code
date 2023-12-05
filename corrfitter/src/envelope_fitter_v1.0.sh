@@ -3,8 +3,8 @@
 vol=1664
 beta=70805
 xg=18876
-src="cw"
-prefix="str"
+src="rcw"
+prefix="tuncheck"
 taste="PION_5"
 print_state="n0"
 
@@ -14,21 +14,21 @@ dir="/home/trimis/fnal/all/spec_data/l${vol}b${beta}x${xg}a" # CMSE
 # dir="/home/yannis/Physics/LQCD/fnal/all/spec_data/l${vol}b${beta}x${xg}a" # LAPTOP
 tdata=33
 tp=64
-n_states=1
-m_states=0
+n_states=2
+m_states=1
 
 if [ $1 == "scan" ]
 then
 
 tmin_min=3
-tmin_max=29
+tmin_max=24
 
 tmax_min=33
 tmax_max=33
 
 xq_arr=( "1950" )
-mom_arr=( "p000" )
-mass_arr=( "0.1" "0.12" )
+mom_arr=( "p100" "p110" )
+mass_arr=( "0.0766" )
 
 for xq in ${xq_arr[@]};do
 echo "xq = ${xq}"
