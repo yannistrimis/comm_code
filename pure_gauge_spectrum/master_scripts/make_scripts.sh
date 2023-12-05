@@ -8,7 +8,7 @@ cluster="fnal"
 n_of_ens=1
 
 nx=16
-nt=128
+nt=64
 
 set_i_lat=101
 set_seed=78324
