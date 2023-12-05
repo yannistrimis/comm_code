@@ -1,21 +1,21 @@
 #!/bin/bash
 
-ens_name="16128b7225x36836"
-masses=("0.05")
+ens_name="1664b70805x18876"
+masses=("0.0766")
 mas_len=${#masses[@]}
 
-prefix="tun"
+prefix="tuncheck"
 
-xq_arr=("3760" "3880" "4000")
+xq_arr=("1950")
 sinks_arr=("PION_5")
 
-mom_arr=("p000")
+mom_arr=("p100" "p110")
 
 for mom in ${mom_arr[@]}
 do
 echo "${mom}"
 
-source1="random_color_wall"
+source1="random_color_wall/momentum"
 source2="random_color_wall"
 
 src_label="rcw"

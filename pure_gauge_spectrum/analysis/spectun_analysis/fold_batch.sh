@@ -1,12 +1,12 @@
 #!/bin/bash
-nt=128 # DON'T FORGET TO CHANGE !!!
-ens_name="16128b7225x36836"
-masses=("0.05")
+nt=64 # DON'T FORGET TO CHANGE !!!
+ens_name="1664b70805x18876"
+masses=("0.0766")
 mas_len=${#masses[@]}
 
-prefix="tun"
+prefix="tuncheck"
 
-xq_arr=("3760" "3880" "4000")
+xq_arr=("1950")
 sinks_arr=("PION_5")
 
 mom_arr=("p000" "p100" "p110")
