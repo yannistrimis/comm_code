@@ -7,6 +7,19 @@
 
 # # # ENSEMBLE l1632b6850x100a ( x = 1.00, a = 0.16 fm, w0 = 1.08297 )
 
+# PION MEASUREMENTS AT ml = 0.01576
+
+#TASTE          E               dE              FIT INFO
+PION_5		0.12799		0.00036		[18,33] {1.18 0.29} # 1+0 (n0)
+PION_i5
+PION_i
+PION_s
+PION_05				
+PION_ij
+PION_i0
+PION_0
+
+
 # # # ENSEMBLE l1664b70805x18876a ( x = 2.00, a = 0.16 fm,  w0 = 1.08403 )
 
 # m = 0.06
@@ -54,7 +67,7 @@
 # PION MEASUREMENTS AT ml = 0.01532
 
 #TASTE		E		dE		FIT INFO
-PION_5
+PION_5		0.12799		0.00036		[18,33] {1.18 0.29} # 1+0 (n0)
 PION_i5
 PION_i
 PION_s
