@@ -1,18 +1,25 @@
 #!/bin/bash
 
-masses=("0.01576")
+ens_name="1664b70805x18876"
+masses=("0.01532")
 mas_len=${#masses[@]}
 
-#sinks_arr=("PION_5" "PION_i5" "PION_i" "PION_s" "PION_05" "PION_ij" "PION_i0" "PION_0")
-sinks_arr=("PION_05")
+prefix="nlpi"
 
-source1="eow"
-source2="eow_fw"
+xq_arr=("1950")
+sinks_arr=("PION_5" "PION_i5" "PION_i" "PION_s" "PION_05" "PION_ij" "PION_i0" "PION_0")
+mom_arr=("p000")
 
-for sinks in "${sinks_arr[@]}"
+src_label="eowfw"
+
+for mom in ${mom_arr[@]}
+do
+echo "${mom}"
+
+for sinks in ${sinks_arr[@]}
 do
 
-echo "====${sinks}===="
+echo "${sinks}"
 
 for i_file in {101..500..1}
 do
@@ -25,19 +32,22 @@ do
 mass1=${masses[$m1]}
 mass2=${mass1}
 
-python aver_one.py <<EOF
+for xq in "${xq_arr[@]}"
+do
+
+python3 aver_one.py <<EOF
+${ens_name}a
+cleanspec${prefix}${mom}${src_label}${ens_name}xq${xq}_m${mass1}m${mass2}${sinks}
 ${i_file}
-${mass1}
-${mass2}
-${source1}
-${source2}
-${sinks}
-specnlpi
+averspec${prefix}${mom}${src_label}${ens_name}xq${xq}_m${mass1}m${mass2}${sinks}
 EOF
 
+done #xq
 
 done # m1
 
 done # i_file
 
 done # sinks
+
+done # momenta
