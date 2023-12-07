@@ -29,7 +29,7 @@ u0=1
 set_source_start=0
 n_sources=2
 source_inc=32
-source_prec=17
+source_prec=18
 
 err=1e-6
 max_cg_iterations=300
@@ -45,7 +45,7 @@ path_build="/home/trimisio/all/comm_code/pure_gauge_spectrum/build"
 run_dir="/project/ahisq/yannis_puregauge/runs/runspecnlpil1664b70805x18876a"
 submit_dir="/project/ahisq/yannis_puregauge/submits/subspecnlpil1664b70805x18876a"
 
-executable="ks_spectrum_ani_hisq_dbl_gcc12openmpi4_20231204"
+executable="ks_spectrum_ani_hisq_dbl_gcc12openmpi4_20231207"
 
 sbatch_time="02:00:00"
 sbatch_nodes="4"

@@ -141,7 +141,7 @@ path_build="/home/trimisio/all/comm_code/pure_gauge_spectrum/build"
 run_dir="/project/ahisq/yannis_puregauge/runs/runspec${prefix}${lat_name}"
 submit_dir="/project/ahisq/yannis_puregauge/submits/subspec${prefix}${lat_name}"
 
-executable="ks_spectrum_ani_hisq_dbl_gcc12openmpi4_20231204"
+executable="ks_spectrum_ani_hisq_dbl_gcc12openmpi4_20231207"
 
 sbatch_time="${sbatch_time}"
 sbatch_nodes="${sbatch_nodes}"
