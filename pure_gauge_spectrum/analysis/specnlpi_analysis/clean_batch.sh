@@ -8,7 +8,7 @@ prefix="nlpi"
 
 xq_arr=("1950")
 #sinks_arr=("PION_5" "PION_i5" "PION_i" "PION_s")
-sinks_arr=("PION_05" "PION_ij" "PION_i0" "PION_0")
+sinks_arr=("PION_05") # "PION_ij" "PION_i0" "PION_0")
 mom_arr=("p000")
 
 source1="even_and_odd_wall"
