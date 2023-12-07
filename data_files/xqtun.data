@@ -10,10 +10,10 @@
 # TUNING CHECK AT ms0 = 
 
 # mom^2		E		dE
-0.00
+0.00		0.55720		0.00062
 
 # WE GET: 
-	mss_phys =
+	mss_phys = 686.10 +- 0.76 MeV
 
 # PION MEASUREMENTS AT ml = 0.01576
 
