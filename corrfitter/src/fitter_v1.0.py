@@ -54,10 +54,12 @@ def main():
 
             for i_state in range(N) :
                 chi2_real = chi2_real - ( gv.exp(prior['log(an)'])[i_state].mean - fit.p['an'][i_state].mean )**2 / ( gv.exp(prior['log(an)'])[i_state].sdev )**2
+#                chi2_real = chi2_real - ( prior['an'][i_state].mean - fit.p['an'][i_state].mean )**2 / ( prior['an'][i_state].sdev )**2
                 chi2_real = chi2_real - ( gv.exp(prior['log(dEn)'])[i_state].mean - fit.p['dEn'][i_state].mean )**2 / ( gv.exp(prior['log(dEn)'])[i_state].sdev )**2
 
             for i_state in range(M) :
                 chi2_real = chi2_real - ( gv.exp(prior['log(ao)'])[i_state].mean - fit.p['ao'][i_state].mean )**2 / ( gv.exp(prior['log(ao)'])[i_state].sdev )**2
+#                chi2_real = chi2_real - ( prior['ao'][i_state].mean - fit.p['ao'][i_state].mean )**2 / ( prior['ao'][i_state].sdev )**2
                 chi2_real = chi2_real - ( gv.exp(prior['log(dEo)'])[i_state].mean - fit.p['dEo'][i_state].mean )**2 / ( gv.exp(prior['log(dEo)'])[i_state].sdev )**2
 
             Q_man = 1-gammainc(0.5*fit.dof,0.5*fit.chi2)
@@ -71,7 +73,7 @@ def main():
                 print('#DATA dDATA FIT dFIT REDUCED_DIST')
                 for it in my_tfit :
                     it_shift = it - my_tfit[0]
-                    print(data['PROP'][it].mean, data['PROP'][it].sdev, my_models[0].fitfcn(p=fit.p,t=my_tfit)[it_shift].mean, my_models[0].fitfcn(p=fit.p,t=my_tfit)[it_shift].sdev,(data['PROP'][it].mean-my_models[0].fitfcn(p=fit.p,t=my_tfit)[it_shift].mean)/data['PROP'][it].sdev)
+                    print(it, data['PROP'][it].mean, data['PROP'][it].sdev, my_models[0].fitfcn(p=fit.p,t=my_tfit)[it_shift].mean, my_models[0].fitfcn(p=fit.p,t=my_tfit)[it_shift].sdev,(data['PROP'][it].mean-my_models[0].fitfcn(p=fit.p,t=my_tfit)[it_shift].mean)/data['PROP'][it].sdev)
 
             cov_matrix = np.zeros((len(my_tfit),len(my_tfit)))
             meas_arr = np.zeros(len(my_tfit))
@@ -104,14 +106,16 @@ def make_data(filename):
     return gv.dataset.avg_data(cf.read_dataset(filename,binsize=1))
 
 def make_models(my_tdata,my_tfit,my_tp):
-    return [cf.Corr2( datatag='PROP', tp=my_tp, tdata=my_tdata, tfit=my_tfit, a=('an','ao'), b=('an','ao'), dE=('dEn','dEo'), s=(1.0,-1.0) )]
+    return [cf.Corr2( datatag='PROP', tp=my_tp, tdata=my_tdata, tfit=my_tfit, a=('an','ao'), b=('an','ao'), dE=('dEn','dEo'), s=(1.0,1.0) )]
 
 def make_prior(N,M):
     prior = collections.OrderedDict()
     prior['log(an)'] = gv.log(gv.gvar(N * ['0.1(10000.0)']))
-    prior['log(dEn)'] = gv.log(gv.gvar(N * ['0.1(1000.0)']))
+#    prior['an'] = gv.gvar(N * ['-0.25(1.0)'])
+    prior['log(dEn)'] = gv.log(gv.gvar(N * ['0.1(10.0)']))
     prior['log(ao)'] = gv.log(gv.gvar(M * ['0.1(10000.0)']))
-    prior['log(dEo)'] = gv.log(gv.gvar(M * ['0.1(1000.0)']))
+#    prior['ao'] = gv.gvar(M * ['-0.1(1.0)'])
+    prior['log(dEo)'] = gv.log(gv.gvar(M * ['0.1(10.0)']))
     return prior
 
 def print_results(fit,N,M):
@@ -133,22 +137,20 @@ def test_param(fit,N,M):
 
     p = fit.p
 
-    En = np.cumsum(p['dEn'])
-    an = p['an']
-
-    if np.abs(an[0].sdev) > np.abs(an[0].mean) :
-        return 'not_ok'
+    if N>0:
+        En = np.cumsum(p['dEn'])
+        an = p['an']
 
     if M>0:
         Eo = np.cumsum(p['dEo'])
         ao = p['ao']
 
-    for i_state in range(1,N) :
-        if ( np.abs(an[i_state].mean) > 10*np.abs(an[0].mean) ) or ( np.abs(an[i_state].sdev) > 100*np.abs(an[0].sdev) ) :
+    for i_state in range(N) :
+        if ( np.abs(an[i_state].sdev) > 10*np.abs(an[i_state].sdev) ) :
             return 'not_ok'
 
     for j_state in range(M) :
-        if ( np.abs(ao[j_state].mean) > 10*np.abs(an[0].mean) ) or ( np.abs(ao[j_state].sdev) > 100*np.abs(an[0].sdev) ) :
+        if ( np.abs(ao[j_state].sdev) > 10*np.abs(ao[j_state].sdev) ) :
             return 'not_ok'
 
     return 'ok'

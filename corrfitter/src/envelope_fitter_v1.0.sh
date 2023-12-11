@@ -3,10 +3,10 @@
 vol=1632
 beta=6850
 xg=100
-src="rcw"
-prefix="str"
-taste="PION_5"
-print_state="n0"
+src="eowfw"
+prefix="nlpi"
+taste="PION_05"
+print_state="o0"
 
 fitdir="/home/trimis/spec_data" # CMSE
 dir="/home/trimis/fnal/all/spec_data/l${vol}b${beta}x${xg}a" # CMSE
@@ -15,20 +15,20 @@ dir="/home/trimis/fnal/all/spec_data/l${vol}b${beta}x${xg}a" # CMSE
 tdata=17
 tp=32
 n_states=1
-m_states=0
+m_states=1
 
 if [ $1 == "scan" ]
 then
 
 tmin_min=0
-tmin_max=15
+tmin_max=14
 
 tmax_min=17
 tmax_max=17
 
 xq_arr=( "100" )
 mom_arr=( "p000" )
-mass_arr=( "0.0788" )
+mass_arr=( "0.01576" )
 
 for xq in ${xq_arr[@]};do
 echo "xq = ${xq}"
@@ -68,12 +68,12 @@ done # xq
 elif [ $1 == "one"  ]
 then
 
-xq="1950"
+xq="100"
 mom="p000"
-tmin=25
-tmax=33
+tmin=5
+tmax=15
 
-mass=0.01532
+mass=0.01576
 
 python3 fitter_v1.0.py <<EOF
 ${dir}
