@@ -8,29 +8,29 @@ cluster="fnal"
 n_of_ens=1
 
 nx=16
-nt=64
+nt=128
 
 set_i_lat=101
 set_seed=78324
 
-beta_name="70805"
-xi_0_name="18876"
+beta_name="7225"
+xi_0_name="36836"
 stream="a"
 
 u0=1
 
 set_source_start=0
 n_sources=2
-source_inc=32 # CHANGE ACCORDING TO nt
-source_prec=17 # CHANGE ACCORDING TO nt
+source_inc=64 # CHANGE ACCORDING TO nt
+source_prec=34 # CHANGE ACCORDING TO nt
 
 nmasses=1
-mass1=0.01532
+mass1=0.01448
 
 nxq=1
-xq1=1.95
+xq1=3.75
 
-xq1_name="1950"
+xq1_name="3750"
 
 err=1e-6
 max_cg_iterations=300
@@ -40,7 +40,7 @@ precision=2
 sbatch_time="02:00:00"
 sbatch_nodes=4 # N/A WHEN icer IS SELECTED
 sbatch_ntasks=128
-sbatch_jobname="nlpi_xi2"
+sbatch_jobname="nlpi_xi4"
 
 prefix="nlpi"
 build_prefix="nlpi"
