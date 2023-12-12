@@ -19,8 +19,11 @@ def main():
     str_tp = input()
     str_N = input()
     str_M = input()
+    str_so = input()
+    str_bin = input()
     fittype = input()
     print_state = input()
+
 
     file_name = my_dir+'/'+file_name
     tmin = int(str_tmin)
@@ -28,11 +31,11 @@ def main():
     tdatamax = int(str_tdatamax)
     my_tp = int(str_tp)
 
-    data = make_data(filename=file_name)
+    data = make_data(file_name,str_bin)
 
     my_tfit = range(tmin,tmax)
     my_tdata = range(0,tdatamax)
-    my_models = make_models(my_tdata,my_tfit,my_tp)
+    my_models = make_models(my_tdata,my_tfit,my_tp,str_so)
     fitter = cf.CorrFitter(models=my_models)
 
     p0 = None
@@ -102,11 +105,11 @@ def main():
                 elif test_param(fit,N,M) == 'not_ok' :
                     print(N,M,tmin,tmax,0,0,0,0,0)
 
-def make_data(filename):
-    return gv.dataset.avg_data(cf.read_dataset(filename,binsize=1))
+def make_data(filename,str_bin):
+    return gv.dataset.avg_data(cf.read_dataset(filename,binsize=int(str_bin)))
 
-def make_models(my_tdata,my_tfit,my_tp):
-    return [cf.Corr2( datatag='PROP', tp=my_tp, tdata=my_tdata, tfit=my_tfit, a=('an','ao'), b=('an','ao'), dE=('dEn','dEo'), s=(1.0,1.0) )]
+def make_models(my_tdata,my_tfit,my_tp,str_so):
+    return [cf.Corr2( datatag='PROP', tp=my_tp, tdata=my_tdata, tfit=my_tfit, a=('an','ao'), b=('an','ao'), dE=('dEn','dEo'), s=(1.0,float(str_so)) )]
 
 def make_prior(N,M):
     prior = collections.OrderedDict()

@@ -14,8 +14,10 @@ dir="/home/trimis/fnal/all/spec_data/l${vol}b${beta}x${xg}a" # CMSE
 # dir="/home/yannis/Physics/LQCD/fnal/all/spec_data/l${vol}b${beta}x${xg}a" # LAPTOP
 tdata=17
 tp=32
-n_states=1
+n_states=0
 m_states=1
+so="1.0"
+binsize=10
 
 if [ $1 == "scan" ]
 then
@@ -37,15 +39,15 @@ echo "	mom: ${mom}"
 for mass in ${mass_arr[@]};do
 echo "		mass: ${mass}"
 
-if [ -f ${fitdir}/${prefix}${mom}${src}${vol}b${beta}x${xg}xq${xq}_m${mass}m${mass}${taste}.${n_states}p${m_states}.scanfit ]
+if [ -f ${fitdir}/${prefix}${mom}${src}${vol}b${beta}x${xg}xq${xq}_m${mass}m${mass}${taste}.${n_states}p${m_states}.bin${binsize}.scanfit ]
 then
-rm ${fitdir}/${prefix}${mom}${src}${vol}b${beta}x${xg}xq${xq}_m${mass}m${mass}${taste}.${n_states}p${m_states}.scanfit
+rm ${fitdir}/${prefix}${mom}${src}${vol}b${beta}x${xg}xq${xq}_m${mass}m${mass}${taste}.${n_states}p${m_states}.bin${binsize}.scanfit
 fi
 
 for ((tmin=${tmin_min};tmin<=${tmin_max};tmin++));do
 for ((tmax=${tmax_min};tmax<=${tmax_max};tmax++));do
 
-python3 fitter_v1.0.py <<EOF >> ${fitdir}/${prefix}${mom}${src}${vol}b${beta}x${xg}xq${xq}_m${mass}m${mass}${taste}.${n_states}p${m_states}.scanfit
+python3 fitter_v1.0.py <<EOF >> ${fitdir}/${prefix}${mom}${src}${vol}b${beta}x${xg}xq${xq}_m${mass}m${mass}${taste}.${n_states}p${m_states}.bin${binsize}.scanfit
 ${dir}
 ${prefix}${mom}${src}${vol}b${beta}x${xg}xq${xq}_m${mass}m${mass}${taste}.specdata
 ${tmin}
@@ -54,6 +56,8 @@ ${tdata}
 ${tp}
 ${n_states}
 ${m_states}
+${so}
+${binsize}
 scanfit
 ${print_state}
 EOF
@@ -84,6 +88,8 @@ ${tdata}
 ${tp}
 ${n_states}
 ${m_states}
+${so}
+${binsize}
 onefit
 NA
 EOF
