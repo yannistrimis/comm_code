@@ -1,14 +1,14 @@
 #!/bin/bash
 
-nt=64 # DON'T FORGET TO CHANGE !!!
+nt=128 # DON'T FORGET TO CHANGE !!!
 
-ens_name="1664b70805x18876"
-masses=("0.01532")
+ens_name="16128b7225x36836"
+masses=("0.01448")
 mas_len=${#masses[@]}
 
 prefix="nlpi"
 
-xq_arr=("1950")
+xq_arr=("3750")
 sinks_arr=("PION_5" "PION_i5" "PION_i" "PION_s" "PION_05" "PION_ij" "PION_i0" "PION_0")
 mom_arr=("p000")
 
