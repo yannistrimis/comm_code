@@ -57,12 +57,10 @@ def main():
 
             for i_state in range(N) :
                 chi2_real = chi2_real - ( gv.exp(prior['log(an)'])[i_state].mean - fit.p['an'][i_state].mean )**2 / ( gv.exp(prior['log(an)'])[i_state].sdev )**2
-#                chi2_real = chi2_real - ( prior['an'][i_state].mean - fit.p['an'][i_state].mean )**2 / ( prior['an'][i_state].sdev )**2
                 chi2_real = chi2_real - ( gv.exp(prior['log(dEn)'])[i_state].mean - fit.p['dEn'][i_state].mean )**2 / ( gv.exp(prior['log(dEn)'])[i_state].sdev )**2
 
             for i_state in range(M) :
                 chi2_real = chi2_real - ( gv.exp(prior['log(ao)'])[i_state].mean - fit.p['ao'][i_state].mean )**2 / ( gv.exp(prior['log(ao)'])[i_state].sdev )**2
-#                chi2_real = chi2_real - ( prior['ao'][i_state].mean - fit.p['ao'][i_state].mean )**2 / ( prior['ao'][i_state].sdev )**2
                 chi2_real = chi2_real - ( gv.exp(prior['log(dEo)'])[i_state].mean - fit.p['dEo'][i_state].mean )**2 / ( gv.exp(prior['log(dEo)'])[i_state].sdev )**2
 
             Q_man = 1-gammainc(0.5*fit.dof,0.5*fit.chi2)
@@ -114,10 +112,8 @@ def make_models(my_tdata,my_tfit,my_tp,str_so):
 def make_prior(N,M):
     prior = collections.OrderedDict()
     prior['log(an)'] = gv.log(gv.gvar(N * ['0.1(10000.0)']))
-#    prior['an'] = gv.gvar(N * ['-0.25(1.0)'])
     prior['log(dEn)'] = gv.log(gv.gvar(N * ['0.1(10.0)']))
     prior['log(ao)'] = gv.log(gv.gvar(M * ['0.1(10000.0)']))
-#    prior['ao'] = gv.gvar(M * ['-0.1(1.0)'])
     prior['log(dEo)'] = gv.log(gv.gvar(M * ['0.1(10.0)']))
     return prior
 

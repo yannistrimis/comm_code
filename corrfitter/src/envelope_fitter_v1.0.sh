@@ -17,7 +17,7 @@ tp=32
 n_states=0
 m_states=1
 so="1.0"
-binsize=10
+binsize=1
 
 if [ $1 == "scan" ]
 then
@@ -74,8 +74,8 @@ then
 
 xq="100"
 mom="p000"
-tmin=5
-tmax=15
+tmin=10
+tmax=17
 
 mass=0.01576
 
