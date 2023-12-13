@@ -8,10 +8,10 @@ prefix="nlpi"
 taste="PION_05"
 print_state="o0"
 
-fitdir="/home/trimis/spec_data" # CMSE
-dir="/home/trimis/fnal/all/spec_data/l${vol}b${beta}x${xg}a" # CMSE
-# fitdir="/home/yannis/Physics/LQCD/spec_data" # LAPTOP
-# dir="/home/yannis/Physics/LQCD/fnal/all/spec_data/l${vol}b${beta}x${xg}a" # LAPTOP
+#fitdir="/home/trimis/spec_data" # CMSE
+#dir="/home/trimis/fnal/all/spec_data/l${vol}b${beta}x${xg}a" # CMSE
+fitdir="/home/yannis/Physics/LQCD/spec_data" # LAPTOP
+dir="/home/yannis/Physics/LQCD/fnal/all/spec_data/l${vol}b${beta}x${xg}a" # LAPTOP
 tdata=17
 tp=32
 n_states=0
@@ -74,7 +74,7 @@ then
 
 xq="100"
 mom="p000"
-tmin=10
+tmin=12
 tmax=17
 
 mass=0.01576
