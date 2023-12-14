@@ -5,8 +5,8 @@ beta=6850
 xg=100
 src="eowfw"
 prefix="nlpi"
-taste="PION_5"
-print_state="n0"
+taste="PION_s"
+print_state="o0"
 
 #fitdir="/home/trimis/spec_data" # CMSE
 #dir="/home/trimis/fnal/all/spec_data/l${vol}b${beta}x${xg}a" # CMSE
@@ -14,16 +14,16 @@ fitdir="/home/yannis/Physics/LQCD/spec_data" # LAPTOP
 dir="/home/yannis/Physics/LQCD/fnal/all/spec_data/l${vol}b${beta}x${xg}a" # LAPTOP
 tdata=17
 tp=32
-n_states=2
-m_states=0
-so="1.0"
+n_states=0
+m_states=1
+so="-1.0"
 binsize=1
 
 if [ $1 == "scan" ]
 then
 
 tmin_min=0
-tmin_max=14
+tmin_max=13
 
 tmax_min=17
 tmax_max=17
@@ -74,8 +74,8 @@ then
 
 xq="100"
 mom="p000"
-tmin=12
-tmax=17
+tmin=5
+tmax=12
 
 mass=0.01576
 
