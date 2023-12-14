@@ -97,7 +97,10 @@ def main():
             elif fittype == 'scanfit' :
                 if test_param(fit,N,M) == 'ok' :
                     if print_state == 'n0' :
-                        print(N,M,tmin,tmax,chi2bydof_from_points,dof_real,Q_from_points,fit.p['dEn'][0].mean,fit.p['dEn'][0].sdev)
+                        if fit.p['dEn'][0].mean < fit.p['dEn'][1].mean :
+                            print(N,M,tmin,tmax,chi2bydof_from_points,dof_real,Q_from_points,fit.p['dEn'][0].mean,fit.p['dEn'][0].sdev)
+                        elif fit.p['dEn'][0].mean > fit.p['dEn'][1].mean :
+                            print(N,M,tmin,tmax,chi2bydof_from_points,dof_real,Q_from_points,fit.p['dEn'][1].mean,fit.p['dEn'][1].sdev)
                     elif print_state == 'o0' :
                         print(N,M,tmin,tmax,chi2bydof_from_points,dof_real,Q_from_points,fit.p['dEo'][0].mean,fit.p['dEo'][0].sdev)
                 elif test_param(fit,N,M) == 'not_ok' :
