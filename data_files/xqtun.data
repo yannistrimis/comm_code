@@ -18,11 +18,11 @@
 # PION MEASUREMENTS AT ml = 0.01576
 
 #TASTE          E               dE              FIT INFO
-PION_5				
+PION_5		0.25481		0.00067		[8,17]{1.414 0.195} 1+0 n0
 PION_i5
 PION_i
 PION_s
-PION_05		0.2868		0.0058		[12,17]{2.589,0.051} 0+1 o0
+PION_05		0.2957		0.0029		[10,17]{2.904 0.013} 0+1 o0
 PION_ij
 PION_i0
 PION_0

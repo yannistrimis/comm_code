@@ -5,8 +5,8 @@ beta=6850
 xg=100
 src="eowfw"
 prefix="nlpi"
-taste="PION_05"
-print_state="o0"
+taste="PION_5"
+print_state="n0"
 
 #fitdir="/home/trimis/spec_data" # CMSE
 #dir="/home/trimis/fnal/all/spec_data/l${vol}b${beta}x${xg}a" # CMSE
@@ -14,8 +14,8 @@ fitdir="/home/yannis/Physics/LQCD/spec_data" # LAPTOP
 dir="/home/yannis/Physics/LQCD/fnal/all/spec_data/l${vol}b${beta}x${xg}a" # LAPTOP
 tdata=17
 tp=32
-n_states=0
-m_states=1
+n_states=2
+m_states=0
 so="1.0"
 binsize=1
 
