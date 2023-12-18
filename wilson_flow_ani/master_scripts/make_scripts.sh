@@ -4,14 +4,14 @@
 # IF MULTIPLE DIRECTORIES ARE NEEDED, THE USER CAN CREATE ARRAYS
 # FOR THE CHANGING PARAMETERS.
 
-cluster="icer"
-n_of_ens=9
+cluster="fnal"
+n_of_ens=4
 
-nx=20
-nt=40
+nx=24
+nt=48
 
-beta_name="7200"
-xi_0_name_arr=("1760" "1780" "1800" "1820" "1840" "1860" "1880" "1900" "1920")
+beta_name="7300"
+xi_0_name_arr=("1860" "1880" "1900" "1920")
 stream="a"
 
 xi_f=2.00
@@ -37,8 +37,6 @@ for (( i_ens=0; i_ens<${n_of_ens}; i_ens++ )); do
 xi_0_name=${xi_0_name_arr[${i_ens}]}
 sbatch_jobname=${sbatch_jobname_arr[${i_ens}]}
 
-# SUBSTITUTE ARRAY ELEMENTS HERE, IF ANY
-# SUBSTITUTE ARRAY ELEMENTS HERE, IF ANY
 # SUBSTITUTE ARRAY ELEMENTS HERE, IF ANY
 
 ensemble="${nx}${nt}b${beta_name}x${xi_0_name}${stream}"
@@ -120,14 +118,14 @@ path_build="/home/trimisio/all/comm_code/wilson_flow_ani/build"
 run_dir="/project/ahisq/yannis_puregauge/runs/run${prefix}${lat_name}"
 submit_dir="/project/ahisq/yannis_puregauge/submits/sub${prefix}${lat_name}"
 
-executable="wilson_flow_bbb_a_dbl_gnu8openmpi3"
+executable="wilson_flow_bbb_a_dbl_gcc12openmpi4_20231218"
 
 sbatch_time="${sbatch_time}"
 sbatch_nodes="${sbatch_nodes}"
 sbatch_ntasks="${sbatch_ntasks}"
 sbatch_jobname="${sbatch_jobname}"
-sbatch_module1="gnu8"
-sbatch_module2="openmpi3"
+sbatch_module1="gnu/12"
+sbatch_module2="openmpi/4"
 
 EOF
 
