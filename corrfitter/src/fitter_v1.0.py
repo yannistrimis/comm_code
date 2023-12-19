@@ -40,68 +40,77 @@ def main():
 
     p0 = None
 
+    N = int(str_N)
+    M = int(str_M)
+
+    listprior=[[],[],[],[]]
+
+    listprior[0] = N*['1(100)']
+    listprior[1] = N*['1(100)']
+    listprior[2] = M*['1(100)']
+    listprior[3] = ['0.29(100)','0.5(2)']
+
     if fittype == 'onefit' :
         print('\ndata from: ',file_name,'\n')
         print('tmin = ',tmin,'   tmax = ',tmax,'\n')
-    for N in [int(str_N)]:
-       for M in [int(str_M)]:
-            prior = make_prior(N,M)
-            fit = fitter.lsqfit( data=data, prior=prior, p0=p0 )
-            if fittype == 'onefit' :
-                print(30 * '=', 'nterm =', N,M)
-                print(fit)
-            p0 = fit.pmean
 
-            dof_real = len(my_tfit)-2*N-2*M
-            chi2_real = fit.chi2
+    prior = make_prior(listprior)
+    fit = fitter.lsqfit( data=data, prior=prior, p0=p0 )
+    if fittype == 'onefit' :
+        print(30 * '=', 'nterm =', N,M)
+        print(fit)
+    p0 = fit.pmean
 
-            for i_state in range(N) :
-                chi2_real = chi2_real - ( gv.exp(prior['log(an)'])[i_state].mean - fit.p['an'][i_state].mean )**2 / ( gv.exp(prior['log(an)'])[i_state].sdev )**2
-                chi2_real = chi2_real - ( gv.exp(prior['log(dEn)'])[i_state].mean - fit.p['dEn'][i_state].mean )**2 / ( gv.exp(prior['log(dEn)'])[i_state].sdev )**2
+    dof_real = len(my_tfit)-2*N-2*M
+    chi2_real = fit.chi2
 
-            for i_state in range(M) :
-                chi2_real = chi2_real - ( gv.exp(prior['log(ao)'])[i_state].mean - fit.p['ao'][i_state].mean )**2 / ( gv.exp(prior['log(ao)'])[i_state].sdev )**2
-                chi2_real = chi2_real - ( gv.exp(prior['log(dEo)'])[i_state].mean - fit.p['dEo'][i_state].mean )**2 / ( gv.exp(prior['log(dEo)'])[i_state].sdev )**2
+    for i_state in range(N) :
+        chi2_real = chi2_real - ( gv.exp(prior['log(an)'])[i_state].mean - fit.p['an'][i_state].mean )**2 / ( gv.exp(prior['log(an)'])[i_state].sdev )**2
+        chi2_real = chi2_real - ( gv.exp(prior['log(dEn)'])[i_state].mean - fit.p['dEn'][i_state].mean )**2 / ( gv.exp(prior['log(dEn)'])[i_state].sdev )**2
 
-            Q_man = 1-gammainc(0.5*fit.dof,0.5*fit.chi2)
-            Q_real = 1-gammainc(0.5*dof_real,0.5*chi2_real)
-            if fittype == 'onefit' :
-                print('\n')
-                print_results(fit,N,M)
-                print('[','GOODNESS OF FIT FROM corrfitter CHI_2:',']','\n',)
-                print( 'augmented chi2/dof [dof]: %.3f [%d]\tQ = %.3f\ndeaugmented chi2/dof [dof]:  %.3f [%d]\tQ = %.3f\n'%(fit.chi2/fit.dof,fit.dof,Q_man,chi2_real/dof_real,dof_real,Q_real) )
-                print('\n')
-                print('#DATA dDATA FIT dFIT REDUCED_DIST')
-                for it in my_tfit :
-                    it_shift = it - my_tfit[0]
-                    print(it, data['PROP'][it].mean, data['PROP'][it].sdev, my_models[0].fitfcn(p=fit.p,t=my_tfit)[it_shift].mean, my_models[0].fitfcn(p=fit.p,t=my_tfit)[it_shift].sdev,(data['PROP'][it].mean-my_models[0].fitfcn(p=fit.p,t=my_tfit)[it_shift].mean)/data['PROP'][it].sdev)
+    for i_state in range(M) :
+        chi2_real = chi2_real - ( gv.exp(prior['log(ao)'])[i_state].mean - fit.p['ao'][i_state].mean )**2 / ( gv.exp(prior['log(ao)'])[i_state].sdev )**2
+        chi2_real = chi2_real - ( gv.exp(prior['log(dEo)'])[i_state].mean - fit.p['dEo'][i_state].mean )**2 / ( gv.exp(prior['log(dEo)'])[i_state].sdev )**2
 
-            cov_matrix = np.zeros((len(my_tfit),len(my_tfit)))
-            meas_arr = np.zeros(len(my_tfit))
-            fit_arr = np.zeros(len(my_tfit))
+    Q_man = 1-gammainc(0.5*fit.dof,0.5*fit.chi2)
+    Q_real = 1-gammainc(0.5*dof_real,0.5*chi2_real)
+    if fittype == 'onefit' :
+        print('\n')
+        print_results(fit,N,M)
+        print('[','GOODNESS OF FIT FROM corrfitter CHI_2:',']','\n',)
+        print( 'augmented chi2/dof [dof]: %.3f [%d]\tQ = %.3f\ndeaugmented chi2/dof [dof]:  %.3f [%d]\tQ = %.3f\n'%(fit.chi2/fit.dof,fit.dof,Q_man,chi2_real/dof_real,dof_real,Q_real) )
+        print('\n')
+        print('#DATA dDATA FIT dFIT REDUCED_DIST')
+        for it in my_tfit :
+            it_shift = it - my_tfit[0]
+            print(it, data['PROP'][it].mean, data['PROP'][it].sdev, my_models[0].fitfcn(p=fit.p,t=my_tfit)[it_shift].mean, my_models[0].fitfcn(p=fit.p,t=my_tfit)[it_shift].sdev,(data['PROP'][it].mean-my_models[0].fitfcn(p=fit.p,t=my_tfit)[it_shift].mean)/data['PROP'][it].sdev)
 
-            for i in my_tfit :
-                i_shift = i - my_tfit[0]
-                for j in my_tfit :
-                    j_shift = j - my_tfit[0]
-                    cov_matrix[i_shift,j_shift] = gv.evalcov(data)['PROP','PROP'][i,j]
-                meas_arr[i_shift] = data['PROP'][i].mean
-                fit_arr[i_shift] = my_models[0].fitfcn(p=fit.p,t=my_tfit)[i_shift].mean
+    cov_matrix = np.zeros((len(my_tfit),len(my_tfit)))
+    meas_arr = np.zeros(len(my_tfit))
+    fit_arr = np.zeros(len(my_tfit))
 
-            chi2bydof_from_points = chisq_by_dof(meas_arr,fit_arr,cov_matrix,dof_real)
-            Q_from_points = q_value(chi2bydof_from_points,dof_real)
-            if fittype == 'onefit' :
-                print('\n')
-                print('[','GOODNESS OF FIT FROM MANUALLY CALCD CHI_2 (ONLY FOR INFINITELY WIDE PRIORS):',']','\n')
-                print( 'chi2/dof from fit points [dof]: %.3f [%d]\tQ = %.3f\n'%(chi2bydof_from_points,dof_real,Q_from_points) )
-            elif fittype == 'scanfit' :
-                if test_param(fit,N,M) == 'ok' :
-                    if print_state == 'n0' :
-                        print(N,M,tmin,tmax,chi2bydof_from_points,dof_real,Q_from_points,fit.p['dEn'][0].mean,fit.p['dEn'][0].sdev)
-                    elif print_state == 'o0' :
-                        print(N,M,tmin,tmax,chi2bydof_from_points,dof_real,Q_from_points,fit.p['dEo'][0].mean,fit.p['dEo'][0].sdev)
-                elif test_param(fit,N,M) == 'not_ok' :
-                    print(N,M,tmin,tmax,0,0,0,0,0)
+    for i in my_tfit :
+        i_shift = i - my_tfit[0]
+        for j in my_tfit :
+            j_shift = j - my_tfit[0]
+            cov_matrix[i_shift,j_shift] = gv.evalcov(data)['PROP','PROP'][i,j]
+        meas_arr[i_shift] = data['PROP'][i].mean
+        fit_arr[i_shift] = my_models[0].fitfcn(p=fit.p,t=my_tfit)[i_shift].mean
+
+    chi2bydof_from_points = chisq_by_dof(meas_arr,fit_arr,cov_matrix,dof_real)
+    Q_from_points = q_value(chi2bydof_from_points,dof_real)
+    if fittype == 'onefit' :
+        print('\n')
+        print('[','GOODNESS OF FIT FROM MANUALLY CALCD CHI_2 (ONLY FOR INFINITELY WIDE PRIORS):',']','\n')
+        print( 'chi2/dof from fit points [dof]: %.3f [%d]\tQ = %.3f\n'%(chi2bydof_from_points,dof_real,Q_from_points) )
+    elif fittype == 'scanfit' :
+        if test_param(fit,N,M) == 'ok' :
+            if print_state == 'n0' :
+                print(N,M,tmin,tmax,chi2bydof_from_points,dof_real,Q_from_points,fit.p['dEn'][0].mean,fit.p['dEn'][0].sdev)
+            elif print_state == 'o0' :
+                print(N,M,tmin,tmax,chi2bydof_from_points,dof_real,Q_from_points,fit.p['dEo'][0].mean,fit.p['dEo'][0].sdev)
+        elif test_param(fit,N,M) == 'not_ok' :
+            print(N,M,tmin,tmax,0,0,0,0,0)
 
 def make_data(filename,str_bin):
     return gv.dataset.avg_data(cf.read_dataset(filename,binsize=int(str_bin)))
@@ -109,12 +118,12 @@ def make_data(filename,str_bin):
 def make_models(my_tdata,my_tfit,my_tp,str_so):
     return [cf.Corr2( datatag='PROP', tp=my_tp, tdata=my_tdata, tfit=my_tfit, a=('an','ao'), b=('an','ao'), dE=('dEn','dEo'), s=(1.0,float(str_so)) )]
 
-def make_prior(N,M):
+def make_prior(listprior):
     prior = collections.OrderedDict()
-    prior['log(an)'] = gv.log(gv.gvar(N * ['0.1(10000.0)']))
-    prior['log(dEn)'] = gv.log(gv.gvar(N * ['0.1(10.0)']))
-    prior['log(ao)'] = gv.log(gv.gvar(M * ['0.1(10000.0)']))
-    prior['log(dEo)'] = gv.log(gv.gvar(M * ['0.1(10.0)']))
+    prior['log(an)'] = gv.log(gv.gvar(listprior[0]))
+    prior['log(dEn)'] = gv.log(gv.gvar(listprior[1]))
+    prior['log(ao)'] = gv.log(gv.gvar(listprior[2]))
+    prior['log(dEo)'] = gv.log(gv.gvar(listprior[3]))
     return prior
 
 def print_results(fit,N,M):

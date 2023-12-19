@@ -1,0 +1,2 @@
+gfortran -o /mnt/home/trimisio/comm_code/NRQCD/build/mainprogram /mnt/home/trimisio/comm_code/NRQCD/code/userparameters.f90 /mnt/home/trimisio/comm_code/NRQCD/code/lattice.f90 /mnt/home/trimisio/comm_code/NRQCD/code/gaugefields.f90 \
+            /mnt/home/trimisio/comm_code/NRQCD/code/heavyoperators.f90 /mnt/home/trimisio/comm_code/NRQCD/code/heavypropagators.f90 /mnt/home/trimisio/comm_code/NRQCD/code/mainprogram.f90
