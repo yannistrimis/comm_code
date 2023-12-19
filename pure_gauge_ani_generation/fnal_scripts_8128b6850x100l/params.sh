@@ -7,10 +7,10 @@ init_seed=1158
 n_of_lat=4
 n_of_sub=1
 
-nx=16
-ny=16
-nz=16
-nt=64
+nx=8
+ny=8
+nz=8
+nt=128
 
 # MILC convention in the improved action is: beta=10/g^2
 # Here we use plaquette action and so that is not relevant.
@@ -36,16 +36,16 @@ qhb_steps=1
 
 stream="l"
 
-ensemble="1664b6850x100l"
-lat_name="l1664b6850x100l"
-out_name="out1664b6850x100l"
+ensemble="8128b6850x100l"
+lat_name="l8128b6850x100l"
+out_name="out8128b6850x100l"
 
 
-directory="/lustre1/ahisq/yannis_puregauge/lattices/l1664b6850x100l"
-out_dir="/project/ahisq/yannis_puregauge/outputs/l1664b6850x100l"
+directory="/lustre1/ahisq/yannis_puregauge/lattices/l8128b6850x100l"
+out_dir="/project/ahisq/yannis_puregauge/outputs/l8128b6850x100l"
 path_build="/home/trimisio/all/comm_code/pure_gauge_ani_generation/build"
-run_dir="/project/ahisq/yannis_puregauge/runs/rungenl1664b6850x100l"
-submit_dir="/project/ahisq/yannis_puregauge/submits/subgenl1664b6850x100l"
+run_dir="/project/ahisq/yannis_puregauge/runs/rungenl8128b6850x100l"
+submit_dir="/project/ahisq/yannis_puregauge/submits/subgenl8128b6850x100l"
 
 executable="su3_ora_symzk0_a_dbl_gcc12openmpi4_20231201"
 

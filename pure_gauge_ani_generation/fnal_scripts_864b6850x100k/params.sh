@@ -7,9 +7,9 @@ init_seed=1158
 n_of_lat=4
 n_of_sub=1
 
-nx=32
-ny=32
-nz=32
+nx=8
+ny=8
+nz=8
 nt=64
 
 # MILC convention in the improved action is: beta=10/g^2
@@ -34,25 +34,25 @@ steps_per_trajectory=4
 u0=1.0 # THIS IS !=1 FOR 1-LOOP SYMANZIK
 qhb_steps=1
 
-stream="m"
+stream="k"
 
-ensemble="3264b6850x100m"
-lat_name="l3264b6850x100m"
-out_name="out3264b6850x100m"
+ensemble="864b6850x100k"
+lat_name="l864b6850x100k"
+out_name="out864b6850x100k"
 
 
-directory="/lustre1/ahisq/yannis_puregauge/lattices/l3264b6850x100m"
-out_dir="/project/ahisq/yannis_puregauge/outputs/l3264b6850x100m"
+directory="/lustre1/ahisq/yannis_puregauge/lattices/l864b6850x100k"
+out_dir="/project/ahisq/yannis_puregauge/outputs/l864b6850x100k"
 path_build="/home/trimisio/all/comm_code/pure_gauge_ani_generation/build"
-run_dir="/project/ahisq/yannis_puregauge/runs/rungenl3264b6850x100m"
-submit_dir="/project/ahisq/yannis_puregauge/submits/subgenl3264b6850x100m"
+run_dir="/project/ahisq/yannis_puregauge/runs/rungenl864b6850x100k"
+submit_dir="/project/ahisq/yannis_puregauge/submits/subgenl864b6850x100k"
 
 executable="su3_ora_symzk0_a_dbl_gcc12openmpi4_20231201"
 
 sbatch_time="8:00:00"
-sbatch_nodes="4"
-sbatch_ntasks="128"
-sbatch_jobname="2sc128"
+sbatch_nodes="1"
+sbatch_ntasks="32"
+sbatch_jobname="2sc32"
 sbatch_module1="gcc/12"
 sbatch_module2="openmpi/4"
 

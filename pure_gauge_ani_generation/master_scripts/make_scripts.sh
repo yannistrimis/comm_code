@@ -5,10 +5,10 @@
 # FOR THE CHANGING PARAMETERS.
 
 cluster="fnal"
-n_of_ens=6
+n_of_ens=3
 
-nx_arr=(8 8 8 16 16 32)
-nt_arr=(8 16 32 32 64 64)
+nx_arr=(8 8 8)
+nt_arr=(64 128 256)
 
 beta=6.85
 beta_name="6850"
@@ -16,12 +16,12 @@ beta_name="6850"
 xi_0=1.00
 xi_0_name="100"
 
-stream_arr=("h" "i" "j" "k" "l" "m")
+stream_arr=("k" "l" "m")
 
 sbatch_time="8:00:00"
-sbatch_nodes_arr=(1 1 1 1 2 2) # N/A WHEN icer IS SELECTED
-sbatch_ntasks_arr=(4 8 16 32 64 128)
-sbatch_jobname_arr=("2sc4" "2sc8" "2sc16" "2sc32" "2sc64" "2sc128")
+sbatch_nodes_arr=(1 2 4) # N/A WHEN icer IS SELECTED
+sbatch_ntasks_arr=(32 64 128)
+sbatch_jobname_arr=("2sc32" "2sc64" "2sc128")
 
 n_of_sub=1
 n_of_lat=4
