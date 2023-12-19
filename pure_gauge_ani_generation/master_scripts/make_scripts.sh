@@ -5,10 +5,10 @@
 # FOR THE CHANGING PARAMETERS.
 
 cluster="fnal"
-n_of_ens=4
+n_of_ens=6
 
-nx=16
-nt=32
+nx_arr=(8 8 8 16 16 32)
+nt_arr=(8 16 32 32 64 64)
 
 beta=6.85
 beta_name="6850"
@@ -16,12 +16,12 @@ beta_name="6850"
 xi_0=1.00
 xi_0_name="100"
 
-stream_arr=("b" "c" "d" "e")
+stream_arr=("h" "i" "j" "k" "l" "m")
 
 sbatch_time="8:00:00"
-sbatch_nodes=1 # N/A WHEN icer IS SELECTED
-sbatch_ntasks_arr=(4,8,16,32)
-sbatch_jobname_arr=("1sc4" "1sc8" "1sc16" "1sc32")
+sbatch_nodes_arr=(1 1 1 1 2 2) # N/A WHEN icer IS SELECTED
+sbatch_ntasks_arr=(4 8 16 32 64 128)
+sbatch_jobname_arr=("2sc4" "2sc8" "2sc16" "2sc32" "2sc64" "2sc128")
 
 n_of_sub=1
 n_of_lat=4
@@ -31,7 +31,11 @@ for (( i_ens=0; i_ens<${n_of_ens}; i_ens++ )); do
 
 # SUBSTITUTE ARRAY ELEMENTS HERE, IF ANY
 
-stream=${stream[${arr}]}
+nx=${nx_arr[${i_ens}]}
+nt=${nt_arr[${i_ens}]}
+
+stream=${stream_arr[${i_ens}]}
+sbatch_nodes=${sbatch_nodes_arr[${i_ens}]}
 sbatch_ntasks=${sbatch_ntasks_arr[${i_ens}]}
 sbatch_jobname=${sbatch_jobname_arr[${i_ens}]}
 
