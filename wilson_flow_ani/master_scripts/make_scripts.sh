@@ -124,7 +124,7 @@ sbatch_time="${sbatch_time}"
 sbatch_nodes="${sbatch_nodes}"
 sbatch_ntasks="${sbatch_ntasks}"
 sbatch_jobname="${sbatch_jobname}"
-sbatch_module1="gnu/12"
+sbatch_module1="gcc/12"
 sbatch_module2="openmpi/4"
 
 EOF

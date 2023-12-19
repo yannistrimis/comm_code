@@ -34,6 +34,6 @@ sbatch_time="02:00:00"
 sbatch_nodes="4"
 sbatch_ntasks="125"
 sbatch_jobname="wfl192"
-sbatch_module1="gnu/12"
+sbatch_module1="gcc/12"
 sbatch_module2="openmpi/4"
 
